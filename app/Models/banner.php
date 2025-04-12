@@ -9,4 +9,5 @@ class banner extends Model
 {
     /** @use HasFactory<\Database\Factories\BannerFactory> */
     use HasFactory;
+    protected $guarded = ['id'];
 }

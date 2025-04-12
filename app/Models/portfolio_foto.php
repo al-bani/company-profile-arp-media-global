@@ -9,4 +9,5 @@ class portfolio_foto extends Model
 {
     /** @use HasFactory<\Database\Factories\PortfolioFotoFactory> */
     use HasFactory;
+    protected $guarded = ['id'];
 }

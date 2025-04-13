@@ -26,20 +26,45 @@
                 Section 1
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Menu 1</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Submenu:</h6>
-                        <a class="collapse-item" href="#">Submenu 1</a>
-                        <a class="collapse-item" href="#">Submenu 2</a>
-                    </div>
-                </div>
+                <a class="nav-link" href="/Perusahaan">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Perusahaan</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Perusahaan">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Super Admin</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Admin</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Partner</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Berita</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Banner</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Portofoli</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Partner</span></a>
             </li>
 
             <!-- Divider -->

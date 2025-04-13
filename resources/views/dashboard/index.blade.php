@@ -174,7 +174,7 @@
 
         <div class="col-lg-12 mb-4">
 
-            <!-- Illustrations -->
+            {{-- <!-- Illustrations -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
@@ -205,7 +205,7 @@
                     <p class="mb-0">Before working with this theme, you should become familiar with the
                         Bootstrap framework, especially the utility classes.</p>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>

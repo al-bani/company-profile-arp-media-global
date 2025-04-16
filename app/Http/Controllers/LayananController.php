@@ -13,7 +13,7 @@ class LayananController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.layanan.homeLayanan');
     }
 
     /**
@@ -21,7 +21,7 @@ class LayananController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.layanan.layanan');
     }
 
     /**

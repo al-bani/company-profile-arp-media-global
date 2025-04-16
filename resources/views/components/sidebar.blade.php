@@ -1,88 +1,80 @@
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                <div class="sidebar-brand-icon ">
-                    {{-- <i class="fas fa-laugh-wink"></i> --}}
-                    <img src="{{ asset('img/logo_white.png') }}" alt="Logo" class="w-100">
-                </div>
-            </a>
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center py-4" href="/">
+        <div class="sidebar-brand-icon">
+            <img src="{{ asset('img/logo_white.png') }}" alt="Logo" class="w-100">
+        </div>
+    </a>
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+    <hr class="sidebar-divider my-0">
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+    <!-- Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link py-3 fs-4" href="/" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
+            <i class="fas fa-home fs-3"></i>
+            <span class="ms-2">Dashboard</span>
+        </a>
+    </li>
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Section 1
-            </div>
+    <hr class="sidebar-divider">
 
-            <li class="nav-item">
-                <a class="nav-link" href="/Perusahaan">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Perusahaan</span></a>
-            </li>
+    <!-- Section 1 -->
+    <div class="sidebar-heading text-light">
+        Section 1
+    </div>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Akun Admin</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Partner</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Berita</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Banner</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Portofolio</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Partner</span></a>
-            </li>
+    <li class="nav-item">
+        <a class="nav-link py-3 fs-4" href="/homePerusahaan" data-bs-toggle="tooltip" data-bs-placement="right" title="Perusahaan">
+            <i class="fas fa-building fs-3"></i>
+            <span class="ms-2">Perusahaan</span>
+        </a>
+    </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+    <li class="nav-item">
+        <a class="nav-link py-3 fs-4" href="/akunAdmin" data-bs-toggle="tooltip" data-bs-placement="right" title="Akun Admin">
+            <i class="fas fa-user-shield fs-3"></i>
+            <span class="ms-2">Akun Admin</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link py-3 fs-4" href="/homeLayanan" data-bs-toggle="tooltip" data-bs-placement="right" title="Layanan">
+            <i class="fas fa-concierge-bell fs-3"></i>
+            <span class="ms-2">Layanan</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link py-3 fs-4" href="/homePartner" data-bs-toggle="tooltip" data-bs-placement="right" title="Partner">
+            <i class="fas fa-handshake fs-3"></i>
+            <span class="ms-2">Partner</span>
+        </a>
+    </li>
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Section 2
-            </div>
+    <li class="nav-item">
+        <a class="nav-link py-3 fs-4" href="/homeBerita" data-bs-toggle="tooltip" data-bs-placement="right" title="Berita">
+            <i class="fas fa-newspaper fs-3"></i>
+            <span class="ms-2">Berita</span>
+        </a>
+    </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="/admin">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Admin</span></a>
-            </li>
+    <li class="nav-item">
+        <a class="nav-link py-3 fs-4" href="/" data-bs-toggle="tooltip" data-bs-placement="right" title="Banner">
+            <i class="fas fa-image fs-3"></i>
+            <span class="ms-2">Banner</span>
+        </a>
+    </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+    <li class="nav-item">
+        <a class="nav-link py-3 fs-4" href="/homePortofolio" data-bs-toggle="tooltip" data-bs-placement="right" title="Portofolio">
+            <i class="fas fa-briefcase fs-3"></i>
+            <span class="ms-2">Portofolio</span>
+        </a>
+    </li>
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+    <hr class="sidebar-divider">
 
-        </ul>
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>

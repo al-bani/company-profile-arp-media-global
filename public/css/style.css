@@ -1,5 +1,5 @@
 * {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
 }
 
 h1 {
@@ -14,12 +14,12 @@ h1 {
 
 .profile {
     border-radius: 100%;
-    background-color: #D9E4EA;
+    background-color: #d9e4ea;
     border: none;
 }
 
 #navbar {
-    background-color: #D9E4EA;
+    background-color: #d9e4ea;
     border-radius: 8px;
     /* opacity: 80%; */
 }
@@ -40,7 +40,7 @@ h1 {
     height: 2.4rem;
     border-radius: 10px;
     width: 18rem;
-    background-color: #D9E4EA;
+    background-color: #d9e4ea;
 }
 
 video {
@@ -56,7 +56,7 @@ video {
 }
 
 @media only screen and (max-width: 777px) {
-    .container-content  {
+    .container-content {
         width: 300px;
         height: 300px;
     }
@@ -133,30 +133,30 @@ video {
 
 @media only screen and (max-width: 430px) {
     .container-content {
-    width: 320px;
-    height: 360px;
-}
-video {
-    width: 270px;
-    height: 230px;
-}
-.container-content select {
-    width: 17rem;
-}
-#title-section {
-    margin-left: 2rem;
-    margin-top: 1rem;
-}
-.offcanvas {
-    width: 250px !important;
-}
-.logoSma {
-    width: 130px;
-}
+        width: 320px;
+        height: 360px;
+    }
+    video {
+        width: 270px;
+        height: 230px;
+    }
+    .container-content select {
+        width: 17rem;
+    }
+    #title-section {
+        margin-left: 2rem;
+        margin-top: 1rem;
+    }
+    .offcanvas {
+        width: 250px !important;
+    }
+    .logoSma {
+        width: 130px;
+    }
 
-.logoItenas {
-    width: 190px;
-}
+    .logoItenas {
+        width: 190px;
+    }
 }
 
 footer {

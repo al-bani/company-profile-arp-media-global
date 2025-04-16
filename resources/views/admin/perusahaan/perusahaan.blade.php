@@ -107,16 +107,17 @@
                 <!-- Perusahaan Status -->
                 <div class="mb-3">
                     <label for="status">Status</label>
-                    <select class="form-select" id="status">
-                        <option selected>Choose...</option>
-                        <option value="anak">Anak Perusahaan</option>
-                        <option value="perusahaan">Induk Perusahaan</option>
+                    <select class="ms-1 form-select btn btn-primary" id="status">
+                        <option selected>Choose</option>
+                        <option value="anak">Anak</option>
+                        <option value="perusahaan">Induk</option>
                     </select>
                 </div>
 
-                <!-- Submit Button -->
-                <div class="mb-3 text-center">
-                    <button type="submit" class="btn btn-primary">Simpan Data Perusahaan</button>
+                 <!-- Action Buttons -->
+                 <div class="mb-3 text-center">
+                    <a href="/homePerusahaan" class="btn btn-secondary me-2">Kembali</a>
+                    <button type="submit" class="btn btn-primary">Simpan Data</button>
                 </div>
             </form>
         </div>

@@ -6,14 +6,14 @@ use App\Models\portfolio;
 use App\Http\Requests\StoreportfolioRequest;
 use App\Http\Requests\UpdateportfolioRequest;
 
-class PortfolioController extends Controller
+class PortofolioController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('admin.portofolio.homePortofolio');
     }
 
     /**
@@ -21,7 +21,7 @@ class PortfolioController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.portofolio.portofolio');
     }
 
     /**

@@ -3,24 +3,22 @@
 <x-layout>
     {{-- Judul --}}
     <div class="mb-2">
-        <h4>Daftar Data</h4>
+        <h4>Daftar Berita</h4>
     </div>
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
-                <a href="{{ route('perusahaan') }}" class="btn btn-primary">+ Tambah Data</a>
+                <a href="/berita" class="btn btn-primary">+ Tambah Data</a>
             </div>
 
             <div class="table-responsive">
                 <table id="example" class="table table-bordered table-striped" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Id</th>
+                            <th>Judul</th>
+                            <th>Tanggal</th>
+                            <th>Penulis</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -30,8 +28,6 @@
                             <td>System Architect</td>
                             <td>Edinburgh</td>
                             <td>61</td>
-                            <td>2011-04-25</td>
-                            <td>$320,800</td>
                             <td>
                                 <a href="" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
@@ -46,8 +42,6 @@
                             <td>Systems</td>
                             <td>Edinburgh</td>
                             <td>61</td>
-                            <td>2011-04-25</td>
-                            <td>$320,800</td>
                             <td>
                                 <a href="" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>

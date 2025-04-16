@@ -13,7 +13,7 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.partner.homePartner');
     }
 
     /**
@@ -21,7 +21,7 @@ class PartnerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.partner.partner');
     }
 
     /**

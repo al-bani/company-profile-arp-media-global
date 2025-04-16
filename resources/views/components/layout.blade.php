@@ -1,39 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<x-header></x-header>
-
+<head>
+    <x-header />
+</head>
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-         <x-sidebar></x-sidebar>
-        <!-- End of Sidebar -->
+        <x-sidebar />
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex flex-column" style="min-height: 100vh;">
 
             <!-- Main Content -->
             <div id="content">
 
                 <!-- Topbar -->
-                 <x-topbar></x-topbar>
-                <!-- End of Topbar -->
+                <x-topbar />
 
-                <!-- Begin Page Content -->
+                <!-- Page Content -->
                 <div class="container-fluid">
                     {{ $slot }}
                 </div>
-                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Main Content -->
 
             <!-- Footer -->
-             <x-footer></x-footer>
-            <!-- End of Footer -->
+            <x-footer />
 
         </div>
         <!-- End of Content Wrapper -->
@@ -41,6 +36,7 @@
     </div>
     <!-- End of Page Wrapper -->
 
-</body>
+    @stack('script')
 
+</body>
 </html>

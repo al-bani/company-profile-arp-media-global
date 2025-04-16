@@ -13,7 +13,15 @@ class PerusahaanController extends Controller
      */
     public function index()
     {
-        return view('dashboard.perusahaan');
+        return view('admin.perusahaan.homePerusahaan');
+    }
+    public function coba()
+    {
+        return view('admin.perusahaan.coba');
+    }
+    public function tambah()
+    {
+        return view('admin.perusahaan.perusahaan');
     }
 
     /**

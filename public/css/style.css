@@ -1,0 +1,176 @@
+* {
+    font-family: 'Montserrat';
+}
+
+h1 {
+    font-size: 4000px;
+}
+
+@media only screen and (max-width: 767px) {
+    .offcanvas-start.w-25 {
+        width: 75%;
+    }
+}
+
+.profile {
+    border-radius: 100%;
+    background-color: #D9E4EA;
+    border: none;
+}
+
+#navbar {
+    background-color: #D9E4EA;
+    border-radius: 8px;
+    /* opacity: 80%; */
+}
+
+.dropdown {
+    background-color: white;
+}
+
+.container-content {
+    width: 700px;
+    /* border: solid 0.1px; */
+    height: 400px;
+    border-radius: 10px;
+    /* box-shadow: 10px; */
+}
+
+.container-content select {
+    height: 2.4rem;
+    border-radius: 10px;
+    width: 18rem;
+    background-color: #D9E4EA;
+}
+
+video {
+    width: 360px;
+    height: 280px;
+    margin-top: 10px;
+}
+
+@media only screen and (min-width: 778px) {
+    .container-content video {
+        margin-left: 10rem;
+    }
+}
+
+@media only screen and (max-width: 777px) {
+    .container-content  {
+        width: 300px;
+        height: 300px;
+    }
+
+    video {
+        width: 220px;
+        height: 180px;
+        margin-left: 1rem;
+    }
+
+    .container-content select {
+        width: 14rem;
+    }
+}
+
+#title-section {
+    margin-left: 20.5rem;
+    margin-top: 1rem;
+}
+
+@media only screen and (min-width: 778px) and (max-width: 991px) {
+    #title-section {
+        margin-left: 9.5rem;
+        margin-top: 1rem;
+    }
+}
+
+@media only screen and (max-width: 777px) {
+    #title-section {
+        margin-left: 8rem;
+        margin-top: 1rem;
+    }
+
+    .offcanvas {
+        width: 300px !important;
+    }
+}
+
+@media only screen and (min-width: 778px) and (max-width: 991px) {
+    .container-content video {
+        margin-left: 10rem;
+    }
+
+    h3 {
+        margin-left: 18%;
+        margin-top: 1rem;
+    }
+}
+
+@media only screen and (max-width: 777px) {
+    .container-content {
+        width: 300px;
+        height: 300px;
+    }
+
+    video {
+        width: 220px;
+        height: 180px;
+        margin-left: 1rem;
+    }
+
+    .container-content select {
+        width: 14rem;
+    }
+
+    #title-section {
+        margin-left: 8rem;
+        margin-top: 1rem;
+    }
+    .offcanvas {
+        width: 300px !important;
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .container-content {
+    width: 320px;
+    height: 360px;
+}
+video {
+    width: 270px;
+    height: 230px;
+}
+.container-content select {
+    width: 17rem;
+}
+#title-section {
+    margin-left: 2rem;
+    margin-top: 1rem;
+}
+.offcanvas {
+    width: 250px !important;
+}
+.logoSma {
+    width: 130px;
+}
+
+.logoItenas {
+    width: 190px;
+}
+}
+
+footer {
+    color: black;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+/* @media only screen and (max-width: 330px) {
+    .gambar img{
+        width: 10px;
+    }
+
+} */

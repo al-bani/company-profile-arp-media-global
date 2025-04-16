@@ -2,12 +2,11 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="sidebar-brand-icon ">
+                    {{-- <i class="fas fa-laugh-wink"></i> --}}
+                    <img src="{{ asset('img/logo_white.png') }}" alt="Logo" class="w-100">
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
             </a>
-
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
@@ -31,15 +30,11 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Perusahaan</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/Perusahaan">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Super Admin</span></a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Admin</span></a>
+                    <span>Akun Admin</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/">
@@ -59,7 +54,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Portofoli</span></a>
+                    <span>Portofolio</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/">

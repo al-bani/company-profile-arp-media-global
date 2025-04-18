@@ -10,7 +10,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
             <i class="fas fa-home fs-3"></i>
             <span class="ms-2">Dashboard</span>
@@ -21,50 +21,52 @@
 
     <!-- Section 1 -->
     <div class="sidebar-heading text-light">
-        Section 1
+        Superadmin
     </div>
 
-    <li class="nav-item">
+    <li class="nav-item {{ Request::is('homePerusahaan*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/homePerusahaan" data-bs-toggle="tooltip" data-bs-placement="right" title="Perusahaan">
             <i class="fas fa-building fs-3"></i>
             <span class="ms-2">Perusahaan</span>
         </a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ Request::is('akunAdmin*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/akunAdmin" data-bs-toggle="tooltip" data-bs-placement="right" title="Akun Admin">
             <i class="fas fa-user-shield fs-3"></i>
             <span class="ms-2">Akun Admin</span>
         </a>
     </li>
-    <li class="nav-item">
+
+    <li class="nav-item {{ Request::is('homeLayanan*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/homeLayanan" data-bs-toggle="tooltip" data-bs-placement="right" title="Layanan">
             <i class="fas fa-concierge-bell fs-3"></i>
             <span class="ms-2">Layanan</span>
         </a>
     </li>
-    <li class="nav-item">
+
+    <li class="nav-item {{ Request::is('homePartner*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/homePartner" data-bs-toggle="tooltip" data-bs-placement="right" title="Partner">
             <i class="fas fa-handshake fs-3"></i>
             <span class="ms-2">Partner</span>
         </a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ Request::is('homeBerita*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/homeBerita" data-bs-toggle="tooltip" data-bs-placement="right" title="Berita">
             <i class="fas fa-newspaper fs-3"></i>
             <span class="ms-2">Berita</span>
         </a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link py-3 fs-4" href="/" data-bs-toggle="tooltip" data-bs-placement="right" title="Banner">
+    <li class="nav-item {{ Request::is('homeBanner*') ? 'active' : '' }}">
+        <a class="nav-link py-3 fs-4" href="/homeBanner" data-bs-toggle="tooltip" data-bs-placement="right" title="Banner">
             <i class="fas fa-image fs-3"></i>
             <span class="ms-2">Banner</span>
         </a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ Request::is('homePortofolio*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/homePortofolio" data-bs-toggle="tooltip" data-bs-placement="right" title="Portofolio">
             <i class="fas fa-briefcase fs-3"></i>
             <span class="ms-2">Portofolio</span>

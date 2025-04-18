@@ -1,10 +1,14 @@
 <x-layout>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Perusahaan</h1>
+        <div class="mb-3 text-center">
+            <a href="/homePerusahaan" class="btn btn-secondary me-2">Kembali</a>
+            <button type="submit" class="btn btn-primary">Simpan Data</button>
+        </div>
     </div>
 
     <!-- Card Wrapper -->
-    <div class="card shadow-sm mb-4">
+    <div class="mb-4">
         <div class="card-body">
             <form action="">
                 @csrf
@@ -12,10 +16,10 @@
                 <!-- Logo Upload Section -->
                 <div class="mb-4 text-center">
                     <div class="card" style="max-width: 18rem; margin: auto;">
-                        <img src="https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg" class="card-img-top" alt="Logo Perusahaan">
+                        <img id="preview" src="/img/default.jpg" class="card-img-top" alt="Logo Perusahaan" style="height: 13.5rem; object-fit: cover;">
                         <div class="card-body">
                             <p class="card-text">Upload dengan Format JPG atau PNG (MAX 5MB)</p>
-                            <a href="#" class="btn btn-primary">Upload Logo Perusahaan</a>
+                            <input type="file" name="perusahaan" class="form-control" accept="image/*" onchange="previewImage(event)">
                         </div>
                     </div>
                 </div>
@@ -113,13 +117,18 @@
                         <option value="perusahaan">Induk</option>
                     </select>
                 </div>
-
-                 <!-- Action Buttons -->
-                 <div class="mb-3 text-center">
-                    <a href="/homePerusahaan" class="btn btn-secondary me-2">Kembali</a>
-                    <button type="submit" class="btn btn-primary">Simpan Data</button>
-                </div>
             </form>
         </div>
     </div>
+
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const preview = document.getElementById('preview');
+                preview.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </x-layout>

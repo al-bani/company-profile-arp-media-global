@@ -21,9 +21,15 @@
                 </div>
 
                 <!-- Logo -->
-                <div class="mb-3">
-                    <label for="logo" class="form-label">Logo</label>
-                    <input class="form-control" id="logo" name="logo" type="file" accept="image/*">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <img id="preview" src="/img/default.jpg" class="card-img-top border" alt="Logo Perusahaan"
+                            style="height: 10rem; width: 10rem; object-fit: cover;">
+                    </div>
+                    <div class="col">
+                        <label for="foto" class="form-label">Logo</label>
+                        <input class="form-control" id="foto" name="foto" type="file" accept="image/*" onchange="previewImage(event)">
+                    </div>
                 </div>
 
                 <!-- Action Buttons -->
@@ -34,4 +40,14 @@
             </form>
         </div>
     </div>
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const preview = document.getElementById('preview');
+                preview.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </x-layout>

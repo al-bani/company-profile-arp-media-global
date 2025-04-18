@@ -1,72 +1,86 @@
 @extends('Layout.layoutAdmin')
 
 <x-layout>
-    {{-- Judul --}}
-    <div class="mb-2">
-        <h4>Daftar Data</h4>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Banner Perusahaan</h1>
+        <button type="submit" class="btn btn-primary">Simpan Data</button>
     </div>
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="d-flex justify-content-end mb-3">
-                <a href="{{ route('perusahaan') }}" class="btn btn-primary">+ Tambah Data</a>
+
+    <form method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="row justify-content-center mb-4">
+            <!-- Banner 1 -->
+            <div class="col-auto">
+                <div class="card" style="width: 20rem;">
+                    <img id="preview1" src="/img/default.jpg" class="card-img-top" alt="..." style="height: 10rem; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Banner 1</h5>
+                        <p class="card-text">Upload dengan Format JPG atau PNG (MAX 5MB)</p>
+                        <input type="file" name="banner1" class="form-control" accept="image/*" onchange="previewImage(event, 1)">
+                    </div>
+                </div>
             </div>
 
-            <div class="table-responsive">
-                <table id="example" class="table table-bordered table-striped" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011-04-25</td>
-                            <td>$320,800</td>
-                            <td>
-                                <a href="" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Bagasx</td>
-                            <td>Systems</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011-04-25</td>
-                            <td>$320,800</td>
-                            <td>
-                                <a href="" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Banner 2 -->
+            <div class="col-auto">
+                <div class="card" style="width: 20rem;">
+                    <img id="preview2" src="/img/default.jpg" class="card-img-top" alt="..." style="height: 10rem; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Banner 2</h5>
+                        <p class="card-text">Upload dengan Format JPG atau PNG (MAX 5MB)</p>
+                        <input type="file" name="banner2" class="form-control" accept="image/*" onchange="previewImage(event, 2)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banner 3 -->
+            <div class="col-auto">
+                <div class="card" style="width: 20rem;">
+                    <img id="preview3" src="/img/default.jpg" class="card-img-top" alt="..." style="height: 10rem; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Banner 3</h5>
+                        <p class="card-text">Upload dengan Format JPG atau PNG (MAX 5MB)</p>
+                        <input type="file" name="banner3" class="form-control" accept="image/*" onchange="previewImage(event, 3)">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    @push('script')
-        <script>
-            $(document).ready(function () {
-                $('#example').DataTable();
-            });
-        </script>
-    @endpush
+
+        <div class="row justify-content-center mb-4">
+            <!-- Banner 4 -->
+            <div class="col-auto">
+                <div class="card" style="width: 20rem;">
+                    <img id="preview4" src="/img/default.jpg" class="card-img-top" alt="..." style="height: 10rem; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Banner 4</h5>
+                        <p class="card-text">Upload dengan Format JPG atau PNG (MAX 5MB)</p>
+                        <input type="file" name="banner4" class="form-control" accept="image/*" onchange="previewImage(event, 4)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banner 5 -->
+            <div class="col-auto">
+                <div class="card" style="width: 20rem;">
+                    <img id="preview5" src="/img/default.jpg" class="card-img-top" alt="..." style="height: 10rem; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Banner 5</h5>
+                        <p class="card-text">Upload dengan Format JPG atau PNG (MAX 5MB)</p>
+                        <input type="file" name="banner5" class="form-control" accept="image/*" onchange="previewImage(event, 5)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        function previewImage(event, index) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const preview = document.getElementById('preview' + index);
+                preview.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </x-layout>

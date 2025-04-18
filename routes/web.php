@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PartnerController;
@@ -30,4 +31,4 @@ Route::get('/homeLayanan', [LayananController::class, 'index']);
 Route::get('/createLayanan', [LayananController::class, 'create']);
 Route::get('/homePortofolio', [PortofolioController::class, 'index']);
 Route::get('/createPortofolio', [PortofolioController::class, 'create']);
-
+Route::get('/homeBanner', [BannerController::class, 'index']);

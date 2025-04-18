@@ -24,35 +24,35 @@
         Superadmin
     </div>
 
-    <li class="nav-item {{ Request::is('homePerusahaan*') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('homePerusahaan*') || Request::is('perusahaan*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/homePerusahaan" data-bs-toggle="tooltip" data-bs-placement="right" title="Perusahaan">
             <i class="fas fa-building fs-3"></i>
             <span class="ms-2">Perusahaan</span>
         </a>
     </li>
 
-    <li class="nav-item {{ Request::is('akunAdmin*') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('akunAdmin*') || Request::is('admin*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/akunAdmin" data-bs-toggle="tooltip" data-bs-placement="right" title="Akun Admin">
             <i class="fas fa-user-shield fs-3"></i>
             <span class="ms-2">Akun Admin</span>
         </a>
     </li>
 
-    <li class="nav-item {{ Request::is('homeLayanan*') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('homeLayanan*') || Request::is('createLayanan*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/homeLayanan" data-bs-toggle="tooltip" data-bs-placement="right" title="Layanan">
             <i class="fas fa-concierge-bell fs-3"></i>
             <span class="ms-2">Layanan</span>
         </a>
     </li>
 
-    <li class="nav-item {{ Request::is('homePartner*') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('homePartner*')  || Request::is('createPartner*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/homePartner" data-bs-toggle="tooltip" data-bs-placement="right" title="Partner">
             <i class="fas fa-handshake fs-3"></i>
             <span class="ms-2">Partner</span>
         </a>
     </li>
 
-    <li class="nav-item {{ Request::is('homeBerita*') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('homeBerita*') || Request::is('berita*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/homeBerita" data-bs-toggle="tooltip" data-bs-placement="right" title="Berita">
             <i class="fas fa-newspaper fs-3"></i>
             <span class="ms-2">Berita</span>
@@ -66,7 +66,7 @@
         </a>
     </li>
 
-    <li class="nav-item {{ Request::is('homePortofolio*') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('homePortofolio*') || Request::is('createPortofolio*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/homePortofolio" data-bs-toggle="tooltip" data-bs-placement="right" title="Portofolio">
             <i class="fas fa-briefcase fs-3"></i>
             <span class="ms-2">Portofolio</span>

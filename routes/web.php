@@ -32,4 +32,3 @@ Route::get('/createLayanan', [LayananController::class, 'create']);
 Route::get('/homePortofolio', [PortofolioController::class, 'index']);
 Route::get('/createPortofolio', [PortofolioController::class, 'create']);
 Route::get('/homeBanner', [BannerController::class, 'index']);
-Route::get('/homeBanner', [BannerController::class, 'index']);

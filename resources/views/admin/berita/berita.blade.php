@@ -9,9 +9,13 @@
         </div>
     </div>
 
-    <div class="mb-4">
-        <form action="" method="POST" enctype="multipart/form-data">
-            @csrf
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Form Tambah Berita</h6>
+        </div>
+        <div class="card-body">
+            <form action="" method="POST" enctype="multipart/form-data">
+                @csrf
 
             {{-- Thumbnail Upload --}}
             <div class="mb-4">
@@ -37,22 +41,22 @@
                 <input class="form-control" id="foto" name="foto" type="file" accept="image/*" onchange="previewImage(event)">
             </div>
 
-            {{-- Isi Berita --}}
-            <div class="mb-3">
-                <label for="deskripsi">Isi Berita</label>
-                <textarea name="deskripsi" class="form-control" id="deskripsi" rows="6"></textarea>
-            </div>
+                {{-- Isi Berita --}}
+                <div class="mb-3">
+                    <label for="deskripsi" class="form-label">Isi Berita</label>
+                    <textarea name="deskripsi" class="form-control" id="deskripsi" rows="6"></textarea>
+                </div>
 
-            {{-- Perusahaan --}}
-            <div class="mb-3">
-                <label for="status">Perusahaan</label>
-                <select class="form-select" name="status" id="status">
-                    <option selected>Choose...</option>
-                    <option value="arp">ARP</option>
-                    <option value="red">Red gitulah</option>
-                    <option value="nothing">[TANPA PERUSAHAAN]</option>
-                </select>
-            </div>
+                {{-- Perusahaan --}}
+                <div class="mb-4">
+                    <label for="status" class="form-label">Perusahaan</label>
+                    <select class="form-select" name="status" id="status">
+                        <option selected disabled>-- Pilih Perusahaan --</option>
+                        <option value="arp">ARP</option>
+                        <option value="red">Red gitulah</option>
+                        <option value="nothing">[TANPA PERUSAHAAN]</option>
+                    </select>
+                </div>
 
 
         </form>

@@ -34,7 +34,7 @@
                                 <span class="badge bg-success text-white px-4 py-2 fs-6 rounded-pill">Aktif</span>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-warning btn-sm me-1">
+                                <a href="/admin/edit" class="btn btn-warning btn-sm me-1">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="#" class="btn btn-info btn-sm me-1">

@@ -1,12 +1,12 @@
 <x-layout>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Form Partner</h1>
+        <h1 class="h3 mb-0 text-gray-800">Form Edit Partner</h1>
     </div>
 
     <!-- Card Wrapper -->
     <div class="card shadow-sm mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Formulir Data Partner</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Formulir Edit Data Partner</h6>
         </div>
         <div class="card-body">
             <form action="" method="POST" enctype="multipart/form-data">

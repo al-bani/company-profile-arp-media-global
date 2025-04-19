@@ -33,7 +33,7 @@
                             <td>2011-04-25</td>
                             <td>$320,800</td>
                             <td>
-                                <a href="" class="btn btn-warning btn-sm">
+                                <a href="/perusahaan/edit" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="#" class="btn btn-info btn-sm me-1">

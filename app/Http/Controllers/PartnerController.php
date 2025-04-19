@@ -43,10 +43,10 @@ class PartnerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(partner $partner)
-    {
-        //
-    }
+    // public function edit(partner $partner)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -62,5 +62,10 @@ class PartnerController extends Controller
     public function destroy(partner $partner)
     {
         //
+    }
+
+    public function edit()
+    {
+        return view('admin.partner.partner-edit');
     }
 }

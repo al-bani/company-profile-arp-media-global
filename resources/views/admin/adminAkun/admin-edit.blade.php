@@ -1,12 +1,12 @@
 <x-layout>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Akun Admin</h1>
+        <h1 class="h3 mb-0 text-gray-800">Edit Akun Admin</h1>
     </div>
 
     <!-- Card Wrapper -->
     <div class="card shadow-sm mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Create Akun</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Edit Akun</h6>
         </div>
         <div class="card-body">
             <form action="">

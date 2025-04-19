@@ -23,6 +23,10 @@ class PerusahaanController extends Controller
     {
         return view('admin.perusahaan.perusahaan');
     }
+    public function edit()
+    {
+        return view('admin.perusahaan.edit-perusahaan');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -51,10 +55,10 @@ class PerusahaanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(perusahaan $perusahaan)
-    {
-        //
-    }
+    // public function edit(perusahaan $perusahaan)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.

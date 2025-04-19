@@ -37,7 +37,7 @@
                             <td>08.00-09.00</td>
                             <td>Lorem Ipsum blablaba</td>
                             <td>
-                                <a href="" class="btn btn-warning btn-sm">
+                                <a href="/portofolio/edit" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="" class="btn btn-danger btn-sm">
@@ -55,7 +55,7 @@
                             <td>08.00-09.00</td>
                             <td>Lorem Ipsum blablaba</td>
                             <td>
-                                <a href="" class="btn btn-warning btn-sm">
+                                <a href="/portofolio/edit" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="" class="btn btn-danger btn-sm">

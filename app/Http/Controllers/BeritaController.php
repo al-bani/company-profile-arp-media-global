@@ -40,13 +40,19 @@ class BeritaController extends Controller
         //
     }
 
+    public function edit()
+    {
+        return view('admin.berita.berita-edit');
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(berita $berita)
-    {
-        //
-    }
+    // public function edit(berita $berita)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.

@@ -43,10 +43,10 @@ class LayananController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(layanan $layanan)
-    {
-        //
-    }
+    // public function edit(layanan $layanan)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -62,5 +62,9 @@ class LayananController extends Controller
     public function destroy(layanan $layanan)
     {
         //
+    }
+    public function edit()
+    {
+        return view('admin.layanan.layanan-edit');
     }
 }

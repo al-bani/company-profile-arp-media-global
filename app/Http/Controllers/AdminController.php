@@ -39,14 +39,18 @@ class AdminController extends Controller
     {
         //
     }
+    public function edit()
+    {
+        return view('admin.adminAkun.admin-edit');
+    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(admin $admin)
-    {
-        //
-    }
+    // public function edit(admin $admin)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.

@@ -1,0 +1,343 @@
+/* Tampilan untuk Tablet  */
+@media only screen and (max-width: 992px) and (min-width: 768px) {
+    .text-profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .text-profile p {
+        font-size: 25px;
+        width: 44rem;
+        text-align: center;
+    }
+
+    .text-profile h4 {
+        font-size: 30px;
+    }
+
+    .text-profile button {
+        margin-bottom: 2rem;
+        width: 18rem;
+        font-size: 20px;
+        height: 50px;
+    }
+
+    .layanan {
+        margin-top: 2rem;
+    }
+
+    .layanan h4 {
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    .client h4 {
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+
+    .client-section {
+        width: 100%;
+        overflow: hidden;
+        background-color: #fff;
+        padding: 40px 0;
+    }
+
+    .client-section h4 {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .marquee-track {
+        display: flex;
+        width: max-content;
+        animation: scroll 18s linear infinite;
+    }
+
+    .marquee-container {
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .logo {
+        display: inline-block;
+        padding: 0 40px;
+    }
+
+    .logo img {
+        height: 130px;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0%);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+
+    .berita .row {
+        display: flex;
+        flex-wrap: nowrap;
+        /* Supaya tidak turun ke bawah */
+        overflow-x: auto;
+        /* Tambahkan scroll horizontal jika perlu */
+        justify-content: left;
+        gap: 10px;
+    }
+
+    .berita .card-template {
+        margin-bottom: 2rem;
+    }
+
+    .rowberita .col-md-6 {
+        flex: 0 0 50%;
+        /* Membuat 2 kolom dalam satu baris */
+        max-width: 50%;
+    }
+
+    .struktur h4 {
+        font-size: 1.8rem;
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        font-weight: 400;
+    }
+
+    .struktur .card {
+        width: 14rem;
+        /* Lebar tetap */
+        overflow: hidden;
+        /* Mencegah elemen keluar dari card */
+        text-align: center;
+        /* Pusatkan teks */
+        border: 1.4px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        background: #fff;
+    }
+
+    .struktur .card img {
+        width: 100%;
+        /* Pastikan gambar selalu memenuhi lebar card */
+        height: auto;
+        /* Menjaga aspek rasio */
+        border-radius: 8px 8px 0 0;
+    }
+
+    .struktur .card .container {
+        padding: 10px;
+        word-wrap: break-word;
+        /* Memastikan teks panjang tidak keluar */
+        white-space: normal;
+        /* Memastikan teks tetap dalam baris */
+    }
+
+    .struktur .card h4 {
+        margin: 5px 0;
+        font-size: 1.2rem;
+    }
+
+    .struktur .card p {
+        margin: 5px 0;
+        font-size: 1rem;
+    }
+
+    .kontak h3,
+    .layanan-web h3 {
+        font-size: 1.8rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        font-weight: 400;
+    }
+
+    .google-map {
+        width: 90%;
+        height: 20rem;
+    }
+
+    .layanan-web h4 {
+        font-size: 1.3rem;
+    }
+
+    .layanan-web p {
+        font-size: 0.8rem;
+    }
+
+    .berita-web h4 {
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        font-weight: 400;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+
+
+
+    .berita-web .card-template {
+        flex: 0 0 auto;
+        /* Mencegah card mengecil */
+        width: 300px;
+        /* Atur lebar tetap */
+        height: 100%;
+        /* Pastikan tinggi card konsisten */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* padding-bottom: 10px; */
+    }
+
+    .berita-web .row {
+        display: flex;
+        flex-wrap: nowrap;
+        /* Supaya tidak turun ke bawah */
+        overflow-x: auto;
+        /* Tambahkan scroll horizontal jika perlu */
+        justify-content: left;
+        margin-bottom: 10px;
+    }
+
+    .berita-web .card-template .card-text {
+        overflow: hidden;
+        display: -webkit-box;
+    }
+
+
+    .berita-web .blog-time {
+        margin-top: -20px;
+    }
+
+    .berita-web .row {
+        gap: 10px;
+        /* Atur jarak antar card */
+        justify-content: left;
+        /* Rapatkan kartu ke tengah */
+    }
+
+    .berita-web .col-lg-3 {
+        flex: 0 0 48%;
+        /* Membuat 2 kartu per baris di tablet */
+        max-width: 48%;
+    }
+
+    .detail-header {
+        background-color: #678dee;
+        /* border: 2px solid ; */
+        border-bottom-left-radius: 100px;
+        color: white;
+    }
+
+    .logo-detail {
+        width: 20%;
+    }
+
+    .detail-header h2 {
+        font-size: 4rem;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .detail-header p {
+        font-size: 2.2rem;
+        text-align: justify;
+    }
+
+    .detail-highlight {
+        color: white;
+    }
+
+    .highlight1 {
+        /* border: 2px solid; */
+        background-color: #678dee;
+        border-top-left-radius: 35px;
+        border-bottom-left-radius: 35px;
+    }
+
+    .highlight1 p {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .highlight1 h2 {
+        font-size: 54px;
+        font-weight: bold;
+    }
+
+    .highlight1 span {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .highlight2 {
+        /* border: 2px solid; */
+        background-color: #9747ff;
+    }
+
+    .highlight2 p {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .highlight2 h2 {
+        font-size: 54px;
+        font-weight: bold;
+    }
+
+    .highlight3 {
+        /* border: 2px solid; */
+        background-color: #678dee;
+        border-top-right-radius: 35px;
+        border-bottom-right-radius: 35px;
+    }
+
+    .highlight3 p {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .highlight3 h2 {
+        font-size: 54px;
+        font-weight: bold;
+    }
+
+    .highlight1 p,
+    .highlight2 p,
+    .highlight3 p {
+        margin-bottom: 0.4vh;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .detail-gambar-bawah img {
+        border: 1px;
+        border-top-left-radius: 500px;
+    }
+
+    .terimakasih h2 {
+        font-size: 3.6rem;
+        font-weight: bold;
+    }
+
+    .text-terimakasih {
+        font-size: 1.7rem;
+    }
+
+    .moto img {
+        border-radius: 34px;
+    }
+
+
+}

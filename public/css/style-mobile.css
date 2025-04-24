@@ -1,0 +1,257 @@
+
+/* Tampilan untuk HP */
+
+@media only screen and (max-width: 767px) {
+    /* .corousel-img {
+        height: 20rem;
+    } */
+
+    .carousel-item {
+        height: 40vh;
+        /* atau tinggi tertentu, misal 600px */
+        position: relative;
+    }
+
+    .carousel-item img,video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        /* memastikan gambar tetap proporsional, crop otomatis */
+    }
+
+
+    .hp-profile p {
+        font-size: 1rem;
+        /* text-align: justify; */
+    }
+
+    .hp-profile h4 {
+        font-size: 1.2rem;
+        /* text-align: justify; */
+    }
+
+    .hp-profile img {
+        justify-content: center;
+    }
+
+    .text-profile h4 {
+        font-size: 24px;
+    }
+
+    .text-profile p {
+        font-size: 18px;
+        width: 100%;
+    }
+
+
+    .layanan .card {
+        height: 18rem;
+        /* atau bisa kamu ubah ke px misal 300px */
+        width: 100%;
+        /* otomatis sesuai col-nya */
+        overflow: hidden;
+        /* biar gambar gak keluar dari card */
+        border-radius: 0.75rem;
+        /* opsional: biar lebih smooth */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        /* opsional: buat tampilan lebih clean */
+    }
+
+    .layanan .card-img-top {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* biar gambar tetap isi penuh tanpa melar */
+        object-position: center;
+    }
+
+    .layanan .card a {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+
+
+    .layanan .card a img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .layanan-card4,.layanan-card5,.layanan-card6 {
+        display: none;
+    }
+
+    .client h4 {
+        margin-top: 1rem;
+    }
+
+    /* Running text */
+    .client-section {
+        width: 100%;
+        overflow: hidden;
+        background-color: #fff;
+        padding: 40px 0;
+    }
+
+    .client-section h4 {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .marquee-track {
+        display: flex;
+        width: max-content;
+        animation: scroll 15s linear infinite;
+    }
+
+    .marquee-container {
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .logo {
+        display: inline-block;
+        padding: 0 40px;
+    }
+
+    .logo img {
+        height: 130px;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0%);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .berita .row {
+        display: flex;
+        flex-wrap: nowrap;
+        /* Supaya tidak turun ke bawah */
+        overflow-x: auto;
+        /* Tambahkan scroll horizontal jika perlu */
+        justify-content: left;
+        gap: 10px;
+    }
+
+    .client .row {
+        display: flex;
+        flex-wrap: nowrap;
+        /* Supaya tidak turun ke bawah */
+        overflow-x: auto;
+        /* Tambahkan scroll horizontal jika perlu */
+        justify-content: left;
+    }
+
+    .client img {
+        max-width: 10rem;
+        /* Sesuaikan ukuran gambar */
+    }
+
+    .berita .card-template {
+        margin-bottom: 2rem;
+    }
+
+    .rowberita .col-sm-12 {
+        flex: 0 0 100%;
+        /* Membuat 1 kolom dalam satu baris */
+        max-width: 100%;
+    }
+
+    .struktur .card {
+        width: 100%;
+        /* Pastikan mengikuti col-6 */
+        max-width: 10rem;
+        /* Tetap menjaga ukuran maksimal */
+        text-align: center;
+        border: 1.4px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        background: #fff;
+    }
+
+    .struktur .row {
+        display: flex;
+        flex-wrap: wrap;
+        /* Memastikan item turun ke baris berikutnya */
+        justify-content: center;
+    }
+
+    .struktur .card img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .kontak h3,
+    .layanan-web h3 {
+        margin-top: 1rem;
+        font-weight: 400;
+    }
+
+    .google-map {
+        width: 100%;
+        height: 20rem;
+    }
+
+    .berita-web-banner {
+        height: 140px;
+    }
+
+    .berita-web h4 {
+        font-size: 1.8rem;
+        display: flex;
+        justify-content: center;
+        font-weight: 400;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+
+    .berita-web .row {
+        display: flex;
+        flex-wrap: nowrap;
+        /* Supaya tidak turun ke bawah */
+        overflow-x: auto;
+        /* Tambahkan scroll horizontal jika perlu */
+        justify-content: left;
+
+        margin-bottom: 1.6rem;
+    }
+
+    .berita-web .card-template {
+        margin-bottom: 2rem;
+    }
+
+    .detail-header {
+        background-color: #678dee;
+        /* border: 2px solid ; */
+        border-bottom-left-radius: 100px;
+        color: white;
+    }
+
+
+
+    /* .detail-header h2 {
+        font-size: 2rem;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .detail-header p {
+        font-size: 2.2rem;
+        text-align: justify;
+    } */
+}

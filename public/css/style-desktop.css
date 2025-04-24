@@ -1,0 +1,421 @@
+/* ------ Header ---------  */
+.navbar a {
+    color: black;
+}
+
+.navbar {
+    background-color: white;
+    font-size: 20px;
+}
+
+.nav-logo {
+    width: 6rem;
+}
+
+/* --------- Content ---------- */
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+.hp-profile {
+    background-color: #6499e9;
+    /* 50% opacity */
+}
+
+.hp-profile button {
+    background-color: white;
+    color: blue;
+}
+
+/* -------- footer ------- */
+
+.footers {
+    position: fixed;
+    bottom: 0;
+}
+
+.struktur .card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.struktur .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Tampilan untuk Desktop */
+@media only screen and (min-width: 992px) {
+    /* .corousel-img {
+        height: 36rem;
+    } */
+
+    .carousel-item {
+        height: 80vh;
+        /* atau tinggi tertentu, misal 600px */
+        position: relative;
+    }
+
+    .carousel-item img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        /* memastikan gambar tetap proporsional, crop otomatis */
+    }
+
+
+    .hp-profile p {
+        font-size: 1.3rem;
+        text-align: justify;
+        margin-right: 5rem;
+    }
+
+    .hp-profile img {
+        width: 14rem;
+    }
+
+    .layanan h4 {
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+        font-weight: 400;
+    }
+
+    .layanan .card {
+        height: 18rem;
+        /* atau bisa kamu ubah ke px misal 300px */
+        width: 100%;
+        /* otomatis sesuai col-nya */
+        overflow: hidden;
+        /* biar gambar gak keluar dari card */
+        border-radius: 0.75rem;
+        /* opsional: biar lebih smooth */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        /* opsional: buat tampilan lebih clean */
+    }
+
+    .layanan .card-img-top {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* biar gambar tetap isi penuh tanpa melar */
+        object-position: center;
+    }
+
+    .layanan .card a {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .layanan .card a img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+
+
+    .client h4 {
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        font-weight: 400;
+    }
+
+    /* Running Text */
+    .client-section {
+        width: 100%;
+        overflow: hidden;
+        background-color: #fff;
+        padding: 40px 0;
+    }
+
+    .client-section h4 {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .marquee-track {
+        display: flex;
+        width: max-content;
+        animation: scroll 18s linear infinite;
+    }
+
+    .marquee-container {
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .logo {
+        display: inline-block;
+        padding: 0 40px;
+    }
+
+    .logo img {
+        height: 130px;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0%);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+
+
+    .berita .row {
+        display: flex;
+        flex-wrap: nowrap;
+        /* Supaya tidak turun ke bawah */
+        overflow-x: auto;
+        /* Tambahkan scroll horizontal jika perlu */
+        justify-content: left;
+        gap: 10px;
+    }
+
+    .berita .card-template {
+        margin-bottom: 2rem;
+    }
+
+    .struktur h4 {
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        font-weight: 400;
+    }
+
+    .struktur .card {
+        width: 14rem;
+        /* Lebar tetap */
+        overflow: hidden;
+        /* Mencegah elemen keluar dari card */
+        text-align: center;
+        /* Pusatkan teks */
+        border: 1.4px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        background: #fff;
+    }
+
+    .struktur .card img {
+        width: 100%;
+        /* Pastikan gambar selalu memenuhi lebar card */
+        height: auto;
+        /* Menjaga aspek rasio */
+        border-radius: 8px 8px 0 0;
+    }
+
+    .struktur .card .container {
+        padding: 10px;
+        word-wrap: break-word;
+        /* Memastikan teks panjang tidak keluar */
+        white-space: normal;
+        /* Memastikan teks tetap dalam baris */
+    }
+
+    .struktur .card h4 {
+        margin: 5px 0;
+        font-size: 1.2rem;
+    }
+
+    .struktur .card p {
+        margin: 5px 0;
+        font-size: 1rem;
+    }
+
+    .kontak h3,
+    .layanan-web h3 {
+        font-size: 2rem;
+        margin-top: 1.6rem;
+        margin-bottom: 2rem;
+        font-weight: 400;
+    }
+
+    .google-map {
+        width: 100%;
+        height: 20rem;
+    }
+
+    .layanan-web .gambar {
+        padding: 0;
+    }
+
+    .berita-web h4 {
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+        font-weight: 400;
+    }
+
+    .berita-web .card-template {
+        margin-bottom: 2rem;
+    }
+
+    .berita-web .card-template {
+        flex: 0 0 auto;
+        /* Mencegah card mengecil */
+        width: 300px;
+        /* Atur lebar tetap */
+        height: 100%;
+        /* Pastikan tinggi card konsisten */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .berita-web .card-template .card-text {
+        overflow: hidden;
+        display: -webkit-box;
+    }
+
+    .berita-web .blog-time {
+        margin-top: -30px;
+    }
+
+    .berita-web .row {
+        justify-content: center;
+        /* Rapatkan kartu ke tengah */
+    }
+
+    .rowberita2 {
+        display: none;
+    }
+
+    .detail-header {
+        background-color: #678dee;
+        /* border: 2px solid ; */
+        border-bottom-left-radius: 100px;
+        color: white;
+    }
+
+    .logo-detail {
+        width: 50%;
+    }
+
+    .detail-header h1 {
+        font-size: 4rem;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .detail-header p {
+        font-size: 2rem;
+        text-align: justify;
+    }
+
+    .detail-highlight {
+        color: white;
+    }
+
+    .highlight1 {
+        /* border: 2px solid; */
+        background-color: #678dee;
+        border-top-left-radius: 35px;
+        border-bottom-left-radius: 35px;
+    }
+
+    .highlight1 p {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .highlight1 h2 {
+        font-size: 54px;
+        font-weight: bold;
+    }
+
+    .highlight1 span {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .highlight2 {
+        /* border: 2px solid; */
+        background-color: #9747ff;
+    }
+
+    .highlight2 p {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .highlight2 h2 {
+        font-size: 54px;
+        font-weight: bold;
+    }
+
+    .highlight3 {
+        /* border: 2px solid; */
+        background-color: #678dee;
+        border-top-right-radius: 35px;
+        border-bottom-right-radius: 35px;
+    }
+
+    .highlight3 p {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .highlight3 h2 {
+        font-size: 54px;
+        font-weight: bold;
+    }
+
+    .highlight1 p,
+    .highlight2 p,
+    .highlight3 p {
+        margin-bottom: 0.4vh;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .detail-gambar-bawah img {
+        border: 1px;
+        border-top-left-radius: 500px;
+    }
+
+    .terimakasih h2 {
+        font-size: 3.3rem;
+        font-weight: bold;
+    }
+
+    .text-terimakasih {
+        font-size: 1.7rem;
+    }
+
+    .moto img {
+        border-radius: 32px;
+    }
+
+    .moto h5 {
+        font-size: 1.5rem;
+    }
+
+    .moto p {
+        font-size: 1.3rem;
+    }
+}

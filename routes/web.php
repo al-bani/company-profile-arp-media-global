@@ -16,32 +16,34 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [DashboardController::class, 'index']);
-Route::get('/homePerusahaan', [PerusahaanController::class, 'index']);
-Route::get('/profile', [profileController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard/homePerusahaan', [PerusahaanController::class, 'index']);
+Route::get('/dashboard/profile', [profileController::class, 'index']);
 // Khusus Admin
-Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/createAkun', [AdminController::class, 'create']);
-Route::get('/akunAdmin', [AdminController::class, 'index']);
-Route::get('/admin/edit', [AdminController::class, 'edit'])->name('admin');
+Route::get('/dashboard/admin', [AdminController::class, 'index']);
+Route::get('/dashboard/createAkun', [AdminController::class, 'create']);
+Route::get('/dashboard/akunAdmin', [AdminController::class, 'index']);
+Route::get('/dashboard/admin/edit', [AdminController::class, 'edit'])->name('admin');
 // Khusus Partner
-Route::get('/homePartner', [PartnerController::class, 'index']);
-Route::get('/createPartner', [PartnerController::class, 'create']);
-Route::get('/partner/edit', [PartnerController::class, 'edit'])->name('partner');
+Route::get('/dashboard/homePartner', [PartnerController::class, 'index']);
+Route::get('/dashboard/createPartner', [PartnerController::class, 'create']);
+Route::get('/dashboard/partner/edit', [PartnerController::class, 'edit'])->name('partner');
 // Khusus perusahaan
-Route::get('/perusahaan', [PerusahaanController::class, 'tambah'])->name('perusahaan');
-Route::get('/perusahaan/edit', [PerusahaanController::class, 'edit'])->name('perusahaan');
+Route::get('/dashboard/perusahaan', [PerusahaanController::class, 'tambah'])->name('perusahaan');
+Route::get('/dashboard/perusahaan/edit', [PerusahaanController::class, 'edit'])->name('perusahaan');
 // Khusus berita
-Route::get('/homeBerita', [BeritaController::class, 'index']);
-Route::get('/berita', [BeritaController::class, 'create']);
-Route::get('/berita/edit', [BeritaController::class, 'edit'])->name('berita');
+Route::get('/dashboard/homeBerita', [BeritaController::class, 'index']);
+Route::get('/dashboard/berita', [BeritaController::class, 'create']);
+Route::get('/dashboard/berita/edit', [BeritaController::class, 'edit'])->name('berita');
 // Khusus Layanan
-Route::get('/homeLayanan', [LayananController::class, 'index']);
-Route::get('/createLayanan', [LayananController::class, 'create']);
-Route::get('/layanan/edit', [LayananController::class, 'edit'])->name('layanan');
+Route::get('/dashboard/homeLayanan', [LayananController::class, 'index']);
+Route::get('/dashboard/createLayanan', [LayananController::class, 'create']);
+Route::get('/dashboard/layanan/edit', [LayananController::class, 'edit'])->name('layanan');
 // Khusus Portofolio
-Route::get('/homePortofolio', [PortofolioController::class, 'index']);
-Route::get('/createPortofolio', [PortofolioController::class, 'create']);
-Route::get('/portofolio/edit', [PortofolioController::class, 'edit'])->name('portofolio');
+Route::get('/dashboard/homePortofolio', [PortofolioController::class, 'index']);
+Route::get('/dashboard/createPortofolio', [PortofolioController::class, 'create']);
+Route::get('/dashboard/portofolio/edit', [PortofolioController::class, 'edit'])->name('portofolio');
 // Khusus Banner
-Route::get('/homeBanner', [BannerController::class, 'index']);
+Route::get('/dashboard/homeBanner', [BannerController::class, 'index']);
+
+//company profile

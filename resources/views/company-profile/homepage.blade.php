@@ -1,4 +1,4 @@
-@extends('layout.company')
+@extends('company-profile.Layout.company')
 
 {{-- Content --}}
 @section('content')
@@ -35,7 +35,7 @@
     <div class="hp-profile container-fluid p-4 ">
         <div class="row justify-content-center ">
             <div class="col-sm-12 col-md-6 col-lg-5  d-flex justify-content-center ps-lg-5 mb-4 mt-4">
-                <img src="{{ asset('images/logo.png') }}" class="hp-profile-logo mt-3 mb-3 w-50" alt>
+                <img src="{{ asset('images/logo copy.png') }}" class="hp-profile-logo mt-3 mb-3 w-50" alt>
             </div>
             <div class="col-sm-12 col-mt-6 col-lg-6 text-profile mt-lg-3 mb-lg-5 text-white ">
                 <h4 class=" pt-3  mb-3"><b>PROFILE PERUSAHAAN</b></h4>

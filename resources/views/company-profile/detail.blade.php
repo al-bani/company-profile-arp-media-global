@@ -1,4 +1,4 @@
-@extends('layout.company')
+@extends('company-profile.Layout.company')
 
 {{-- Content --}}
 @section('content')
@@ -8,7 +8,7 @@
             {{-- bagian header --}}
             <div class="row detail-header">
                 <div class="col-lg-4 mt-5 mb-4">
-                    <img src="{{ asset('images/logo.png') }}" alt="" class="logo-detail mb-5">
+                    <img src="{{ asset('images/logo copy.png') }}" alt="" class="logo-detail mb-5">
                 </div>
                 <div class="col-lg-8 mt-4 text-start pe-5 mb-4">
                     <h2>Media Perusahaan Yang Mengedapankan Kualitas</h2>
@@ -107,8 +107,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 @endsection

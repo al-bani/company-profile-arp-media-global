@@ -9,6 +9,7 @@ use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PortofolioController;
+use App\Http\Controllers\companyProfile;
 use App\Models\admin;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+Route::get('/', [companyProfile::class, 'index']);
+Route::get('/berita', [companyProfile::class, 'berita']);
+Route::get('/detail', [companyProfile::class, 'detail']);
+Route::get('/kontak', [companyProfile::class, 'kontak']);
+Route::get('/layanan', [companyProfile::class, 'layanan']);
+Route::get('/portofolio', [companyProfile::class, 'portofolio']);
+Route::get('/struktur', [companyProfile::class, 'struktur']);
+
+// khusus admin
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/dashboard/homePerusahaan', [PerusahaanController::class, 'index']);
 Route::get('/dashboard/profile', [profileController::class, 'index']);

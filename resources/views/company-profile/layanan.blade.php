@@ -1,4 +1,4 @@
-@extends('layout.company')
+@extends('company-profile.Layout.company')
 
 @section('content')
     <div class="container layanan-web">

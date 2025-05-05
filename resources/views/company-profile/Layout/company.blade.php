@@ -9,10 +9,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-    {{-- <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css"> --}}
+    {{-- <link href="{{ asset('css/style-compro.css') }}" rel="stylesheet" type="text/css"> --}}
     <link href="{{ asset('css/style-desktop.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/style-tablet.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/style-mobile.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/template.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
 
@@ -31,16 +32,16 @@
             <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav ms-auto d-flex gap-5 me-5">
                     <li class="nav-item ">
-                        <a class="nav-link " aria-current="page" href="#"> Perusahaan</a>
+                        <a class="nav-link " aria-current="page" href="/"> Perusahaan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Media</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Layanan</a>
+                        <a class="nav-link" href="/layanan">Layanan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " aria-disabled="true">Kontak</a>
+                        <a class="nav-link " href="/kontak" aria-disabled="true">Kontak</a>
                     </li>
                 </ul>
             </div>

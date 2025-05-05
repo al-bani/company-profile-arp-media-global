@@ -1,4 +1,4 @@
-@extends('layout.company')
+@extends('company-profile.Layout.company')
 
 @section('content')
     <img src="{{ asset('images/banner.png') }}" class="berita-web-banner w-100">
@@ -233,7 +233,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 @endsection

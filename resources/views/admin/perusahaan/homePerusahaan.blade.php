@@ -8,7 +8,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
-                <a href="{{ route('perusahaan') }}" class="btn btn-primary">+ Tambah Data</a>
+                <a href="/dashboard/perusahaan" class="btn btn-primary">+ Tambah Data</a>
             </div>
 
             <div class="table-responsive">
@@ -33,7 +33,7 @@
                             <td>2011-04-25</td>
                             <td>$320,800</td>
                             <td>
-                                <a href="/perusahaan/edit" class="btn btn-warning btn-sm">
+                                <a href="/dashboard/perusahaan/edit" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="#" class="btn btn-info btn-sm me-1">

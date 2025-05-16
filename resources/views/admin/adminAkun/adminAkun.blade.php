@@ -48,7 +48,7 @@
 
                 <!-- Action Buttons -->
                 <div class="mb-3 text-center">
-                    <a href="/akunAdmin" class="btn btn-secondary me-2">Kembali</a>
+                    <a href="/dashboard/akunAdmin" class="btn btn-secondary me-2">Kembali</a>
                     <button type="submit" class="btn btn-primary">Simpan Data</button>
                 </div>
             </form>

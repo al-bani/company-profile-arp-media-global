@@ -2,7 +2,7 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Perusahaan</h1>
         <div class="mb-3 text-center">
-            <a href="/homePerusahaan" class="btn btn-secondary me-2">Kembali</a>
+            <a href="/dashboard/homePerusahaan" class="btn btn-secondary me-2">Kembali</a>
             <button type="submit" class="btn btn-primary">Simpan Data</button>
         </div>
     </div>

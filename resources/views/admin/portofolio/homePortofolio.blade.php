@@ -8,7 +8,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
-                <a href="/createPortofolio" class="btn btn-primary">+ Tambah Data</a>
+                <a href="/dashboard/createPortofolio" class="btn btn-primary">+ Tambah Data</a>
             </div>
 
             <div class="table-responsive">
@@ -37,7 +37,7 @@
                             <td>08.00-09.00</td>
                             <td>Lorem Ipsum blablaba</td>
                             <td>
-                                <a href="/portofolio/edit" class="btn btn-warning btn-sm">
+                                <a href="/dashboard/portofolio/edit" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="" class="btn btn-danger btn-sm">
@@ -55,7 +55,7 @@
                             <td>08.00-09.00</td>
                             <td>Lorem Ipsum blablaba</td>
                             <td>
-                                <a href="/portofolio/edit" class="btn btn-warning btn-sm">
+                                <a href="/dashboard/portofolio/edit" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="" class="btn btn-danger btn-sm">
@@ -63,7 +63,7 @@
                                 </a>
                             </td>
                         </tr>
-                        
+
                     </tbody>
                 </table>
             </div>

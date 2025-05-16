@@ -13,21 +13,22 @@ return new class extends Migration
     {
         Schema::create('perusahaans', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->string('nama', 100);
-            $table->string('logo', 100);
-            $table->string('moto', 255)->nullable();
-            $table->string('media_sosial')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('nib')->unique();
+            $table->text('notaris');
+            $table->string('npwp')->unique();
+            $table->text('deskripsi');
             $table->text('alamat');
-            $table->text('deskripsi')->nullable();
-            $table->string('nib', 50)->nullable();
-            $table->string('npwp', 50)->nullable();
+            $table->string('email')->unique();
+            $table->string('no_telpon');
+            $table->string('instagram')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('tiktok')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('moto')->nullable();
             $table->text('visi')->nullable();
             $table->text('misi')->nullable();
-            $table->string('notaris', 100)->nullable();
-            $table->string('email', 100)->unique();
-            $table->string('no_telp', 20);
-            $table->boolean('status')->default(1);
+            $table->timestamps();
         });
     }
 

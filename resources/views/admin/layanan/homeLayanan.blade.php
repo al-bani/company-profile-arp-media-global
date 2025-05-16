@@ -8,7 +8,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
-                <a href="/createLayanan" class="btn btn-primary">+ Tambah Data</a>
+                <a href="/dashboard/createLayanan" class="btn btn-primary">+ Tambah Data</a>
             </div>
 
             <div class="table-responsive">
@@ -34,7 +34,7 @@
                                 foto.jpg
                             </td>
                             <td>
-                                <a href="/layanan/edit" class="btn btn-warning btn-sm me-1">
+                                <a href="/dashboard/layanan/edit" class="btn btn-warning btn-sm me-1">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="#" class="btn btn-info btn-sm me-1">
@@ -54,7 +54,7 @@
                                 foto.jpg
                             </td>
                             <td>
-                                <a href="/layanan/edit" class="btn btn-warning btn-sm me-1">
+                                <a href="/dashboard/layanan/edit" class="btn btn-warning btn-sm me-1">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="#" class="btn btn-info btn-sm me-1">

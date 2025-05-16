@@ -8,7 +8,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
-                <a href="/berita" class="btn btn-primary">+ Tambah Data</a>
+                <a href="/dashboard/berita" class="btn btn-primary">+ Tambah Data</a>
             </div>
 
             <div class="table-responsive">
@@ -43,7 +43,7 @@
                             <td>Edinburgh</td>
                             <td>61</td>
                             <td>
-                                <a href="/berita/edit" class="btn btn-warning btn-sm">
+                                <a href="/dashboard/berita/edit" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="" class="btn btn-danger btn-sm">

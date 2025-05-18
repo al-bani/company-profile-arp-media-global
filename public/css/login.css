@@ -1,0 +1,159 @@
+/* Base styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+    background-color: #005bac; /* Biru Persib */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    width: 900px;
+    max-width: 95%;
+    background-color: #f9fbfd; /* Warna netral cerah agar kontras dengan biru Persib */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.login-box {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.login-left,
+.login-right {
+    width: 50%;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.login-right {
+    background: linear-gradient(
+        to bottom right,
+        #e3f2fd,
+        #bbdefb
+    ); /* Tetap biru muda lembut */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-logo {
+    max-width: 80%;
+    height: auto;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form h2 {
+    margin-bottom: 10px;
+    color: #0d47a1;
+}
+
+.subtitle {
+    margin-bottom: 30px;
+    color: #607d8b;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid #bbdefb;
+    border-radius: 10px;
+    padding: 0 10px;
+    height: 50px;
+    background-color: #f1f8ff;
+}
+
+.input-wrapper input {
+    border: none;
+    outline: none;
+    flex: 1;
+    height: 100%;
+    font-size: 14px;
+    background: transparent;
+}
+
+.icon {
+    color: #1976d2;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.login-button {
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    height: 50px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-button:hover {
+    background-color: #1e88e5;
+}
+
+.links {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.links a {
+    color: #1976d2;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        margin: 20px;
+    }
+
+    .login-box {
+        flex-direction: column;
+    }
+
+    .login-left,
+    .login-right {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .login-right {
+        order: -1;
+        padding: 40px 20px;
+    }
+
+    .login-logo {
+        max-width: 100%;
+    }
+
+    .links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}

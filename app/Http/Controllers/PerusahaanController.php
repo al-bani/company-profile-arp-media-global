@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\perusahaan;
 use App\Http\Requests\StoreperusahaanRequest;
 use App\Http\Requests\UpdateperusahaanRequest;
+use Illuminate\Http\Request;
 
 class PerusahaanController extends Controller
 {
@@ -13,7 +14,10 @@ class PerusahaanController extends Controller
      */
     public function index()
     {
-        return view('admin.perusahaan.homePerusahaan');
+        $perusahaans = Perusahaan::all(); // Mengambil semua data
+
+        // return view('admin.perusahaan.index', compact('dataPerusahaan'));
+        return view('admin.perusahaan.homePerusahaan', compact('perusahaans'));
     }
     public function coba()
     {
@@ -23,9 +27,11 @@ class PerusahaanController extends Controller
     {
         return view('admin.perusahaan.perusahaan');
     }
-    public function edit()
+    public function edit(perusahaan $perusahaan)
     {
-        return view('admin.perusahaan.edit-perusahaan');
+        return view('admin.perusahaan.edit-perusahaan', [
+            'perusahaan' => $perusahaan
+        ]);
     }
 
     /**
@@ -33,15 +39,16 @@ class PerusahaanController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.perusahaan.createPerusahaan");
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreperusahaanRequest $request)
+    public function store(Request $request)
     {
-        //
+        perusahaan::create($request->all());
+        return redirect('/dashboard/perusahaan')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -63,16 +70,20 @@ class PerusahaanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateperusahaanRequest $request, perusahaan $perusahaan)
+    public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        perusahaan::where('id', $id)
+            ->update($request->except('_token', '_method'));
+        return redirect('/dashboard/perusahaan')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(perusahaan $perusahaan)
+    public function destroy($id)
     {
-        //
+        perusahaan::destroy($id);
+        return redirect('/dashboard/perusahaan')->with('success', 'Data Berhasil dihapus');
     }
 }

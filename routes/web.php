@@ -26,6 +26,7 @@ Route::get('/portofolio', [companyProfile::class, 'portofolio']);
 Route::get('/struktur', [companyProfile::class, 'struktur']);
 
 // khusus admin
+Route::get('/login', [DashboardController::class, 'login']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/dashboard/homePerusahaan', [PerusahaanController::class, 'index']);
 Route::get('/dashboard/profile', [profileController::class, 'index']);
@@ -39,8 +40,8 @@ Route::get('/dashboard/homePartner', [PartnerController::class, 'index']);
 Route::get('/dashboard/createPartner', [PartnerController::class, 'create']);
 Route::get('/dashboard/partner/edit', [PartnerController::class, 'edit'])->name('partner');
 // Khusus perusahaan
-Route::get('/dashboard/perusahaan', [PerusahaanController::class, 'tambah'])->name('perusahaan');
-Route::get('/dashboard/perusahaan/edit', [PerusahaanController::class, 'edit'])->name('perusahaan');
+Route::resource('/dashboard/perusahaan', PerusahaanController::class);
+// Route::get('/dashboard/perusahaan/edit', [PerusahaanController::class, 'edit'])->name('perusahaan');
 // Khusus berita
 Route::get('/dashboard/homeBerita', [BeritaController::class, 'index']);
 Route::get('/dashboard/berita', [BeritaController::class, 'create']);
@@ -56,4 +57,4 @@ Route::get('/dashboard/portofolio/edit', [PortofolioController::class, 'edit'])-
 // Khusus Banner
 Route::get('/dashboard/homeBanner', [BannerController::class, 'index']);
 
-//company profile
+//admin

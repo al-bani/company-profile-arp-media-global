@@ -14,37 +14,9 @@
             <div class="table-responsive">
                 <table id="example" class="table table-bordered table-striped" width="100%" cellspacing="0">
                     <thead>
-                        <tr>
-                            <th>IdPerusahaan</th>
-                            <th>NamaAdmin</th>
-                            <th>Email</th>
-                            <th>No Telepon</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
+                       
                     </thead>
                     <tbody>
-                        {{-- Contoh Data --}}
-                        <tr>
-                            <td>I001</td>
-                            <td>Tiger Nixon</td>
-                            <td>tiger.nixon@example.com</td>
-                            <td>082123456789</td>
-                            <td>
-                                <span class="badge bg-success text-white px-4 py-2 fs-6 rounded-pill">Aktif</span>
-                            </td>
-                            <td>
-                                <a href="/dashboard/admin/edit" class="btn btn-warning btn-sm me-1">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="#" class="btn btn-info btn-sm me-1">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
 
                         {{-- @foreach ($data as $item)
                             <tr>

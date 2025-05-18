@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('moto')->nullable();
             $table->text('visi')->nullable();
             $table->text('misi')->nullable();
+            $table->text('status')->nullable();
             $table->timestamps();
         });
     }

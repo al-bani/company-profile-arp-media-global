@@ -4,6 +4,11 @@
     {{-- Judul --}}
     <div class="mb-2">
         <h4>Partner</h4>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
     </div>
 
     <div class="card shadow mb-4">
@@ -24,60 +29,71 @@
                     </thead>
                     <tbody>
                         {{-- Contoh Data --}}
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>tiger.nixon@example.com</td>
-                            <td>082123456789</td>
-
-                            <td>
-                                <a href="/dashboard/partner/edit" class="btn btn-warning btn-sm me-1">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="#" class="btn btn-info btn-sm me-1">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
-
-                        {{-- @foreach ($data as $item)
+                        @foreach ($partners as $partner)
                             <tr>
-                                <td>{{ $item->id_perusahaan }}</td>
-                                <td>{{ $item->nama_admin }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>{{ $item->no_telepon }}</td>
+                                <td>{{ $partner->nama_partner }}</td>
+                                <td>{{ $partner->email }}</td>
                                 <td>
-                                    @if ($item->status == 'aktif')
-                                        <span class="badge bg-success text-white px-4 py-2 fs-6 rounded-pill">Aktif</span>
-                                    @else
-                                        <span class="badge bg-danger text-white px-4 py-2 fs-6 rounded-pill">Tidak Aktif</span>
-                                    @endif
+                                    <!-- {{-- contoh tampilkan logo --}} -->
+                                    <img src="{{ asset('storage/' . $partner->logo) }}" alt="Logo" width="50">
                                 </td>
+
+
                                 <td>
-                                    <a href="{{ route('edit', $item->id) }}" class="btn btn-warning btn-sm me-1">
+                                    <a href="/dashboard/partner/edit" class="btn btn-warning btn-sm me-1">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('delete', $item->id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </form>
+                                    <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
+                                        data-bs-target="#detailPartner{{ $loop->iteration }}">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
+    @foreach ($partners as $partner)
+        <!-- Modal Detail dengan Textbox -->
+        <!-- Modal Detail -->
+        <div class="modal fade" id="detailPartner{{ $loop->iteration }}" tabindex="-1"
+            aria-labelledby="detailLabel{{ $loop->iteration }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content border-0 rounded-4 shadow">
+                    <div class="modal-header bg-primary text-white rounded-top">
+                        <h5 class="modal-title" id="detailLabel{{ $loop->iteration }}">Detail Partner</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nama Partner -->
+                        <div class="mb-3">
+                            <label class="form-label">Nama Partner</label>
+                            <input type="text" class="form-control" value="{{ $partner->nama_partner }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="text" class="form-control" value="{{ $partner->email }}" readonly>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-secondary rounded-pill px-4"
+                            data-bs-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
     @push('script')
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('#example').DataTable();
             });
         </script>

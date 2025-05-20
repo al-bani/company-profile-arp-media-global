@@ -8,13 +8,20 @@
             <h6 class="m-0 font-weight-bold text-primary">Formulir Edit Data Perusahaan</h6>
         </div>
         <div class="card-body">
-            <form action="/dashboard/perusahaan/{{ $perusahaan -> id }}" method="post">
+            <form action="/dashboard/perusahaan/{{ $perusahaan -> id }}" method="post" enctype="multipart/form-data">
                 @method('put')
                 @csrf
 
                 <div class="mb-3">
-                    <label for="logo">logo</label>
-                    <input class="form-control" id="logo" name="logo" placeholder="Masukan Logo" value="{{ old('logo', $perusahaan->logo) }}">
+                    <label for="logo">Logo</label>
+                    @if($perusahaan->logo)
+                        <img src="{{ asset($perusahaan->logo) }}" alt="Logo" width="100" class="mb-2">
+                    @endif
+                    <input type="file" class="form-control" id="logo" name="logo" accept="image/*">
+                </div>
+                 <div class="mb-3">
+                    <label for="nama_perusahaan">Nama Perusahaan</label>
+                    <input class="form-control" id="nama_perusahaan" name="nama_perusahaan" placeholder="Masukkan Nama Perusahaan" value="{{ old('nama_perusahaan', $perusahaan->nama_perusahaan) }}">
                 </div>
                 <div class="mb-3">
                     <label for="nib">NIB</label>

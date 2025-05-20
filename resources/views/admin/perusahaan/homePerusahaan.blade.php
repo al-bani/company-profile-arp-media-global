@@ -23,6 +23,7 @@
                         <tr>
                             <th>No</th>
                             <th>Logo</th>
+                            <th>Nama Perusahaan</th>
                             <th>NIB</th>
                             <th>Notaris</th>
                             <th>Action</th>
@@ -32,7 +33,12 @@
                         @foreach ($perusahaans as $perusahaan)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $perusahaan->logo }}</td>
+                                <td>
+                                    @if($perusahaan->logo)
+                                        <img src="{{ asset($perusahaan->logo) }}" alt="Logo" width="60">
+                                    @endif
+                                </td>
+                                <td>{{ $perusahaan->nama_perusahaan }}</td>
                                 <td>{{ $perusahaan->nib }}</td>
                                 <td>{{ $perusahaan->npwp }}</td>
                                 <td>
@@ -74,7 +80,7 @@
                             <!-- Modal Body -->
                             <div class="modal-body text-center">
                                 <p class="fs-6 mb-1">Apakah Anda yakin ingin menghapus data berikut?</p>
-                                <p class="fw-semibold text-danger small">ID: {{ $perusahaan->id }}</p>
+                                <p class="fw-semibold text-danger small">Nama Perusahaan: {{ $perusahaan->nama_perusahaan }}</p>
                             </div>
 
                             <!-- Modal Footer -->

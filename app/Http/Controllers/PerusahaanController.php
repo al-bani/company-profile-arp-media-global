@@ -47,7 +47,16 @@ class PerusahaanController extends Controller
      */
     public function store(Request $request)
     {
-        perusahaan::create($request->all());
+        $data = $request->all();
+    
+        if ($request->hasFile('logo')) {
+            $filename = time() . '_' . $request->file('logo')->getClientOriginalName();
+            $destination = 'image/upload/logo';
+            $request->file('logo')->move(public_path($destination), $filename);
+            $data['logo'] = $destination . '/' . $filename;
+        }
+    
+        perusahaan::create($data);
         return redirect('/dashboard/perusahaan')->with('success', 'Data Berhasil Ditambahkan');
     }
 

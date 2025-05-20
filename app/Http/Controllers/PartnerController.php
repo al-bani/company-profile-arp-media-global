@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\partner;
 use App\Http\Requests\StorepartnerRequest;
 use App\Http\Requests\UpdatepartnerRequest;
+use Illuminate\Http\Request;
 
 class PartnerController extends Controller
 {
@@ -13,7 +14,9 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        return view('admin.partner.homePartner');
+        $partners = Partner::all();
+
+        return view('admin.partner.homePartner', compact('partners'));
     }
 
     /**
@@ -21,15 +24,16 @@ class PartnerController extends Controller
      */
     public function create()
     {
-        return view('admin.partner.partner');
+        return view('admin.partner.createPartner');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorepartnerRequest $request)
+    public function store(Request $request)
     {
-        //
+        partner::create($request->all());
+        return redirect('/dashboard/partner')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -51,21 +55,24 @@ class PartnerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatepartnerRequest $request, partner $partner)
+    public function update(Request $request, $id)
     {
-        //
+        partner::where('id', $id)
+            ->update($request->except('_token', '_method'));
+        return redirect('/dashboard/perusahaan')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(partner $partner)
+    public function destroy($id)
     {
-        //
+        partner::destroy($id);
+        return redirect('/dashboard/partenr')->with('success', 'Data Berhasil dihapus');
     }
 
     public function edit()
     {
-        return view('admin.partner.partner-edit');
+        return view('admin.partner.partner-edit', []);
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\portfolio_foto;
+use App\Models\portofolio_foto;
 use App\Http\Requests\Storeportfolio_fotoRequest;
 use App\Http\Requests\Updateportfolio_fotoRequest;
+use Illuminate\Http\Request;
 
 class PortfolioFotoController extends Controller
 {
@@ -13,7 +14,8 @@ class PortfolioFotoController extends Controller
      */
     public function index()
     {
-        //
+        $portofolios = portofolio_foto::all();
+        return view('admin.perusahaan.homePerusahaan', compact('perusahaans'));
     }
 
     /**
@@ -27,15 +29,16 @@ class PortfolioFotoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Storeportfolio_fotoRequest $request)
+    public function store(Request $request)
     {
-        //
+        portofolio_foto::create($request->all());
+        return redirect('/dashboard/portofolio_foto')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(portfolio_foto $portfolio_foto)
+    public function show()
     {
         //
     }
@@ -43,15 +46,17 @@ class PortfolioFotoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(portfolio_foto $portfolio_foto)
+    public function edit()
     {
-        //
+        return view('admin.portofolio.edit-perusahaan', [
+            
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updateportfolio_fotoRequest $request, portfolio_foto $portfolio_foto)
+    public function update()
     {
         //
     }
@@ -59,7 +64,7 @@ class PortfolioFotoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(portfolio_foto $portfolio_foto)
+    public function destroy()
     {
         //
     }

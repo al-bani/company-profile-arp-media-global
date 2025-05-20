@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\berita;
 use App\Http\Requests\StoreberitaRequest;
 use App\Http\Requests\UpdateberitaRequest;
+use Illuminate\Http\Request;
 
 class BeritaController extends Controller
 {
@@ -13,7 +14,8 @@ class BeritaController extends Controller
      */
     public function index()
     {
-        return view('admin.berita.homeBerita');
+        $beritas = berita::all();
+        return view('admin.berita.homeBerita', compact('beritas'));
     }
 
     /**
@@ -21,15 +23,16 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        return view('admin.berita.berita');
+        return view('admin.berita.createBerita');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreberitaRequest $request)
+    public function store(Request $request)
     {
-        //
+        berita::create($request->all());
+        return redirect('/dashboard/berita')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -57,16 +60,19 @@ class BeritaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateberitaRequest $request, berita $berita)
+    public function update(Request $request, $id)
     {
-        //
+        berita::where('id', $id)
+            ->update($request->except('_token', '_method'));
+        return redirect('/dashboard/berita')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(berita $berita)
+    public function destroy($id)
     {
-        //
+        berita::destroy($id);
+        return redirect('/dashboard/berita')->with('success', 'Data Berhasil dihapus');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\admin;
 use App\Http\Requests\StoreadminRequest;
 use App\Http\Requests\UpdateadminRequest;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -13,7 +14,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.adminAkun.homeAdminAkun');
+        $data = admin::all();
+        return view('admin.adminAkun.homeAdminAkun', compact('data'));
     }
 
     /**
@@ -21,15 +23,16 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.adminAkun.adminAkun');
+        return view('admin.adminAkun.createAdminAkun');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreadminRequest $request)
+    public function store(Request $request)
     {
-        //
+        admin::create($request->all());
+        return redirect('/dashboard/akunAdmin')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -39,9 +42,11 @@ class AdminController extends Controller
     {
         //
     }
-    public function edit()
+
+    public function edit($id)
     {
-        return view('admin.adminAkun.admin-edit');
+        $admin = admin::findOrFail($id);
+        return view('admin.adminAkun.admin-edit', compact('admin'));
     }
 
     /**
@@ -55,16 +60,19 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateadminRequest $request, admin $admin)
+    public function update(Request $request, $id)
     {
-        //
+        admin::where('id', $id)
+            ->update($request->except('_token', '_method'));
+        return redirect('/dashboard/adminAkun')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(admin $admin)
+    public function destroy($id)
     {
-        //
+        admin::destroy($id);
+        return redirect('/dashboard/akunAdmin')->with('success', 'Data Berhasil dihapus');
     }
 }

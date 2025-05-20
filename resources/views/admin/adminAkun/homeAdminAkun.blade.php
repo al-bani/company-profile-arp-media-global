@@ -14,11 +14,17 @@
             <div class="table-responsive">
                 <table id="example" class="table table-bordered table-striped" width="100%" cellspacing="0">
                     <thead>
-                       
+                        <tr>
+                            <th>ID Perusahaan</th>
+                            <th>Nama Admin</th>
+                            <th>Email</th>
+                            <th>No Telepon</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
                     </thead>
                     <tbody>
-
-                        {{-- @foreach ($data as $item)
+                        @foreach ($data as $item)
                             <tr>
                                 <td>{{ $item->id_perusahaan }}</td>
                                 <td>{{ $item->nama_admin }}</td>
@@ -32,10 +38,10 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('edit', $item->id) }}" class="btn btn-warning btn-sm me-1">
+                                    <a href="{{ route('akunAdmin.edit', $item->id) }}" class="btn btn-warning btn-sm me-1">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('delete', $item->id) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('akunAdmin.destroy', $item->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">
@@ -44,7 +50,7 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>

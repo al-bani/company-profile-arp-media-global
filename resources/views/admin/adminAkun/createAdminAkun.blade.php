@@ -1,0 +1,67 @@
+<x-layout>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Akun Admin</h1>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header py-3 bg-primary">
+            <h6 class="m-0 font-weight-bold text-white">Create Akun</h6>
+        </div>
+        <div class="card-body">
+            <form action="/dashboard/akunAdmin" method="POST">
+                @csrf
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="id_perusahaan" class="form-label fw-semibold">ID Perusahaan</label>
+                        <input type="text" class="form-control" id="id_perusahaan" name="id_perusahaan" placeholder="ID123456" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="nama_admin" class="form-label fw-semibold">Nama Admin</label>
+                        <input type="text" class="form-control" id="nama_admin" name="nama_admin" placeholder="Nama Lengkap Admin" required>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="email" class="form-label fw-semibold">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="admin@example.com" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="no_telepon" class="form-label fw-semibold">No Telepon</label>
+                        <input type="tel" class="form-control" id="no_telepon" name="no_telepon" placeholder="081234567890" required>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label for="status_akun" class="form-label fw-semibold">Status Akun</label>
+                        <select class="form-select" id="status_akun" name="status" required>
+                            <option value="" selected disabled>Pilih Status</option>
+                            <option value="aktif">Aktif</option>
+                            <option value="nonaktif">Nonaktif</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="perusahaan" class="form-label fw-semibold">Perusahaan</label>
+                        <select class="form-select" id="perusahaan" name="nama_perusahaan" required>
+                            <option value="" selected disabled>Pilih Perusahaan</option>
+                            <option value="anak">Anak</option>
+                            <option value="induk">Induk</option>
+                            {{-- Bisa dinamis --}}
+                        </select>
+                    </div>
+                </div>
+
+          <div class="mb-3 text-end">
+    <a href="/dashboard/akunAdmin" class="btn btn-secondary me-3 px-4">Kembali</a>
+    <button type="submit" class="btn btn-primary px-4">Simpan Data</button>
+</div>
+
+            </form>
+        </div>
+    </div>
+</x-layout>

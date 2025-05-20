@@ -1,8 +1,8 @@
 <x-layout>
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    {{-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Perusahaan</h1>
 
-    </div>
+    </div> --}}
 
     <!-- Card Wrapper -->
     <div class="card shadow mb-4">
@@ -10,7 +10,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Formulir Tambah Data Perusahaan</h6>
         </div>
         <div class="card-body">
-            <form action="/dashboard/perusahaan" method="post">
+            <form action="/dashboard/perusahaan" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <!-- Logo Upload Section -->
@@ -20,16 +20,31 @@
                             style="height: 13.5rem; object-fit: cover;">
                         <div class="card-body">
                             <p class="card-text">Upload dengan Format JPG atau PNG (MAX 5MB)</p>
-                            <input type="file" name="perusahaan" class="form-control" accept="image/*"
+                            <input type="file" id="logo" name="logo" class="form-control" accept="image/*"
                                 onchange="previewImage(event)">
                         </div>
                     </div>
                 </div> -->
+                <div class="mb-4 text-center">
+                    <div class="card" style="max-width: 18rem; margin: auto;">
+                        <div class="card-body">
+                            <p class="card-text">Upload Logo (Format JPG atau PNG, MAX 5MB)</p>
+                            <input type="file" id="logo" name="logo" class="form-control" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+
 
                 <!-- NIB, Notaris, and NPWP -->
+                {{-- <div class="mb-3">
+                    <label for="logo" class="form-label">Logo Perusahaan</label>
+                    <img src="{{ asset('storage/' . $perusahaan->logo) }}" alt="Logo Perusahaan" width="100">
+                </div> --}}
+
                 <div class="mb-3">
-                    <label for="nib">gambar</label>
-                    <input class="form-control" id="logo" name="logo" placeholder="1234567890123">
+                    <label for="Nama_Perusahaan">Nama Perusahaan</label>
+                    <input class="form-control" id="nama_perusahaan" name="nama_perusahaan"
+                        placeholder="Nama Perusahaan">
                 </div>
                 <div class="mb-3">
                     <label for="nib">NIB</label>

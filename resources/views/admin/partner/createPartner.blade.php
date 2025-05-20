@@ -9,12 +9,12 @@
             <h6 class="m-0 font-weight-bold text-primary">Formulir Data Partner</h6>
         </div>
         <div class="card-body">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="/dashboard/partner" method="POST" enctype="multipart/form-data">
                 @csrf
                 <!-- Nama Partner -->
                 <div class="mb-3">
                     <label for="nama_partner" class="form-label">Nama Partner</label>
-                    <input class="form-control" id="nama_partner" name="nama_partner" type="text" placeholder="Masukkan nama partner">
+                    <input class="form-control" id="nama_partner" name="nama_partner" type="text" placeholder="Masukkan nama Partner">
                 </div>
 
                 <!-- Email -->
@@ -24,16 +24,20 @@
                 </div>
 
                 <!-- Logo -->
-                <div class="row align-items-center">
+                <!-- <div class="row align-items-center">
                     <div class="col-auto">
                         <img id="preview" src="/img/default.jpg" class="card-img-top border" alt="Logo Perusahaan"
                             style="height: 10rem; width: 10rem; object-fit: cover;">
                     </div>
                     <div class="col">
-                        <label for="foto" class="form-label">Logo</label>
+                        <label for="foto" class="form-label">Logo Partner</label>
                         <input class="form-control" id="foto" name="foto" type="file" accept="image/*" onchange="previewImage(event)">
+                        <div class="card-body">
+                            <p class="card-text">Upload Logo Partner (Format JPG atau PNG, MAX 5MB)</p>
+                            <input type="file" id="foto" name="foto" class="form-control" accept="image/*">
+                        </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Action Buttons -->
                 <div class="mb-3 text-center">

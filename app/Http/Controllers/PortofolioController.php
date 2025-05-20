@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\portfolio;
+use App\Models\portofolio;
 use App\Http\Requests\StoreportfolioRequest;
 use App\Http\Requests\UpdateportfolioRequest;
+use Illuminate\Http\Request;
 
 class PortofolioController extends Controller
 {
@@ -21,21 +22,22 @@ class PortofolioController extends Controller
      */
     public function create()
     {
-        return view('admin.portofolio.portofolio');
+        return view('admin.portofolio.createPortofolio');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreportfolioRequest $request)
+    public function store(Request $request)
     {
-        //
+         portofolio::create($request->all());
+        return redirect('/dashboard/portofolio')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(portfolio $portfolio)
+    public function show()
     {
         //
     }
@@ -47,23 +49,28 @@ class PortofolioController extends Controller
     // {
     //     //
     // }
-    public function edit()
+    public function edit(portofolio $portofolio)
     {
-        return view('admin.portofolio.portofolio-edit');
+        return view('admin.portofolio.portofolio-edit',[
+            'portofolio' => $portofolio
+        ]);
     }
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateportfolioRequest $request, portfolio $portfolio)
+    public function update(Request $request, $id)
     {
-        //
+        portofolio::where('id', $id)
+            ->update($request->except('_token', '_method'));
+        return redirect('/dashboard/portofolio')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(portfolio $portfolio)
+    public function destroy($id)
     {
-        //
+         portofolio::destroy($id);
+        return redirect('/dashboard/portofolio')->with('success', 'Data Berhasil dihapus');
     }
 }

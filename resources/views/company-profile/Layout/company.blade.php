@@ -31,11 +31,16 @@
             </button>
             <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav ms-auto d-flex gap-5 me-5">
-                    <li class="nav-item ">
-                        <a class="nav-link " aria-current="page" href="/"> Perusahaan</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" aria-current="page" href="/" data-bs-toggle="dropdown" aria-expanded="false"> Perusahaan</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Portofolio</a></li>
+                            <li><a class="dropdown-item" href="#">Struktur Organisasi</a></li>
+                           
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Media</a>
+                        <a class="nav-link" href="#">Berita</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/layanan">Layanan</a>

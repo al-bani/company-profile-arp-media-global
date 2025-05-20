@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class portfolio_foto extends Model
+class portofolio extends Model
 {
-    /** @use HasFactory<\Database\Factories\PortfolioFotoFactory> */
+    /** @use HasFactory<\Database\Factories\PortfolioFactory> */
     use HasFactory;
     protected $guarded = ['id'];
 }

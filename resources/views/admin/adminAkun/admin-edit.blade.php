@@ -9,40 +9,41 @@
             <h6 class="m-0 font-weight-bold text-primary">Edit Akun</h6>
         </div>
         <div class="card-body">
-            <form action="">
+            <form action="{{ route('akunAdmin.update', $admin->id) }}" method="POST">
                 @csrf
+                @method('PATCH')
 
                 <!-- Id Perusahaan -->
                 <div class="mb-3">
                     <label for="id_perusahaan">ID Perusahaan</label>
-                    <input class="form-control" id="id_perusahaan" name="id_perusahaan" type="text" placeholder="ID123456">
+                    <input class="form-control" id="id_perusahaan" name="id_perusahaan" type="text" value="{{ $admin->id_perusahaan }}" placeholder="ID123456">
                 </div>
 
                 <!-- Nama Admin -->
                 <div class="mb-3">
                     <label for="nama_admin">Nama Admin</label>
-                    <input class="form-control" id="nama_admin" name="nama_admin" type="text" placeholder="Nama Lengkap Admin">
+                    <input class="form-control" id="nama_admin" name="nama_admin" type="text" value="{{ $admin->nama_admin }}" placeholder="Nama Lengkap Admin">
                 </div>
 
                 <!-- Email -->
                 <div class="mb-3">
                     <label for="email">Email</label>
-                    <input class="form-control" id="email" name="email" type="email" placeholder="admin@example.com">
+                    <input class="form-control" id="email" name="email" type="email" value="{{ $admin->email }}" placeholder="admin@example.com">
                 </div>
 
                 <!-- No Telepon -->
                 <div class="mb-3">
                     <label for="no_telepon">No Telepon</label>
-                    <input class="form-control" id="no_telepon" name="no_telepon" type="tel" placeholder="081234567890">
+                    <input class="form-control" id="no_telepon" name="no_telepon" type="tel" value="{{ $admin->no_telepon }}" placeholder="081234567890">
                 </div>
 
                 <!-- Status -->
                 <div class="mb-3">
                     <label for="status">Status</label>
                     <select class="ms-1 form-select btn btn-primary" id="status" name="status">
-                        <option selected disabled>Pilih Status</option>
-                        <option value="anak">Anak</option>
-                        <option value="induk">Induk</option>
+                        <option disabled>Pilih Status</option>
+                        <option value="aktif" {{ $admin->status == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                        <option value="tidak aktif" {{ $admin->status == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>
                     </select>
                 </div>
 

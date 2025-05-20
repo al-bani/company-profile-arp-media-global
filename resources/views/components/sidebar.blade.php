@@ -3,7 +3,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center py-4" href="/">
         <div class="sidebar-brand-icon">
-            <img src="{{ asset('img/logo_white.png') }}" alt="Logo" class="w-100">
+            <img src="{{ asset('images/logo_white.png') }}" alt="Logo" class="w-100">
         </div>
     </a>
 

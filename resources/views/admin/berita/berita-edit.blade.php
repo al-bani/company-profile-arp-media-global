@@ -1,4 +1,4 @@
-<x-layout>
+    <x-layout>
     {{-- Load CKEditor --}}
     <script src="ckeditor/ckeditor.js"></script>
 

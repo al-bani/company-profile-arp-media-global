@@ -16,56 +16,34 @@
                     <thead>
                         <tr>
                             <th>ID Perusahaan</th>
-                            <th>ID</th>
                             <th>Nama Layanan</th>
                             <th>Deskripsi</th>
-                            <th>Foto</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {{-- Contoh Data --}}
+                        @foreach ($layanans as $layanan)
+                            
+                        
                         <tr>
-                            <td>I001</td>
-                            <td>1000</td>
-                            <td>Televisi</td>
-                            <td>Lorem Ipsum</td>
-                            <td>
-                                foto.jpg
-                            </td>
+                            <td>{{ $layanan->id_perusahaan }}</td>
+                            <td>{{ $layanan->nama_layanan }}</td>
+                            <td>{{ $layanan->deskripsi }}</td>
                             <td>
                                 <a href="/dashboard/layanan/edit" class="btn btn-warning btn-sm me-1">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="#" class="btn btn-info btn-sm me-1">
+                                <a href="/dashboard/layanan" class="btn btn-info btn-sm me-1">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger btn-sm">
+                                <a href="/dashboard" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>I002</td>
-                            <td>1002</td>
-                            <td>Radio</td>
-                            <td>Lorem Ipsum</td>
-                            <td>
-                                foto.jpg
-                            </td>
-                            <td>
-                                <a href="/dashboard/layanan/edit" class="btn btn-warning btn-sm me-1">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="#" class="btn btn-info btn-sm me-1">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
-
+                        @endforeach
+                       
                         {{-- @foreach ($data as $item)
                             <tr>
                                 <td>{{ $item->id_perusahaan }}</td>

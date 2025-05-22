@@ -21,9 +21,9 @@
                     <thead>
                         <tr>
                             <th>Judul</th>
-                            <th>Tanggal</th>
                             <th>Penulis</th>
                             <th>Perusahaan</th>
+                             <th>Tanggal</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -31,9 +31,9 @@
                         @foreach ($beritas as $berita)
                             <tr>
                                 <td>{{ $berita->judul }}</td>
-                                <td>{{ $berita->tanggal }}</td>
                                 <td>{{ $berita->penulis }}</td>
                                 <td>{{ $berita->perusahaan }}</td>
+                                <td>{{ $berita->tanggal }}</td>
                                 <td>
                                     <a href="/dashboard/berita/{{ $berita->id }}/edit" class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i>
@@ -65,16 +65,16 @@
                                                 <input type="text" class="form-control" value="{{ $berita->judul }}" readonly>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Tanggal</label>
-                                                <input type="text" class="form-control" value="{{ $berita->tanggal }}" readonly>
-                                            </div>
-                                            <div class="mb-3">
                                                 <label class="form-label">Penulis</label>
                                                 <input type="text" class="form-control" value="{{ $berita->penulis }}" readonly>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Isi Berita</label>
                                                 <textarea class="form-control" rows="5" readonly>{{ $berita->isi }}</textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Tanggal</label>
+                                                <input type="text" class="form-control" value="{{ $berita->tanggal }}" readonly>
                                             </div>
                                         </div>
                                         <div class="modal-footer border-0">

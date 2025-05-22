@@ -1,50 +1,144 @@
-@extends('company-profile.Layout.company')
+@extends('layout.company')
 
 @section('content')
+    <link href="{{ asset('css/portofolio.css') }}" rel="stylesheet" type="text/css">
     <img src="{{ asset('images/banner.png') }}" class="berita-web-banner w-100">
-    <div class="container-fluid ">
-        <div class="text-center ">
+    <div class="container pt-4">
+        <h1 class="mb-4 ">Ongoing</h1>
 
-            {{-- bagian header --}}
-            <div class="row detail-header">
-                <div class="col-lg-4 mt-5 ">
-                    <img src="{{ asset('images/logo.png') }}" alt="" class="logo-detail  w-75">
+        <!-- TAMPILAN DESKTOP: Grid -->
+        <div class="row d-none d-md-flex">
+            @foreach (range(1, 7) as $i)
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                        <div class="card-inner">
+                            <div class="card-front" style="background-image: url('{{ asset('images/test1.jpeg') }}');">
+                                <div class="overlay p-4">
+                                    <h1 class="fst-italic fw-bold h3">JUDUL PROJECT</h1>
+                                </div>
+                            </div>
+                            <div class="card-back p-4 position-relative"
+                            style="background-image: url('{{ asset('images/test1.jpeg') }}'); background-size: cover; background-position: center;" >
+                            <div class="bg-dark bg-opacity-75 position-absolute top-0 start-0 w-100 h-100"
+                            style="z-index: 1;"></div>
+                            <div class="position-relative" style="z-index: 2;">
+                                <h1 class="fst-italic fw-bold h3 text-white">JUDUL PROJECT</h1>
+                                <p class="fs-6 text-white">
+                                    Project ini merupakan sebuah inisiatif periklanan modern berupa Billboard Digital
+                                    beresolusi tinggi
+                                    yang dirancang secara kreatif untuk menarik perhatian publik, dan dipasang secara
+                                    strategis di pusat
+                                    keramaian kota Bandung guna meningkatkan visibilitas dan daya tarik brand yang
+                                    diiklankan.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-8 mt-4 text-start p-4 mb-4">
-                    <h1 class="h2 fw-bold">Media Perusahaan Yang Mengedapankan Kualitas</h1>
-                    <p>Kami hadir sebagai penggerak untuk membuka dunia penuh peluang serta kemungkinan tanpa batas melalui
-                        serta kemungkinan tanpa batas melalui pemanfaatan laanan dan solusi digital integrasi</p>
-                </div>
+
             </div>
+            @endforeach
+        </div>
 
-            {{-- Project  --}}
-            <div class="container p-4">
-                <h1 class="h1">Projects</h1>
-                <div class="row p-4">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="card mb-3 border-0 w-100">
-                            <img src="{{ asset('images/event.png') }}" class="card-img-top " alt="...">
+        <!-- TAMPILAN MOBILE: Scroll horizontal -->
+        <div class="scroll-container d-md-none">
+            <div class="scroll-wrapper">
+                @foreach (range(1, 4) as $i)
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front" style="background-image: url('{{ asset('images/test1.jpeg') }}');">
+                            <div class="overlay p-4">
+                                <h1 class="fst-italic fw-bold h3">JUDUL PROJECT</h1>
+                            </div>
+                        </div>
+                        <div class="card-back p-4 position-relative"
+                        style="background-image: url('{{ asset('images/test1.jpeg') }}'); background-size: cover; background-position: center;">
+                        <div class="bg-dark bg-opacity-75 position-absolute top-0 start-0 w-100 h-100"
+                                    style="z-index: 1;"></div>
+                                    <div class="position-relative" style="z-index: 2;">
+                                    <h1 class="fst-italic fw-bold h3 text-white">JUDUL PROJECT</h1>
+                                    <p class="fs-6 text-white">
+                                        Project ini merupakan sebuah inisiatif periklanan modern berupa Billboard Digital
+                                        beresolusi tinggi
+                                        yang dirancang secara kreatif untuk menarik perhatian publik, dan dipasang secara
+                                        strategis di pusat
+                                        keramaian kota Bandung guna meningkatkan visibilitas dan daya tarik brand yang
+                                        diiklankan.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="card mb-3 border-0 w-100">
-                            <img src="{{ asset('images/event.png') }}" class="card-img-top " alt="...">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="card mb-3 border-0 w-100">
-                            <img src="{{ asset('images/event.png') }}" class="card-img-top " alt="...">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="card mb-3 border-0 w-100">
-                            <img src="{{ asset('images/event.png') }}" class="card-img-top " alt="...">
-                        </div>
-                    </div>
-
-                </div>
+                @endforeach
             </div>
         </div>
-    </div>
+
+        <h1 class="mb-4 ">Finish</h1>
+        <!-- TAMPILAN DESKTOP: Grid -->
+        <div class="row d-none d-md-flex">
+            @foreach (range(1, 7) as $i)
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <div class="card-inner">
+                            <div class="card-front" style="background-image: url('{{ asset('images/test1.jpeg') }}');">
+                                <div class="overlay p-4">
+                                    <h1 class="fst-italic fw-bold h3">JUDUL PROJECT</h1>
+                                </div>
+                            </div>
+                            <div class="card-back p-4 position-relative"
+                                style="background-image: url('{{ asset('images/test1.jpeg') }}'); background-size: cover; background-position: center;">
+                                <div class="bg-dark bg-opacity-75 position-absolute top-0 start-0 w-100 h-100"
+                                    style="z-index: 1;"></div>
+                                <div class="position-relative" style="z-index: 2;">
+                                    <h1 class="fst-italic fw-bold h3 text-white">JUDUL PROJECT</h1>
+                                    <p class="fs-6 text-white">
+                                        Project ini merupakan sebuah inisiatif periklanan modern berupa Billboard Digital
+                                        beresolusi tinggi
+                                        yang dirancang secara kreatif untuk menarik perhatian publik, dan dipasang secara
+                                        strategis di pusat
+                                        keramaian kota Bandung guna meningkatkan visibilitas dan daya tarik brand yang
+                                        diiklankan.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            @endforeach
+        </div>
+
+        <!-- TAMPILAN MOBILE: Scroll horizontal -->
+        <div class="scroll-container d-md-none">
+            <div class="scroll-wrapper">
+                @foreach (range(1, 4) as $i)
+                    <div class="card">
+                        <div class="card-inner">
+                            <div class="card-front" style="background-image: url('{{ asset('images/test1.jpeg') }}');">
+                                <div class="overlay p-4">
+                                    <h1 class="fst-italic fw-bold h3">JUDUL PROJECT</h1>
+                                </div>
+                            </div>
+                            <div class="card-back p-4 position-relative"
+                                style="background-image: url('{{ asset('images/test1.jpeg') }}'); background-size: cover; background-position: center;">
+                                <div class="bg-dark bg-opacity-75 position-absolute top-0 start-0 w-100 h-100"
+                                    style="z-index: 1;"></div>
+                                <div class="position-relative" style="z-index: 2;">
+                                    <h1 class="fst-italic fw-bold h3 text-white">JUDUL PROJECT</h1>
+                                    <p class="fs-6 text-white">
+                                        Project ini merupakan sebuah inisiatif periklanan modern berupa Billboard Digital
+                                        beresolusi tinggi
+                                        yang dirancang secara kreatif untuk menarik perhatian publik, dan dipasang secara
+                                        strategis di pusat
+                                        keramaian kota Bandung guna meningkatkan visibilitas dan daya tarik brand yang
+                                        diiklankan.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 @endsection

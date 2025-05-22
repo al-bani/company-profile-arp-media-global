@@ -34,8 +34,8 @@
                                 <td>{{ $partner->nama_partner }}</td>
                                 <td>{{ $partner->email }}</td>
                                 <td>
-                                    @if ($partner->logo)
-                                        <img src="{{ asset($partner->logo) }}" alt="Logo" width="60">
+                                    @if ($partner->foto)
+                                        <img src="{{ asset($partner->foto) }}" alt="Logo" width="100">
                                     @endif
                                 </td>
 
@@ -117,7 +117,14 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Logo Partner</label>
+                            @if ($partner->foto)
+                                <img src="{{ asset($partner->foto) }}" alt="Logo" class="w-100">
+                            @endif
+                        </div>
                         <!-- Nama Partner -->
+
                         <div class="mb-3">
                             <label class="form-label">Nama Partner</label>
                             <input type="text" class="form-control" value="{{ $partner->nama_partner }}" readonly>

@@ -9,20 +9,15 @@
             <h6 class="m-0 font-weight-bold text-primary">Formulir Data Layanan</h6>
         </div>
         <div class="card-body">
-            <form action="dashboard/layanan" method="post">
+            <form action="/dashboard/layanan" method="post">
                 @csrf
 
                 <!-- Id Perusahaan -->
                 <div class="mb-3">
                     <label for="id_perusahaan">ID Perusahaan</label>
-                    <input class="form-control" id="id_perusahaan" name="id_perusahaan" type="text" placeholder="ID123456" disabled>
+                    <input class="form-control" id="id_perusahaan" name="id_perusahaan" type="text" placeholder="ID123456">
                 </div>
 
-                <!-- Id Perusahaan -->
-                <div class="mb-3">
-                    <label for="id_perusahaan">ID</label>
-                    <input class="form-control" id="id" name="id" type="text" placeholder="ID123456" disabled>
-                </div>
 
                 <!-- Nama Layanan -->
                 <div class="mb-3">
@@ -33,14 +28,9 @@
                 <!-- deskripsi -->
                 <div class="mb-3">
                     <label for="deskripsi">Deskripsi</label>
-                    <input class="form-control" id="email" name="email" type="email" placeholder="admin@example.com">
+                    <input class="form-control" id="deskripsi" name="deskripsi" type="text" placeholder="admin@example.com">
                 </div>
 
-                {{-- layanan --}}
-                <div class="mb-3">
-                    <label for="logo">Deskripsi</label>
-                    <input class="form-control" id="logo" name="logo" type="email" placeholder="admin@example.com">
-                </div>
 
                 {{-- <div class="row align-items-center">
                     <div class="col-auto">
@@ -55,7 +45,7 @@
 
 
                 <div class="mb-3 text-center">
-                    <a href="/homeLayanan" class="btn btn-secondary me-2">Kembali</a>
+                    <a href="/dashboard/homeLayanan" class="btn btn-secondary me-2">Kembali</a>
                     <button type="submit" class="btn btn-primary">Simpan Data</button>
                 </div>
             </form>

@@ -32,6 +32,8 @@ class PortofolioController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
+
         portofolio::create($request->all());
         return redirect('/dashboard/portofolio')->with('success', 'Data Berhasil Ditambahkan');
     }

@@ -13,8 +13,8 @@
 
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
-                        <label for="id_perusahaan" class="form-label fw-semibold">ID Perusahaan</label>
-                        <input type="text" class="form-control" id="id_perusahaan" name="id_perusahaan" placeholder="ID123456" required>
+                        <label for="email" class="form-label fw-semibold">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="admin@example.com" required>
                     </div>
 
                     <div class="col-md-6">
@@ -25,32 +25,17 @@
 
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
-                        <label for="email" class="form-label fw-semibold">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="admin@example.com" required>
+                        <label for="password" class="form-label fw-semibold">Password</label>
+                        <input type="text" class="form-control" id="password" name="password" required>
                     </div>
-
+                    
                     <div class="col-md-6">
                         <label for="no_telepon" class="form-label fw-semibold">No Telepon</label>
                         <input type="tel" class="form-control" id="no_telepon" name="no_telepon" placeholder="081234567890" required>
                     </div>
                 </div>
-                <div class="row g-3 mb-3">
-                    <div class="col-md-6">
-                        <label for="password" class="form-label fw-semibold">Password</label>
-                        <input type="text" class="form-control" id="password" name="password" required>
-                    </div>
-                </div>
 
                 <div class="row g-3 mb-4">
-                    <div class="col-md-6">
-                        <label for="status_akun" class="form-label fw-semibold">Status Akun</label>
-                        <select class="form-select" id="status_akun" name="status" required>
-                            <option value="" selected disabled>Pilih Status</option>
-                            <option value="aktif">Aktif</option>
-                            <option value="nonaktif">Nonaktif</option>
-                        </select>
-                    </div>
-
                     <div class="col-md-6">
                         <label for="perusahaan" class="form-label fw-semibold">Perusahaan</label>
                         <select class="form-select" id="perusahaan" name="nama_perusahaan" required>

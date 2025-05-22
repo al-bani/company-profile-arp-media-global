@@ -32,7 +32,8 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data['status'] = 1;
+        $data['status'] = "aktif";
+        $data['id_perusahaan'] = "default";
         admin::create($data);
 
         return redirect('/dashboard/akunAdmin')->with('success', 'Data Berhasil Ditambahkan');
@@ -67,7 +68,7 @@ class AdminController extends Controller
     {
         admin::where('id', $id)
             ->update($request->except('_token', '_method'));
-        return redirect('/dashboard/adminAkun')->with('success', 'Data Berhasil Diubah');
+        return redirect('/dashboard/akunAdmin')->with('success', 'Data Berhasil Diubah');
     }
 
     /**

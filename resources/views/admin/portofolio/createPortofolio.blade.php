@@ -1,70 +1,49 @@
 <x-layout>
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Tambah Portofolio</h1>
-    </div>
 
     <!-- Card Wrapper -->
     <div class="card shadow-sm mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Formulir Portofolio</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Tambah Portofolio</h6>
         </div>
-        <div class="card-body">
-            <form action="">
+        <div class="card-body"> 
+
+            <form action="">     #carouselExample 
                 @csrf
 
-                <!-- Id Perusahaan -->
                 <div class="mb-3">
-                    <label for="id_perusahaan">ID Perusahaan</label>
-                    <input class="form-control" id="id_perusahaan" name="id_perusahaan" type="text"
-                        placeholder="ID123456" disabled>
+                    <label for="Nama_Perusahaan">Nama Project</label>
+                    <input class="form-control" id="nama_perusahaan" name="nama_perusahaan" placeholder="Nama Project" required>
+                </div>
+                <div class="mb-3">
+                    <label for="deskripsi">Deskripsi Project</label>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
                 </div>
 
-                <!-- Id Perusahaan -->
-                <div class="mb-3">
-                    <label for="id">ID</label>
-                    <input class="form-control" id="id" name="id" type="text" placeholder="ID123456"
-                        disabled>
+                <div class="mb-2">
+                    <label for="deskripsi">Deskripsi Client</label>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
                 </div>
 
-                <!-- Nama Layanan -->
                 <div class="mb-3">
-                    <label for="nama_project">Nama Project</label>
-                    <input class="form-control" id="nama_project" name="nama_project" type="text"
-                        placeholder="Nama Project">
+                    <label for="Nama_Perusahaan">Logo Client</label>
+                    <input type="file" id="logo" name="logo" class="form-control" accept="image/*" required>
                 </div>
 
-                <!-- Team -->
                 <div class="mb-3">
-                    <label for="team">Team</label>
-                    <input class="form-control" id="team" name="team" type="text" placeholder="Nama Team">
+                    <label for="deskripsi">Konsep Project</label>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
                 </div>
 
-                <!-- Tempat -->
-                <div class="mb-3">
-                    <label for="tempat">Tempat</label>
-                    <input class="form-control" id="tempat" name="tempat" type="text" placeholder="Tempat">
-                </div>
 
-                <!-- Tanggal -->
-                <div class="mb-3">
-                    <label for="Tanggal">Tanggal</label>
-                    <input class="form-control" id="tanggal" name="tangga;" type="text" placeholder="tanggal">
+                <label for="timeline">Timeline</label>
+                <div id="input-container" class="timeline">
+                    <div class="mb-3">
+                        <input type="text" name="fields[]" class="form-control" placeholder="Masukkan sesuatu">
+                    </div>
                 </div>
+        
+                <button type="button" class="btn btn-secondary mb-3" id="add-field">+ Tambah Field</button>
 
-                <!-- Waktu -->
-                <div class="mb-3">
-                    <label for="waktu">Waktu</label>
-                    <input class="form-control" id="waktu" name="waktu" type="text" placeholder="waktu">
-                </div>
-
-                <!-- deskripsi -->
-                <div class="mb-3">
-                    <label for="deskripsi">Deskripsi</label>
-                    <input class="form-control" id="email" name="email" type="email"
-                        placeholder="admin@example.com">
-                </div>
-
-                <!-- Action Buttons -->
                 <div class="mb-3 text-center">
                     <a href="/dashboard/homePortofolio" class="btn btn-secondary me-2">Kembali</a>
                     <button type="submit" class="btn btn-primary">Simpan Data</button>
@@ -72,4 +51,21 @@
             </form>
         </div>
     </div>
+    <script>
+        const maxFields = 5;
+        const container = document.getElementById('input-container');
+    
+        document.getElementById('add-field').addEventListener('click', function () {
+            const currentFields = container.querySelectorAll('input[name="fields[]"]').length;
+    
+            if (currentFields < maxFields) {
+                const newField = document.createElement('div');
+                newField.classList.add('mb-3');
+                newField.innerHTML = `<input type="text" name="fields[]" class="form-control" placeholder="Masukkan sesuatu">`;
+                container.appendChild(newField);
+            } else {
+                alert("Maksimal hanya 5 field yang boleh ditambahkan.");
+            }
+        });
+    </script>
 </x-layout>

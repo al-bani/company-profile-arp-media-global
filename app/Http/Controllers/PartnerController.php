@@ -32,8 +32,17 @@ class PartnerController extends Controller
      */
     public function store(Request $request)
     {
-        partner::create($request->all());
-        return redirect('/dashboard/partner')->with('success', 'Data Berhasil Ditambahkan');
+        $data = $request->all();
+    
+        if ($request->hasFile('foto')) {
+            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
+            $destination = 'image/upload/foto';
+            $request->file('foto')->move(public_path($destination), $filename);
+            $data['foto'] = $destination . '/' . $filename;
+        }
+    
+        partner::create($data);
+        return redirect('/dashboard/perusahaan')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -71,8 +80,10 @@ class PartnerController extends Controller
         return redirect('/dashboard/partner')->with('success', 'Data Berhasil dihapus');
     }
 
-    public function edit()
+    public function edit(partner $partner)
     {
-        return view('admin.partner.partner-edit', []);
+        return view('admin.partner.partner-edit', [
+            'partner' => $partner
+        ]);
     }
 }

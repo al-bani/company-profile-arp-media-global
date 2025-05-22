@@ -32,7 +32,7 @@ class companyProfile extends Controller
     }
     public function portofolio()
     {
-        return view('company-profile.portofolio');
+        return view('company-profile.portofolio-detail');
     }
 
     public function struktur()

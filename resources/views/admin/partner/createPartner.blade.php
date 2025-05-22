@@ -23,6 +23,15 @@
                     <input class="form-control" id="email" name="email" type="email" placeholder="partner@example.com">
                 </div>
 
+                <div class="mb-4 text-center">
+                    <div class="card" style="max-width: 18rem; margin: auto;">
+                        <div class="card-body">
+                            <p class="card-text">Upload Logo (Format JPG atau PNG, MAX 5MB)</p>
+                            <input type="file" id="logo" name="logo" class="form-control" accept="image/*" required>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Logo -->
                 <!-- <div class="row align-items-center">
                     <div class="col-auto">

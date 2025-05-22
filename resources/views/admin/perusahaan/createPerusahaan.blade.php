@@ -29,7 +29,7 @@
                     <div class="card" style="max-width: 18rem; margin: auto;">
                         <div class="card-body">
                             <p class="card-text">Upload Logo (Format JPG atau PNG, MAX 5MB)</p>
-                            <input type="file" id="logo" name="logo" class="form-control" accept="image/*">
+                            <input type="file" id="logo" name="logo" class="form-control" accept="image/*" required>
                         </div>
                     </div>
                 </div>
@@ -44,31 +44,31 @@
                 <div class="mb-3">
                     <label for="Nama_Perusahaan">Nama Perusahaan</label>
                     <input class="form-control" id="nama_perusahaan" name="nama_perusahaan"
-                        placeholder="Nama Perusahaan">
+                        placeholder="Nama Perusahaan" required>
                 </div>
                 <div class="mb-3">
                     <label for="nib">NIB</label>
-                    <input class="form-control" id="nib" name="nib" placeholder="1234567890123">
+                    <input class="form-control" id="nib" name="nib" placeholder="1234567890123" required>
                 </div>
                 <div class="mb-3">
                     <label for="notaris">Notaris</label>
                     <input class="form-control" id="notaris" name="notaris" type="text"
-                        placeholder="No. 05 Tanggal 12 Februari 2023 oleh Notaris Rina Dewi, S.H., M.Kn.">
+                        placeholder="No. 05 Tanggal 12 Februari 2023 oleh Notaris Rina Dewi, S.H., M.Kn." required>
                 </div>
                 <div class="mb-3">
                     <label for="npwp">NPWP</label>
                     <input class="form-control" id="npwp" name="npwp" type="number"
-                        placeholder="12.345.678.9-123.000">
+                        placeholder="12.345.678.9-123.000" required>
                 </div>
 
                 <!-- Deskripsi and Alamat -->
                 <div class="mb-3">
                     <label for="deskripsi">Deskripsi</label>
-                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="alamat">Alamat</label>
-                    <textarea class="form-control" id="alamat" name="alamat" rows="3"></textarea>
+                    <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
                 </div>
 
                 <!-- Contact Info (Email and Phone) -->
@@ -76,12 +76,12 @@
                     <div class="col">
                         <label for="email">Email</label>
                         <input class="form-control" id="email" name="email" type="email"
-                            placeholder="name@example.com">
+                            placeholder="name@example.com" required>
                     </div>
                     <div class="col">
                         <label for="no_telpon">No Telp</label>
                         <input class="form-control" id="no_telpon" name="no_telpon" type="number"
-                            placeholder="629831267321">
+                            placeholder="629831267321" required>
                     </div>
                 </div>
 
@@ -92,7 +92,7 @@
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1">@</span>
                             <input type="text" class="form-control" id="instagram" name="instagram"
-                                placeholder="Username" aria-label="Username">
+                                placeholder="Username" aria-label="Username" required>
                         </div>
                     </div>
                     <div class="col">
@@ -100,7 +100,7 @@
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon2">@</span>
                             <input type="text" class="form-control" id="facebook" name="facebook"
-                                placeholder="Username" aria-label="Username">
+                                placeholder="Username" aria-label="Username" required>
                         </div>
                     </div>
                     <div class="col">
@@ -108,7 +108,7 @@
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon3">@</span>
                             <input type="text" class="form-control" id="tiktok" name="tiktok"
-                                placeholder="Username" aria-label="Username">
+                                placeholder="Username" aria-label="Username" required>
                         </div>
                     </div>
                     <div class="col">
@@ -116,7 +116,7 @@
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon4">@</span>
                             <input type="text" class="form-control" id="twitter" name="twitter"
-                                placeholder="Username" aria-label="Username">
+                                placeholder="Username" aria-label="Username" required>
                         </div>
                     </div>
                 </div>

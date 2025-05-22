@@ -68,7 +68,7 @@ class PartnerController extends Controller
     public function destroy($id)
     {
         partner::destroy($id);
-        return redirect('/dashboard/partenr')->with('success', 'Data Berhasil dihapus');
+        return redirect('/dashboard/partner')->with('success', 'Data Berhasil dihapus');
     }
 
     public function edit()

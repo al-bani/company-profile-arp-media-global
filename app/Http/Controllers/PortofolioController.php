@@ -14,7 +14,9 @@ class PortofolioController extends Controller
      */
     public function index()
     {
-        return view('admin.portofolio.homePortofolio');
+        $portofolios = portofolio::all();
+
+        return view('admin.portofolio.homePortofolio', compact('portofolios'));
     }
 
     /**
@@ -30,7 +32,7 @@ class PortofolioController extends Controller
      */
     public function store(Request $request)
     {
-         portofolio::create($request->all());
+        portofolio::create($request->all());
         return redirect('/dashboard/portofolio')->with('success', 'Data Berhasil Ditambahkan');
     }
 
@@ -51,7 +53,7 @@ class PortofolioController extends Controller
     // }
     public function edit(portofolio $portofolio)
     {
-        return view('admin.portofolio.portofolio-edit',[
+        return view('admin.portofolio.portofolio-edit', [
             'portofolio' => $portofolio
         ]);
     }
@@ -70,7 +72,7 @@ class PortofolioController extends Controller
      */
     public function destroy($id)
     {
-         portofolio::destroy($id);
+        portofolio::destroy($id);
         return redirect('/dashboard/portofolio')->with('success', 'Data Berhasil dihapus');
     }
 }

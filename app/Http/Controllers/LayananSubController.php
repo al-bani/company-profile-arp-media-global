@@ -13,7 +13,10 @@ class LayananSubController extends Controller
      */
     public function index()
     {
-        //
+         $layananSubs = layanan_sub::all(); // Mengambil semua data
+
+        // return view('admin.perusahaan.index', compact('dataPerusahaan'));
+        return view('admin.layanan', compact('perusahaans'));
     }
 
     /**

@@ -31,7 +31,10 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        admin::create($request->all());
+        $data = $request->all();
+        $data['status'] = 1;
+        admin::create($data);
+
         return redirect('/dashboard/akunAdmin')->with('success', 'Data Berhasil Ditambahkan');
     }
 

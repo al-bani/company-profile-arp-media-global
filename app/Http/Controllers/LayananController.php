@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\layanan;
 use App\Http\Requests\StorelayananRequest;
 use App\Http\Requests\UpdatelayananRequest;
+use Illuminate\Http\Request;
 
 class LayananController extends Controller
 {
@@ -22,15 +23,16 @@ class LayananController extends Controller
      */
     public function create()
     {
-        return view('admin.layanan.layanan');
+        return view('admin.layanan.createLayanan');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorelayananRequest $request)
+    public function store(Request $request)
     {
-        //
+        layanan::create($request->all());
+        return redirect('/dashboard/layanan')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -52,20 +54,25 @@ class LayananController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatelayananRequest $request, layanan $layanan)
+    public function update(Request $request,$id)
     {
-        //
+         layanan::where('id', $id)
+            ->update($request->except('_token', '_method'));
+        return redirect('/dashboard/perusahaan')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(layanan $layanan)
+    public function destroy($id)
     {
-        //
+        layanan::destroy($id);
+        return redirect('/dashboard/layanan')->with('success', 'Data Berhasil dihapus');
     }
-    public function edit()
+    public function edit(layanan $layanan)
     {
-        return view('admin.layanan.layanan-edit');
+        return view('admin.layanan.layanan-edit',[
+            'layanan' => $layanan
+        ]);
     }
 }

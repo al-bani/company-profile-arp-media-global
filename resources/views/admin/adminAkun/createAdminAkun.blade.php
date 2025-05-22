@@ -8,7 +8,7 @@
             <h6 class="m-0 font-weight-bold text-white">Create Akun</h6>
         </div>
         <div class="card-body">
-            <form action="/dashboard/akunAdmin" method="POST">
+            <form action="/dashboard/akunAdmin" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row g-3 mb-3">
@@ -32,6 +32,12 @@
                     <div class="col-md-6">
                         <label for="no_telepon" class="form-label fw-semibold">No Telepon</label>
                         <input type="tel" class="form-control" id="no_telepon" name="no_telepon" placeholder="081234567890" required>
+                    </div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="password" class="form-label fw-semibold">Password</label>
+                        <input type="text" class="form-control" id="password" name="password" required>
                     </div>
                 </div>
 

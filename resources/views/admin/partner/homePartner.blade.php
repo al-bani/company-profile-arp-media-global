@@ -34,8 +34,9 @@
                                 <td>{{ $partner->nama_partner }}</td>
                                 <td>{{ $partner->email }}</td>
                                 <td>
-                                    <!-- {{-- contoh tampilkan logo --}} -->
-                                    <img src="{{ asset('storage/' . $partner->logo) }}" alt="Logo" width="50">
+                                    @if ($partner->logo)
+                                        <img src="{{ asset($partner->logo) }}" alt="Logo" width="60">
+                                    @endif
                                 </td>
 
 
@@ -47,7 +48,9 @@
                                         data-bs-target="#detailPartner{{ $loop->iteration }}">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="#" class="btn btn-danger btn-sm">
+
+                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#deletePartner{{ $loop->iteration }}">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </td>
@@ -58,6 +61,48 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Delete -->
+    @foreach ($partners as $partner)
+        <div class="modal fade" id="deletePartner{{ $loop->iteration }}" tabindex="-1"
+            aria-labelledby="modalLabel{{ $loop->iteration }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow rounded-4">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header bg-light border-0 rounded-top">
+                        <h5 class="modal-title text-danger fw-bold" id="modalLabel{{ $loop->iteration }}">
+                            <i class="fas fa-trash-alt me-2"></i>Konfirmasi Hapus
+                        </h5>
+
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body text-center">
+                        <p class="fs-6 mb-1">Apakah Anda yakin ingin menghapus data berikut?</p>
+                        <p class="fw-semibold text-danger ">Nama Partner: {{ $partner->nama_partner }}</p>
+                        <p class="fw-semibold text-danger ">Nama Partner: {{ $partner->email }}</p>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer justify-content-center gap-3 border-0 pb-4">
+                        <form action="/dashboard/partner/{{ $partner->id }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger px-4 rounded-pill shadow-sm">
+                                <i class="fas fa-trash-alt me-1"></i> Hapus
+                            </button>
+                        </form>
+                        <button type="button" class="btn btn-outline-secondary px-4 rounded-pill"
+                            data-bs-dismiss="modal">
+                            Batal
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    @endforeach
 
     @foreach ($partners as $partner)
         <!-- Modal Detail dengan Textbox -->

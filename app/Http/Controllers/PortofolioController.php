@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\portofolio;
 use App\Http\Requests\StoreportfolioRequest;
 use App\Http\Requests\UpdateportfolioRequest;
+use App\Models\perusahaan;
 use Illuminate\Http\Request;
 
 class PortofolioController extends Controller
@@ -24,7 +25,10 @@ class PortofolioController extends Controller
      */
     public function create()
     {
-        return view('admin.portofolio.createPortofolio');
+
+        return view('admin.portofolio.createPortofolio', [
+            'perusahaans' => perusahaan::all()
+        ]);
     }
 
     /**
@@ -32,8 +36,12 @@ class PortofolioController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-
+        $id_portofolio =  $request->id_perusahaan . '_' . $request->nama_project;
+        $waktu = $request->jam_mulai.'-'. $request->jam_selesai;
+        $request->merge([
+            'id_portofolio' => $id_portofolio,
+            'waktu' => $waktu
+        ]);
         portofolio::create($request->all());
         return redirect('/dashboard/portofolio')->with('success', 'Data Berhasil Ditambahkan');
     }

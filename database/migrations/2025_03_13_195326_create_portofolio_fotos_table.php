@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('portofolio_fotos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('id_portofolio_foto')->unique();
             $table->string('nama_project', 255);
             $table->string('judul_foto', 255);
             $table->string('foto', 100);

@@ -15,8 +15,8 @@
                 <table id="example" class="table table-bordered table-striped" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>ID Perusahaan</th>
-                            <th>ID</th>
+                            <th>ID Portofolio</th>
+                            <th>Perusahaan</th>
                             <th>Nama Project</th>
                             <th>Team</th>
                             <th>Tempat</th>
@@ -27,42 +27,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>PSH10000</td>
-                            <td>12000</td>
-                            <td>Seminar</td>
-                            <td>Team 1</td>
-                            <td>Daring</td>
-                            <td>2011-04-25</td>
-                            <td>08.00-09.00</td>
-                            <td>Lorem Ipsum blablaba</td>
-                            <td>
-                                <a href="/dashboard/portofolio/edit" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>PSH10002</td>
-                            <td>12002</td>
-                            <td>Seminar 2</td>
-                            <td>Team 2</td>
-                            <td>Daring</td>
-                            <td>2011-04-25</td>
-                            <td>08.00-09.00</td>
-                            <td>Lorem Ipsum blablaba</td>
-                            <td>
-                                <a href="/dashboard/portofolio/edit" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        @foreach ($portofolios as $portofolio)
+                            <tr>
+                                <td>{{$portofolio->id_portofolio}}</td>
+                                <td>{{$portofolio->perusahaan->nama_perusahaan}}</td>
+                                <td>{{$portofolio->nama_project}}</td>
+                                <td>{{$portofolio->team}}</td>
+                                <td>{{$portofolio->tempat}}</td>
+                                <td>{{$portofolio->tanggal}}</td>
+                                <td>{{$portofolio->waktu}}</td>
+                                <td>{{$portofolio->deskripsi}}</td>
+                                <td>
+                                    <a href="/dashboard/portofolio/edit" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
 
                     </tbody>
                 </table>
@@ -71,7 +55,7 @@
     </div>
     @push('script')
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('#example').DataTable();
             });
         </script>

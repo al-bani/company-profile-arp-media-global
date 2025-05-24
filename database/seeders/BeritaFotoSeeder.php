@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\berita_foto;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class BeritaFotoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        berita_foto::factory()->count(10)->create();
     }
 }

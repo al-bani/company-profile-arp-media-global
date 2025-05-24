@@ -1,106 +1,152 @@
 @extends('Layout.layoutAdmin')
 
 <x-layout>
-    <div id="carouselExample" class="carousel slide">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="https://assets.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p3/103/2025/04/04/IMG-20250404-WA0003-3237814259.jpg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+    {{-- Judul --}}
     <div class="mb-2">
-        <h4>Daftar Data</h4>
+        <h4>banner</h4>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
     </div>
 
-    <form method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="row justify-content-center mb-4">
-            <!-- Banner 1 -->
-            <div class="col-auto">
-                <div class="card" style="width: 20rem;">
-                    <img id="preview1" src="/img/default.jpg" class="card-img-top" alt="..." style="height: 10rem; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">Banner 1</h5>
-                        <p class="card-text">Upload dengan Format JPG atau PNG (MAX 5MB)</p>
-                        <input type="file" name="banner1" class="form-control" accept="image/*" onchange="previewImage(event, 1)">
-                    </div>
-                </div>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-end mb-3">
+                <a href="/dashboard/banner/create" class="btn btn-primary">+ Tambah Data</a>
             </div>
 
-            <!-- Banner 2 -->
-            <div class="col-auto">
-                <div class="card" style="width: 20rem;">
-                    <img id="preview2" src="/img/default.jpg" class="card-img-top" alt="..." style="height: 10rem; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">Banner 2</h5>
-                        <p class="card-text">Upload dengan Format JPG atau PNG (MAX 5MB)</p>
-                        <input type="file" name="banner2" class="form-control" accept="image/*" onchange="previewImage(event, 2)">
+            <div class="table-responsive">
+                <table id="example" class="table table-bordered table-striped" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Judul</th>
+                            <th>Deskripsi</th>
+                            <th>Foto</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{-- Contoh Data --}}
+                        @foreach ($banners as $banner)
+                            <tr>
+                                <td>{{ $banner->perusahaan->nama_perusahaan }}</td>
+                                <td>{{ $banner->judul }}</td>
+                                <td>{{ $banner->deskripsi }}</td>
+                                <td>
+                                    @if ($banner->foto)
+                                        <img src="{{ asset($banner->foto) }}" alt="Logo" width="100">
+                                    @endif
+                                </td>
+
+
+                                <td>
+                                    <a href="/dashboard/banner/edit" class="btn btn-warning btn-sm me-1">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
+                                        data-bs-target="#detailbanner{{ $loop->iteration }}">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+
+                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#deletebanner{{ $loop->iteration }}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete -->
+    @foreach ($banners as $banner)
+        <div class="modal fade" id="deletebanner{{ $loop->iteration }}" tabindex="-1"
+            aria-labelledby="modalLabel{{ $loop->iteration }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow rounded-4">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header bg-light border-0 rounded-top">
+                        <h5 class="modal-title text-danger fw-bold" id="modalLabel{{ $loop->iteration }}">
+                            <i class="fas fa-trash-alt me-2"></i>Konfirmasi Hapus
+                        </h5>
+
                     </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body text-center">
+                        <p class="fs-6 mb-1">Apakah Anda yakin ingin menghapus data berikut?</p>
+                        <p class="fw-semibold text-danger ">Nama banner: {{ $banner->judul }}</p>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer justify-content-center gap-3 border-0 pb-4">
+                        <form action="/dashboard/banner/{{ $banner->id }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger px-4 rounded-pill shadow-sm">
+                                <i class="fas fa-trash-alt me-1"></i> Hapus
+                            </button>
+                        </form>
+                        <button type="button" class="btn btn-outline-secondary px-4 rounded-pill"
+                            data-bs-dismiss="modal">
+                            Batal
+                        </button>
+                    </div>
+
                 </div>
             </div>
+        </div>
+    @endforeach
 
-            <!-- Banner 3 -->
-            <div class="col-auto">
-                <div class="card" style="width: 20rem;">
-                    <img id="preview3" src="/img/default.jpg" class="card-img-top" alt="..." style="height: 10rem; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">Banner 3</h5>
-                        <p class="card-text">Upload dengan Format JPG atau PNG (MAX 5MB)</p>
-                        <input type="file" name="banner3" class="form-control" accept="image/*" onchange="previewImage(event, 3)">
+    @foreach ($banners as $banner)
+        <!-- Modal Detail dengan Textbox -->
+        <!-- Modal Detail -->
+        <div class="modal fade" id="detailbanner{{ $loop->iteration }}" tabindex="-1"
+            aria-labelledby="detailLabel{{ $loop->iteration }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content border-0 rounded-4 shadow">
+                    <div class="modal-header bg-primary text-white rounded-top">
+                        <h5 class="modal-title" id="detailLabel{{ $loop->iteration }}">Detail Banner</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Logo banner</label>
+                            @if ($banner->foto)
+                                <img src="{{ asset($banner->foto) }}" alt="Logo" class="w-100">
+                            @endif
+                        </div>
+                        <!-- Nama banner -->
+                        <div class="mb-3">
+                            <label class="form-label">Judul Banner</label>
+                            <input type="text" class="form-control" value="{{ $banner->judul }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Deskripsi</label>
+                            <input type="text" class="form-control" value="{{ $banner->deskripsi }}" readonly>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-secondary rounded-pill px-4"
+                            data-bs-dismiss="modal">Tutup</button>
                     </div>
                 </div>
             </div>
         </div>
+    @endforeach
 
-        <div class="row justify-content-center mb-4">
-            <!-- Banner 4 -->
-            <div class="col-auto">
-                <div class="card" style="width: 20rem;">
-                    <img id="preview4" src="/img/default.jpg" class="card-img-top" alt="..." style="height: 10rem; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">Banner 4</h5>
-                        <p class="card-text">Upload dengan Format JPG atau PNG (MAX 5MB)</p>
-                        <input type="file" name="banner4" class="form-control" accept="image/*" onchange="previewImage(event, 4)">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Banner 5 -->
-            <div class="col-auto">
-                <div class="card" style="width: 20rem;">
-                    <img id="preview5" src="/img/default.jpg" class="card-img-top" alt="..." style="height: 10rem; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">Banner 5</h5>
-                        <p class="card-text">Upload dengan Format JPG atau PNG (MAX 5MB)</p>
-                        <input type="file" name="banner5" class="form-control" accept="image/*" onchange="previewImage(event, 5)">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    <script>
-        function previewImage(event, index) {
-            const reader = new FileReader();
-            reader.onload = function () {
-                const preview = document.getElementById('preview' + index);
-                preview.src = reader.result;
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    </script>
+    @push('script')
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable();
+            });
+        </script>
+    @endpush
 </x-layout>

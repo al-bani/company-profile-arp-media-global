@@ -10,4 +10,11 @@ class portofolio extends Model
     /** @use HasFactory<\Database\Factories\PortfolioFactory> */
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function perusahaan(){
+        return $this->belongsTo(perusahaan::class, 'id_perusahaan', 'id_perusahaan');
+    }
+    public function portofolio_foto(){
+        return $this->hasMany(portofolio_foto::class, 'id_perusahaan', 'id_perusahaan');
+    }
 }

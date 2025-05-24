@@ -9,9 +9,9 @@
             <h6 class="m-0 font-weight-bold text-primary">Edit Akun</h6>
         </div>
         <div class="card-body">
-            <form action="{{ route('akunAdmin.update', $admin->id) }}" method="POST">
+            <form action="/dashboard/akunAdmin/{{$admin->id}}" method="POST">
                 @csrf
-                @method('PATCH')
+                @method('put')
 
                 <!-- Id Perusahaan -->
                 <div class="mb-3">

@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('portofolios', function (Blueprint $table) {
             $table->id();
+            $table->string('id_portofolio')->unique();
             $table->string('id_perusahaan');
             $table->string('nama_project');
             $table->string('team');
             $table->string('tempat');
             $table->date('tanggal');
-            $table->time('waktu');
+            $table->string('waktu');
             $table->text('deskripsi');
             $table->timestamps();
         });

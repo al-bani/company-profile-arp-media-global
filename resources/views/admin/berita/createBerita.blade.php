@@ -15,14 +15,36 @@
                     {{-- Judul --}}
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul Berita</label>
-                        <input type="text" name="judul" id="judul" class="form-control" placeholder="Masukkan judul berita" oninput="previewJudul()">
+                        <input type="text" name="judul" id="judul" class="form-control"
+                            placeholder="Masukkan judul berita" oninput="previewJudul()">
+                    </div>
+
+                    {{-- perusahaan --}}
+                    <div class="mb-3">
+                        <label for="id_perusahaan">Perusahaan</label>
+                        <select class="ms-1 form-select btn btn-secondary" aria-label="Default select example"
+                            name="id_perusahaan" id="id_perusahaan">
+                            @foreach ($perusahaans as $perusahaan)
+                                @if (old('id_perusahaan') == $perusahaan->id_perusahaan)
+                                    <option value="{{ $perusahaan->id_perusahaan }}" selected>
+                                        {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
+                                    </option>
+                                @else
+                                    <option value="{{ $perusahaan->id_perusahaan }}" selected>
+                                        {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
 
                     {{-- Thumbnail --}}
                     <div class="mb-3">
                         <label for="foto" class="form-label">Thumbnail</label>
-                        <input type="file" class="form-control" id="foto" name="foto" accept="image/*" onchange="previewImage(event)">
-                        <img id="preview" src="#" alt="Preview Thumbnail" class="img-fluid mt-3 d-none" style="max-height: 200px; object-fit: cover;">
+                        <input type="file" class="form-control" id="foto" name="foto" accept="image/*"
+                            onchange="previewImage(event)">
+                        <img id="preview" src="#" alt="Preview Thumbnail" class="img-fluid mt-3 d-none"
+                            style="max-height: 200px; object-fit: cover;">
                     </div>
 
                     {{-- Isi Berita --}}
@@ -34,7 +56,8 @@
                     {{-- Penulis --}}
                     <div class="mb-3">
                         <label for="penulis" class="form-label">Penulis</label>
-                        <input type="text" name="penulis" id="penulis" class="form-control" placeholder="Nama penulis">
+                        <input type="text" name="penulis" id="penulis" class="form-control"
+                            placeholder="Nama penulis">
                     </div>
 
                     {{-- Tanggal --}}
@@ -55,7 +78,7 @@
 
     {{-- CKEditor Init + Preview --}}
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             CKEDITOR.replace('konten', {
                 contentsCss: '/ckeditor/contents.css',
                 removePlugins: 'tableselection',
@@ -73,7 +96,7 @@
 
         function previewImage(event) {
             const reader = new FileReader();
-            reader.onload = function () {
+            reader.onload = function() {
                 const preview = document.getElementById('preview');
                 preview.src = reader.result;
                 preview.classList.remove('d-none');

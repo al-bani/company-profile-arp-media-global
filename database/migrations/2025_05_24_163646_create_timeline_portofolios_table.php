@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('layanans', function (Blueprint $table) {
+        Schema::create('timeline_portofolios', function (Blueprint $table) {
             $table->id();
-            $table->string('id_layanan')->unique();
-            $table->string('id_perusahaan');
-            $table->string('nama_layanan');
-            $table->text('deskripsi');
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('layanans');
+        Schema::dropIfExists('timeline_portofolios');
     }
 };

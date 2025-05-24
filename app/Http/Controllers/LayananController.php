@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\layanan;
 use App\Http\Requests\StorelayananRequest;
 use App\Http\Requests\UpdatelayananRequest;
+use App\Models\perusahaan;
 use Illuminate\Http\Request;
 
 class LayananController extends Controller
@@ -23,7 +24,9 @@ class LayananController extends Controller
      */
     public function create()
     {
-        return view('admin.layanan.createLayanan');
+        return view('admin.layanan.createLayanan', [
+            'perusahaans' => perusahaan::all()
+        ]);
     }
 
     /**
@@ -31,6 +34,11 @@ class LayananController extends Controller
      */
     public function store(Request $request)
     {
+        $id_layanan = $request->id_perusahaan . '_' . $request->nama_layanan ;
+        $request->merge([
+            'id_layanan' => $id_layanan,
+            // 'password' => bcrypt($request->password) // hash password juga di sini
+        ]);
         layanan::create($request->all());
         return redirect('/dashboard/layanan')->with('success', 'Data Berhasil Ditambahkan');
     }

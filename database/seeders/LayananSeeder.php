@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\layanan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class LayananSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        layanan::factory()->count(10)->create();
     }
 }

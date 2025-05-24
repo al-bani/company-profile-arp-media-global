@@ -2,17 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\layanan_sub;
+use App\Models\portofolio;
+use App\Models\portofolio_foto;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class LayananSubSeeder extends Seeder
+class PortofolioFotoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        layanan_sub::factory()->count(10)->create();
+        portofolio_foto::factory()->count(10)->create();
     }
 }

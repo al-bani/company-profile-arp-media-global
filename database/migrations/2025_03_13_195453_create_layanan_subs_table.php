@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('layanan_subs', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('id_layanan_sub')->unique();
+            $table->string('id_layanan');
             $table->date('tanggal');
             $table->text('deskripsi')->nullable();
             $table->string('foto', 100)->nullable();
+            $table->timestamps();
 
         });
     }

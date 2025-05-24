@@ -20,6 +20,7 @@
                 <table id="example" class="table table-bordered table-striped" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>ID Berita</th>
                             <th>Judul</th>
                             <th>Penulis</th>
                             <th>Perusahaan</th>
@@ -30,9 +31,10 @@
                     <tbody>
                         @foreach ($beritas as $berita)
                             <tr>
+                                <td>{{ $berita->id_berita }}</td>
                                 <td>{{ $berita->judul }}</td>
                                 <td>{{ $berita->penulis }}</td>
-                                <td>{{ $berita->perusahaan }}</td>
+                                <td>{{ $berita->id_perusahaan }}</td>
                                 <td>{{ $berita->tanggal }}</td>
                                 <td>
                                     <a href="/dashboard/berita/{{ $berita->id }}/edit" class="btn btn-warning btn-sm">

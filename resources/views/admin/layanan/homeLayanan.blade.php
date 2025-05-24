@@ -15,7 +15,7 @@
                 <table id="example" class="table table-bordered table-striped" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>ID Perusahaan</th>
+                            <th>Perusahaan</th>
                             <th>Nama Layanan</th>
                             <th>Deskripsi</th>
                             <th>Action</th>
@@ -24,10 +24,10 @@
                     <tbody>
                         {{-- Contoh Data --}}
                         @foreach ($layanans as $layanan)
-                            
-                        
+
+
                         <tr>
-                            <td>{{ $layanan->id_perusahaan }}</td>
+                            <td>{{ $layanan->perusahaan->nama_perusahaan }}</td>
                             <td>{{ $layanan->nama_layanan }}</td>
                             <td>{{ $layanan->deskripsi }}</td>
                             <td>
@@ -43,7 +43,7 @@
                             </td>
                         </tr>
                         @endforeach
-                       
+
                         {{-- @foreach ($data as $item)
                             <tr>
                                 <td>{{ $item->id_perusahaan }}</td>

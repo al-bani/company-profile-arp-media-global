@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\portofolio_foto;
 use App\Http\Requests\Storeportfolio_fotoRequest;
 use App\Http\Requests\Updateportfolio_fotoRequest;
+use App\Models\perusahaan;
 use Illuminate\Http\Request;
 
 class PortfolioFotoController extends Controller
@@ -23,7 +24,7 @@ class PortfolioFotoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.portofolio.create-portofolio');
     }
 
     /**
@@ -31,6 +32,10 @@ class PortfolioFotoController extends Controller
      */
     public function store(Request $request)
     {
+        $id_portofolio =  $request->id_perusahaan . '_' . $request->nama_portofolio;
+        $request->merge([
+            'id_portofolio' => $id_portofolio,
+        ]);
         portofolio_foto::create($request->all());
         return redirect('/dashboard/portofolio_foto')->with('success', 'Data Berhasil Ditambahkan');
     }
@@ -48,9 +53,7 @@ class PortfolioFotoController extends Controller
      */
     public function edit()
     {
-        return view('admin.portofolio.edit-perusahaan', [
-            
-        ]);
+        return view('admin.portofolio.edit-perusahaan', []);
     }
 
     /**

@@ -32,6 +32,24 @@
                     </div>
                 </div>
 
+                <div class="mb-3">
+                    <label for="id_perusahaan">Perusahaan</label>
+                    <select class="ms-1 form-select btn btn-secondary" aria-label="Default select example"
+                        name="id_perusahaan" id="id_perusahaan">
+                        @foreach ($perusahaans as $perusahaan)
+                            @if (old('id_perusahaan') == $perusahaan->id_perusahaan)
+                                <option value="{{ $perusahaan->id_perusahaan }}" selected>
+                                    {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
+                                </option>
+                            @else
+                                <option value="{{ $perusahaan->id_perusahaan }}" selected>
+                                    {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+
                 <!-- Logo -->
                 <!-- <div class="row align-items-center">
                     <div class="col-auto">

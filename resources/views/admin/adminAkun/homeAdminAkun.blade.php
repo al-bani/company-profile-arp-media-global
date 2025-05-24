@@ -15,7 +15,7 @@
                 <table id="example" class="table table-bordered table-striped" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>ID Perusahaan</th>
+                            <th>Perusahaan</th>
                             <th>Nama Admin</th>
                             <th>Email</th>
                             <th>No Telepon</th>
@@ -26,15 +26,15 @@
                     <tbody>
                         @foreach ($data as $item)
                             <tr>
-                                <td>{{ $item->id_perusahaan }}</td>
+                                <td>{{ $item->perusahaan->nama_perusahaan }}</td>
                                 <td>{{ $item->nama_admin }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->no_telepon }}</td>
                                 <td>
-                                    @if ($item->status == 'aktif')
-                                        <span class="badge bg-success text-white px-4 py-2 fs-6 rounded-pill">Aktif</span>
+                                    @if ($item->status == 'admin')
+                                        <span class="badge bg-primary text-white px-4 py-2 fs-6 rounded-pill">Admin</span>
                                     @else
-                                        <span class="badge bg-danger text-white px-4 py-2 fs-6 rounded-pill">Tidak Aktif</span>
+                                        <span class="badge bg-success text-white px-4 py-2 fs-6 rounded-pill">Super Admin</span>
                                     @endif
                                 </td>
                                 <td>

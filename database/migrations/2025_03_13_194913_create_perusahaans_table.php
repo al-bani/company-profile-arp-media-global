@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('perusahaans', function (Blueprint $table) {
             $table->id();
+            $table->string('id_perusahaan')->unique();
             $table->string('nama_perusahaan')->nullable();
             $table->string('logo')->nullable();
             $table->string('nib')->unique();

@@ -13,25 +13,40 @@
                 @csrf
 
                 <!-- Id Perusahaan -->
-                <div class="mb-3">
-                    <label for="id_perusahaan">ID Perusahaan</label>
-                    <input class="form-control" id="id_perusahaan" name="id_perusahaan" type="text" placeholder="ID123456">
-                </div>
+
 
 
                 <!-- Nama Layanan -->
                 <div class="mb-3">
                     <label for="nama_admin">Nama Layanan</label>
-                    <input class="form-control" id="nama_layanan" name="nama_layanan" type="text" placeholder="Nama Layanan">
+                    <input class="form-control" id="nama_layanan" name="nama_layanan" type="text"
+                        placeholder="Nama Layanan">
                 </div>
 
                 <!-- deskripsi -->
                 <div class="mb-3">
                     <label for="deskripsi">Deskripsi</label>
-                    <input class="form-control" id="deskripsi" name="deskripsi" type="text" placeholder="admin@example.com">
+                    <input class="form-control" id="deskripsi" name="deskripsi" type="text"
+                        placeholder="admin@example.com">
                 </div>
 
-
+                <div class="mb-3">
+                    <label for="id_perusahaan">Perusahaan</label>
+                    <select class="ms-1 form-select btn btn-secondary" aria-label="Default select example"
+                        name="id_perusahaan" id="id_perusahaan">
+                        @foreach ($perusahaans as $perusahaan)
+                            @if (old('id_perusahaan') == $perusahaan->id_perusahaan)
+                                <option value="{{ $perusahaan->id_perusahaan }}" selected>
+                                    {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
+                                </option>
+                            @else
+                                <option value="{{ $perusahaan->id_perusahaan }}" selected>
+                                    {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
                 {{-- <div class="row align-items-center">
                     <div class="col-auto">
                         <img id="preview" src="/img/default.jpg" class="card-img-top border" alt="Logo Perusahaan"
@@ -54,7 +69,7 @@
     <script>
         function previewImage(event) {
             const reader = new FileReader();
-            reader.onload = function () {
+            reader.onload = function() {
                 const preview = document.getElementById('preview');
                 preview.src = reader.result;
             }

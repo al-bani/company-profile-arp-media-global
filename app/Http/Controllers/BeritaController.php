@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\berita;
 use App\Http\Requests\StoreberitaRequest;
 use App\Http\Requests\UpdateberitaRequest;
+use App\Models\perusahaan;
 use Illuminate\Http\Request;
 
 class BeritaController extends Controller
@@ -23,7 +24,9 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        return view('admin.berita.createBerita');
+        return view('admin.berita.createBerita', [
+            'perusahaans' => perusahaan::all()
+        ]);
     }
 
     /**
@@ -31,6 +34,11 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
+        $id_berita = 'berita' . '_' . $request->id_perusahaan . '_' . $request->id;
+        $request->merge([
+            'id_berita' => $id_berita,
+            // 'password' => bcrypt($request->password) // hash password juga di sini
+        ]);
         berita::create($request->all());
         return redirect('/dashboard/berita')->with('success', 'Data Berhasil Ditambahkan');
     }
@@ -43,9 +51,13 @@ class BeritaController extends Controller
         //
     }
 
-    public function edit()
+    public function edit(berita $berita)
     {
-        return view('admin.berita.berita-edit');
+        dd($berita->all());
+        return view('admin.berita.berita-edit', [
+            'berita' => $berita,
+            'perusahaans' => perusahaan::all()
+        ]);
     }
 
 

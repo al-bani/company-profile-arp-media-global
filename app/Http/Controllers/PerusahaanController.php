@@ -47,15 +47,19 @@ class PerusahaanController extends Controller
      */
     public function store(Request $request)
     {
+        $id_perusahaan =  $request->status. '_' . $request->nama_perusahaan.'_'. $request->nib;
+        $request->merge([
+            'id_perusahaan' => $id_perusahaan,
+        ]);
         $data = $request->all();
-    
+
         if ($request->hasFile('logo')) {
             $filename = time() . '_' . $request->file('logo')->getClientOriginalName();
             $destination = 'image/upload/logo';
             $request->file('logo')->move(public_path($destination), $filename);
             $data['logo'] = $destination . '/' . $filename;
         }
-    
+
         perusahaan::create($data);
         return redirect('/dashboard/perusahaan')->with('success', 'Data Berhasil Ditambahkan');
     }

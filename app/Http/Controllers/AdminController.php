@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\admin;
 use App\Http\Requests\StoreadminRequest;
 use App\Http\Requests\UpdateadminRequest;
+use App\Models\perusahaan;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -23,7 +24,9 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.adminAkun.createAdminAkun');
+        return view('admin.adminAkun.createAdminAkun', [
+            'perusahaans' => perusahaan::all()
+        ]);
     }
 
     /**
@@ -31,10 +34,14 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $data['status'] = "aktif";
-        $data['id_perusahaan'] = "default";
-        admin::create($data);
+
+        $id_admin = $request->status . '_' . $request->id_perusahaan . '_' . str_replace(' ', '_', $request->nama_admin);
+        $request->merge([
+            'id_admin' => $id_admin,
+            // 'password' => bcrypt($request->password) // hash password juga di sini
+        ]);
+        // dd($request->all());
+        admin::create($request->all());
 
         return redirect('/dashboard/akunAdmin')->with('success', 'Data Berhasil Ditambahkan');
     }

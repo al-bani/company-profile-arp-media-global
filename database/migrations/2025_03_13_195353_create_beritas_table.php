@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('beritas', function (Blueprint $table) {
             $table->id();
+            $table->string('id_perusahaan');
+            $table->string('id_berita')->unique();
             $table->string('judul');
             $table->string('tanggal');
-            $table->string('foto')->nullable();
             $table->text('konten');
             $table->string('penulis');
             $table->timestamps();

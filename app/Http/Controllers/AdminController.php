@@ -57,7 +57,10 @@ class AdminController extends Controller
     public function edit($id)
     {
         $admin = admin::findOrFail($id);
-        return view('admin.adminAkun.admin-edit', compact('admin'));
+        return view('admin.adminAkun.admin-edit', [
+            'admin' => $admin,
+            'perusahaans' => perusahaan::all()
+        ]);
     }
 
     /**

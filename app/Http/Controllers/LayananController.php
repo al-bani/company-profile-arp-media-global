@@ -69,11 +69,34 @@ class LayananController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-         layanan::where('id', $id)
-            ->update($request->except('_token', '_method'));
-        return redirect('/dashboard/perusahaan')->with('success', 'Data Berhasil Diubah');
+        $layanan = layanan::findOrFail($id);
+
+        $data = $request->except('_token', '_method');
+
+        // Handle file upload
+        if ($request->hasFile('foto')) {
+            // Delete old file if exists
+            if ($layanan->foto && file_exists(public_path($layanan->foto))) {
+                unlink(public_path($layanan->foto));
+            }
+
+            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
+            $destination = 'image/upload/foto';
+            $request->file('foto')->move(public_path($destination), $filename);
+            $data['foto'] = $destination . '/' . $filename;
+        }
+
+        // Update id_layanan if nama_layanan changed
+        if ($request->nama_layanan !== $layanan->nama_layanan) {
+            $data['id_layanan'] = $layanan->id_perusahaan . '_' . $request->nama_layanan;
+        }
+
+        $layanan->update($data);
+
+        return redirect()->route('layanan.index')
+            ->with('success', 'Data Layanan berhasil diperbarui');
     }
 
     /**

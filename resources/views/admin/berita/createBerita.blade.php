@@ -69,7 +69,7 @@
 
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-header">
-                            <h5 class="mb-0">Dokumentasi</h5>
+                            <h5 class="mb-0">Thumbnail</h5>
                         </div>
                         <div class="card-body">
                             <div id="input-container-image" class="image-group mb-3">
@@ -85,8 +85,6 @@
                                 </div>
                             </div>
 
-                            <button type="button" class="btn btn-secondary mt-2" id="add-field-image">+ Tambah
-                                Field Foto</button>
                         </div>
                     </div>
                     {{-- Tombol --}}

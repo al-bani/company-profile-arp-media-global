@@ -16,7 +16,19 @@
                 <!-- Id Perusahaan -->
                 <div class="mb-3">
                     <label for="id_perusahaan">ID Perusahaan</label>
-                    <input class="form-control" id="id_perusahaan" name="id_perusahaan" type="text" value="{{ $admin->id_perusahaan }}" placeholder="ID123456">
+                    <select class="id_perusahaan form-select" aria-label="Default select example" name="id_perusahaan" id="id_perusahaan">
+                        @foreach ($perusahaans as $perusahaan)
+                            @if (old('id_perusahaan', $admin->id_perusahaan) == $perusahaan->id_perusahaan)
+                                <option value="{{ $perusahaan->id_perusahaan }}" selected>
+                                    {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
+                                </option>
+                            @else
+                                <option value="{{ $perusahaan->id_perusahaan }}">
+                                    {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
                 </div>
 
                 <!-- Nama Admin -->

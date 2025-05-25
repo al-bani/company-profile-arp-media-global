@@ -9,48 +9,66 @@
             <h6 class="m-0 font-weight-bold text-primary">Formulir Edit Data Layanan</h6>
         </div>
         <div class="card-body">
-            <form action="">
+            <form action="{{ route('layanan.update', $layanan->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
 
                 <!-- Id Perusahaan -->
                 <div class="mb-3">
                     <label for="id_perusahaan">ID Perusahaan</label>
-                    <input class="form-control" id="id_perusahaan" name="id_perusahaan" type="text" placeholder="ID123456" disabled>
-                </div>
-
-                <!-- Id Perusahaan -->
-                <div class="mb-3">
-                    <label for="id_perusahaan">ID</label>
-                    <input class="form-control" id="id" name="id" type="text" placeholder="ID123456" disabled>
+                    <input class="form-control" id="id_perusahaan" name="id_perusahaan" type="text" value="{{ $layanan->id_perusahaan }}" readonly>
                 </div>
 
                 <!-- Nama Layanan -->
                 <div class="mb-3">
-                    <label for="nama_admin">Nama Layanan</label>
-                    <input class="form-control" id="nama_layanan" name="nama_layanan" type="text" placeholder="Nama Layanan">
+                    <label for="nama_layanan">Nama Layanan</label>
+                    <input class="form-control @error('nama_layanan') is-invalid @enderror"
+                           id="nama_layanan"
+                           name="nama_layanan"
+                           type="text"
+                           value="{{ old('nama_layanan', $layanan->nama_layanan) }}"
+                           placeholder="Nama Layanan">
+                    @error('nama_layanan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
-                <!-- deskripsi -->
+                <!-- Deskripsi -->
                 <div class="mb-3">
                     <label for="deskripsi">Deskripsi</label>
-                    <input class="form-control" id="email" name="email" type="email" placeholder="admin@example.com">
+                    <textarea class="form-control @error('deskripsi') is-invalid @enderror"
+                              id="deskripsi"
+                              name="deskripsi"
+                              rows="4">{{ old('deskripsi', $layanan->deskripsi) }}</textarea>
+                    @error('deskripsi')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="row align-items-center">
                     <div class="col-auto">
-                        <img id="preview" src="/img/default.jpg" class="card-img-top border" alt="Logo Perusahaan"
-                            style="height: 10rem; width: 10rem; object-fit: cover;">
+                        <img id="preview" src="{{ asset($layanan->foto ?? '/img/default.jpg') }}"
+                             class="card-img-top border"
+                             alt="Foto Layanan"
+                             style="height: 10rem; width: 10rem; object-fit: cover;">
                     </div>
                     <div class="col">
-                        <label for="foto" class="form-label">Logo</label>
-                        <input class="form-control" id="foto" name="foto" type="file" accept="image/*" onchange="previewImage(event)">
+                        <label for="foto" class="form-label">Foto Layanan</label>
+                        <input class="form-control @error('foto') is-invalid @enderror"
+                               id="foto"
+                               name="foto"
+                               type="file"
+                               accept="image/*"
+                               onchange="previewImage(event)">
+                        @error('foto')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
-
-                <div class="mb-3 text-center">
-                    <a href="/homeLayanan" class="btn btn-secondary me-2">Kembali</a>
-                    <button type="submit" class="btn btn-primary">Simpan Data</button>
+                <div class="mb-3 text-center mt-4">
+                    <a href="{{ route('layanan.index') }}" class="btn btn-secondary me-2">Kembali</a>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                 </div>
             </form>
         </div>

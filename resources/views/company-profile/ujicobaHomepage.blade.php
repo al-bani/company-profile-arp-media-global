@@ -7,7 +7,7 @@
         $logos = ['bi.png', 'bjb.png', 'disdik.png', 'diskominfo.png', 'ojk.png', 'unpad.png'];
     @endphp
     @foreach ($perusahaans as $perusahaan)
-        @if ($perusahaan->nib === '2102220087754')
+        @if ($perusahaan->nib === '123')
             <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner">
                     @foreach ($banners as $foto)

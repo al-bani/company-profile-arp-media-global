@@ -66,16 +66,41 @@ class BannerController extends Controller
     public function edit(banner $banner)
     {
         return view('admin.banner.banner-edit', [
-            'banners' => $banner
+            'banner' => $banner,
+            'perusahaans' => perusahaan::all()
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatebannerRequest $request, banner $banner)
+    public function update(Request $request, $id)
     {
-        //
+        $banner = banner::findOrFail($id);
+
+        $data = $request->except('_token', '_method');
+
+        // Update id_banner if needed
+        if ($request->judul !== $banner->judul || $request->id_perusahaan !== $banner->id_perusahaan) {
+            $data['id_banner'] = $request->id_perusahaan . '_' . $request->judul;
+        }
+
+        // Handle file upload
+        if ($request->hasFile('foto')) {
+            // Delete old file if exists
+            if ($banner->foto && file_exists(public_path($banner->foto))) {
+                unlink(public_path($banner->foto));
+            }
+
+            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
+            $destination = 'image/upload/foto';
+            $request->file('foto')->move(public_path($destination), $filename);
+            $data['foto'] = $destination . '/' . $filename;
+        }
+
+        $banner->update($data);
+
+        return redirect('/dashboard/banner')->with('success', 'Banner berhasil diperbarui');
     }
 
     /**

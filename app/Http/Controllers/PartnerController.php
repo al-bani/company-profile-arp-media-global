@@ -73,9 +73,32 @@ class PartnerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        partner::where('id', $id)
-            ->update($request->except('_token', '_method'));
-        return redirect('/dashboard/perusahaan')->with('success', 'Data Berhasil Diubah');
+        $partner = partner::findOrFail($id);
+
+        $data = $request->except('_token', '_method');
+
+        // Handle file upload
+        if ($request->hasFile('foto')) {
+            // Delete old file if exists
+            if ($partner->foto && file_exists(public_path($partner->foto))) {
+                unlink(public_path($partner->foto));
+            }
+
+            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
+            $destination = 'image/upload/foto';
+            $request->file('foto')->move(public_path($destination), $filename);
+            $data['foto'] = $destination . '/' . $filename;
+        }
+
+        // Update id_partner if nama_partner changed
+        if ($request->nama_partner !== $partner->nama_partner) {
+            $data['id_partner'] = $partner->id_perusahaan . '_' . $request->nama_partner;
+        }
+
+        $partner->update($data);
+
+        return redirect()->route('partner.index')
+            ->with('success', 'Data Partner berhasil diperbarui');
     }
 
     /**

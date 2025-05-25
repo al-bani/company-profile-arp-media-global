@@ -74,7 +74,6 @@ class BeritaController extends Controller
 
     public function edit(berita $berita)
     {
-        dd($berita->all());
         return view('admin.berita.berita-edit', [
             'berita' => $berita,
             'perusahaans' => perusahaan::all()
@@ -95,9 +94,44 @@ class BeritaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        berita::where('id', $id)
-            ->update($request->except('_token', '_method'));
-        return redirect('/dashboard/berita')->with('success', 'Data Berhasil Diubah');
+        $berita = berita::findOrFail($id);
+
+        $data = $request->except('_token', '_method', 'foto');
+
+        // Update id_berita if needed
+        if ($request->id_perusahaan !== $berita->id_perusahaan) {
+            $data['id_berita'] = 'berita' . '_' . $request->id_perusahaan . '_' . $id;
+        }
+
+        // Handle file uploads
+        if ($request->has('foto')) {
+            foreach ($request->foto as $item) {
+                if (isset($item['foto']) && $item['foto'] instanceof \Illuminate\Http\UploadedFile) {
+                    // Delete old file if exists
+                    if ($berita->foto && file_exists(public_path($berita->foto))) {
+                        unlink(public_path($berita->foto));
+                    }
+
+                    $filename = time() . '_' . $item['foto']->getClientOriginalName();
+                    $destination = 'image/upload/foto';
+                    $item['foto']->move(public_path($destination), $filename);
+
+                    // Update or create berita_foto
+                    berita_foto::updateOrCreate(
+                        ['id_berita' => $berita->id_berita],
+                        [
+                            'id_berita_foto' => 'img' . $berita->id_berita . ($item['judul_foto'] ?? ''),
+                            'judul_foto' => $item['judul_foto'] ?? '',
+                            'foto' => $destination . '/' . $filename,
+                        ]
+                    );
+                }
+            }
+        }
+
+        $berita->update($data);
+
+        return redirect('/dashboard/berita')->with('success', 'Berita berhasil diperbarui');
     }
 
     /**

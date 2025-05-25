@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [companyProfile::class, 'index']);
-Route::get('/ujiCoba', [companyProfile::class, 'ujiCoba']);
 Route::get('/berita', [companyProfile::class, 'berita']);
 Route::get('/detail', [companyProfile::class, 'detail']);
 Route::get('/kontak', [companyProfile::class, 'kontak']);

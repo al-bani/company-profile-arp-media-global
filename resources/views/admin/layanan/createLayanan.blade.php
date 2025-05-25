@@ -11,11 +11,6 @@
         <div class="card-body">
             <form action="/dashboard/layanan" method="post">
                 @csrf
-
-                <!-- Id Perusahaan -->
-
-
-
                 <!-- Nama Layanan -->
                 <div class="mb-3">
                     <label for="nama_admin">Nama Layanan</label>
@@ -47,16 +42,17 @@
                         @endforeach
                     </select>
                 </div>
-                {{-- <div class="row align-items-center">
+                <div class="row align-items-center">
                     <div class="col-auto">
                         <img id="preview" src="/img/default.jpg" class="card-img-top border" alt="Logo Perusahaan"
                             style="height: 10rem; width: 10rem; object-fit: cover;">
                     </div>
                     <div class="col">
                         <label for="foto" class="form-label">Logo</label>
-                        <input class="form-control" id="foto" name="foto" type="file" accept="image/*" onchange="previewImage(event)">
+                        <input class="form-control" id="foto" name="foto" type="file" accept="image/*"
+                            onchange="previewImage(event)">
                     </div>
-                </div> --}}
+                </div>
 
 
                 <div class="mb-3 text-center">

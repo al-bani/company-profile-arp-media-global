@@ -16,8 +16,11 @@ class BeritaController extends Controller
      */
     public function index()
     {
-        $beritas = berita::all();
-        return view('admin.berita.homeBerita', compact('beritas'));
+
+        return view('admin.berita.homeBerita', [
+            'beritas' => berita::all(),
+            'beritaFotos'=> berita_foto::all()
+        ]);
     }
 
     /**

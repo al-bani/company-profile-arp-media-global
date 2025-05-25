@@ -120,7 +120,7 @@
                                 <!-- Gambar -->
                                 @if ($perusahaan->logo)
                                     <div class="mb-3 text-center">
-                                        <img src="{{ asset('storage/' . $perusahaan->logo) }}"
+                                        <img src="{{ asset( $perusahaan->logo) }}"
                                             class="img-fluid rounded shadow-sm" style="max-height: 120px;">
                                     </div>
                                 @endif

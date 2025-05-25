@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('id_perusahaan');
             $table->string('nama_layanan');
             $table->text('deskripsi');
+            $table->text('foto');
             $table->timestamps();
         });
     }

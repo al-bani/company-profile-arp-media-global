@@ -140,6 +140,16 @@
                                     <label class="form-label">Tanggal</label>
                                     <input type="text" class="form-control" value="{{ $berita->tanggal }}" readonly>
                                 </div>
+                                @foreach ($beritaFotos as $foto)
+                                    @if ($foto->id_berita === $berita->id_berita)
+                                        <label for="foto" class="form-label">Judul Foto: {{ $foto->judul_foto }}</label>
+                                        <div class="mb-3 ">
+                                            <img src="{{ asset($foto->foto) }}" class="img-fluid rounded shadow-sm"
+                                                style="max-height: 120px;">
+                                        </div>
+                                    @endif
+                                @endforeach
+
 
                             </div>
                             <div class="modal-footer border-0">

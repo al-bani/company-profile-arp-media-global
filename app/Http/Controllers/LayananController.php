@@ -39,7 +39,14 @@ class LayananController extends Controller
             'id_layanan' => $id_layanan,
             // 'password' => bcrypt($request->password) // hash password juga di sini
         ]);
-        layanan::create($request->all());
+        $data = $request->all();
+        if ($request->hasFile('foto')) {
+            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
+            $destination = 'image/upload/foto';
+            $request->file('foto')->move(public_path($destination), $filename);
+            $data['foto'] = $destination . '/' . $filename;
+        }
+        layanan::create($data);
         return redirect('/dashboard/layanan')->with('success', 'Data Berhasil Ditambahkan');
     }
 

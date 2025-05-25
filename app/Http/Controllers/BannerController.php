@@ -81,8 +81,9 @@ class BannerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(banner $banner)
+    public function destroy($id)
     {
-        //
+        banner::destroy($id);
+        return redirect('/dashboard/banner')->with('success', 'Data Berhasil dihapus');
     }
 }

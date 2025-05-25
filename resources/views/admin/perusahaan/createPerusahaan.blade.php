@@ -27,9 +27,12 @@
                 </div> -->
                 <div class="mb-4 text-center">
                     <div class="card" style="max-width: 18rem; margin: auto;">
+                        <img id="preview" src="/img/default.jpg" class="card-img-top" alt="Logo Perusahaan"
+                            style="height: 13.5rem; object-fit: cover;">
                         <div class="card-body">
                             <p class="card-text">Upload Logo (Format JPG atau PNG, MAX 5MB)</p>
-                            <input type="file" id="logo" name="logo" class="form-control" accept="image/*" required>
+                            <input type="file" id="logo" name="logo" class="form-control" accept="image/*"
+                                required>
                         </div>
                     </div>
                 </div>
@@ -53,11 +56,11 @@
                 <div class="mb-3">
                     <label for="notaris">Notaris</label>
                     <input class="form-control" id="notaris" name="notaris" type="text"
-                        placeholder="No. 05 Tanggal 12 Februari 2023 oleh Notaris Rina Dewi, S.H., M.Kn." required>
+                        placeholder="Nama Notaris" required>
                 </div>
                 <div class="mb-3">
                     <label for="npwp">NPWP</label>
-                    <input class="form-control" id="npwp" name="npwp" type="number"
+                    <input class="form-control" id="npwp" name="npwp"
                         placeholder="12.345.678.9-123.000" required>
                 </div>
 

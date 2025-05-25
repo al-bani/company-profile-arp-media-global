@@ -66,11 +66,7 @@
                         <input type="date" name="tanggal" id="tanggal" class="form-control">
                     </div>
 
-                    {{-- Tombol --}}
-                    <div class="d-flex justify-content-center">
-                        <a href="/dashboard/berita" class="btn btn-secondary me-2 px-4">Kembali</a>
-                        <button type="submit" class="btn btn-primary px-4">Publish Berita</button>
-                    </div>
+
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-header">
                             <h5 class="mb-0">Dokumentasi</h5>
@@ -92,6 +88,11 @@
                             <button type="button" class="btn btn-secondary mt-2" id="add-field-image">+ Tambah
                                 Field Foto</button>
                         </div>
+                    </div>
+                    {{-- Tombol --}}
+                    <div class="d-flex justify-content-center">
+                        <a href="/dashboard/berita" class="btn btn-secondary me-2 px-4">Kembali</a>
+                        <button type="submit" class="btn btn-primary px-4">Publish Berita</button>
                     </div>
                 </form>
             </div>

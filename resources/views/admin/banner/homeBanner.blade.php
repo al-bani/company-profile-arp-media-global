@@ -67,7 +67,7 @@
 
     <!-- Modal Delete -->
     @foreach ($banners as $banner)
-        <div class="modal fade" id="deletebanner{{ $loop->iteration }}" tabindex="-1"
+        <div class="modal fade" id="deleteBanner{{ $loop->iteration }}" tabindex="-1"
             aria-labelledby="modalLabel{{ $loop->iteration }}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content border-0 shadow rounded-4">
@@ -109,7 +109,7 @@
     @foreach ($banners as $banner)
         <!-- Modal Detail dengan Textbox -->
         <!-- Modal Detail -->
-        <div class="modal fade" id="detailbanner{{ $loop->iteration }}" tabindex="-1"
+        <div class="modal fade" id="detailBanner{{ $loop->iteration }}" tabindex="-1"
             aria-labelledby="detailLabel{{ $loop->iteration }}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content border-0 rounded-4 shadow">

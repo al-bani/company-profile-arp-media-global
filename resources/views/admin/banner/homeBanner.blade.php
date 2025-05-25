@@ -22,6 +22,7 @@
                     <thead>
                         <tr>
                             <th>Judul</th>
+                            <th>Perusahaan</th>
                             <th>Deskripsi</th>
                             <th>Foto</th>
                             <th>Action</th>
@@ -31,8 +32,8 @@
                         {{-- Contoh Data --}}
                         @foreach ($banners as $banner)
                             <tr>
-                                <td>{{ $banner->perusahaan->nama_perusahaan }}</td>
                                 <td>{{ $banner->judul }}</td>
+                                <td>{{ $banner->perusahaan->nama_perusahaan }}</td>
                                 <td>{{ $banner->deskripsi }}</td>
                                 <td>
                                     @if ($banner->foto)
@@ -42,16 +43,17 @@
 
 
                                 <td>
-                                    <a href="/dashboard/banner/edit" class="btn btn-warning btn-sm me-1">
+                                    <a href="/dashboard/banner/{{ $banner->id }}/edit"
+                                        class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
-                                        data-bs-target="#detailbanner{{ $loop->iteration }}">
+                                        data-bs-target="#detailBanner{{ $loop->iteration }}">
                                         <i class="fas fa-eye"></i>
                                     </a>
 
                                     <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#deletebanner{{ $loop->iteration }}">
+                                        data-bs-target="#deleteBanner{{ $loop->iteration }}">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </td>

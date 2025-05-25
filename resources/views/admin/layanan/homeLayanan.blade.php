@@ -24,62 +24,121 @@
                     <tbody>
                         {{-- Contoh Data --}}
                         @foreach ($layanans as $layanan)
-
-
-                        <tr>
-                            <td>{{ $layanan->perusahaan->nama_perusahaan }}</td>
-                            <td>{{ $layanan->nama_layanan }}</td>
-                            <td>{{ $layanan->deskripsi }}</td>
-                            <td>
-                                <a href="/dashboard/layanan/edit" class="btn btn-warning btn-sm me-1">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="/dashboard/layanan" class="btn btn-info btn-sm me-1">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="/dashboard" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-
-                        {{-- @foreach ($data as $item)
                             <tr>
-                                <td>{{ $item->id_perusahaan }}</td>
-                                <td>{{ $item->nama_admin }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>{{ $item->no_telepon }}</td>
+                                <td>{{ $layanan->perusahaan->nama_perusahaan }}</td>
+                                <td>{{ $layanan->nama_layanan }}</td>
+                                <td>{{ $layanan->deskripsi }}</td>
                                 <td>
-                                    @if ($item->status == 'aktif')
-                                        <span class="badge bg-success text-white px-4 py-2 fs-6 rounded-pill">Aktif</span>
-                                    @else
-                                        <span class="badge bg-danger text-white px-4 py-2 fs-6 rounded-pill">Tidak Aktif</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('edit', $item->id) }}" class="btn btn-warning btn-sm me-1">
+                                    <a href="/dashboard/layanan/{{ $layanan->id }}/edit"
+                                        class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('delete', $item->id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </form>
+                                    <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
+                                        data-bs-target="#detailLayanan{{ $loop->iteration }}">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+
+                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#deleteLayanan{{ $loop->iteration }}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>
+
+            <!-- Modal Delete -->
+            @foreach ($layanans as $layanan)
+                <div class="modal fade" id="deleteLayanan{{ $loop->iteration }}" tabindex="-1"
+                    aria-labelledby="modalLabel{{ $loop->iteration }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content border-0 shadow rounded-4">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header bg-light border-0 rounded-top">
+                                <h5 class="modal-title text-danger fw-bold" id="modalLabel{{ $loop->iteration }}">
+                                    <i class="fas fa-trash-alt me-2"></i>Konfirmasi Hapus
+                                </h5>
+
+                            </div>
+
+                            <!-- Modal Body -->
+                            <div class="modal-body text-center">
+                                <p class="fs-6 mb-1">Apakah Anda yakin ingin menghapus data berikut?</p>
+                                <p class="fw-semibold text-danger ">Nama layanan: {{ $layanan->nama_layanan }}</p>
+                                <p class="fw-semibold text-danger ">Nama layanan: {{ $layanan->email }}</p>
+                            </div>
+
+                            <!-- Modal Footer -->
+                            <div class="modal-footer justify-content-center gap-3 border-0 pb-4">
+                                <form action="/dashboard/layanan/{{ $layanan->id }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger px-4 rounded-pill shadow-sm">
+                                        <i class="fas fa-trash-alt me-1"></i> Hapus
+                                    </button>
+                                </form>
+                                <button type="button" class="btn btn-outline-secondary px-4 rounded-pill"
+                                    data-bs-dismiss="modal">
+                                    Batal
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+            @foreach ($layanans as $layanan)
+                <!-- Modal Detail Layanan -->
+                <div class="modal fade" id="detailLayanan{{ $loop->iteration }}" tabindex="-1"
+                    aria-labelledby="detailLayananLabel{{ $loop->iteration }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content border-0 rounded-4 shadow">
+                            <div class="modal-header bg-primary text-white rounded-top">
+                                <h5 class="modal-title" id="detailLayananLabel{{ $loop->iteration }}">Detail Layanan
+                                </h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="mb-3">
+                                    <label class="form-label">Nama Perusahaan</label>
+                                    <input type="text" class="form-control"
+                                        value="{{ $layanan->perusahaan->nama_perusahaan }}" readonly>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Nama Layanan</label>
+                                    <input type="text" class="form-control" value="{{ $layanan->nama_layanan }}"
+                                        readonly>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Deskripsi</label>
+                                    <textarea class="form-control" rows="3" readonly>{{ $layanan->deskripsi }}</textarea>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer border-0">
+                                <button type="button" class="btn btn-secondary rounded-pill px-4"
+                                    data-bs-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
         </div>
     </div>
 
     @push('script')
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('#example').DataTable();
             });
         </script>

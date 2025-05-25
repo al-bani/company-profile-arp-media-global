@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('id_portofolio_foto')->unique();
-            $table->string('nama_project', 255);
+            $table->string('id_portofolio');
             $table->string('judul_foto', 255);
             $table->string('foto', 100);
         });

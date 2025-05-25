@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\berita;
 use App\Http\Requests\StoreberitaRequest;
 use App\Http\Requests\UpdateberitaRequest;
+use App\Models\berita_foto;
 use App\Models\perusahaan;
 use Illuminate\Http\Request;
 
@@ -37,9 +38,26 @@ class BeritaController extends Controller
         $id_berita = 'berita' . '_' . $request->id_perusahaan . '_' . $request->id;
         $request->merge([
             'id_berita' => $id_berita,
-            // 'password' => bcrypt($request->password) // hash password juga di sini
         ]);
         berita::create($request->all());
+
+
+        if ($request->has('foto')) {
+            foreach ($request->foto as $item) {
+                if (isset($item['foto']) && $item['foto'] instanceof \Illuminate\Http\UploadedFile) {
+                    $filename = time() . '_' . $item['foto']->getClientOriginalName();
+                    $destination = 'image/upload/foto';
+                    $item['foto']->move(public_path($destination), $filename);
+
+                    berita_foto::create([
+                        'id_berita' => $request->id_berita,
+                        'id_berita_foto' => 'img'.$request->id_berita.$item['judul_foto'],
+                        'judul_foto' => $item['judul_foto'] ?? '',
+                        'foto' => $destination . '/' . $filename,
+                    ]);
+                }
+            }
+        }
         return redirect('/dashboard/berita')->with('success', 'Data Berhasil Ditambahkan');
     }
 

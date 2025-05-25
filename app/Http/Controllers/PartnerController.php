@@ -49,7 +49,7 @@ class PartnerController extends Controller
         }
 
         partner::create($data);
-        return redirect('/dashboard/perusahaan')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect('/dashboard/partner')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**

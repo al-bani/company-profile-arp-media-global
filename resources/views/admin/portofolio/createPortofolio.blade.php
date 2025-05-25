@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
 
-            <form action="/dashboard/portofolio" method="post">
+            <form action="/dashboard/portofolio" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -77,14 +77,49 @@
                 </div>
 
 
-                {{-- <label for="timeline">Timeline</label>
-                <div id="input-container" class="timeline">
-                    <div class="mb-3">
-                        <input type="text" name="fields[]" class="form-control" placeholder="Masukkan sesuatu">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Dokumentasi</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="input-container-image" class="image-group mb-3">
+                            <div class="mb-2">
+                                <label>Judul Foto</label>
+                                <input class="form-control" type="text" name="foto[0][judul_foto]" class="form-control"
+                                    placeholder="Masukkan Judul Foto">
+                            </div>
+                            <div>
+                                <label>Foto</label>
+                                <input type="file" name="foto[0][foto]" class="form-control" placeholder="foto" accept="image/*" >
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-secondary mt-2" id="add-field-image">+ Tambah Field</button>
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-secondary mb-3" id="add-field">+ Tambah Field</button> --}}
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Timeline</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="input-container" class="timeline-group mb-3">
+                            <div class="mb-2">
+                                <label>Tanggal/Tahun</label>
+                                <input class="date" type="date" name="timeline[0][tanggal]" class="form-control"
+                                    placeholder="Masukkan tanggal/tahun">
+                            </div>
+                            <div>
+                                <label>Deskripsi</label>
+                                <textarea type="text" name="timeline[0][deskripsi]" class="form-control" placeholder="Masukkan deskripsi">
+                                </textarea>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-secondary mt-2" id="add-field">+ Tambah Field</button>
+                    </div>
+                </div>
+
 
                 <div class="mb-3 text-center">
                     <a href="/dashboard/portofolio" class="btn btn-secondary me-2">Kembali</a>
@@ -93,22 +128,72 @@
             </form>
         </div>
     </div>
-    <script>
-        const maxFields = 5;
-        const container = document.getElementById('input-container');
+    @push('script')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const button = document.getElementById('add-field');
+                const container = document.getElementById('input-container');
+                const maxFields = 5;
+                let timelineIndex = 1; // dimulai dari 1 karena field pertama sudah ada di HTML
 
-        document.getElementById('add-field').addEventListener('click', function() {
-            const currentFields = container.querySelectorAll('input[name="fields[]"]').length;
+                button.addEventListener('click', function() {
+                    const currentFields = container.querySelectorAll('.timeline-group').length;
 
-            if (currentFields < maxFields) {
-                const newField = document.createElement('div');
-                newField.classList.add('mb-3');
-                newField.innerHTML =
-                    `<input type="text" name="fields[]" class="form-control" placeholder="Masukkan sesuatu">`;
-                container.appendChild(newField);
-            } else {
-                alert("Maksimal hanya 5 field yang boleh ditambahkan.");
-            }
-        });
-    </script>
+                    if (currentFields < maxFields) {
+                        const newGroup = document.createElement('div');
+                        newGroup.classList.add('timeline-group', 'mb-3');
+                        newGroup.innerHTML = `
+                    <hr class="my-4 border-2">
+                    <div class="mb-2">
+                        <label>Tanggal/Tahun</label>
+                        <input class="date form-control" type="date" name="timeline[${timelineIndex}][tanggal]" placeholder="Masukkan tanggal/tahun">
+                    </div>
+                    <div>
+                        <label>Deskripsi</label>
+                        <textarea name="timeline[${timelineIndex}][deskripsi]" class="form-control" placeholder="Masukkan deskripsi"></textarea>
+                    </div>
+                `;
+                        container.appendChild(newGroup);
+                        timelineIndex++;
+                    } else {
+                        alert("Maksimal hanya 5 field yang boleh ditambahkan.");
+                    }
+                });
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const button = document.getElementById('add-field-image');
+                const container = document.getElementById('input-container-image');
+                const maxFields = 3;
+                let timelineIndex = 1; // dimulai dari 1 karena field pertama sudah ada di HTML
+
+                button.addEventListener('click', function() {
+                    const currentFields = container.querySelectorAll('.image-group').length;
+
+                    if (currentFields < maxFields) {
+                        const newGroup = document.createElement('div');
+                        newGroup.classList.add('image-group', 'mb-3');
+                        newGroup.innerHTML = `
+                    <hr class="my-4 border-2">
+                    <div class="mb-2">
+                        <label>Judul Foto</label>
+                        <input class=" form-control" name="foto[${timelineIndex}][judul_foto]" placeholder="Masukkan tanggal/tahun">
+                    </div>
+                    <div>
+                        <label>Foto</label>
+                        <input type="file" name="foto[${timelineIndex}][foto]" class="form-control" placeholder="Masukkan Foto">
+                    </div>
+                `;
+                        container.appendChild(newGroup);
+                        timelineIndex++;
+                    } else {
+                        alert("Maksimal hanya 3 field yang boleh ditambahkan.");
+                    }
+                });
+            });
+        </script>
+    @endpush
+
+
 </x-layout>

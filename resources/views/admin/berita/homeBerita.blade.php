@@ -24,7 +24,7 @@
                             <th>Judul</th>
                             <th>Penulis</th>
                             <th>Perusahaan</th>
-                             <th>Tanggal</th>
+                            <th>Tanggal</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -50,82 +50,113 @@
                                     </a>
                                 </td>
                             </tr>
-
-                            <!-- Modal Detail -->
-                            <div class="modal fade" id="detailBerita{{ $loop->iteration }}" tabindex="-1"
-                                aria-labelledby="detailLabel{{ $loop->iteration }}" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable">
-                                    <div class="modal-content border-0 rounded-4 shadow">
-                                        <div class="modal-header bg-primary text-white rounded-top">
-                                            <h5 class="modal-title" id="detailLabel{{ $loop->iteration }}">Detail Berita</h5>
-                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label class="form-label">Judul</label>
-                                                <input type="text" class="form-control" value="{{ $berita->judul }}" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Penulis</label>
-                                                <input type="text" class="form-control" value="{{ $berita->penulis }}" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Isi Berita</label>
-                                                <textarea class="form-control" rows="5" readonly>{{ $berita->isi }}</textarea>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Tanggal</label>
-                                                <input type="text" class="form-control" value="{{ $berita->tanggal }}" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer border-0">
-                                            <button type="button" class="btn btn-secondary rounded-pill px-4"
-                                                data-bs-dismiss="modal">Tutup</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Modal Delete -->
-                            <div class="modal fade" id="deleteBerita{{ $loop->iteration }}" tabindex="-1"
-                                aria-labelledby="modalDelete{{ $loop->iteration }}" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content border-0 shadow rounded-4">
-                                        <div class="modal-header bg-light border-0 rounded-top">
-                                            <h5 class="modal-title text-danger fw-bold" id="modalDelete{{ $loop->iteration }}">
-                                                <i class="fas fa-trash-alt me-2"></i>Konfirmasi Hapus
-                                            </h5>
-                                        </div>
-                                        <div class="modal-body text-center">
-                                            <p class="fs-6 mb-1">Yakin ingin menghapus berita ini?</p>
-                                            <p class="fw-semibold text-danger small">Judul: {{ $berita->judul }}</p>
-                                        </div>
-                                        <div class="modal-footer justify-content-center gap-3 border-0 pb-4">
-                                            <form action="/dashboard/berita/{{ $berita->id }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger px-4 rounded-pill shadow-sm">
-                                                    <i class="fas fa-trash-alt me-1"></i> Hapus
-                                                </button>
-                                            </form>
-                                            <button type="button" class="btn btn-outline-secondary px-4 rounded-pill"
-                                                data-bs-dismiss="modal">Batal</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         @endforeach
                     </tbody>
                 </table>
             </div>
+            <!-- Modal Delete -->
+            @foreach ($beritas as $berita)
+                <div class="modal fade" id="deleteBerita{{ $loop->iteration }}" tabindex="-1"
+                    aria-labelledby="modalLabel{{ $loop->iteration }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content border-0 shadow rounded-4">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header bg-light border-0 rounded-top">
+                                <h5 class="modal-title text-danger fw-bold" id="modalLabel{{ $loop->iteration }}">
+                                    <i class="fas fa-trash-alt me-2"></i>Konfirmasi Hapus
+                                </h5>
+
+                            </div>
+
+                            <!-- Modal Body -->
+                            <div class="modal-body text-center">
+                                <p class="fs-6 mb-1">Apakah Anda yakin ingin menghapus data berikut?</p>
+                                <p class="fw-semibold text-danger ">Nama berita: {{ $berita->nama_berita }}</p>
+                                <p class="fw-semibold text-danger ">Nama berita: {{ $berita->email }}</p>
+                            </div>
+
+                            <!-- Modal Footer -->
+                            <div class="modal-footer justify-content-center gap-3 border-0 pb-4">
+                                <form action="/dashboard/berita/{{ $berita->id }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger px-4 rounded-pill shadow-sm">
+                                        <i class="fas fa-trash-alt me-1"></i> Hapus
+                                    </button>
+                                </form>
+                                <button type="button" class="btn btn-outline-secondary px-4 rounded-pill"
+                                    data-bs-dismiss="modal">
+                                    Batal
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+            @foreach ($beritas as $berita)
+                <!-- Modal Detail Berita -->
+                <div class="modal fade" id="detailBerita{{ $loop->iteration }}" tabindex="-1"
+                    aria-labelledby="detailBeritaLabel{{ $loop->iteration }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content border-0 rounded-4 shadow">
+                            <div class="modal-header bg-primary text-white rounded-top">
+                                <h5 class="modal-title" id="detailBeritaLabel{{ $loop->iteration }}">Detail Berita</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <!-- ID Berita -->
+                                <div class="mb-3">
+                                    <label class="form-label">ID Berita</label>
+                                    <input type="text" class="form-control" value="{{ $berita->id_berita }}"
+                                        readonly>
+                                </div>
+
+                                <!-- Judul -->
+                                <div class="mb-3">
+                                    <label class="form-label">Judul</label>
+                                    <input type="text" class="form-control" value="{{ $berita->judul }}" readonly>
+                                </div>
+
+                                <!-- Penulis -->
+                                <div class="mb-3">
+                                    <label class="form-label">Penulis</label>
+                                    <input type="text" class="form-control" value="{{ $berita->penulis }}" readonly>
+                                </div>
+
+                                <!-- Perusahaan -->
+                                <div class="mb-3">
+                                    <label class="form-label">Perusahaan</label>
+                                    <input type="text" class="form-control"
+                                        value="{{ $berita->perusahaan->nama_perusahaan ?? $berita->id_perusahaan }}"
+                                        readonly>
+                                </div>
+
+                                <!-- Tanggal -->
+                                <div class="mb-3">
+                                    <label class="form-label">Tanggal</label>
+                                    <input type="text" class="form-control" value="{{ $berita->tanggal }}" readonly>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer border-0">
+                                <button type="button" class="btn btn-secondary rounded-pill px-4"
+                                    data-bs-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
         </div>
     </div>
 
     @push('script')
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('#example').DataTable();
             });
         </script>

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('timeline_portofolios', function (Blueprint $table) {
             $table->id();
+            $table->string('timeline_id')->unique();
+            $table->string('id_portofolio');
+            $table->string('tanggal');
+            $table->string('deskripsi');
             $table->timestamps();
         });
     }

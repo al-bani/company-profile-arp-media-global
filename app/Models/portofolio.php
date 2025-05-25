@@ -15,6 +15,9 @@ class portofolio extends Model
         return $this->belongsTo(perusahaan::class, 'id_perusahaan', 'id_perusahaan');
     }
     public function portofolio_foto(){
-        return $this->hasMany(portofolio_foto::class, 'id_perusahaan', 'id_perusahaan');
+        return $this->hasMany(portofolio_foto::class, 'id_portofolio', 'id_portofolio');
+    }
+    public function portofolio_timeline(){
+        return $this->hasMany(timelinePortofolio::class, 'id_portofolio', 'id_portofolio');
     }
 }

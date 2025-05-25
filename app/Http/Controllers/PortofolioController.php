@@ -6,6 +6,8 @@ use App\Models\portofolio;
 use App\Http\Requests\StoreportfolioRequest;
 use App\Http\Requests\UpdateportfolioRequest;
 use App\Models\perusahaan;
+use App\Models\portofolio_foto;
+use App\Models\timelinePortofolio;
 use Illuminate\Http\Request;
 
 class PortofolioController extends Controller
@@ -36,13 +38,46 @@ class PortofolioController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->foto);
         $id_portofolio =  $request->id_perusahaan . '_' . $request->nama_project;
-        $waktu = $request->jam_mulai.'-'. $request->jam_selesai;
+        $waktu = $request->jam_mulai . '-' . $request->jam_selesai;
         $request->merge([
             'id_portofolio' => $id_portofolio,
             'waktu' => $waktu
         ]);
         portofolio::create($request->all());
+
+        // dd($request->timeline);
+        // Simpan timeline jika ada
+        if ($request->has('timeline')) {
+            foreach ($request->timeline as $item) {
+                if (!empty($item['tanggal']) || !empty($item['deskripsi'])) {
+                    timelinePortofolio::create([
+                        'timeline_id' => 'tl-' . $request->nama_project . $item['tanggal'], // Pastikan ada relasi
+                        'id_portofolio' => $request->id_portofolio,
+                        'tanggal' => $item['tanggal'],
+                        'deskripsi' => $item['deskripsi'],
+                    ]);
+                }
+            }
+        }
+
+        if ($request->has('foto')) {
+            foreach ($request->foto as $index => $item) {
+                if (isset($item['foto']) && $item['foto'] instanceof \Illuminate\Http\UploadedFile) {
+                    $filename = time() . '_' . $item['foto']->getClientOriginalName();
+                    $destination = 'image/upload/foto';
+                    $item['foto']->move(public_path($destination), $filename);
+
+                    portofolio_foto::create([
+                        'id_portofolio' => $request->id_portofolio,
+                        'id_portofolio_foto' => 'img'.$request->id_portofolio.$item['judul_foto'],
+                        'judul_foto' => $item['judul_foto'] ?? '',
+                        'foto' => $destination . '/' . $filename,
+                    ]);
+                }
+            }
+        }
         return redirect('/dashboard/portofolio')->with('success', 'Data Berhasil Ditambahkan');
     }
 

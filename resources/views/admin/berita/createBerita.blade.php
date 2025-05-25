@@ -39,13 +39,13 @@
                     </div>
 
                     {{-- Thumbnail --}}
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="foto" class="form-label">Thumbnail</label>
                         <input type="file" class="form-control" id="foto" name="foto" accept="image/*"
                             onchange="previewImage(event)">
                         <img id="preview" src="#" alt="Preview Thumbnail" class="img-fluid mt-3 d-none"
                             style="max-height: 200px; object-fit: cover;">
-                    </div>
+                    </div> --}}
 
                     {{-- Isi Berita --}}
                     <div class="mb-3">
@@ -70,6 +70,28 @@
                     <div class="d-flex justify-content-center">
                         <a href="/dashboard/berita" class="btn btn-secondary me-2 px-4">Kembali</a>
                         <button type="submit" class="btn btn-primary px-4">Publish Berita</button>
+                    </div>
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Dokumentasi</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="input-container-image" class="image-group mb-3">
+                                <div class="mb-2">
+                                    <label>Judul Foto</label>
+                                    <input class="form-control" type="text" name="foto[0][judul_foto]"
+                                        class="form-control" placeholder="Masukkan Judul Foto">
+                                </div>
+                                <div>
+                                    <label>Foto</label>
+                                    <input type="file" name="foto[0][foto]" class="form-control" placeholder="foto"
+                                        accept="image/*">
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-secondary mt-2" id="add-field-image">+ Tambah
+                                Field Foto</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -105,5 +127,36 @@
                 reader.readAsDataURL(event.target.files[0]);
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('add-field-image');
+            const container = document.getElementById('input-container-image');
+            const maxFields = 3;
+            let timelineIndex = 1; // dimulai dari 1 karena field pertama sudah ada di HTML
+
+            button.addEventListener('click', function() {
+                const currentFields = container.querySelectorAll('.image-group').length;
+
+                if (currentFields < maxFields) {
+                    const newGroup = document.createElement('div');
+                    newGroup.classList.add('image-group', 'mb-3');
+                    newGroup.innerHTML = `
+                    <hr class="my-4 border-2">
+                    <div class="mb-2">
+                        <label>Judul Foto</label>
+                        <input class=" form-control" name="foto[${timelineIndex}][judul_foto]" placeholder="Masukkan tanggal/tahun">
+                    </div>
+                    <div>
+                        <label>Foto</label>
+                        <input type="file" name="foto[${timelineIndex}][foto]" class="form-control" placeholder="Masukkan Foto">
+                    </div>
+                `;
+                    container.appendChild(newGroup);
+                    timelineIndex++;
+                } else {
+                    alert("Maksimal hanya 3 field yang boleh ditambahkan.");
+                }
+            });
+        });
     </script>
 </x-layout>

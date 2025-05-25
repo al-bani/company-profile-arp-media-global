@@ -41,7 +41,8 @@
 
 
                                 <td>
-                                    <a href="/dashboard/partner/edit" class="btn btn-warning btn-sm me-1">
+                                    <a href="/dashboard/partner/{{ $partner->id }}/edit"
+                                        class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
@@ -59,8 +60,92 @@
                     </tbody>
                 </table>
             </div>
+            @foreach ($partners as $partner)
+                <!-- Modal Detail Partner -->
+                <div class="modal fade" id="detailPartner{{ $loop->iteration }}" tabindex="-1"
+                    aria-labelledby="detailLabel{{ $loop->iteration }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content border-0 rounded-4 shadow">
+                            <div class="modal-header bg-primary text-white rounded-top">
+                                <h5 class="modal-title" id="detailLabel{{ $loop->iteration }}">Detail Partner</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                {{-- Logo --}}
+                                @if ($partner->foto)
+                                    <div class="mb-3 text-center">
+                                        <img src="{{ asset($partner->foto) }}" class="img-fluid rounded shadow-sm"
+                                            style="max-height: 150px;" alt="Logo Partner">
+                                    </div>
+                                @endif
+
+                                <div class="mb-3">
+                                    <label class="form-label">Nama Partner</label>
+                                    <input type="text" class="form-control" value="{{ $partner->nama_partner }}"
+                                        readonly>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="text" class="form-control" value="{{ $partner->email }}" readonly>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer border-0">
+                                <button type="button" class="btn btn-secondary rounded-pill px-4"
+                                    data-bs-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
         </div>
     </div>
+
+    <!-- Modal Delete -->
+    @foreach ($partners as $partner)
+        <div class="modal fade" id="deletePartner{{ $loop->iteration }}" tabindex="-1"
+            aria-labelledby="modalLabel{{ $loop->iteration }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow rounded-4">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header bg-light border-0 rounded-top">
+                        <h5 class="modal-title text-danger fw-bold" id="modalLabel{{ $loop->iteration }}">
+                            <i class="fas fa-trash-alt me-2"></i>Konfirmasi Hapus
+                        </h5>
+
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body text-center">
+                        <p class="fs-6 mb-1">Apakah Anda yakin ingin menghapus data berikut?</p>
+                        <p class="fw-semibold text-danger small">Nama partner:
+                            {{ $partner->nama_partner }}</p>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer justify-content-center gap-3 border-0 pb-4">
+                        <form action="/dashboard/partner/{{ $partner->id }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger px-4 rounded-pill shadow-sm">
+                                <i class="fas fa-trash-alt me-1"></i> Hapus
+                            </button>
+                        </form>
+                        <button type="button" class="btn btn-outline-secondary px-4 rounded-pill"
+                            data-bs-dismiss="modal">
+                            Batal
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    @endforeach
 
     <!-- Modal Delete -->
     @foreach ($partners as $partner)
@@ -127,7 +212,8 @@
 
                         <div class="mb-3">
                             <label class="form-label">Nama Partner</label>
-                            <input type="text" class="form-control" value="{{ $partner->nama_partner }}" readonly>
+                            <input type="text" class="form-control" value="{{ $partner->nama_partner }}"
+                                readonly>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Email</label>

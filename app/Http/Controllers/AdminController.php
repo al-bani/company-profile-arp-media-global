@@ -40,8 +40,9 @@ class AdminController extends Controller
             'id_admin' => $id_admin,
             // 'password' => bcrypt($request->password) // hash password juga di sini
         ]);
-        // dd($request->all());
-        admin::create($request->all());
+        $data = $request->all();
+        $data['status'] = "aktif";
+        admin::create($data);
 
         return redirect('/dashboard/akunAdmin')->with('success', 'Data Berhasil Ditambahkan');
     }

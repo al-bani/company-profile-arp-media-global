@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('tanggal');
             $table->text('konten');
             $table->string('penulis');
+            $table->string('judul_foto', 255);
+            $table->string('foto', 100);
             $table->timestamps();
         });
     }

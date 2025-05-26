@@ -21,51 +21,36 @@
                 <!-- Email -->
                 <div class="mb-3">
                     <label for="deskripsi" class="form-label">Deskripsi Foto</label>
-                    <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Masukan Deskripsi"></textarea>,
-
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Masukan Deskripsi"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="id_perusahaan">Perusahaan</label>
+                    <select class="ms-1 form-select btn btn-secondary" aria-label="Default select example"
+                        name="id_perusahaan" id="id_perusahaan">
+                        @foreach ($perusahaans as $perusahaan)
+                            @if (old('id_perusahaan') == $perusahaan->id_perusahaan)
+                                <option value="{{ $perusahaan->id_perusahaan }}" selected>
+                                    {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
+                                </option>
+                            @else
+                                <option value="{{ $perusahaan->id_perusahaan }}" selected>
+                                    {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
                     <div class="mb-4 text-center">
-                        <div class="card" style="max-width: 18rem; margin: auto;">
+                        <div class="card" style="max-width: 25rem; margin: auto;">
+                            <img id="preview" src="/images/default.jpg" class="card-img-top" alt="Logo Perusahaan"
+                                style="height: 13.5rem; object-fit: cover;">
                             <div class="card-body">
-                                <p class="card-text">Upload Foto (Format JPG atau PNG, MAX 5MB)</p>
-                                <input type="file" id="foto" name="foto" class="form-control"
-                                    accept="image/*" required>
+                                <p class="card-text">Upload Banner</p>
+                                <input type="file" id="logo" name="logo" class="form-control" accept="image/*"
+                                    onchange="previewImage(event)" required>
                             </div>
                         </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="id_perusahaan">Perusahaan</label>
-                        <select class="ms-1 form-select btn btn-secondary" aria-label="Default select example"
-                            name="id_perusahaan" id="id_perusahaan">
-                            @foreach ($perusahaans as $perusahaan)
-                                @if (old('id_perusahaan') == $perusahaan->id_perusahaan)
-                                    <option value="{{ $perusahaan->id_perusahaan }}" selected>
-                                        {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
-                                    </option>
-                                @else
-                                    <option value="{{ $perusahaan->id_perusahaan }}" selected>
-                                        {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
-                                    </option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <!-- Logo -->
-                    <!-- <div class="row align-items-center">
-                    <div class="col-auto">
-                        <img id="preview" src="/img/default.jpg" class="card-img-top border" alt="Logo Perusahaan"
-                            style="height: 10rem; width: 10rem; object-fit: cover;">
-                    </div>
-                    <div class="col">
-                        <label for="foto" class="form-label">Logo Partner</label>
-                        <input class="form-control" id="foto" name="foto" type="file" accept="image/*" onchange="previewImage(event)">
-                        <div class="card-body">
-                            <p class="card-text">Upload Logo Partner (Format JPG atau PNG, MAX 5MB)</p>
-                            <input type="file" id="foto" name="foto" class="form-control" accept="image/*">
-                        </div>
-                    </div>
-                </div> -->
 
                     <!-- Action Buttons -->
                     <div class="mb-3 text-center">
@@ -77,12 +62,16 @@
     </div>
     <script>
         function previewImage(event) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                const preview = document.getElementById('preview');
-                preview.src = reader.result;
+            const file = event.target.files[0];
+            if (file) {
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('preview');
+                    preview.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
             }
-            reader.readAsDataURL(event.target.files[0]);
         }
     </script>
 </x-layout>

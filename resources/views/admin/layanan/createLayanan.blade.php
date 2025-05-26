@@ -44,13 +44,13 @@
                 </div>
                 <div class="row align-items-center">
                     <div class="col-auto">
-                        <img id="preview" src="/img/default.jpg" class="card-img-top border" alt="Logo Perusahaan"
+                        <img id="preview" src="/images/default.jpg" class="card-img-top border" alt="Logo Perusahaan"
                             style="height: 10rem; width: 10rem; object-fit: cover;">
                     </div>
                     <div class="col">
-                        <label for="foto" class="form-label">Logo</label>
+                        <label for="foto" class="form-label">Foto Layanan</label>
                         <input class="form-control" id="foto" name="foto" type="file" accept="image/*"
-                            onchange="previewImage(event)">
+                            onchange="validateFileSize(this)" required>
                     </div>
                 </div>
 
@@ -70,6 +70,22 @@
                 preview.src = reader.result;
             }
             reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function validateFileSize(input) {
+            const maxSize = 5 * 1024 * 1024; // 5MB dalam bytes
+            const file = input.files[0];
+
+            if (file && file.size > maxSize) {
+                alert("Ukuran file tidak boleh lebih dari 5MB!");
+                input.value = ''; // Reset input file
+                return false;
+            }
+
+            // Jika file valid, preview gambar
+            if (file) {
+                previewImage({ target: input });
+            }
         }
     </script>
 </x-layout>

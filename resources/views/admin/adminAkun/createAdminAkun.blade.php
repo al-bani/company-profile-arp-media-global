@@ -33,8 +33,7 @@
 
                     <div class="col-md-6">
                         <label for="no_telepon" class="form-label fw-semibold">No Telepon</label>
-                        <input type="tel" class="form-control" id="no_telepon" name="no_telepon"
-                            placeholder="081234567890" required>
+                        <input type="tel" class="form-control" id="no_telepon" name="no_telepon" placeholder="081234567890" required>
                     </div>
                 </div>
 
@@ -56,18 +55,6 @@
                             @endforeach
                         </select>
                     </div>
-
-                </div>
-                <div class="row g-3 mb-5">
-                    <div class="col-md-6">
-                        <label for="status" class="form-label fw-semibold">Status</label>
-                        <select class="status form-select" aria-label="Default select example" name="status" id="status">
-                            <option value="" selected disabled>Pilih Status</option>
-                            <option value="admin">Admin</option>
-                            <option value="superAdmin">Super Admin</option>
-                        </select>
-                    </div>
-
                 </div>
 
                 <div class="mb-3 text-end">

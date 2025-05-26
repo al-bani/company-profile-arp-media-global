@@ -37,7 +37,7 @@
                                 <td>{{ $berita->id_perusahaan }}</td>
                                 <td>{{ $berita->tanggal }}</td>
                                 <td>
-                                    <a href="/dashboard/berita/{{ $berita->id }}/edit" class="btn btn-warning btn-sm">
+                                    <a href="{{ route('berita.edit', $berita->id) }}" class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal"

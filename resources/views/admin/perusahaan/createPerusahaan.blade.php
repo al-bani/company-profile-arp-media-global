@@ -27,12 +27,12 @@
                 </div> -->
                 <div class="mb-4 text-center">
                     <div class="card" style="max-width: 18rem; margin: auto;">
-                        <img id="preview" src="/img/default.jpg" class="card-img-top" alt="Logo Perusahaan"
+                        <img id="preview" src="/images/default.jpg" class="card-img-top" alt="Logo Perusahaan"
                             style="height: 13.5rem; object-fit: cover;">
                         <div class="card-body">
-                            <p class="card-text">Upload Logo (Format JPG atau PNG, MAX 5MB)</p>
+                            <p class="card-text">Upload Logo (MAX 5MB)</p>
                             <input type="file" id="logo" name="logo" class="form-control" accept="image/*"
-                                required>
+                                onchange="validateFileSize(this)" required>
                         </div>
                     </div>
                 </div>
@@ -165,6 +165,22 @@
                 preview.src = reader.result;
             }
             reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function validateFileSize(input) {
+            const maxSize = 5 * 1024 * 1024; // 5MB dalam bytes
+            const file = input.files[0];
+
+            if (file && file.size > maxSize) {
+                alert("Ukuran file tidak boleh lebih dari 5MB!");
+                input.value = ''; // Reset input file
+                return false;
+            }
+
+            // Jika file valid, preview gambar
+            if (file) {
+                previewImage({ target: input });
+            }
         }
     </script>
 </x-layout>

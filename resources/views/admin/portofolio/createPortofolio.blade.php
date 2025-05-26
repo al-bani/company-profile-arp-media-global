@@ -19,14 +19,56 @@
                     <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
                 </div>
 
-                <div class="mb-2">
-                    <label for="deskripsi">Team</label>
-                    <input class="form-control" id="team" name="team" rows="3" required></input>
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Team</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="team-container" class="team-group mb-3">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-grow-1">
+                                    <label>Anggota</label>
+                                    <input type="text" name="team[0][anggota]" class="form-control" placeholder="Masukkan Nama Anggota">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-secondary" id="add-team-field">Tambah Anggota</button>
+                            <button type="button" class="btn btn-danger ml-2" id="remove-team-field">Hapus Anggota</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="tempat">Tempat</label>
-                    <input type="form-control" id="tempat" name="tempat" class="form-control" required>
+                    <label for="tempat">Lokasi Kegiatan</label>
+                    <div class="d-flex gap-3 mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="jenis_lokasi" id="offline" value="offline" checked>
+                            <label class="form-check-label" for="offline">
+                                Offline
+                            </label>
+                        </div>
+                        <div class="form-check ml-2">
+                            <input class="form-check-input" type="radio" name="jenis_lokasi" id="online" value="online">
+                            <label class="form-check-label" for="online">
+                                Online
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="offline-field">
+                        <input type="text" id="tempat" name="tempat" class="form-control" placeholder="Masukkan lokasi kegiatan" required>
+                    </div>
+
+                    <div id="online-field" style="display: none;">
+                        <select class="form-select" name="jenis_online" id="jenis_online">
+                            <option value="">Pilih jenis kegiatan online</option>
+                            <option value="website">Website</option>
+                            <option value="online_meeting">Online Meeting</option>
+                            <option value="desain">Desain</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="mb-4">
@@ -83,18 +125,30 @@
                     </div>
                     <div class="card-body">
                         <div id="input-container-image" class="image-group mb-3">
-                            <div class="mb-2">
-                                <label>Judul Foto</label>
-                                <input class="form-control" type="text" name="foto[0][judul_foto]" class="form-control"
-                                    placeholder="Masukkan Judul Foto">
-                            </div>
-                            <div>
-                                <label>Foto</label>
-                                <input type="file" name="foto[0][foto]" class="form-control" placeholder="foto" accept="image/*" >
+                            <div class="image-item">
+                                <div class="row align-items-center mb-3">
+                                    <div class="col-auto">
+                                        <img id="preview-0" src="/images/default.jpg" class="card-img-top border" alt="Preview Foto"
+                                            style="height: 10rem; width: 10rem; object-fit: cover;">
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-2">
+                                            <label>Judul Foto</label>
+                                            <input class="form-control" type="text" name="foto[0][judul_foto]" placeholder="Masukkan Judul Foto">
+                                        </div>
+                                        <div>
+                                            <label>Foto</label>
+                                            <input type="file" name="foto[0][foto]" class="form-control" placeholder="foto" accept="image/*" onchange="previewImage(this, 'preview-0')">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <button type="button" class="btn btn-secondary mt-2" id="add-field-image">+ Tambah Field</button>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-secondary" id="add-field-image">Tambah Dokumentasi</button>
+                            <button type="button" class="btn btn-danger ml-2" id="remove-field-image">Hapus Dokumentasi</button>
+                        </div>
                     </div>
                 </div>
 
@@ -103,20 +157,23 @@
                         <h5 class="mb-0">Timeline</h5>
                     </div>
                     <div class="card-body">
-                        <div id="input-container" class="timeline-group mb-3">
-                            <div class="mb-2">
-                                <label>Tanggal/Tahun</label>
-                                <input class="date" type="date" name="timeline[0][tanggal]" class="form-control"
-                                    placeholder="Masukkan tanggal/tahun">
-                            </div>
-                            <div>
-                                <label>Deskripsi</label>
-                                <textarea type="text" name="timeline[0][deskripsi]" class="form-control" placeholder="Masukkan deskripsi">
-                                </textarea>
+                        <div id="timeline-container" class="timeline-group mb-3">
+                            <div class="timeline-item">
+                                <div class="mb-2">
+                                    <label>Tanggal/Tahun</label>
+                                    <input class="form-control" type="date" name="timeline[0][tanggal]" placeholder="Masukkan tanggal/tahun">
+                                </div>
+                                <div>
+                                    <label>Deskripsi</label>
+                                    <textarea name="timeline[0][deskripsi]" class="form-control" placeholder="Masukkan deskripsi"></textarea>
+                                </div>
                             </div>
                         </div>
 
-                        <button type="button" class="btn btn-secondary mt-2" id="add-field">+ Tambah Field</button>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-secondary" id="add-timeline-field">Tambah Timeline</button>
+                            <button type="button" class="btn btn-danger ml-2" id="remove-timeline-field">Hapus Timeline</button>
+                        </div>
                     </div>
                 </div>
 
@@ -130,67 +187,148 @@
     </div>
     @push('script')
         <script>
+            function previewImage(input, previewId) {
+                const preview = document.getElementById(previewId);
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                        preview.classList.remove('d-none');
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    preview.src = '#';
+                    preview.classList.add('d-none');
+                }
+            }
+
             document.addEventListener('DOMContentLoaded', function() {
-                const button = document.getElementById('add-field');
-                const container = document.getElementById('input-container');
-                const maxFields = 5;
-                let timelineIndex = 1; // dimulai dari 1 karena field pertama sudah ada di HTML
+                // Fungsi untuk menambah dan menghapus field team
+                const teamButton = document.getElementById('add-team-field');
+                const removeTeamButton = document.getElementById('remove-team-field');
+                const teamContainer = document.getElementById('team-container');
+                let teamIndex = 1;
 
-                button.addEventListener('click', function() {
-                    const currentFields = container.querySelectorAll('.timeline-group').length;
+                teamButton.addEventListener('click', function() {
+                    const newGroup = document.createElement('div');
+                    newGroup.classList.add('d-flex', 'align-items-center', 'mb-3');
+                    newGroup.innerHTML = `
+                        <div class="flex-grow-1">
+                            <label>Anggota</label>
+                            <input type="text" name="team[${teamIndex}][anggota]" class="form-control" placeholder="Masukkan Nama Anggota">
+                        </div>
+                    `;
+                    teamContainer.appendChild(newGroup);
+                    teamIndex++;
+                });
 
-                    if (currentFields < maxFields) {
-                        const newGroup = document.createElement('div');
-                        newGroup.classList.add('timeline-group', 'mb-3');
-                        newGroup.innerHTML = `
-                    <hr class="my-4 border-2">
-                    <div class="mb-2">
-                        <label>Tanggal/Tahun</label>
-                        <input class="date form-control" type="date" name="timeline[${timelineIndex}][tanggal]" placeholder="Masukkan tanggal/tahun">
-                    </div>
-                    <div>
-                        <label>Deskripsi</label>
-                        <textarea name="timeline[${timelineIndex}][deskripsi]" class="form-control" placeholder="Masukkan deskripsi"></textarea>
-                    </div>
-                `;
-                        container.appendChild(newGroup);
-                        timelineIndex++;
-                    } else {
-                        alert("Maksimal hanya 5 field yang boleh ditambahkan.");
+                removeTeamButton.addEventListener('click', function() {
+                    const fields = teamContainer.querySelectorAll('.d-flex');
+                    if (fields.length > 1) {
+                        teamContainer.removeChild(fields[fields.length - 1]);
+                        teamIndex--;
                     }
                 });
-            });
-        </script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const button = document.getElementById('add-field-image');
-                const container = document.getElementById('input-container-image');
-                const maxFields = 3;
-                let timelineIndex = 1; // dimulai dari 1 karena field pertama sudah ada di HTML
 
-                button.addEventListener('click', function() {
-                    const currentFields = container.querySelectorAll('.image-group').length;
+                // Fungsi untuk menambah dan menghapus field timeline
+                const timelineButton = document.getElementById('add-timeline-field');
+                const removeTimelineButton = document.getElementById('remove-timeline-field');
+                const timelineContainer = document.getElementById('timeline-container');
+                let timelineIndex = 1;
 
-                    if (currentFields < maxFields) {
-                        const newGroup = document.createElement('div');
-                        newGroup.classList.add('image-group', 'mb-3');
-                        newGroup.innerHTML = `
-                    <hr class="my-4 border-2">
-                    <div class="mb-2">
-                        <label>Judul Foto</label>
-                        <input class=" form-control" name="foto[${timelineIndex}][judul_foto]" placeholder="Masukkan tanggal/tahun">
-                    </div>
-                    <div>
-                        <label>Foto</label>
-                        <input type="file" name="foto[${timelineIndex}][foto]" class="form-control" placeholder="Masukkan Foto">
-                    </div>
-                `;
-                        container.appendChild(newGroup);
-                        timelineIndex++;
-                    } else {
-                        alert("Maksimal hanya 3 field yang boleh ditambahkan.");
+                timelineButton.addEventListener('click', function() {
+                    const newGroup = document.createElement('div');
+                    newGroup.classList.add('timeline-item', 'mb-3');
+                    newGroup.innerHTML = `
+                        <hr class="my-4 border-2">
+                        <div class="mb-2">
+                            <label>Tanggal/Tahun</label>
+                            <input class="form-control" type="date" name="timeline[${timelineIndex}][tanggal]" placeholder="Masukkan tanggal/tahun">
+                        </div>
+                        <div>
+                            <label>Deskripsi</label>
+                            <textarea name="timeline[${timelineIndex}][deskripsi]" class="form-control" placeholder="Masukkan deskripsi"></textarea>
+                        </div>
+                    `;
+                    timelineContainer.appendChild(newGroup);
+                    timelineIndex++;
+                });
+
+                removeTimelineButton.addEventListener('click', function() {
+                    const fields = timelineContainer.querySelectorAll('.timeline-item');
+                    if (fields.length > 1) {
+                        timelineContainer.removeChild(fields[fields.length - 1]);
+                        timelineIndex--;
                     }
                 });
+
+                // Fungsi untuk menambah dan menghapus field dokumentasi
+                const imageButton = document.getElementById('add-field-image');
+                const removeImageButton = document.getElementById('remove-field-image');
+                const imageContainer = document.getElementById('input-container-image');
+                let imageIndex = 1;
+
+                imageButton.addEventListener('click', function() {
+                    const newGroup = document.createElement('div');
+                    newGroup.classList.add('image-item', 'mb-3');
+                    newGroup.innerHTML = `
+                        <hr class="my-4 border-2">
+                        <div class="row align-items-center mb-3">
+                            <div class="col-auto">
+                                <img id="preview-${imageIndex}" src="/images/default.jpg" class="card-img-top border" alt="Preview Foto"
+                                    style="height: 10rem; width: 10rem; object-fit: cover;">
+                            </div>
+                            <div class="col">
+                                <div class="mb-2">
+                                    <label>Judul Foto</label>
+                                    <input class="form-control" name="foto[${imageIndex}][judul_foto]" placeholder="Masukkan Judul Foto">
+                                </div>
+                                <div>
+                                    <label>Foto</label>
+                                    <input type="file" name="foto[${imageIndex}][foto]" class="form-control" placeholder="Masukkan Foto" accept="image/*" onchange="previewImage(this, 'preview-${imageIndex}')">
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    imageContainer.appendChild(newGroup);
+                    imageIndex++;
+                });
+
+                removeImageButton.addEventListener('click', function() {
+                    const fields = imageContainer.querySelectorAll('.image-item');
+                    if (fields.length > 1) {
+                        imageContainer.removeChild(fields[fields.length - 1]);
+                        imageIndex--;
+                    }
+                });
+
+                // Fungsi untuk menangani perubahan jenis lokasi
+                const offlineRadio = document.getElementById('offline');
+                const onlineRadio = document.getElementById('online');
+                const offlineField = document.getElementById('offline-field');
+                const onlineField = document.getElementById('online-field');
+                const tempatInput = document.getElementById('tempat');
+                const jenisOnlineSelect = document.getElementById('jenis_online');
+
+                function updateFields() {
+                    if (offlineRadio.checked) {
+                        offlineField.style.display = 'block';
+                        onlineField.style.display = 'none';
+                        tempatInput.required = true;
+                        jenisOnlineSelect.required = false;
+                    } else {
+                        offlineField.style.display = 'none';
+                        onlineField.style.display = 'block';
+                        tempatInput.required = false;
+                        jenisOnlineSelect.required = true;
+                    }
+                }
+
+                offlineRadio.addEventListener('change', updateFields);
+                onlineRadio.addEventListener('change', updateFields);
+
+                // Inisialisasi awal
+                updateFields();
             });
         </script>
     @endpush

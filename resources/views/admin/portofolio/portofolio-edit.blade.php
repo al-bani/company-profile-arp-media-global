@@ -68,7 +68,7 @@
                            name="tanggal"
                            id="tanggal"
                            class="form-control @error('tanggal') is-invalid @enderror"
-                           value="{{ old('tanggal', $portofolio->tanggal) }}">
+                           value="{{ old('tanggal', $portofolio->tanggal) }}" required>
                     @error('tanggal')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -81,7 +81,7 @@
                                class="form-control @error('jam_mulai') is-invalid @enderror"
                                name="jam_mulai"
                                id="jam_mulai"
-                               value="{{ old('jam_mulai', explode('-', $portofolio->waktu)[0] ?? '') }}">
+                               value="{{ old('jam_mulai', explode('-', $portofolio->waktu)[0] ?? '') }}" required>
                         @error('jam_mulai')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -92,7 +92,7 @@
                                class="form-control @error('jam_selesai') is-invalid @enderror"
                                name="jam_selesai"
                                id="jam_selesai"
-                               value="{{ old('jam_selesai', explode('-', $portofolio->waktu)[1] ?? '') }}">
+                               value="{{ old('jam_selesai', explode('-', $portofolio->waktu)[1] ?? '') }}" required>
                         @error('jam_selesai')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -103,7 +103,7 @@
                     <label for="id_perusahaan">Perusahaan</label>
                     <select class="form-select @error('id_perusahaan') is-invalid @enderror"
                             name="id_perusahaan"
-                            id="id_perusahaan">
+                            id="id_perusahaan" required>
                         @foreach ($perusahaans as $perusahaan)
                             <option value="{{ $perusahaan->id_perusahaan }}"
                                 {{ old('id_perusahaan', $portofolio->id_perusahaan) == $perusahaan->id_perusahaan ? 'selected' : '' }}>
@@ -130,14 +130,14 @@
                                            type="text"
                                            name="foto[{{ $index }}][judul_foto]"
                                            value="{{ $foto->judul_foto }}"
-                                           placeholder="Masukkan Judul Foto">
+                                           placeholder="Masukkan Judul Foto" required>
                                 </div>
                                 <div>
                                     <label>Foto</label>
                                     <input type="file"
                                            name="foto[{{ $index }}][foto]"
                                            class="form-control"
-                                           accept="image/*">
+                                           accept="image/*" required>
                                     @if($foto->foto)
                                         <img src="{{ asset($foto->foto) }}"
                                              alt="Current Photo"
@@ -165,12 +165,12 @@
                                     <input class="form-control"
                                            type="date"
                                            name="timeline[{{ $index }}][tanggal]"
-                                           value="{{ $timeline->tanggal }}">
+                                           value="{{ $timeline->tanggal }}" required>
                                 </div>
                                 <div>
                                     <label>Deskripsi</label>
                                     <textarea class="form-control"
-                                              name="timeline[{{ $index }}][deskripsi]">{{ $timeline->deskripsi }}</textarea>
+                                              name="timeline[{{ $index }}][deskripsi]" required>{{ $timeline->deskripsi }}</textarea>
                                 </div>
                             </div>
                             @endforeach
@@ -236,11 +236,11 @@
                             <hr class="my-4 border-2">
                             <div class="mb-2">
                                 <label>Judul Foto</label>
-                                <input class="form-control" name="foto[${imageIndex}][judul_foto]" placeholder="Masukkan Judul Foto">
+                                <input class="form-control" name="foto[${imageIndex}][judul_foto]" placeholder="Masukkan Judul Foto" required>
                             </div>
                             <div>
                                 <label>Foto</label>
-                                <input type="file" name="foto[${imageIndex}][foto]" class="form-control" accept="image/*">
+                                <input type="file" name="foto[${imageIndex}][foto]" class="form-control" accept="image/*" required>
                             </div>
                         `;
                         container.appendChild(newGroup);

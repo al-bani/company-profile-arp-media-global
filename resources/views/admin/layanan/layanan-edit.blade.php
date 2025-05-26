@@ -27,7 +27,7 @@
                            name="nama_layanan"
                            type="text"
                            value="{{ old('nama_layanan', $layanan->nama_layanan) }}"
-                           placeholder="Nama Layanan">
+                           placeholder="Nama Layanan" required>
                     @error('nama_layanan')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -39,30 +39,34 @@
                     <textarea class="form-control @error('deskripsi') is-invalid @enderror"
                               id="deskripsi"
                               name="deskripsi"
-                              rows="4">{{ old('deskripsi', $layanan->deskripsi) }}</textarea>
+                              rows="4" required>{{ old('deskripsi', $layanan->deskripsi) }}</textarea>
                     @error('deskripsi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="row align-items-center">
-                    <div class="col-auto">
-                        <img id="preview" src="{{ asset($layanan->foto ?? '/img/default.jpg') }}"
-                             class="card-img-top border"
+                <div class="row">
+                    <div class="col-md-2">
+                        <img id="preview" src="{{ asset($layanan->foto ?? '/images/default.jpg') }}"
+                             class="img-fluid rounded mb-3"
                              alt="Foto Layanan"
-                             style="height: 10rem; width: 10rem; object-fit: cover;">
+                             style="max-height: 200px; object-fit: cover;">
                     </div>
-                    <div class="col">
-                        <label for="foto" class="form-label">Foto Layanan</label>
-                        <input class="form-control @error('foto') is-invalid @enderror"
-                               id="foto"
-                               name="foto"
-                               type="file"
-                               accept="image/*"
-                               onchange="previewImage(event)">
-                        @error('foto')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                    <div class="col-md-10">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text">Upload Foto (MAX 5MB)</p>
+                                <input class="form-control @error('foto') is-invalid @enderror"
+                                       id="foto"
+                                       name="foto"
+                                       type="file"
+                                       accept="image/*"
+                                       onchange="previewImage(event)" required>
+                                @error('foto')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -75,12 +79,23 @@
     </div>
     <script>
         function previewImage(event) {
-            const reader = new FileReader();
-            reader.onload = function () {
-                const preview = document.getElementById('preview');
-                preview.src = reader.result;
+            const file = event.target.files[0];
+            if (file) {
+                const maxSize = 5 * 1024 * 1024; // 5MB dalam bytes
+
+                if (file.size > maxSize) {
+                    alert("Ukuran file tidak boleh lebih dari 5MB!");
+                    event.target.value = ''; // Reset input file
+                    return false;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('preview');
+                    preview.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
             }
-            reader.readAsDataURL(event.target.files[0]);
         }
     </script>
 </x-layout>

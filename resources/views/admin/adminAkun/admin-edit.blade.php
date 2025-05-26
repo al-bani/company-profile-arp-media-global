@@ -16,7 +16,7 @@
                 <!-- Id Perusahaan -->
                 <div class="mb-3">
                     <label for="id_perusahaan">ID Perusahaan</label>
-                    <select class="id_perusahaan form-select" aria-label="Default select example" name="id_perusahaan" id="id_perusahaan">
+                    <select class="id_perusahaan form-select" aria-label="Default select example" name="id_perusahaan" id="id_perusahaan" required>
                         @foreach ($perusahaans as $perusahaan)
                             @if (old('id_perusahaan', $admin->id_perusahaan) == $perusahaan->id_perusahaan)
                                 <option value="{{ $perusahaan->id_perusahaan }}" selected>
@@ -34,25 +34,25 @@
                 <!-- Nama Admin -->
                 <div class="mb-3">
                     <label for="nama_admin">Nama Admin</label>
-                    <input class="form-control" id="nama_admin" name="nama_admin" type="text" value="{{ $admin->nama_admin }}" placeholder="Nama Lengkap Admin">
+                    <input class="form-control" id="nama_admin" name="nama_admin" type="text" value="{{ $admin->nama_admin }}" placeholder="Nama Lengkap Admin" required>
                 </div>
 
                 <!-- Email -->
                 <div class="mb-3">
                     <label for="email">Email</label>
-                    <input class="form-control" id="email" name="email" type="email" value="{{ $admin->email }}" placeholder="admin@example.com">
+                    <input class="form-control" id="email" name="email" type="email" value="{{ $admin->email }}" placeholder="admin@example.com" required>
                 </div>
 
                 <!-- No Telepon -->
                 <div class="mb-3">
                     <label for="no_telepon">No Telepon</label>
-                    <input class="form-control" id="no_telepon" name="no_telepon" type="tel" value="{{ $admin->no_telepon }}" placeholder="081234567890">
+                    <input class="form-control" id="no_telepon" name="no_telepon" type="tel" value="{{ $admin->no_telepon }}" placeholder="081234567890" required>
                 </div>
 
                 <!-- Status -->
                 <div class="mb-3">
                     <label for="status">Status</label>
-                    <select class="ms-1 form-select btn btn-primary" id="status" name="status">
+                    <select class="ms-1 form-select btn btn-primary" id="status" name="status" required>
                         <option disabled>Pilih Status</option>
                         <option value="aktif" {{ $admin->status == 'aktif' ? 'selected' : '' }}>Aktif</option>
                         <option value="tidak aktif" {{ $admin->status == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>

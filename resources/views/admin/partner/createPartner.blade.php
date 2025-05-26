@@ -23,12 +23,15 @@
                     <input class="form-control" id="email" name="email" type="email" placeholder="partner@example.com">
                 </div>
 
-               <div class="mb-4 text-center">
-                    <div class="card" style="max-width: 18rem; margin: auto;">
-                        <div class="card-body">
-                            <p class="card-text">Upload Logo (Format JPG atau PNG, MAX 5MB)</p>
-                            <input type="file" id="foto" name="foto" class="form-control" accept="image/*" required>
-                        </div>
+                <div class="row align-items-center mb-3">
+                    <div class="col-auto">
+                        <img id="preview" src="/images/default.jpg" class="card-img-top border" alt="Logo Perusahaan"
+                            style="height: 10rem; width: 10rem; object-fit: cover;">
+                    </div>
+                    <div class="col">
+                        <label for="foto" class="form-label">Logo</label>
+                        <input class="form-control" id="foto" name="foto" type="file" accept="image/*"
+                            onchange="validateFileSize(this)">
                     </div>
                 </div>
 
@@ -82,6 +85,22 @@
                 preview.src = reader.result;
             }
             reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function validateFileSize(input) {
+            const maxSize = 5 * 1024 * 1024; // 5MB dalam bytes
+            const file = input.files[0];
+
+            if (file && file.size > maxSize) {
+                alert("Ukuran file tidak boleh lebih dari 5MB!");
+                input.value = ''; // Reset input file
+                return false;
+            }
+
+            // Jika file valid, preview gambar
+            if (file) {
+                previewImage({ target: input });
+            }
         }
     </script>
 </x-layout>

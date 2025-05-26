@@ -11,6 +11,8 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\companyProfile;
 use App\Models\admin;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\FaqController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -44,7 +46,8 @@ Route::get('/dashboard/partner/edit', [PartnerController::class, 'edit'])->name(
 // Khusus berita
 Route::get('/dashboard/homeBerita', [BeritaController::class, 'index']);
 Route::get('/dashboard/berita', [BeritaController::class, 'create']);
-Route::get('/dashboard/berita/edit', [BeritaController::class, 'edit'])->name('berita');
+Route::get('/dashboard/berita/{berita}/edit', [BeritaController::class, 'edit'])->name('berita.edit');
+Route::put('/dashboard/berita/{berita}', [BeritaController::class, 'update'])->name('berita.update');
 // Khusus Layanan
 Route::get('/dashboard/homeLayanan', [LayananController::class, 'index']);
 Route::get('/dashboard/createLayanan', [LayananController::class, 'create']);
@@ -56,6 +59,20 @@ Route::get('/dashboard/portofolio/edit', [PortofolioController::class, 'edit'])-
 // Khusus Banner
 Route::get('/dashboard/homeBanner', [BannerController::class, 'index']);
 
+// Khusus FAQ
+Route::get('/dashboard/homeFaq', [FaqController::class, 'index']);
+Route::get('/dashboard/faq/create', [FaqController::class, 'create'])->name('faq.create');
+Route::post('/dashboard/faq', [FaqController::class, 'store'])->name('faq.store');
+Route::get('/dashboard/faq/{faq}/edit', [FaqController::class, 'edit'])->name('faq.edit');
+Route::put('/dashboard/faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
+Route::delete('/dashboard/faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
+
+// Khusus Email
+Route::get('/dashboard/homeEmail', [EmailController::class, 'index']);
+Route::get('/dashboard/email', [EmailController::class, 'create']);
+Route::get('/dashboard/email/{email}/edit', [EmailController::class, 'edit'])->name('email.edit');
+Route::put('/dashboard/email/{email}', [EmailController::class, 'update'])->name('email.update');
+
 //admin
 // Khusus perusahaan
 Route::resource('/dashboard/perusahaan', PerusahaanController::class);
@@ -65,3 +82,5 @@ Route::resource('/dashboard/berita', BeritaController::class);
 Route::resource('/dashboard/layanan', LayananController::class);
 Route::resource('/dashboard/portofolio', PortofolioController::class);
 Route::resource('/dashboard/banner', BannerController::class);
+Route::resource('/dashboard/faq', FaqController::class);
+Route::resource('/dashboard/email', EmailController::class);

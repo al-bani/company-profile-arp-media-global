@@ -53,13 +53,6 @@
                         <textarea name="konten" id="konten" rows="6" class="form-control"></textarea>
                     </div>
 
-                    {{-- Penulis --}}
-                    <div class="mb-3">
-                        <label for="penulis" class="form-label">Penulis</label>
-                        <input type="text" name="penulis" id="penulis" class="form-control"
-                            placeholder="Nama penulis">
-                    </div>
-
                     {{-- Tanggal --}}
                     <div class="mb-4">
                         <label for="tanggal" class="form-label">Tanggal Publikasi</label>
@@ -80,17 +73,36 @@
                                 </div>
                                 <div>
                                     <label>Foto</label>
-                                    <input type="file" name="foto[0][foto]" class="form-control" placeholder="foto"
-                                        accept="image/*">
+                                    <input type="file" name="foto" class="form-control" placeholder="foto"
+                                        accept="image/*" onchange="validateFileSize(this)">
                                 </div>
                             </div>
 
                         </div>
                     </div>
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Preview</h5>
+                        </div>
+
+                        <div class="mb-4 mt-4">
+                            <div class="card" style="max-width: 18rem; margin: auto;">
+                                <img id="preview" src="/images/default.jpg" class="card-img-top" alt="Logo Perusahaan" style="height: 12rem; object-fit: cover;" >
+
+                                <div class="card-body">
+                                    <h5 class="card-title" id="cardTitle"><b>Judul Berita</b></h5>
+                                    <p class="card-text"><i class="fas fa-user fs-3"></i> Nama Penulis</p>
+                                    <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                     {{-- Tombol --}}
                     <div class="d-flex justify-content-center">
-                        <a href="/dashboard/berita" class="btn btn-secondary me-2 px-4">Kembali</a>
-                        <button type="submit" class="btn btn-primary px-4">Publish Berita</button>
+                        <a href="/dashboard/berita" class="btn btn-secondary px-4">Kembali</a>
+                        <button type="submit" class="ml-2 btn btn-primary px-4">Publish Berita</button>
                     </div>
                 </form>
             </div>
@@ -102,8 +114,20 @@
         document.addEventListener("DOMContentLoaded", function() {
             CKEDITOR.replace('konten', {
                 contentsCss: '/ckeditor/contents.css',
-                removePlugins: 'tableselection',
-                allowedContent: true
+                removePlugins: 'elementspath,resize,about,flash,iframe,forms,smiley,specialchar,tabletools,find,pagebreak,preview,print,save,showblocks,stylescombo,templates,newpage,language,scayt,div,justify,font,colorbutton,background,image2,uploadimage,uploadfile,filebrowser,link,anchor,horizontalrule,indent,outdent,blockquote,removeformat,format,sourcearea',
+                allowedContent: true,
+                toolbar: [
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+                    { name: 'styles', items: ['Styles', 'Format'] },
+                    { name: 'links', items: ['Link', 'Unlink'] },
+                    { name: 'insert', items: ['Image'] },
+                    { name: 'tools', items: ['Maximize'] }
+                ],
+                height: 400,
+                removeButtons: '',
+                format_tags: 'p;h1;h2;h3;pre',
+                removeDialogTabs: 'image:advanced;link:advanced'
             });
         });
 
@@ -116,46 +140,31 @@
         }
 
         function previewImage(event) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                const preview = document.getElementById('preview');
-                preview.src = reader.result;
-                preview.classList.remove('d-none');
-            };
-            if (event.target.files[0]) {
-                reader.readAsDataURL(event.target.files[0]);
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('preview');
+                    preview.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const button = document.getElementById('add-field-image');
-            const container = document.getElementById('input-container-image');
-            const maxFields = 3;
-            let timelineIndex = 1; // dimulai dari 1 karena field pertama sudah ada di HTML
+        function validateFileSize(input) {
+            const maxSize = 5 * 1024 * 1024; // 5MB dalam bytes
+            const file = input.files[0];
 
-            button.addEventListener('click', function() {
-                const currentFields = container.querySelectorAll('.image-group').length;
+            if (file && file.size > maxSize) {
+                alert("Ukuran file tidak boleh lebih dari 5MB!");
+                input.value = ''; // Reset input file
+                return false;
+            }
 
-                if (currentFields < maxFields) {
-                    const newGroup = document.createElement('div');
-                    newGroup.classList.add('image-group', 'mb-3');
-                    newGroup.innerHTML = `
-                    <hr class="my-4 border-2">
-                    <div class="mb-2">
-                        <label>Judul Foto</label>
-                        <input class=" form-control" name="foto[${timelineIndex}][judul_foto]" placeholder="Masukkan tanggal/tahun">
-                    </div>
-                    <div>
-                        <label>Foto</label>
-                        <input type="file" name="foto[${timelineIndex}][foto]" class="form-control" placeholder="Masukkan Foto">
-                    </div>
-                `;
-                    container.appendChild(newGroup);
-                    timelineIndex++;
-                } else {
-                    alert("Maksimal hanya 3 field yang boleh ditambahkan.");
-                }
-            });
-        });
+            // Jika file valid, preview gambar
+            if (file) {
+                previewImage({ target: input });
+            }
+        }
     </script>
 </x-layout>

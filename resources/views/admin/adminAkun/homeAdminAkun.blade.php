@@ -31,12 +31,11 @@
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->no_telepon }}</td>
                                 <td>
-                                    @if ($item->status == 'admin')
+                                    @if ($item->status == 'aktif')
                                         <span
-                                            class="badge bg-primary text-white px-4 py-2 fs-6 rounded-pill">Admin</span>
+                                            class="badge bg-success text-white px-4 py-2 fs-6 rounded-pill">{{ $item->status }}</span>
                                     @else
-                                        <span class="badge bg-success text-white px-4 py-2 fs-6 rounded-pill">Super
-                                            Admin</span>
+                                        <span class="badge bg-danger text-white px-4 py-2 fs-6 rounded-pill">{{ $item->status }}</span>
                                     @endif
                                 </td>
                                 <td>

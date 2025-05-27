@@ -24,8 +24,12 @@ class LayananController extends Controller
      */
     public function create()
     {
+        $perusahaans = perusahaan::all();
+        if ($perusahaans->isEmpty()) {
+            return redirect('/dashboard/layanan')->with('error', 'Tambahkan minimal 1 perusahaan terlebih dahulu!');
+        }
         return view('admin.layanan.createLayanan', [
-            'perusahaans' => perusahaan::all()
+            'perusahaans' => $perusahaans
         ]);
     }
 

@@ -5,6 +5,13 @@
         <h4>Akun Admin</h4>
     </div>
 
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
+            {{ session('error') }}
+            <a class="btn-close pe-auto text-black" style="cursor: pointer; text-decoration: none;" data-bs-dismiss="alert" aria-label="Close">X</a>
+        </div>
+    @endif
+
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="d-flex justify-content-end mb-3">

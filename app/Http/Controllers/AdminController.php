@@ -24,8 +24,12 @@ class AdminController extends Controller
      */
     public function create()
     {
+        $perusahaans = perusahaan::all();
+        if ($perusahaans->isEmpty()) {
+            return redirect('/dashboard/akunAdmin')->with('error', 'Tambahkan minimal 1 perusahaan terlebih dahulu!');
+        }
         return view('admin.adminAkun.createAdminAkun', [
-            'perusahaans' => perusahaan::all()
+            'perusahaans' => $perusahaans
         ]);
     }
 

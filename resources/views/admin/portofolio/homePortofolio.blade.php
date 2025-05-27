@@ -11,6 +11,15 @@
                 <a href="/dashboard/createPortofolio" class="btn btn-primary">+ Tambah Data</a>
             </div>
 
+            <div class="container-fluid">
+                @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="cursor: pointer; text-decoration: none;"></button>
+                </div>
+                @endif
+            </div>
+
             <div class="table-responsive">
                 <table id="example" class="table table-bordered table-striped" width="100%" cellspacing="0">
                     <thead>
@@ -41,7 +50,7 @@
                                     <a href="/dashboard/portofolio/{{ $portofolio->id }}/edit"
                                         class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i>
-                                    </a>
+                                    </a>    
                                     <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
                                         data-bs-target="#detailPortofolio{{ $loop->iteration }}">
                                         <i class="fas fa-eye"></i>

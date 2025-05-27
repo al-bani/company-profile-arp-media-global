@@ -25,8 +25,12 @@ class BannerController extends Controller
      */
     public function create()
     {
+        $perusahaans = perusahaan::all();
+        if ($perusahaans->isEmpty()) {
+            return redirect('/dashboard/banner')->with('error', 'Tambahkan minimal 1 perusahaan terlebih dahulu!');
+        }
         return view("admin.banner.createBanner", [
-            'perusahaans' => perusahaan::all()
+            'perusahaans' => $perusahaans
         ]);
     }
 

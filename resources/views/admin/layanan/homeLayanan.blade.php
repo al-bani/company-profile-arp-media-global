@@ -11,6 +11,15 @@
                 <a href="/dashboard/createLayanan" class="btn btn-primary">+ Tambah Data</a>
             </div>
 
+            <div class="container-fluid">
+                @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="cursor: pointer; text-decoration: none;"></button>
+                </div>
+                @endif
+            </div>
+
             <div class="table-responsive">
                 <table id="example" class="table table-bordered table-striped" width="100%" cellspacing="0">
                     <thead>

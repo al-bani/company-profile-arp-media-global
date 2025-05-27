@@ -8,6 +8,12 @@
                 {{ session('success') }}
             </div>
         @endif
+        @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="cursor: pointer; text-decoration: none;"></button>
+        </div>
+        @endif
     </div>
 
     <div class="card shadow mb-4">

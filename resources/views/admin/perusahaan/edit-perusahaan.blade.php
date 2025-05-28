@@ -112,7 +112,7 @@
                         <input class="form-control" id="misi" name="misi" type="text" value="{{ old('misi', $perusahaan->misi) }}" required>
                     </div>
                 </div>
-
+                @if ($role === 'superAdmin')
                 <div class="mb-3">
                     <label for="status">Status</label>
                     <select class="ms-1 form-select btn btn-primary" id="status" name="status" required>
@@ -120,7 +120,7 @@
                         <option value="perusahaan" {{ old('status', $perusahaan->status) == 'perusahaan' ? 'selected' : '' }}>Induk</option>
                     </select>
                 </div>
-
+                @endif
                 <div class="mb-3 text-center">
                     <a href="/dashboard/perusahaan" class="btn btn-secondary me-2">Kembali</a>
                     <button type="submit" class="btn btn-primary">Simpan Data</button>

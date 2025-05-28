@@ -6,6 +6,7 @@ use App\Models\perusahaan;
 use App\Http\Requests\StoreperusahaanRequest;
 use App\Http\Requests\UpdateperusahaanRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PerusahaanController extends Controller
 {
@@ -14,10 +15,17 @@ class PerusahaanController extends Controller
      */
     public function index()
     {
-        $perusahaans = Perusahaan::all(); // Mengambil semua data
+        $role = Auth::user()->role;
 
-        // return view('admin.perusahaan.index', compact('dataPerusahaan'));
-        return view('admin.perusahaan.homePerusahaan', compact('perusahaans'));
+        if ($role === 'superAdmin') {
+            $perusahaans = Perusahaan::all();
+        } else {
+            // Ambil id_perusahaan dari admin yang login
+            $admin = Auth::user();
+            $perusahaans = Perusahaan::where('id_perusahaan', $admin->id_perusahaan)->get();
+        }
+
+        return view('admin.perusahaan.homePerusahaan', compact('perusahaans', 'role'));
     }
     public function coba()
     {
@@ -29,8 +37,10 @@ class PerusahaanController extends Controller
     }
     public function edit(perusahaan $perusahaan)
     {
+        $role = Auth::user()->role; // Mengambil role dari user yang login
         return view('admin.perusahaan.edit-perusahaan', [
-            'perusahaan' => $perusahaan
+            'perusahaan' => $perusahaan,
+            'role' => $role
         ]);
     }
 

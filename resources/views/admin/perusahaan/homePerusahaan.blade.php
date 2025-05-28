@@ -1,7 +1,7 @@
 {{-- @extends('Layout.layoutAdmin') --}}
 
 <x-layout>
-    
+
     {{-- Judul --}}
     <div class="mb-2">
         <h4>Perusahaan</h4>
@@ -14,9 +14,11 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <div class="d-flex justify-content-end mb-3">
-                <a href="/dashboard/perusahaan/create" class="btn btn-primary">+ Tambah Data</a>
-            </div>
+            @if ($role === 'superAdmin')
+                <div class="d-flex justify-content-end mb-3">
+                    <a href="/dashboard/perusahaan/create" class="btn btn-primary">+ Tambah Data</a>
+                </div>
+            @endif
 
             <div class="table-responsive">
                 <table id="example" class="table table-bordered table-striped" width="100%" cellspacing="0">
@@ -55,10 +57,10 @@
                                         <i class="fas fa-eye"></i>
                                     </a>
 
-                                    {{-- <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#deletePerusahaan{{ $loop->iteration }}">
                                         <i class="fas fa-trash-alt"></i>
-                                    </a> --}}
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

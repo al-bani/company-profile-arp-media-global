@@ -25,10 +25,19 @@ class AdminController extends Controller
      */
     public function create()
     {
+        // Ambil semua perusahaan
         $perusahaans = perusahaan::all();
+
+        // Ambil id_perusahaan yang sudah ada di tabel admins
+        $perusahaanTerdaftar = admin::pluck('id_perusahaan')->toArray();
+
+        // Filter perusahaan yang belum memiliki admin
+        $perusahaans = $perusahaans->whereNotIn('id_perusahaan', $perusahaanTerdaftar);
+
         if ($perusahaans->isEmpty()) {
-            return redirect('/dashboard/akunAdmin')->with('error', 'Tambahkan minimal 1 perusahaan terlebih dahulu!');
+            return redirect('/dashboard/akunAdmin')->with('error', 'Semua perusahaan sudah memiliki admin!');
         }
+
         return view('admin.adminAkun.createAdminAkun', [
             'perusahaans' => $perusahaans
         ]);
@@ -64,9 +73,21 @@ class AdminController extends Controller
     public function edit($id)
     {
         $admin = admin::findOrFail($id);
+
+        // Ambil semua perusahaan
+        $perusahaans = perusahaan::all();
+
+        // Ambil id_perusahaan yang sudah ada di tabel admins (kecuali admin yang sedang diedit)
+        $perusahaanTerdaftar = admin::where('id', '!=', $id)
+            ->pluck('id_perusahaan')
+            ->toArray();
+
+        // Filter perusahaan yang belum memiliki admin atau perusahaan yang sedang diedit
+        $perusahaans = $perusahaans->whereNotIn('id_perusahaan', $perusahaanTerdaftar);
+
         return view('admin.adminAkun.admin-edit', [
             'admin' => $admin,
-            'perusahaans' => perusahaan::all()
+            'perusahaans' => $perusahaans
         ]);
     }
 

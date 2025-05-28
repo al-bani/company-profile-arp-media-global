@@ -43,11 +43,11 @@
                         </ul>
 
                         <!-- Tombol Edit -->
-                        <div class="text-center mt-4">
+                        {{-- <div class="text-center mt-4">
                             <a href="#" class="btn btn-primary px-4">
                                 <i class="bi bi-pencil-fill me-2"></i>Edit Profil
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
 
                 </div>

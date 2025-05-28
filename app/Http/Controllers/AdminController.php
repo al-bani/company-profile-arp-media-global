@@ -7,6 +7,7 @@ use App\Http\Requests\StoreadminRequest;
 use App\Http\Requests\UpdateadminRequest;
 use App\Models\perusahaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -42,6 +43,7 @@ class AdminController extends Controller
         $id_admin = $request->status . '_' . $request->id_perusahaan . '_' . str_replace(' ', '_', $request->nama_admin);
         $request->merge([
             'id_admin' => $id_admin,
+            'password' => Hash::make($request->password),
             // 'password' => bcrypt($request->password) // hash password juga di sini
         ]);
         $data = $request->all();
@@ -81,8 +83,18 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        admin::where('id', $id)
-            ->update($request->except('_token', '_method'));
+        $data = $request->except('_token', '_method');
+
+        // Jika kolom password diisi, hash dulu
+        if (!empty($request->password)) {
+            $data['password'] = Hash::make($request->password);
+        } else {
+            // Jangan update password jika kosong
+            unset($data['password']);
+        }
+
+        admin::where('id', $id)->update($data);
+
         return redirect('/dashboard/akunAdmin')->with('success', 'Data Berhasil Diubah');
     }
 

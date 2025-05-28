@@ -59,6 +59,15 @@
                     </select>
                 </div>
 
+                <div class="mb-3">
+                    <label for="role">Status</label>
+                    <select class="ms-1 form-select btn btn-primary" id="role" name="role" required>
+                        <option disabled>Pilih Status</option>
+                        <option value="admin" {{ $admin->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                        <option value="superAdmin" {{ $admin->role == 'superAdmin' ? 'selected' : '' }}>Super Admin</option>
+                    </select>
+                </div>
+
                 <!-- Action Buttons -->
                 <div class="mb-3 text-center">
                     <a href="/dashboard/akunAdmin" class="btn btn-secondary me-2">Kembali</a>

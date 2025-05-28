@@ -1,3 +1,7 @@
+@php
+    $role = auth('admin')->user()->role ?? null;
+@endphp
+
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
@@ -19,9 +23,9 @@
 
     <hr class="sidebar-divider">
 
-    <!-- Section 1 -->
+    <!-- Section Heading -->
     <div class="sidebar-heading text-light">
-        Superadmin
+        {{ $role === 'superAdmin' ? 'Super Admin' : 'Admin' }}
     </div>
 
     <li class="nav-item {{ Request::is('dashboard/perusahaan*') ? 'active' : '' }}">
@@ -31,12 +35,14 @@
         </a>
     </li>
 
-    <li class="nav-item {{ Request::is('dashboard/akunAdmin*') ? 'active' : '' }}">
-        <a class="nav-link py-3 fs-4" href="/dashboard/akunAdmin" data-bs-toggle="tooltip" data-bs-placement="right" title="Akun Admin">
-            <i class="fas fa-user-shield fs-3"></i>
-            <span class="ms-2">Akun Admin</span>
-        </a>
-    </li>
+    @if ($role === 'superAdmin')
+        <li class="nav-item {{ Request::is('dashboard/akunAdmin*') ? 'active' : '' }}">
+            <a class="nav-link py-3 fs-4" href="/dashboard/akunAdmin" data-bs-toggle="tooltip" data-bs-placement="right" title="Akun Admin">
+                <i class="fas fa-user-shield fs-3"></i>
+                <span class="ms-2">Akun Admin</span>
+            </a>
+        </li>
+    @endif
 
     <li class="nav-item {{ Request::is('dashboard/layanan*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/dashboard/layanan" data-bs-toggle="tooltip" data-bs-placement="right" title="Layanan">

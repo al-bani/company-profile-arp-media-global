@@ -16,7 +16,7 @@
                         <i class="fas fa-user-tie fa-2x" style="color: #007bff;"></i>
                     </div>
                     <div>
-                        <h5 class="font-weight-bold mb-0" style="color: #007bff;">Selamat Datang, SuperAdmin!</h5>
+                        <h5 class="font-weight-bold mb-0" style="color: #007bff;">Selamat Datang, {{ auth('admin')->user()->nama_admin ?? '-' }}!</h5>
                         <small style="color: #007bff;">Pantau aktivitas dan kelola data dengan mudah dari dashboard ini.</small>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        
+
 
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -201,7 +201,7 @@
             <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        
+
     </div>
 </div>
 

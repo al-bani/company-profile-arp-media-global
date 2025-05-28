@@ -23,7 +23,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
-                <a href="/dashboard/createPartner" class="btn btn-primary">+ Tambah Data</a>
+                <a href="/dashboard/partner/create" class="btn btn-primary">+ Tambah Data</a>
             </div>
 
             <div class="table-responsive">

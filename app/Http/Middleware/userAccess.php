@@ -14,12 +14,29 @@ class userAccess
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, $roles): Response
     {
-        if (!Auth::guard('admin')->check()) {
-            return redirect('/login'); // atau route login khusus admin jika ada
+
+         if (empty(auth('admin')->user()->role)) {
+            return redirect()->intended('/login');
         }
 
-        return $next($request);
+        $loggedRole = auth('admin')->user()->role;
+        foreach ($roles as $role) {
+            if ($loggedRole === $role) {
+                return $next($request);
+            }
+        }
+
+        switch ($loggedRole) {
+            case 'admin':
+                return redirect()->intended('/admin');
+            case 'superAdmin':
+                return redirect()->intended('/superAdmin');
+            default:
+                return back()->with('access', 'Anda Tidak Punya Akses');
+        }
+
+
     }
 }

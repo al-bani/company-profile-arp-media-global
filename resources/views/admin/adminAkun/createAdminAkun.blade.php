@@ -33,15 +33,17 @@
 
                     <div class="col-md-6">
                         <label for="no_telepon" class="form-label fw-semibold">No Telepon</label>
-                        <input type="tel" class="form-control" id="no_telepon" name="no_telepon" placeholder="081234567890" required>
+                        <input type="tel" class="form-control" id="no_telepon" name="no_telepon"
+                            placeholder="081234567890" required>
                     </div>
                 </div>
 
                 <div class="row g-3 mb-4">
                     <div class="col-md-6">
                         <label for="perusahaan" class="form-label fw-semibold">Perusahaan</label>
-                        <select class="id_perusahaan form-select" aria-label="Default select example"
+                        <select class="ms-1 form-select btn btn-primary" aria-label="Default select example"
                             name="id_perusahaan" id="id_perusahaan">
+                            <option disabled>Pilih Perusahaan</option>
                             @foreach ($perusahaans as $perusahaan)
                                 @if (old('id_perusahaan') == $perusahaan->id_perusahaan)
                                     <option value="{{ $perusahaan->id_perusahaan }}" selected>
@@ -53,6 +55,14 @@
                                     </option>
                                 @endif
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="role" ass="form-label fw-semibold">Status</label>
+                        <select class="ms-1 form-select btn btn-primary" id="role" name="role" required>
+                            <option disabled>Pilih Status</option>
+                            <option value="admin">Admin</option>
+                            <option value="superAdmin">Super Admin</option>
                         </select>
                     </div>
                 </div>

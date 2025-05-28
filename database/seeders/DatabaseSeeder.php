@@ -21,15 +21,15 @@ class DatabaseSeeder extends Seeder
         // ]);
          $this->call([
             PerusahaanSeeder::class,
-            BeritaSeeder::class,
-            LayananSeeder::class,
-            LayananSubSeeder::class,
-            PortofolioSeeder::class,
             AdminSeeder::class,
-            PartnerSeeder::class,
-            BannerSeeder::class,
-            BeritaFotoSeeder::class,
-            PortofolioFotoSeeder::class,
+            // BeritaSeeder::class,
+            // LayananSeeder::class,
+            // LayananSubSeeder::class,
+            // PortofolioSeeder::class,
+            // PartnerSeeder::class,
+            // BannerSeeder::class,
+            // BeritaFotoSeeder::class,
+            // PortofolioFotoSeeder::class,
         ]);
     }
 }

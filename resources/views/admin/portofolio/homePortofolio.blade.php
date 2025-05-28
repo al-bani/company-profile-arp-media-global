@@ -8,7 +8,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
-                <a href="/dashboard/createPortofolio" class="btn btn-primary">+ Tambah Data</a>
+                <a href="/dashboard/portofolio/create" class="btn btn-primary">+ Tambah Data</a>
             </div>
 
             <div class="container-fluid">
@@ -50,7 +50,7 @@
                                     <a href="/dashboard/portofolio/{{ $portofolio->id }}/edit"
                                         class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i>
-                                    </a>    
+                                    </a>
                                     <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
                                         data-bs-target="#detailPortofolio{{ $loop->iteration }}">
                                         <i class="fas fa-eye"></i>

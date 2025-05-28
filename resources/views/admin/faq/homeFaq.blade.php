@@ -8,7 +8,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="d-flex justify-content-end mb-3">
-                <a href="{{ route('faq.create') }}" class="btn btn-primary">+ Tambah Data</a>
+                <a href="/dashboard/faq/create" class="btn btn-primary">+ Tambah Data</a>
             </div>
 
             <div class="table-responsive">

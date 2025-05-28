@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('id_admin')->unique();
             $table->string('id_perusahaan');
             $table->string('nama_admin');
+            $table->enum('role', ['superAdmin', 'admin'])->default('admin');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('no_telepon');

@@ -34,13 +34,16 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>
-                                    @if($perusahaan->logo)
+                                    @if ($perusahaan->logo)
                                         <img src="{{ asset($perusahaan->logo) }}" alt="Logo" width="60">
+                                    @else
+                                        <span style="color: red;">Logo Kosong</span>
                                     @endif
                                 </td>
-                                <td>{{ $perusahaan->nama_perusahaan }}</td>
-                                <td>{{ $perusahaan->nib }}</td>
-                                <td>{{ $perusahaan->npwp }}</td>
+                                <td>{!! $perusahaan->nama_perusahaan ? $perusahaan->nama_perusahaan : '<span style="color: red;">Nama Perusahaan Kosong</span>' !!}</td>
+                                <td>{!! $perusahaan->nib ? $perusahaan->nib : '<span style="color: red;">NIB Kosong</span>' !!}</td>
+                                <td>{!! $perusahaan->npwp ? $perusahaan->npwp : '<span style="color: red;">NPWP Kosong</span>' !!}</td>
+
                                 <td>
                                     <a href="/dashboard/perusahaan/{{ $perusahaan->id }}/edit"
                                         class="btn btn-warning btn-sm">
@@ -80,7 +83,8 @@
                             <!-- Modal Body -->
                             <div class="modal-body text-center">
                                 <p class="fs-6 mb-1">Apakah Anda yakin ingin menghapus data berikut?</p>
-                                <p class="fw-semibold text-danger small">Nama Perusahaan: {{ $perusahaan->nama_perusahaan }}</p>
+                                <p class="fw-semibold text-danger small">Nama Perusahaan:
+                                    {{ $perusahaan->nama_perusahaan }}</p>
                             </div>
 
                             <!-- Modal Footer -->
@@ -120,8 +124,8 @@
                                 <!-- Gambar -->
                                 @if ($perusahaan->logo)
                                     <div class="mb-3 text-center">
-                                        <img src="{{ asset( $perusahaan->logo) }}"
-                                            class="img-fluid rounded shadow-sm" style="max-height: 120px;">
+                                        <img src="{{ asset($perusahaan->logo) }}" class="img-fluid rounded shadow-sm"
+                                            style="max-height: 120px;">
                                     </div>
                                 @endif
 

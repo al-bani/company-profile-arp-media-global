@@ -6,9 +6,11 @@
     </div>
 
     @if (session('error'))
-        <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center"
+            role="alert">
             {{ session('error') }}
-            <a class="btn-close pe-auto text-black" style="cursor: pointer; text-decoration: none;" data-bs-dismiss="alert" aria-label="Close">X</a>
+            <a class="btn-close pe-auto text-black" style="cursor: pointer; text-decoration: none;" data-bs-dismiss="alert"
+                aria-label="Close">X</a>
         </div>
     @endif
 
@@ -33,16 +35,18 @@
                     <tbody>
                         @foreach ($data as $item)
                             <tr>
-                                <td>{{ $item->perusahaan->nama_perusahaan }}</td>
-                                <td>{{ $item->nama_admin }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>{{ $item->no_telepon }}</td>
+                                <td>{!! $item->perusahaan->nama_perusahaan ?? '<span style="color: red;">Nama Perusahaan Kosong</span>' !!}</td>
+                                <td>{!! $item->nama_admin ? $item->nama_admin : '<span style="color: red;">Nama Admin Kosong</span>' !!}</td>
+                                <td>{!! $item->email ? $item->email : '<span style="color: red;">Email Kosong</span>' !!}</td>
+                                <td>{!! $item->no_telepon ? $item->no_telepon : '<span style="color: red;">No Telepon Kosong</span>' !!}</td>
+
                                 <td>
                                     @if ($item->status == 'aktif')
                                         <span
                                             class="badge bg-success text-white px-4 py-2 fs-6 rounded-pill">{{ $item->status }}</span>
                                     @else
-                                        <span class="badge bg-danger text-white px-4 py-2 fs-6 rounded-pill">{{ $item->status }}</span>
+                                        <span
+                                            class="badge bg-danger text-white px-4 py-2 fs-6 rounded-pill">{{ $item->status }}</span>
                                     @endif
                                 </td>
                                 <td>
@@ -89,7 +93,7 @@
 
                             <!-- Modal Footer -->
                             <div class="modal-footer justify-content-center gap-3 border-0 pb-4">
-                                <form action="/dashboard/admin/{{ $item->id }}" method="POST">
+                                <form action="/dashboard/akunAdmin/{{ $item->id }}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger px-4 rounded-pill shadow-sm">
@@ -124,7 +128,10 @@
                                 <div class="mb-3">
                                     <label class="form-label">Nama Perusahaan</label>
                                     <input type="text" class="form-control"
-                                        value="{{ $item->perusahaan->nama_perusahaan }}" readonly>
+                                        value="{{ $item->perusahaan?->nama_perusahaan ?? 'Nama Perusahaan Kosong' }}"
+                                        readonly>
+
+
                                 </div>
 
                                 <!-- Nama Admin -->

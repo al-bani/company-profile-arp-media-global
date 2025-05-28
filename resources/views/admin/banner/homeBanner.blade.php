@@ -3,7 +3,7 @@
 <x-layout>
     {{-- Judul --}}
     <div class="mb-2">
-        <h4>banner</h4>
+        <h4>Banner Perusahaan</h4>
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}

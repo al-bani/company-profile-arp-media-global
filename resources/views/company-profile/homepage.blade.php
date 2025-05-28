@@ -1,6 +1,5 @@
 @extends('company-profile.Layout.company')
 
-{{-- Content --}}
 @section('content')
 
     @php
@@ -10,15 +9,14 @@
     <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="{{ asset('images/berita.jpg') }}" class="corousel-img d-block w-100 " alt="...">
+                <img src="{{ asset('images/berita.jpg') }}" class="corousel-img d-block w-100" alt="Slide 1">
             </div>
             <div class="carousel-item">
-                <video src="{{ asset('images/interview.mp4') }}" class="corousel-img d-block w-100 " autoplay controls loop
-                    type="video/mp4"></video>
-                {{-- <img src="{{ asset('images/berita.png') }}" class="corousel-img d-block w-100 " alt="..."> --}}
+                <video src="{{ asset('images/interview.mp4') }}" class="corousel-img d-block w-100" autoplay muted
+                    loop></video>
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('images/berita.jpg') }}" class="corousel-img d-block w-100 " alt="...">
+                <img src="{{ asset('images/berita.jpg') }}" class="corousel-img d-block w-100" alt="Slide 3">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -31,180 +29,105 @@
         </button>
     </div>
 
-    {{-- Profile Perusahaan --}}
-    <div class="hp-profile container-fluid p-4 ">
-        <div class="row justify-content-center ">
-            <div class="col-sm-12 col-md-6 col-lg-5  d-flex justify-content-center ps-lg-5 mb-4 mt-4">
-                <img src="{{ asset('images/logo copy.png') }}" class="hp-profile-logo mt-3 mb-3 w-50" alt>
+    {{-- Layanan --}}
+    <div class="container pt-5 ">
+        <h1 class="text-center h1">Layanan Kami</h1>
+        <div class="layanan-container">
+            <div class="custom-card">
+                <div class="img-box"><img
+                        src="https://images.unsplash.com/photo-1682685797507-d44d838b0ac7?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                </div>
+                <div class="custom-content">
+                    <h2>Event Organizer</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto, hic? Magnam eum error saepe
+                        doloribus corrupti repellat quisquam alias doloremque!</p>
+                    <a href="">Read More</a>
+                </div>
             </div>
-            <div class="col-sm-12 col-mt-6 col-lg-6 text-profile mt-lg-3 mb-lg-5 text-white ">
-                <h4 class=" pt-3  mb-3"><b>PROFILE PERUSAHAAN</b></h4>
-                <p>PT. ARP Global Media merupakan salah satu badan usaha yang bergerak di bidang Periklanan, aktivitas
-                    Remediasi, Pengelolaan Limbah dan Sampah Lainnya</p>
-                <button class="btn d-flex justify-content-center justify-content-lg-start">Baca Selengkapnya </button>
+            <div class="custom-card" >
+                <div class="img-box"><img
+                        src="https://images.unsplash.com/photo-1682686578023-dc680e7a3aeb?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                </div>
+                <div class="custom-content" >
+                    <h2>Media Advertising</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto, hic? Magnam eum error saepe
+                        doloribus corrupti repellat quisquam alias doloremque!</p>
+                    <a href="">Read More</a>
+                </div>
+            </div>
+            <div class="custom-card">
+                <div class="img-box"><img
+                        src="https://images.unsplash.com/photo-1682686580224-cd46ea1a6950?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                </div>
+                <div class="custom-content">
+                    <h2>Pengelolaan Sampah</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto, hic? Magnam eum error saepe
+                        doloribus corrupti repellat quisquam alias doloremque!</p>
+                    <a href="">Read More</a>
+
+                </div>
             </div>
         </div>
     </div>
 
-    {{-- Layanan --}}
-    <div class="container layanan ">
-        <h1 class="display-5 pb-3" >Layanan</h1>
-        <div class="container text-center">
-            <div class="row">
-                <div class="col-sm-12 col-md-4    col-lg-4 layanan-card1 " >
-                    <div class="card mb-3 border-0 w-100">
-                        <img src="{{ asset('images/event.png') }}" class="card-img-top " alt="...">
-                    </div>
+    {{-- Profil Perusahaan --}}
+    <div class="container-fluid bg-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 text-center mb-4 mb-lg-0">
+                    <img src="{{ asset('images/logo1.png') }}" class="img-fluid w-50" alt="Logo Perusahaan">
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 layanan-card2">
-                    <div class="card  mb-3 border-0">
-                        <img src="{{ asset('images/sampah.png') }}" class="card-img-top " alt="...">
-
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 layanan-card3" >
-                    <div class="card mb-3 border-0">
-                        <img src="{{ asset('images/berita.jpg') }}" class="card-img-top " alt="...">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        {{-- Buat Yang bawah card nya --}}
-        <div class="container text-center">
-            <div class="row">
-                <div class="col-sm-12 col-md-6 col-lg-4 layanan-card4">
-                    <div class="card mb-3 border-0">
-                        <img src="{{ asset('images/berita.jpg') }}" class="card-img-top " alt="...">
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 layanan-card5">
-                    <div class="card  mb-3 border-0">
-
-                        <img src="{{ asset('images/sampah.png') }}" class="card-img-top " alt="...">
-
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 layanan-card6">
-                    <div class="card mb-3 border-0">
-                        <a href="">
-                            <img src="{{ asset('images/viewmore.png') }}" class="card-img-top " alt="...">
-                        </a>
-                    </div>
+                <div class="col-lg-7">
+                    <h3 class="fw-bold mb-3">PROFILE PERUSAHAAN</h3>
+                    <p class="mb-4">PT. ARP Global Media merupakan salah satu badan usaha yang bergerak di bidang
+                        Periklanan, aktivitas Remediasi, Pengelolaan Limbah dan Sampah Lainnya.</p>
+                    <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
                 </div>
             </div>
         </div>
     </div>
 
     {{-- Berita --}}
-    <div class="container berita ">
-        <h1 class="display-5 text-center">Berita</h1>
-        <div class="container">
-            <div class="rowberita row">
-                <div class="col-sm-12 col-md-6 col-lg-3 ">
-                    <div class="card-template">
-                        <div class="card-template-img-holder">
-                            <img src="{{ asset('images/berita.jpg') }}" alt="Blog image">
-                        </div>
-                        <h3 class="blog-title">Media Avertising</h3>
-                        <span class="blog-time">Monday Jan 20, 2020</span>
-                        <p class="description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis viverra turpis, non
-                            cursus ex accumsan at.
-                        </p>
-                        <div class="options">
-                            <span></span>
-                            <button class="btn">Read Full Blog</button>
+    <div class="container berita pt-5">
+        <h1 class="text-center h1 mb-5">Berita Terbaru</h1>
+        <div class="row g-4">
+            @for ($i = 0; $i < 5; $i++)
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{{ asset('images/berita.jpg') }}" class="card-img-top" alt="Berita">
+                        <div class="card-body">
+                            <h5 class="card-title">Media Advertising</h5>
+                            <p class="card-text"><small class="text-muted">Monday Jan 20, 2020</small></p>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis
+                                viverra turpis.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Read Full Blog</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-3 ">
-                    <div class="card-template">
-                        <div class="card-template-img-holder">
-                            <img src="{{ asset('images/berita.jpg') }}" alt="Blog image">
-                        </div>
-                        <h3 class="blog-title">Media Avertising</h3>
-                        <span class="blog-time">Monday Jan 20, 2020</span>
-                        <p class="description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis viverra turpis, non
-                            cursus ex accumsan at.
-                        </p>
-                        <div class="options">
-                            <span></span>
-                            <button class="btn">Read Full Blog</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-3 ">
-                    <div class="card-template">
-                        <div class="card-template-img-holder">
-                            <img src="{{ asset('images/berita.jpg') }}" alt="Blog image">
-                        </div>
-                        <h3 class="blog-title">Media Avertising</h3>
-                        <span class="blog-time">Monday Jan 20, 2020</span>
-                        <p class="description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis viverra turpis, non
-                            cursus ex accumsan at.
-                        </p>
-                        <div class="options">
-                            <span></span>
-                            <button class="btn">Read Full Blog</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-3 ">
-                    <div class="card-template">
-                        <div class="card-template-img-holder">
-                            <img src="{{ asset('images/berita.jpg') }}" alt="Blog image">
-                        </div>
-                        <h3 class="blog-title">Media Avertising</h3>
-                        <span class="blog-time">Monday Jan 20, 2020</span>
-                        <p class="description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis viverra turpis, non
-                            cursus ex accumsan at.
-                        </p>
-                        <div class="options">
-                            <span></span>
-                            <button class="btn">Read Full Blog</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-3 ">
-                    <div class="card-template">
-                        <div class="card-template-img-holder">
-                            <img src="{{ asset('images/berita.jpg') }}" alt="Blog image">
-                        </div>
-                        <h3 class="blog-title">Media Avertising</h3>
-                        <span class="blog-time">Monday Jan 20, 2020</span>
-                        <p class="description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis viverra turpis, non
-                            cursus ex accumsan at.
-                        </p>
-                        <div class="options">
-                            <span></span>
-                            <button class="btn">Read Full Blog</button>
-                        </div>
-                    </div>
-                </div>
+            @endfor
+        </div>
+    </div>
 
-
+    {{-- Klien --}}
+    <div class="client-section  bg-white ">
+        <div class="container text-center">
+            <h2 class="text-center mb-4">Klien Kami</h2>
+            <div class="marquee-container overflow-hidden">
+                <div class="marquee-track d-flex">
+                    @for ($i = 0; $i < 4; $i++)
+                        @foreach ($logos as $logo)
+                            <div class="px-3">
+                                <img src="{{ asset('images/client/' . $logo) }}" alt="Logo Klien" class="img-fluid"
+                                    style="height: 70px;">
+                            </div>
+                        @endforeach
+                    @endfor
+                </div>
             </div>
         </div>
     </div>
 
-    {{-- Client --}}
-    <div class="client-section">
-        <h4>Klien Kita</h4>
-        <div class="marquee-container">
-            <div class="marquee-track">
-                @for ($i = 0; $i < 2; $i++)
-                    @foreach ($logos as $logo)
-                        <div class="logo">
-                            <img src="{{ asset('images/client/' . $logo) }}" alt="logo">
-                        </div>
-                    @endforeach
-                @endfor
-            </div>
-        </div>
-    </div>
 @endsection
+<style>
+    
+</style>

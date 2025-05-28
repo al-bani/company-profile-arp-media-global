@@ -1,4 +1,3 @@
-
 /* Tampilan untuk HP */
 
 @media only screen and (max-width: 767px) {
@@ -6,13 +5,37 @@
         height: 20rem;
     } */
 
+    /* Untuk navbar */
+    /* Submenu style untuk mobile */
+
+    .navbar-nav .nav-link {
+        border-bottom: 1px solid #ddd;
+        padding: 12px 16px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .navbar-nav .dropdown-item {
+        padding: 10px 24px;
+        border-bottom: 1px solid #eee;
+        font-weight: 400;
+        color: #444;
+    }
+
+    .navbar-nav .nav-link i {
+        font-size: 0.9rem;
+    }
+
+    /* sampai navbar */
+
     .carousel-item {
         height: 40vh;
         /* atau tinggi tertentu, misal 600px */
         position: relative;
     }
 
-    .carousel-item img,video {
+    .carousel-item img,
+    video {
         position: absolute;
         top: 0;
         left: 0;
@@ -21,7 +44,6 @@
         object-fit: cover;
         /* memastikan gambar tetap proporsional, crop otomatis */
     }
-
 
     .hp-profile p {
         font-size: 1rem;
@@ -45,7 +67,6 @@
         font-size: 18px;
         width: 100%;
     }
-
 
     .layanan .card {
         height: 18rem;
@@ -74,8 +95,6 @@
         height: 100%;
     }
 
-
-
     .layanan .card a img {
         width: 100%;
         height: 100%;
@@ -83,7 +102,9 @@
         display: block;
     }
 
-    .layanan-card4,.layanan-card5,.layanan-card6 {
+    .layanan-card4,
+    .layanan-card5,
+    .layanan-card6 {
         display: none;
     }
 
@@ -241,8 +262,6 @@
         border-bottom-left-radius: 100px;
         color: white;
     }
-
-
 
     /* .detail-header h2 {
         font-size: 2rem;

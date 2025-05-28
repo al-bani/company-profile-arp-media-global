@@ -3,7 +3,7 @@
 <x-layout>
     {{-- Judul --}}
     <div class="mb-2">
-        <h4>Partner</h4>
+        <h4>Partner Perusahaan</h4>
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}

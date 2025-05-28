@@ -13,8 +13,10 @@
     <link href="{{ asset('css/style-desktop.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/style-tablet.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/style-mobile.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/template.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
 
 </head>
@@ -32,18 +34,41 @@
             <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav ms-auto d-flex gap-5 me-5">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" aria-current="page" href="/" data-bs-toggle="dropdown" aria-expanded="false"> Perusahaan</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Portofolio</a></li>
-                            <li><a class="dropdown-item" href="#">Struktur Organisasi</a></li>
-                           
+                        <a class="nav-link  d-lg-none d-flex justify-content-between align-items-center"
+                            data-bs-toggle="collapse" href="#submenuMobilePerusahaan" role="button"
+                            aria-expanded="false" aria-controls="submenuMobilePerusahaan">
+                            Perusahaan
+                            <i class="bi bi-chevron-down"></i>
+                        </a>
+
+                        <!-- submenu khusus mobile -->
+                        <div class="collapse d-lg-none ps-3" id="submenuMobilePerusahaan">
+                            <a class="dropdown-item" href="#">Tentang Perusahaan</a>
+                            <a class="dropdown-item" href="#">Manajemen</a>
+                            <a class="dropdown-item" href="#">Tata Kelola Perusahaan</a>
+                            <a class="dropdown-item" href="#">Keberlanjutan</a>
+                            <a class="dropdown-item" href="#">Len Technopark</a>
+                        </div>
+
+                        <!-- versi desktop tetap pakai dropdown-menu biasa -->
+                        <a class="nav-link dropdown-toggle d-none d-lg-block" href="#" id="submenuDesktopPerusahaan"
+                            data-bs-toggle="dropdown" aria-expanded="false" aria-controls="submenuDesktopPerusahaan">
+                            Perusahaan
+                        </a>
+                        <ul class="dropdown-menu custom-dropdown d-none d-lg-block" id="submenuDesktopPerusahaan" aria-labelledby="dropdownMenu">
+                            <li><a class="dropdown-item" href="#">Tentang Perusahaan</a></li>
+                            <li><a class="dropdown-item" href="#">Manajemen</a></li>
+                            <li><a class="dropdown-item" href="#">Tata Kelola Perusahaan</a></li>
+                            <li><a class="dropdown-item" href="#">Keberlanjutan</a></li>
+                            <li><a class="dropdown-item" href="#">Len Technopark</a></li>
                         </ul>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Berita</a>
+                        <a class="nav-link " href="#">Berita</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/layanan">Layanan</a>
+                        <a class="nav-link " href="/layanan">Layanan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="/kontak" aria-disabled="true">Kontak</a>
@@ -97,3 +122,4 @@
 
 
 </html>
+

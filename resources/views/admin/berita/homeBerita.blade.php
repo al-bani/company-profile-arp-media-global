@@ -2,7 +2,7 @@
 
 <x-layout>
     <div class="mb-2">
-        <h4>Berita</h4>
+        <h4>Berita Perusahaan</h4>
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}

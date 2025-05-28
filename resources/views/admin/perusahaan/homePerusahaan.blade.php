@@ -1,6 +1,7 @@
-@extends('Layout.layoutAdmin')
+{{-- @extends('Layout.layoutAdmin') --}}
 
 <x-layout>
+    
     {{-- Judul --}}
     <div class="mb-2">
         <h4>Perusahaan</h4>
@@ -54,10 +55,10 @@
                                         <i class="fas fa-eye"></i>
                                     </a>
 
-                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                    {{-- <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#deletePerusahaan{{ $loop->iteration }}">
                                         <i class="fas fa-trash-alt"></i>
-                                    </a>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach

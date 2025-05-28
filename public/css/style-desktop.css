@@ -23,13 +23,13 @@ body {
 }
 
 .hp-profile {
-    background-color: #6499e9;
+    /* background-color: #6499e9; */
     /* 50% opacity */
 }
 
 .hp-profile button {
-    background-color: white;
-    color: blue;
+    background-color: #6499e9;
+    color: white;
 }
 
 /* -------- footer ------- */
@@ -72,7 +72,6 @@ body {
         /* memastikan gambar tetap proporsional, crop otomatis */
     }
 
-
     .hp-profile p {
         font-size: 1.3rem;
         text-align: justify;
@@ -82,14 +81,11 @@ body {
     .hp-profile img {
         width: 14rem;
     }
-
-    .layanan h4 {
-        font-size: 2rem;
-        display: flex;
-        justify-content: center;
+    /* 
+    tent: center;
         margin-bottom: 2rem;
         font-weight: 400;
-    }
+    } */
 
     .layanan .card {
         height: 18rem;
@@ -124,8 +120,6 @@ body {
         object-fit: cover;
         display: block;
     }
-
-
 
     .client h4 {
         font-size: 2rem;
@@ -181,8 +175,6 @@ body {
             transform: translateX(-50%);
         }
     }
-
-
 
     .berita .row {
         display: flex;
@@ -390,7 +382,7 @@ body {
     .highlight2 p,
     .highlight3 p {
         margin-bottom: 0.4vh;
-        font-family: 'Roboto', sans-serif;
+        font-family: "Roboto", sans-serif;
     }
 
     .detail-gambar-bawah img {
@@ -419,5 +411,3 @@ body {
         font-size: 1.3rem;
     }
 }
-
-

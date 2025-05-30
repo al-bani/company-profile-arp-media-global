@@ -14,6 +14,12 @@ class Faq extends Model
 
     protected $fillable = [
         'pertanyaan',
-        'jawaban'
+        'jawaban',
+        'id_perusahaan'
     ];
+
+    public function perusahaan()
+    {
+        return $this->belongsTo(perusahaan::class, 'id_perusahaan', 'id_perusahaan');
+    }
 }

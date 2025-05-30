@@ -40,33 +40,35 @@
                     <tbody>
                         {{-- Contoh Data --}}
                         @foreach ($banners as $banner)
-                            <tr>
-                                <td>{{ $banner->judul }}</td>
-                                <td>{{ $banner->perusahaan->nama_perusahaan }}</td>
-                                <td>{{ $banner->deskripsi }}</td>
-                                <td>
-                                    @if ($banner->foto)
-                                        <img src="{{ asset($banner->foto) }}" alt="Logo" width="100">
-                                    @endif
-                                </td>
+                            @if ($role === 'superAdmin' || (isset($banner->id_perusahaan) && $banner->id_perusahaan == Auth::user()->id_perusahaan))
+                                <tr>
+                                    <td>{{ $banner->judul }}</td>
+                                    <td>{{ $banner->perusahaan->nama_perusahaan }}</td>
+                                    <td>{{ $banner->deskripsi }}</td>
+                                    <td>
+                                        @if ($banner->foto)
+                                            <img src="{{ asset($banner->foto) }}" alt="Logo" width="100">
+                                        @endif
+                                    </td>
 
 
-                                <td>
-                                    <a href="/dashboard/banner/{{ $banner->id }}/edit"
-                                        class="btn btn-warning btn-sm">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
-                                        data-bs-target="#detailBanner{{ $loop->iteration }}">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
+                                    <td>
+                                        <a href="/dashboard/banner/{{ $banner->id }}/edit"
+                                            class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
+                                            data-bs-target="#detailBanner{{ $loop->iteration }}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
 
-                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#deleteBanner{{ $loop->iteration }}">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                                        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#deleteBanner{{ $loop->iteration }}">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>

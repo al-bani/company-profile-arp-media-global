@@ -46,10 +46,12 @@
                             name="id_perusahaan"
                             id="id_perusahaan" required>
                         @foreach ($perusahaans as $perusahaan)
-                            <option value="{{ $perusahaan->id_perusahaan }}"
-                                {{ old('id_perusahaan', $banner->id_perusahaan) == $perusahaan->id_perusahaan ? 'selected' : '' }}>
-                                {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
-                            </option>
+                            @if ($role === 'superAdmin' || $perusahaan->id_perusahaan == Auth::user()->id_perusahaan)
+                                <option value="{{ $perusahaan->id_perusahaan }}"
+                                    {{ old('id_perusahaan', $banner->id_perusahaan) == $perusahaan->id_perusahaan ? 'selected' : '' }}>
+                                    {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
+                                </option>
+                            @endif
                         @endforeach
                     </select>
                     @error('id_perusahaan')

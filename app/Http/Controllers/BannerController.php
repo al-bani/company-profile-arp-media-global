@@ -7,6 +7,7 @@ use App\Http\Requests\StorebannerRequest;
 use App\Http\Requests\UpdatebannerRequest;
 use App\Models\perusahaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BannerController extends Controller
 {
@@ -15,9 +16,14 @@ class BannerController extends Controller
      */
     public function index()
     {
-        return view('admin.banner.homeBanner', [
-            'banners' => banner::all()
-        ]);
+        $role = Auth::user()->role;
+        if ($role === 'superAdmin') {
+            $banners = banner::all();
+        } else {
+            $admin = Auth::user();
+            $banners = banner::where('id_perusahaan', $admin->id_perusahaan)->get();
+        }
+        return view('admin.banner.homeBanner', compact('banners', 'role'));
     }
 
     /**
@@ -25,12 +31,19 @@ class BannerController extends Controller
      */
     public function create()
     {
-        $perusahaans = perusahaan::all();
+        $role = Auth::user()->role;
+        if ($role === 'superAdmin') {
+            $perusahaans = perusahaan::all();
+        } else {
+            $admin = Auth::user();
+            $perusahaans = perusahaan::where('id_perusahaan', $admin->id_perusahaan)->get();
+        }
         if ($perusahaans->isEmpty()) {
             return redirect('/dashboard/banner')->with('error', 'Tambahkan minimal 1 perusahaan terlebih dahulu!');
         }
-        return view("admin.banner.createBanner", [
-            'perusahaans' => $perusahaans
+        return view('admin.banner.createBanner', [
+            'perusahaans' => $perusahaans,
+            'role' => $role
         ]);
     }
 
@@ -39,6 +52,11 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
+        $role = Auth::user()->role;
+        if ($role !== 'superAdmin') {
+            $admin = Auth::user();
+            $request->merge(['id_perusahaan' => $admin->id_perusahaan]);
+        }
         $id_banner = $request->id_perusahaan . '_' . $request->judul;
         $request->merge([
             'id_banner' => $id_banner,
@@ -52,6 +70,7 @@ class BannerController extends Controller
             $request->file('foto')->move(public_path($destination), $filename);
             $data['foto'] = $destination . '/' . $filename;
         }
+        // dd($data);
         banner::create($data);
         return redirect('/dashboard/banner')->with('success', 'Data Berhasil Ditambahkan');
     }

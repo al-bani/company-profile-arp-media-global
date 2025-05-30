@@ -7,6 +7,7 @@ use App\Http\Requests\StorepartnerRequest;
 use App\Http\Requests\UpdatepartnerRequest;
 use App\Models\perusahaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PartnerController extends Controller
 {
@@ -15,9 +16,14 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        $partners = Partner::all();
-
-        return view('admin.partner.homePartner', compact('partners'));
+        $role = Auth::user()->role;
+        if ($role === 'superAdmin') {
+            $partners = partner::all();
+        } else {
+            $admin = Auth::user();
+            $partners = partner::where('id_perusahaan', $admin->id_perusahaan)->get();
+        }
+        return view('admin.partner.homePartner', compact('partners', 'role'));
     }
 
     /**
@@ -25,12 +31,19 @@ class PartnerController extends Controller
      */
     public function create()
     {
-        $perusahaans = perusahaan::all();
+        $role = Auth::user()->role;
+        if ($role === 'superAdmin') {
+            $perusahaans = perusahaan::all();
+        } else {
+            $admin = Auth::user();
+            $perusahaans = perusahaan::where('id_perusahaan', $admin->id_perusahaan)->get();
+        }
         if ($perusahaans->isEmpty()) {
             return redirect('/dashboard/partner')->with('error', 'Tambahkan minimal 1 perusahaan terlebih dahulu!');
         }
         return view('admin.partner.createPartner', [
-            'perusahaans' => $perusahaans
+            'perusahaans' => $perusahaans,
+            'role' => $role
         ]);
     }
 
@@ -39,10 +52,14 @@ class PartnerController extends Controller
      */
     public function store(Request $request)
     {
+        $role = Auth::user()->role;
+        if ($role !== 'superAdmin') {
+            $admin = Auth::user();
+            $request->merge(['id_perusahaan' => $admin->id_perusahaan]);
+        }
         $id_partner =  $request->id_perusahaan . '_' . $request->nama_partner;
         $request->merge([
             'id_partner' => $id_partner,
-            // 'password' => bcrypt($request->password) // hash password juga di sini
         ]);
         $data = $request->all();
         if ($request->hasFile('foto')) {
@@ -51,7 +68,6 @@ class PartnerController extends Controller
             $request->file('foto')->move(public_path($destination), $filename);
             $data['foto'] = $destination . '/' . $filename;
         }
-
         partner::create($data);
         return redirect('/dashboard/partner')->with('success', 'Data Berhasil Ditambahkan');
     }
@@ -78,29 +94,27 @@ class PartnerController extends Controller
     public function update(Request $request, $id)
     {
         $partner = partner::findOrFail($id);
-
+        $role = Auth::user()->role;
+        if ($role !== 'superAdmin') {
+            $admin = Auth::user();
+            if ($partner->id_perusahaan !== $admin->id_perusahaan) {
+                abort(403, 'Unauthorized');
+            }
+        }
         $data = $request->except('_token', '_method');
-
-        // Handle file upload
         if ($request->hasFile('foto')) {
-            // Delete old file if exists
             if ($partner->foto && file_exists(public_path($partner->foto))) {
                 unlink(public_path($partner->foto));
             }
-
             $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
             $destination = 'image/upload/foto';
             $request->file('foto')->move(public_path($destination), $filename);
             $data['foto'] = $destination . '/' . $filename;
         }
-
-        // Update id_partner if nama_partner changed
         if ($request->nama_partner !== $partner->nama_partner) {
             $data['id_partner'] = $partner->id_perusahaan . '_' . $request->nama_partner;
         }
-
         $partner->update($data);
-
         return redirect()->route('partner.index')
             ->with('success', 'Data Partner berhasil diperbarui');
     }
@@ -110,14 +124,30 @@ class PartnerController extends Controller
      */
     public function destroy($id)
     {
-        partner::destroy($id);
+        $partner = partner::findOrFail($id);
+        $role = Auth::user()->role;
+        if ($role !== 'superAdmin') {
+            $admin = Auth::user();
+            if ($partner->id_perusahaan !== $admin->id_perusahaan) {
+                abort(403, 'Unauthorized');
+            }
+        }
+        $partner->delete();
         return redirect('/dashboard/partner')->with('success', 'Data Berhasil dihapus');
     }
 
     public function edit(partner $partner)
     {
+        $role = Auth::user()->role;
+        if ($role !== 'superAdmin') {
+            $admin = Auth::user();
+            if ($partner->id_perusahaan !== $admin->id_perusahaan) {
+                abort(403, 'Unauthorized');
+            }
+        }
         return view('admin.partner.partner-edit', [
-            'partner' => $partner
+            'partner' => $partner,
+            'role' => $role
         ]);
     }
 }

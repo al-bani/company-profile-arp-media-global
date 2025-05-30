@@ -13,9 +13,12 @@
 </head>
 
 <body>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/DataTables/datatables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
 
 </body>
 @stack('script')
+
 
 </html>

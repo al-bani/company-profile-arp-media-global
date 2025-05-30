@@ -32,7 +32,9 @@
                     </thead>
                     <tbody>
                         {{-- Contoh Data --}}
+                        @php $role = $role ?? 'admin'; @endphp
                         @foreach ($layanans as $layanan)
+                            @if ($role === 'superAdmin' || (isset($layanan->id_perusahaan) && $layanan->id_perusahaan == Auth::user()->id_perusahaan))
                             <tr>
                                 <td>{{ $layanan->perusahaan->nama_perusahaan }}</td>
                                 <td>{{ $layanan->nama_layanan }}</td>
@@ -53,6 +55,7 @@
                                     </a>
                                 </td>
                             </tr>
+                            @endif
                         @endforeach
 
                     </tbody>

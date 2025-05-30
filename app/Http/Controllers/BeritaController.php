@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateberitaRequest;
 use App\Models\berita_foto;
 use App\Models\perusahaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class BeritaController extends Controller
 {
@@ -16,10 +18,18 @@ class BeritaController extends Controller
      */
     public function index()
     {
-
+        $role = Auth::user()->role;
+        if ($role === 'superAdmin') {
+            $beritas = berita::all();
+        } else {
+            $admin = Auth::user();
+            $beritas = berita::where('id_perusahaan', $admin->id_perusahaan)->get();
+        }
+        $beritaFotos = berita_foto::all();
         return view('admin.berita.homeBerita', [
-            'beritas' => berita::all(),
-            'beritaFotos'=> berita_foto::all()
+            'beritas' => $beritas,
+            'beritaFotos' => $beritaFotos,
+            'role' => $role
         ]);
     }
 
@@ -28,12 +38,19 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        $perusahaans = perusahaan::all();
+        $role = Auth::user()->role;
+        if ($role === 'superAdmin') {
+            $perusahaans = perusahaan::all();
+        } else {
+            $admin = Auth::user();
+            $perusahaans = perusahaan::where('id_perusahaan', $admin->id_perusahaan)->get();
+        }
         if ($perusahaans->isEmpty()) {
             return redirect('/dashboard/berita')->with('error', 'Tambahkan minimal 1 perusahaan terlebih dahulu!');
         }
         return view('admin.berita.createBerita', [
-            'perusahaans' => $perusahaans
+            'perusahaans' => $perusahaans,
+            'role' => $role
         ]);
     }
 
@@ -42,33 +59,10 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
-        // Buat id_berita yang unik dengan menambahkan timestamp
-        $id_berita = 'berita' . '_' . $request->id_perusahaan . '_' . time();
-        $request->merge([
-            'id_berita' => $id_berita,
-            'penulis' => "wd",
-        ]);
-
-        // Simpan data berita
-        $berita = berita::create($request->all());
-
-        // Handle file uploads
-        if ($request->has('foto')) {
-            foreach ($request->foto as $item) {
-                if (isset($item['foto']) && $item['foto'] instanceof \Illuminate\Http\UploadedFile) {
-                    $filename = time() . '_' . $item['foto']->getClientOriginalName();
-                    $destination = 'image/upload/foto';
-                    $item['foto']->move(public_path($destination), $filename);
-
-                    // Simpan ke tabel berita_foto
-                    berita_foto::create([
-                        'id_berita' => $berita->id_berita,
-                        'id_berita_foto' => 'img' . $berita->id_berita . ($item['judul_foto'] ?? ''),
-                        'judul_foto' => $item['judul_foto'] ?? '',
-                        'foto' => $destination . '/' . $filename,
-                    ]);
-                }
-            }
+        $role = Auth::user()->role;
+        if ($role !== 'superAdmin') {
+            $admin = Auth::user();
+            $request->merge(['id_perusahaan' => $admin->id_perusahaan]);
         }
 
         return redirect('/dashboard/berita')->with('success', 'Data Berhasil Ditambahkan');
@@ -84,9 +78,17 @@ class BeritaController extends Controller
 
     public function edit(berita $berita)
     {
+        $role = Auth::user()->role;
+        if ($role !== 'superAdmin') {
+            $admin = Auth::user();
+            if ($berita->id_perusahaan !== $admin->id_perusahaan) {
+                abort(403, 'Unauthorized');
+            }
+        }
         return view('admin.berita.berita-edit', [
             'berita' => $berita,
-            'perusahaans' => perusahaan::all()
+            'perusahaans' => perusahaan::all(),
+            'role' => $role
         ]);
     }
 
@@ -105,28 +107,28 @@ class BeritaController extends Controller
     public function update(Request $request, $id)
     {
         $berita = berita::findOrFail($id);
+        $role = Auth::user()->role;
+        if ($role !== 'superAdmin') {
+            $admin = Auth::user();
+            if ($berita->id_perusahaan !== $admin->id_perusahaan) {
+                abort(403, 'Unauthorized');
+            }
+        }
         $data = $request->except('_token', '_method', 'foto');
-
-        // Update id_berita if needed
         if ($request->id_perusahaan !== $berita->id_perusahaan) {
             $data['id_berita'] = 'berita' . '_' . $request->id_perusahaan . '_' . $id;
         }
-
-        // Handle file uploads
         if ($request->has('foto')) {
             foreach ($request->foto as $item) {
                 if (isset($item['foto']) && $item['foto'] instanceof \Illuminate\Http\UploadedFile) {
-                    // Hapus foto lama jika ada
                     $oldFoto = berita_foto::where('id_berita', $berita->id_berita)->first();
                     if ($oldFoto && file_exists(public_path($oldFoto->foto))) {
                         unlink(public_path($oldFoto->foto));
                     }
-
-                    $filename = time() . '_' . $item['foto']->getClientOriginalName();
+                    $extension = $item['foto']->getClientOriginalExtension();
+                    $filename = Str::random(16) . '.' . $extension;
                     $destination = 'image/upload/foto';
                     $item['foto']->move(public_path($destination), $filename);
-
-                    // Update atau buat baru berita_foto
                     berita_foto::updateOrCreate(
                         ['id_berita' => $berita->id_berita],
                         [
@@ -138,7 +140,6 @@ class BeritaController extends Controller
                 }
             }
         }
-
         $berita->update($data);
         return redirect('/dashboard/berita')->with('success', 'Berita berhasil diperbarui');
     }
@@ -148,7 +149,15 @@ class BeritaController extends Controller
      */
     public function destroy($id)
     {
-        berita::destroy($id);
+        $berita = berita::findOrFail($id);
+        $role = Auth::user()->role;
+        if ($role !== 'superAdmin') {
+            $admin = Auth::user();
+            if ($berita->id_perusahaan !== $admin->id_perusahaan) {
+                abort(403, 'Unauthorized');
+            }
+        }
+        $berita->delete();
         return redirect('/dashboard/berita')->with('success', 'Data Berhasil dihapus');
     }
 }

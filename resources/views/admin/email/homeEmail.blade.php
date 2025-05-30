@@ -15,6 +15,7 @@
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Pesan</th>
+                            <th>Perusahaan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -24,6 +25,7 @@
                                 <td>{{ $email->nama }}</td>
                                 <td>{{ $email->email }}</td>
                                 <td>{{ Str::limit($email->pesan, 50) }}</td>
+                                <td>{{ $email->perusahaan->nama_perusahaan ?? '-' }}</td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
                                         data-bs-target="#detailEmail{{ $loop->iteration }}">
@@ -93,6 +95,10 @@
                                 <div class="mb-3">
                                     <label class="form-label">Pesan</label>
                                     <textarea class="form-control" rows="4" readonly>{{ $email->pesan }}</textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Perusahaan</label>
+                                    <input type="text" class="form-control" value="{{ $email->perusahaan->nama_perusahaan ?? '-' }}" readonly>
                                 </div>
                             </div>
                             <div class="modal-footer border-0">

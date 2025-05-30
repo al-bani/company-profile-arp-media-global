@@ -9,4 +9,16 @@ class email extends Model
 {
     /** @use HasFactory<\Database\Factories\EmailFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'nama',
+        'email',
+        'pesan',
+        'id_perusahaan'
+    ];
+
+    public function perusahaan()
+    {
+        return $this->belongsTo(perusahaan::class, 'id_perusahaan', 'id_perusahaan');
+    }
 }

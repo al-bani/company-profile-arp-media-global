@@ -38,7 +38,9 @@
                     </thead>
                     <tbody>
                         {{-- Contoh Data --}}
+                        @php $role = $role ?? 'admin'; @endphp
                         @foreach ($partners as $partner)
+                            @if ($role === 'superAdmin' || (isset($partner->id_perusahaan) && $partner->id_perusahaan == Auth::user()->id_perusahaan))
                             <tr>
                                 <td>{{ $partner->nama_partner }}</td>
                                 <td>{{ $partner->email }}</td>
@@ -47,8 +49,6 @@
                                         <img src="{{ asset($partner->foto) }}" alt="Logo" width="100">
                                     @endif
                                 </td>
-
-
                                 <td>
                                     <a href="/dashboard/partner/{{ $partner->id }}/edit"
                                         class="btn btn-warning btn-sm">
@@ -58,13 +58,13 @@
                                         data-bs-target="#detailPartner{{ $loop->iteration }}">
                                         <i class="fas fa-eye"></i>
                                     </a>
-
                                     <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#deletePartner{{ $loop->iteration }}">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </td>
                             </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>

@@ -17,6 +17,7 @@
                         <tr>
                             <th>Pertanyaan</th>
                             <th>Jawaban</th>
+                            <th>Perusahaan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -25,6 +26,7 @@
                             <tr>
                                 <td>{{ Str::limit($faq->pertanyaan, 50) }}</td>
                                 <td>{{ Str::limit($faq->jawaban, 50) }}</td>
+                                <td>{{ $faq->perusahaan->nama_perusahaan ?? '-' }}</td>
                                 <td>
                                     <a href="{{ route('faq.edit', $faq->id) }}"
                                         class="btn btn-warning btn-sm">
@@ -97,6 +99,10 @@
                                 <div class="mb-3">
                                     <label class="form-label">Jawaban</label>
                                     <textarea class="form-control" rows="4" readonly>{{ $faq->jawaban }}</textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Perusahaan</label>
+                                    <input class="form-control" value="{{ $faq->perusahaan->nama_perusahaan ?? '-' }}" readonly />
                                 </div>
                             </div>
                             <div class="modal-footer border-0">

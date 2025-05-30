@@ -2,6 +2,8 @@
     {{-- Load CKEditor --}}
     <script src="/ckeditor/ckeditor.js"></script>
 
+    @php $role = $role ?? 'admin'; @endphp
+
     <div class="container-fluid">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -29,10 +31,12 @@
                         <label for="id_perusahaan">Perusahaan</label>
                         <select class="ms-1 form-select btn btn-secondary" name="id_perusahaan" id="id_perusahaan" required>
                             @foreach ($perusahaans as $perusahaan)
+                                @if ($role === 'superAdmin' || $perusahaan->id_perusahaan == Auth::user()->id_perusahaan)
                                 <option value="{{ $perusahaan->id_perusahaan }}"
                                     {{ old('id_perusahaan', $berita->id_perusahaan) == $perusahaan->id_perusahaan ? 'selected' : '' }}>
                                     {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
                                 </option>
+                                @endif
                             @endforeach
                         </select>
                     </div>

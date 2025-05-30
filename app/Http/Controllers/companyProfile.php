@@ -16,36 +16,67 @@ class companyProfile extends Controller
 {
     public function index()
     {
-        return view('company-profile.homepage');
+        // return view('company-profile.homepage');
+
+        $id_perusahaan = 'induk_ARP Global Media_2102220087754'; // atau bisa dari session, auth, atau parameter
+        $perusahaan = Perusahaan::with([
+            'banner',
+            'layanan',
+            'partner',
+            'berita.beritaFoto',
+            'portofolio.portofolioFoto'
+        ])->where('id_perusahaan', $id_perusahaan)->first();
+
+        $banners = $perusahaan->banner;
+        $layanans = $perusahaan->layanan;
+        $partners = $perusahaan->partner;
+        $beritas = $perusahaan->berita;
+        $portofolios = $perusahaan->portofolio;
+        // dd($perusahaan->banner);
+
+         if (!$perusahaan) {
+            abort(404, 'Perusahaan tidak ditemukan.');
+        }
+        return view('company-profile.homePage', [
+            'perusahaans' => $perusahaan,
+            'banners' => $banners,
+            'layanans' => $layanans,
+            'partners' => $partners,
+            'beritas' => $beritas,
+            'portofolios' => $portofolios
+        ]);
     }
     public function ujiCoba()
     {
-        return view('company-profile.ujicobaHomepage', [
-            'perusahaans' => perusahaan::all(),
-            'banners' => banner::all(),
-            'layanans' => layanan::all(),
-            'partners' => partner::all(),
-            'beritas' => berita::all(),
-            'portofolios' => portofolio::all(),
-            'beritaFotos' => berita_foto::all(),
-            'portofolioFoto' => portofolio_foto::all()
-        ]);
+        // return view('company-profile.ujicobaHomepage', [
+        //     'perusahaans' => perusahaan::all(),
+        //     'banners' => banner::all(),
+        //     'layanans' => layanan::all(),
+        //     'partners' => partner::all(),
+        //     'beritas' => berita::all(),
+        //     'portofolios' => portofolio::all(),
+        //     'beritaFotos' => berita_foto::all(),
+        //     'portofolioFoto' => portofolio_foto::all()
+        // ]);
 
         // ALTERNATE
 
-        // $id_perusahaan = 1; // atau bisa dari session, auth, atau parameter
+        $id_perusahaan = 'induk_ARP Global Media_2102220087754'; // atau bisa dari session, auth, atau parameter
+        $perusahaan = Perusahaan::with([
+            'banner',
+            'layanan',
+            'partner',
+            'berita.beritaFoto',
+            'portofolio.portofolioFoto'
+        ])->where('id_perusahaan', $id_perusahaan)->first();
 
-        // $perusahaan = Perusahaan::with([
-        //     'banner',
-        //     'layanan',
-        //     'partner',
-        //     'berita.beritaFoto',         // Nested relasi: berita + foto
-        //     'portofolio.portofolioFoto'  // Nested relasi: portofolio + foto
-        // ])->findOrFail($id_perusahaan);
+        if (!$perusahaan) {
+            abort(404, 'Perusahaan tidak ditemukan.');
+        }
 
-        // return view('company-profile.ujicobaHomepage', [
-        //     'perusahaans' => $perusahaan
-        // ]);
+        return view('company-profile.ujicobaHomepage', [
+            'perusahaans' => $perusahaan
+        ]);
     }
 
     public function berita()

@@ -9,6 +9,7 @@
             </div>
 
             <div class="card-body">
+                @php $role = $role ?? 'admin'; @endphp
                 <form action="/dashboard/berita" method="POST" enctype="multipart/form-data">
                     @csrf
 
@@ -25,12 +26,8 @@
                         <select class="ms-1 form-select btn btn-secondary" aria-label="Default select example"
                             name="id_perusahaan" id="id_perusahaan">
                             @foreach ($perusahaans as $perusahaan)
-                                @if (old('id_perusahaan') == $perusahaan->id_perusahaan)
-                                    <option value="{{ $perusahaan->id_perusahaan }}" selected>
-                                        {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
-                                    </option>
-                                @else
-                                    <option value="{{ $perusahaan->id_perusahaan }}" selected>
+                                @if ($role === 'superAdmin' || $perusahaan->id_perusahaan == Auth::user()->id_perusahaan)
+                                    <option value="{{ $perusahaan->id_perusahaan }}" {{ old('id_perusahaan') == $perusahaan->id_perusahaan ? 'selected' : '' }}>
                                         {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
                                     </option>
                                 @endif
@@ -73,7 +70,7 @@
                                 </div>
                                 <div>
                                     <label>Foto</label>
-                                    <input type="file" name="foto" class="form-control" placeholder="foto"
+                                    <input type="file" name="foto[0][foto]" class="form-control" placeholder="foto"
                                         accept="image/*" onchange="validateFileSize(this)">
                                 </div>
                             </div>

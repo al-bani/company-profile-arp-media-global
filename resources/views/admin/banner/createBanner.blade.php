@@ -28,12 +28,8 @@
                     <select class="ms-1 form-select btn btn-secondary" aria-label="Default select example"
                         name="id_perusahaan" id="id_perusahaan">
                         @foreach ($perusahaans as $perusahaan)
-                            @if (old('id_perusahaan') == $perusahaan->id_perusahaan)
-                                <option value="{{ $perusahaan->id_perusahaan }}" selected>
-                                    {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
-                                </option>
-                            @else
-                                <option value="{{ $perusahaan->id_perusahaan }}" selected>
+                            @if ($role === 'superAdmin' || $perusahaan->id_perusahaan == Auth::user()->id_perusahaan)
+                                <option value="{{ $perusahaan->id_perusahaan }}" {{ old('id_perusahaan', $banner->id_perusahaan ?? '') == $perusahaan->id_perusahaan ? 'selected' : '' }}>
                                     {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
                                 </option>
                             @endif
@@ -46,7 +42,7 @@
                                 style="height: 13.5rem; object-fit: cover;">
                             <div class="card-body">
                                 <p class="card-text">Upload Banner</p>
-                                <input type="file" id="logo" name="logo" class="form-control" accept="image/*"
+                                <input type="file" id="foto" name="foto" class="form-control" accept="image/*"
                                     onchange="previewImage(event)" required>
                             </div>
                         </div>

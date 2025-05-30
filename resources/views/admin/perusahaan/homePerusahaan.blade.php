@@ -1,4 +1,4 @@
-{{-- @extends('Layout.layoutAdmin') --}}
+@extends('Layout.layoutAdmin')
 
 <x-layout>
 
@@ -242,15 +242,10 @@
     </div>
 
     @push('script')
-        <!-- jQuery dan DataTables -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function() {
                 $('#example').DataTable();
             });
         </script>
-
-        <!-- Bootstrap Bundle JS (sudah termasuk Popper.js) -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @endpush
 </x-layout>

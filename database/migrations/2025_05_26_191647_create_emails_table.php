@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->id();
+            $table->string('id_perusahaan');
             $table->string('nama');
             $table->string('email');
             $table->text('pesan');

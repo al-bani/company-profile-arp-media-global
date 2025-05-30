@@ -35,7 +35,9 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php $role = $role ?? 'admin'; @endphp
                         @foreach ($beritas as $berita)
+                            @if ($role === 'superAdmin' || (isset($berita->id_perusahaan) && $berita->id_perusahaan == Auth::user()->id_perusahaan))
                             <tr>
                                 <td>{{ $berita->id_berita }}</td>
                                 <td>{{ $berita->judul }}</td>
@@ -56,6 +58,7 @@
                                     </a>
                                 </td>
                             </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>

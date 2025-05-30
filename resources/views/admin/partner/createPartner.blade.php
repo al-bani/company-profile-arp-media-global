@@ -9,6 +9,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Formulir Data Partner</h6>
         </div>
         <div class="card-body">
+            @php $role = $role ?? 'admin'; @endphp
             <form action="/dashboard/partner" method="POST" enctype="multipart/form-data">
                 @csrf
                 <!-- Nama Partner -->
@@ -40,12 +41,8 @@
                     <select class="ms-1 form-select btn btn-secondary" aria-label="Default select example"
                         name="id_perusahaan" id="id_perusahaan">
                         @foreach ($perusahaans as $perusahaan)
-                            @if (old('id_perusahaan') == $perusahaan->id_perusahaan)
-                                <option value="{{ $perusahaan->id_perusahaan }}" selected>
-                                    {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
-                                </option>
-                            @else
-                                <option value="{{ $perusahaan->id_perusahaan }}" selected>
+                            @if ($role === 'superAdmin' || $perusahaan->id_perusahaan == Auth::user()->id_perusahaan)
+                                <option value="{{ $perusahaan->id_perusahaan }}" {{ old('id_perusahaan') == $perusahaan->id_perusahaan ? 'selected' : '' }}>
                                     {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
                                 </option>
                             @endif

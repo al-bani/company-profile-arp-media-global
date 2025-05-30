@@ -64,6 +64,38 @@ class BeritaController extends Controller
             $admin = Auth::user();
             $request->merge(['id_perusahaan' => $admin->id_perusahaan]);
         }
+        $id_berita = 'berita' . '_' . $request->id_perusahaan . '_' . $request->id;
+        $request->merge([
+            'id_berita' => $id_berita,
+            // 'password' => bcrypt($request->password) // hash password juga di sini
+        ]);
+        $data = $request->all();
+        if ($request->hasFile('foto')) {
+            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
+            $destination = 'image/upload/foto';
+            $request->file('foto')->move(public_path($destination), $filename);
+            $data['foto'] = $destination . '/' . $filename;
+        }
+
+        berita::create($data);
+
+        // if ($request->has('foto')) {
+        //     foreach ($request->foto as $item) {
+        //         if (isset($item['foto']) && $item['foto'] instanceof \Illuminate\Http\UploadedFile) {
+        //             $filename = time() . '_' . $item['foto']->getClientOriginalName();
+        //             $destination = 'image/upload/foto';
+        //             $item['foto']->move(public_path($destination), $filename);
+
+        //             berita_foto::create([
+        //                 'id_berita' => $request->id_berita,
+        //                 'id_berita_foto' => 'img'.$request->id_berita.$item['judul_foto'],
+        //                 'judul_foto' => $item['judul_foto'] ?? '',
+        //                 'foto' => $destination . '/' . $filename,
+        //             ]);
+        //         }
+        //     }
+        // }
+
 
         return redirect('/dashboard/berita')->with('success', 'Data Berhasil Ditambahkan');
     }

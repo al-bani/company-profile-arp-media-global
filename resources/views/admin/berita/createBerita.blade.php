@@ -19,6 +19,12 @@
                         <input type="text" name="judul" id="judul" class="form-control"
                             placeholder="Masukkan judul berita" oninput="previewJudul()">
                     </div>
+                    {{-- penulis  --}}
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Judul Berita</label>
+                        <input type="text" name="penulis" id="penulis" class="form-control"
+                            placeholder="" value="{{Auth::user()->nama_admin}}">
+                    </div>
 
                     {{-- perusahaan --}}
                     <div class="mb-3">
@@ -65,12 +71,12 @@
                             <div id="input-container-image" class="image-group mb-3">
                                 <div class="mb-2">
                                     <label>Judul Foto</label>
-                                    <input class="form-control" type="text" name="foto[0][judul_foto]"
+                                    <input class="form-control" type="text" name="judul_foto"
                                         class="form-control" placeholder="Masukkan Judul Foto">
                                 </div>
                                 <div>
                                     <label>Foto</label>
-                                    <input type="file" name="foto[0][foto]" class="form-control" placeholder="foto"
+                                    <input type="file" name="foto" class="form-control" placeholder="foto"
                                         accept="image/*" onchange="validateFileSize(this)">
                                 </div>
                             </div>

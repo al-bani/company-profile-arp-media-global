@@ -88,9 +88,11 @@ class BannerController extends Controller
      */
     public function edit(banner $banner)
     {
+         $role = Auth::user()->role;
         return view('admin.banner.banner-edit', [
             'banner' => $banner,
-            'perusahaans' => perusahaan::all()
+            'perusahaans' => perusahaan::all(),
+            'role' => $role
         ]);
     }
 

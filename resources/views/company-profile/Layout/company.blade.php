@@ -24,17 +24,20 @@
 <body>
 
     {{-- Header --}}
-    <nav class="navbar navbar-expand-lg w-100 sticky-top shadow ">
+    <nav class="navbar navbar-expand-lg w-100 sticky-top shadow">
         <div class="container-fluid">
-            <img class="nav-logo navbar-brand ms-3 " src="{{ asset('images/logo-AGM.png') }}"></img>
+            <img class="nav-logo navbar-brand ms-3" src="{{ asset('images/logo-AGM.png') }}"></img>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse " id="navbarNav">
+
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto d-flex gap-5 me-5">
                     <li class="nav-item dropdown">
-                        <a class="nav-link  d-lg-none d-flex justify-content-between align-items-center"
+                        <!-- MOBILE Toggle -->
+                        <a class="nav-link d-lg-none d-flex justify-content-between align-items-center"
                             data-bs-toggle="collapse" href="#submenuMobilePerusahaan" role="button"
                             aria-expanded="false" aria-controls="submenuMobilePerusahaan">
                             Perusahaan
@@ -50,12 +53,14 @@
                             <a class="dropdown-item" href="#">Len Technopark</a>
                         </div>
 
-                        <!-- versi desktop tetap pakai dropdown-menu biasa -->
-                        <a class="nav-link dropdown-toggle d-none d-lg-block" href="#" id="submenuDesktopPerusahaan"
-                            data-bs-toggle="dropdown" aria-expanded="false" aria-controls="submenuDesktopPerusahaan">
+                        <!-- DESKTOP dropdown toggle -->
+                        <a class="nav-link dropdown-toggle d-none d-lg-block" href="#" id="dropdownPerusahaan"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Perusahaan
                         </a>
-                        <ul class="dropdown-menu custom-dropdown d-none d-lg-block" id="submenuDesktopPerusahaan" aria-labelledby="dropdownMenu">
+
+                        <!-- DESKTOP dropdown menu -->
+                        <ul class="dropdown-menu custom-dropdown" aria-labelledby="dropdownPerusahaan">
                             <li><a class="dropdown-item" href="#">Tentang Perusahaan</a></li>
                             <li><a class="dropdown-item" href="#">Manajemen</a></li>
                             <li><a class="dropdown-item" href="#">Tata Kelola Perusahaan</a></li>
@@ -65,19 +70,19 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Berita</a>
+                        <a class="nav-link" href="#">Berita</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="/layanan">Layanan</a>
+                        <a class="nav-link" href="/layanan">Layanan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="/kontak" aria-disabled="true">Kontak</a>
+                        <a class="nav-link" href="/kontak">Kontak</a>
                     </li>
                 </ul>
             </div>
         </div>
-
     </nav>
+
 
     <main>
         @yield('content')
@@ -118,8 +123,15 @@
             }
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Bersihkan dropdown desktop agar tidak otomatis muncul
+        document.querySelectorAll(".dropdown-menu").forEach(function(dropdown) {
+            dropdown.classList.remove("show");
+        });
+    });
 </script>
 
 
-</html>
 
+</html>

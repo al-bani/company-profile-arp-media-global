@@ -5,15 +5,32 @@
         $logos = ['bi.png', 'bjb.png', 'disdik.png', 'diskominfo.png', 'ojk.png', 'unpad.png'];
     @endphp
 
+    @php
+        $subsidiaries = [
+            ['name' => 'Perusahaan A', 'image' => 'unpad.png'],
+            ['name' => 'Perusahaan B', 'image' => 'unpad.png'],
+            ['name' => 'Perusahaan C', 'image' => 'unpad.png'],
+            ['name' => 'Perusahaan D', 'image' => 'unpad.png'],
+            ['name' => 'Perusahaan E', 'image' => 'unpad.png'],
+        ];
+    @endphp
+
     <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
-            @foreach ($banners as $foto)
-                <div class="carousel-item active">
-                    <img src="{{ asset($foto->foto) }}" class="corousel-img d-block w-100" alt="Slide 1">
+            @foreach ($banners as $index => $foto)
+                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                    <!-- Gambar -->
+                    <img src="{{ asset($foto->foto) }}" class="carousel-img d-block w-100" alt="Slide {{ $index + 1 }}">
+
+                    <!-- Overlay Teks -->
+                    <div class="carousel-text-overlay">
+                        <h2>{{ $foto->judul ?? 'Judul Banner' }}</h2>
+                        <p>{{ $foto->deskripsi ?? 'Deskripsi singkat banner' }}</p>
+                    </div>
                 </div>
             @endforeach
-
         </div>
+
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -23,6 +40,9 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+
+
+
 
     {{-- Layanan --}}
     <div class="container pt-5 ">
@@ -39,29 +59,6 @@
                     </div>
                 </div>
             @endforeach
-            {{-- <div class="custom-card">
-                <div class="img-box"><img
-                        src="https://images.unsplash.com/photo-1682686578023-dc680e7a3aeb?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
-                </div>
-                <div class="custom-content">
-                    <h2>Media Advertising</h2>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto, hic? Magnam eum error saepe
-                        doloribus corrupti repellat quisquam alias doloremque!</p>
-                    <a href="">Read More</a>
-                </div>
-            </div>
-            <div class="custom-card">
-                <div class="img-box"><img
-                        src="https://images.unsplash.com/photo-1682686580224-cd46ea1a6950?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
-                </div>
-                <div class="custom-content">
-                    <h2>Pengelolaan Sampah</h2>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto, hic? Magnam eum error saepe
-                        doloribus corrupti repellat quisquam alias doloremque!</p>
-                    <a href="">Read More</a>
-
-                </div>
-            </div> --}}
         </div>
     </div>
 
@@ -102,6 +99,31 @@
         </div>
     </div>
 
+    <!-- Anak Perusahaan -->
+    <div class="container pt-5">
+        <h1 class="text-center h1">Anak Perusahaan</h1>
+        <div class="subsidiary-container">
+            @if ($perusahaans->status === 'induk')
+                @foreach ($anaks as $perusahaan)
+                    @if ($perusahaan->status === 'anak')
+                        <div class="subsidiary-card">
+                            <div class="subsidiary-img-box">
+                                <img src="{{ asset($perusahaan->logo) }}" alt="">
+                            </div>
+                            <div class="subsidiary-content">
+                                <h2>{{ $perusahaan->nama_perusahaan }}</h2>
+
+                                <a href="/{{ $perusahaan->nama_perusahaan }}">Read More</a>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            @endif
+
+        </div>
+    </div>
+
+
     {{-- Klien --}}
     <div class="client-section  bg-white ">
         <div class="container text-center">
@@ -111,7 +133,8 @@
 
                     @foreach ($partners as $partner)
                         <div class="px-3">
-                            <img src="{{ asset($partner->foto) }}" alt="Logo Klien" class="img-fluid" style="height: 70px;">
+                            <img src="{{ asset($partner->foto) }}" alt="Logo Klien" class="img-fluid"
+                                style="height: 70px;">
                         </div>
                     @endforeach
 
@@ -123,3 +146,4 @@
 <style>
 
 </style>
+

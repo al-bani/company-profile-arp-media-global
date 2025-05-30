@@ -23,7 +23,7 @@ class companyProfile extends Controller
             'banner',
             'layanan',
             'partner',
-            'berita.beritaFoto',
+            'berita',
             'portofolio.portofolioFoto'
         ])->where('id_perusahaan', $id_perusahaan)->first();
 
@@ -32,6 +32,8 @@ class companyProfile extends Controller
         $partners = $perusahaan->partner;
         $beritas = $perusahaan->berita;
         $portofolios = $perusahaan->portofolio;
+        $anak = perusahaan::all();
+        // dd($anak);
         // dd($perusahaan->banner);
 
          if (!$perusahaan) {
@@ -43,9 +45,49 @@ class companyProfile extends Controller
             'layanans' => $layanans,
             'partners' => $partners,
             'beritas' => $beritas,
-            'portofolios' => $portofolios
+            'portofolios' => $portofolios,
+            'anaks' => $anak
         ]);
     }
+
+    public function show($nama_perusahaan)
+    {
+        // return view('company-profile.homepage');
+
+        // $nama_perusahan = 'induk_ARP Global Media_2102220087754'; // atau bisa dari session, auth, atau parameter
+        $perusahaan = Perusahaan::with([
+            'banner',
+            'layanan',
+            'partner',
+            'berita',
+            'portofolio.portofolioFoto'
+            ])->where('nama_perusahaan', $nama_perusahaan)->first();
+
+            // dd($perusahaan);
+        $banners = $perusahaan->banner;
+        $layanans = $perusahaan->layanan;
+        $partners = $perusahaan->partner;
+        $beritas = $perusahaan->berita;
+        $portofolios = $perusahaan->portofolio;
+        $anak = perusahaan::all();
+        // dd($anak);
+        // dd($perusahaan->banner);
+
+         if (!$perusahaan) {
+            abort(404, 'Perusahaan tidak ditemukan.');
+        }
+        return view('company-profile.homePage', [
+            'perusahaans' => $perusahaan,
+            'banners' => $banners,
+            'layanans' => $layanans,
+            'partners' => $partners,
+            'beritas' => $beritas,
+            'portofolios' => $portofolios,
+            'anaks' => $anak
+        ]);
+    }
+
+
     public function ujiCoba()
     {
         // return view('company-profile.ujicobaHomepage', [

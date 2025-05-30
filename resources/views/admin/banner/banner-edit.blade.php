@@ -66,7 +66,7 @@
                             style="height: 13.5rem; object-fit: cover;">
                         <div class="card-body">
                             <p class="card-text">Upload Banner</p>
-                            <input type="file" id="logo" name="logo" class="form-control" accept="image/*"
+                            <input type="file" id="foto" name="foto" class="form-control" accept="image/*"
                                 onchange="previewImage(event)" required>
                         </div>
                     </div>

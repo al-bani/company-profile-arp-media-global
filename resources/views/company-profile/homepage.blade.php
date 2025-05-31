@@ -72,7 +72,7 @@
                 <div class="col-lg-7">
                     <h3 class="fw-bold mb-3">PROFILE PERUSAHAAN</h3>
                     <p class="mb-4">{!! $perusahaans->deskripsi !!}</p>
-                    <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
+                    <a href="/detail/{{$perusahaans->nama_perusahaan}}" class="btn btn-primary">Baca Selengkapnya</a>
                 </div>
             </div>
         </div>
@@ -146,4 +146,3 @@
 <style>
 
 </style>
-

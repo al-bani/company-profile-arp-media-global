@@ -25,15 +25,16 @@ Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->na
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
+Route::get('/set-perusahaan/{id}', [CompanyProfile::class, 'setPerusahaan']);
 Route::get('/', [companyProfile::class, 'index']);
-Route::get('/{nama_perusahaan}', [companyProfile::class, 'show'])->name('perusahaan.show');
 Route::get('/ujiCoba', [companyProfile::class, 'ujiCoba']);
-Route::get('/berita', [companyProfile::class, 'berita']);
-Route::get('/detail', [companyProfile::class, 'detail']);
-Route::get('/kontak', [companyProfile::class, 'kontak']);
-Route::get('/layanan', [companyProfile::class, 'layanan']);
-Route::get('/portofolio', [companyProfile::class, 'portofolio']);
-Route::get('/struktur', [companyProfile::class, 'struktur']);
+Route::get('/berita/{nama_perusahaan}', [companyProfile::class, 'berita']);
+Route::get('/detail/{nama_perusahaan}', [companyProfile::class, 'detail']);
+Route::get('/kontak/{nama_perusahaan}', [companyProfile::class, 'kontak']);
+Route::get('/layanan/{nama_perusahaan}', [companyProfile::class, 'layanan']);
+Route::get('/struktur/{nama_perusahaan}', [companyProfile::class, 'struktur']);
+Route::get('/portofolio/{nama_perusahaan}', [companyProfile::class, 'portofolio']);
+Route::get('/{nama_perusahaan}', [companyProfile::class, 'show'])->name('perusahaan.show');
 
 // khusus admin
 // Route::get('/login', [DashboardController::class, 'login']);

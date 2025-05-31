@@ -1,4 +1,4 @@
-@extends('layout.company')
+@extends('company-profile.Layout.company')
 
 @section('content')
     <link href="{{ asset('css/portofolio.css') }}" rel="stylesheet" type="text/css">
@@ -12,13 +12,13 @@
             <div class="col-md-3 mb-4">
                 <div class="card">
                         <div class="card-inner">
-                            <div class="card-front" style="background-image: url('{{ asset('images/test1.jpeg') }}');">
+                            <div class="card-front" style="background-image: url('{{ asset('images/homepage.png') }}');">
                                 <div class="overlay p-4">
                                     <h1 class="fst-italic fw-bold h3">JUDUL PROJECT</h1>
                                 </div>
                             </div>
                             <div class="card-back p-4 position-relative"
-                            style="background-image: url('{{ asset('images/test1.jpeg') }}'); background-size: cover; background-position: center;" >
+                            style="background-image: url('{{ asset('images/homepage.png') }}'); background-size: cover; background-position: center;" >
                             <div class="bg-dark bg-opacity-75 position-absolute top-0 start-0 w-100 h-100"
                             style="z-index: 1;"></div>
                             <div class="position-relative" style="z-index: 2;">

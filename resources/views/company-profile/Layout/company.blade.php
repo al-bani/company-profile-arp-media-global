@@ -19,6 +19,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
 
+
 </head>
 
 <body>
@@ -26,7 +27,9 @@
     {{-- Header --}}
     <nav class="navbar navbar-expand-lg w-100 sticky-top shadow">
         <div class="container-fluid">
-            <img class="nav-logo navbar-brand ms-3" src="{{ asset('images/logo-AGM.png') }}"></img>
+            <a href="/" class="navbar-brand ms-3">
+                <img class="nav-logo" src="{{ asset($perusahaans->logo) }}" alt="Logo">
+            </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,11 +49,9 @@
 
                         <!-- submenu khusus mobile -->
                         <div class="collapse d-lg-none ps-3" id="submenuMobilePerusahaan">
-                            <a class="dropdown-item" href="#">Tentang Perusahaan</a>
-                            <a class="dropdown-item" href="#">Manajemen</a>
-                            <a class="dropdown-item" href="#">Tata Kelola Perusahaan</a>
-                            <a class="dropdown-item" href="#">Keberlanjutan</a>
-                            <a class="dropdown-item" href="#">Len Technopark</a>
+                            <a class="dropdown-item" href="/detail/{{$perusahaans->nama_perusahaan}}">Detail Perusahaan</a>
+                            <a class="dropdown-item" href="/portofolio/{{$perusahaans->nama_perusahaan}}">Portofolio</a>
+                            <a class="dropdown-item" href="/struktur/{{$perusahaans->nama_perusahaan}}">Struktur Organisasi</a>
                         </div>
 
                         <!-- DESKTOP dropdown toggle -->
@@ -61,16 +62,15 @@
 
                         <!-- DESKTOP dropdown menu -->
                         <ul class="dropdown-menu custom-dropdown" aria-labelledby="dropdownPerusahaan">
-                            <li><a class="dropdown-item" href="#">Tentang Perusahaan</a></li>
-                            <li><a class="dropdown-item" href="#">Manajemen</a></li>
-                            <li><a class="dropdown-item" href="#">Tata Kelola Perusahaan</a></li>
-                            <li><a class="dropdown-item" href="#">Keberlanjutan</a></li>
-                            <li><a class="dropdown-item" href="#">Len Technopark</a></li>
+                            <li><a class="dropdown-item" href="/detail/{{$perusahaans->nama_perusahaan}}">Tentang Perusahaan</a></li>
+                            <li><a class="dropdown-item" href="/portofolio/{{$perusahaans->nama_perusahaan}}">Portofolio</a></li>
+                            <li><a class="dropdown-item" href="/struktur/{{$perusahaans->nama_perusahaan}}">Struktur Organisasi</a></li>
+
                         </ul>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Berita</a>
+                        <a class="nav-link" href="/berita">Berita</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/layanan">Layanan</a>
@@ -123,15 +123,7 @@
             }
         });
     });
-
-    document.addEventListener("DOMContentLoaded", function() {
-        // Bersihkan dropdown desktop agar tidak otomatis muncul
-        document.querySelectorAll(".dropdown-menu").forEach(function(dropdown) {
-            dropdown.classList.remove("show");
-        });
-    });
 </script>
-
 
 
 </html>

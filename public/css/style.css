@@ -113,34 +113,60 @@
     }
 }
 
-/* Untuk Navbar */
+/* Navbar dasar */
+.nav-link {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 400;
+}
 
+/* Garis bawah animasi saat hover */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px; /* beri jarak agar tidak menabrak teks */
+    width: 100%;
+    height: 2px;
+    background-color: #007BFF;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #007BFF;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* Dropdown khusus desktop */
 .custom-dropdown {
     width: 250px;
-    /* sesuaikan sesuai kebutuhan */
     border-radius: 0;
     padding: 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Item dalam dropdown */
+/* Item dropdown */
 .custom-dropdown .dropdown-item {
     padding: 12px 20px;
     border-bottom: 1px solid #e0e0e0;
     font-size: 16px;
     color: #444;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Hover efek */
+/* Hover efek dropdown */
 .custom-dropdown .dropdown-item:hover {
     background-color: #f8f9fa;
     color: #6499e9;
-    font-weight: bold;
-}
-
-.nav-link:hover {
-    color: #6499e9;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 /* Hapus garis di item terakhir */
@@ -148,9 +174,20 @@
     border-bottom: none;
 }
 
-/* Judul menu berwarna merah di navbar */
+/* Judul menu berwarna merah di navbar (jika digunakan) */
 .nav-link.text-danger {
     color: red !important;
+}
+
+/* Bootstrap Icons fix (penting agar ikon muncul) */
+.bi {
+    font-family: "bootstrap-icons" !important;
+    font-style: normal;
+    font-weight: normal;
+    display: inline-block !important;
+    vertical-align: middle;
+    font-size: 1rem;
+    color: inherit;
 }
 
 

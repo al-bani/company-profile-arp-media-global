@@ -14,11 +14,14 @@ use Illuminate\Http\Request;
 
 class companyProfile extends Controller
 {
+
     public function index()
     {
         // return view('company-profile.homepage');
 
         $id_perusahaan = 'induk_ARP Global Media_2102220087754'; // atau bisa dari session, auth, atau parameter
+
+        // session(['id_perusahaan' => $id_perusahaan]);
         $perusahaan = Perusahaan::with([
             'banner',
             'layanan',
@@ -36,7 +39,7 @@ class companyProfile extends Controller
         // dd($anak);
         // dd($perusahaan->banner);
 
-         if (!$perusahaan) {
+        if (!$perusahaan) {
             abort(404, 'Perusahaan tidak ditemukan.');
         }
         return view('company-profile.homePage', [
@@ -61,9 +64,16 @@ class companyProfile extends Controller
             'partner',
             'berita',
             'portofolio.portofolioFoto'
-            ])->where('nama_perusahaan', $nama_perusahaan)->first();
+        ])->where('nama_perusahaan', $nama_perusahaan)->first();
 
-            // dd($perusahaan);
+
+        if (!$perusahaan) {
+            abort(404, 'Perusahaan tidak ditemukan.');
+        }
+        // Update session jika ingin perusahaan berubah di session juga
+        // session(['id_perusahaan' => $perusahaan->id_perusahaan]);
+
+        // dd($perusahaan);
         $banners = $perusahaan->banner;
         $layanans = $perusahaan->layanan;
         $partners = $perusahaan->partner;
@@ -73,9 +83,6 @@ class companyProfile extends Controller
         // dd($anak);
         // dd($perusahaan->banner);
 
-         if (!$perusahaan) {
-            abort(404, 'Perusahaan tidak ditemukan.');
-        }
         return view('company-profile.homePage', [
             'perusahaans' => $perusahaan,
             'banners' => $banners,
@@ -87,6 +94,66 @@ class companyProfile extends Controller
         ]);
     }
 
+
+
+
+    public function berita()
+    {
+        return view('company-profile.berita');
+    }
+
+    public function detail($nama_perusahaan)
+    {
+        // return view('company-profile.detail');
+
+        if (!$nama_perusahaan) {
+            abort(404, 'Perusahaan belum dipilih.');
+        }
+
+        $perusahaan = Perusahaan::all()
+            ->where('nama_perusahaan', $nama_perusahaan)
+            ->first();
+
+        if (!$perusahaan) {
+            abort(404, 'Perusahaan tidak ditemukan.');
+        }
+
+        return view('company-profile.detail', [
+            'perusahaans' => $perusahaan,
+        ]);
+    }
+
+    public function kontak()
+    {
+        return view('company-profile.kontak');
+    }
+
+    public function layanan()
+    {
+        return view('company-profile.layanan');
+    }
+    public function portofolio($nama_perusahaan)
+    {
+        // return view('company-profile.portofolio');
+
+
+        if (!$nama_perusahaan) {
+            abort(404, 'Perusahaan belum dipilih.');
+        }
+
+        $perusahaan = Perusahaan::with('portofolio')
+            ->where('nama_perusahaan', $nama_perusahaan)
+            ->first();
+
+        if (!$perusahaan) {
+            abort(404, 'Perusahaan tidak ditemukan.');
+        }
+
+        return view('company-profile.portofolio', [
+            'perusahaans' => $perusahaan,
+            'portofolios' => $perusahaan->portofolio
+        ]);
+    }
 
     public function ujiCoba()
     {
@@ -120,31 +187,6 @@ class companyProfile extends Controller
             'perusahaans' => $perusahaan
         ]);
     }
-
-    public function berita()
-    {
-        return view('company-profile.berita');
-    }
-
-    public function detail()
-    {
-        return view('company-profile.detail');
-    }
-
-    public function kontak()
-    {
-        return view('company-profile.kontak');
-    }
-
-    public function layanan()
-    {
-        return view('company-profile.layanan');
-    }
-    public function portofolio()
-    {
-        return view('company-profile.portofolio-detail');
-    }
-
     public function struktur()
     {
         return view('company-profile.struktur');

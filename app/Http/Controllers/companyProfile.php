@@ -187,8 +187,22 @@ class companyProfile extends Controller
             'perusahaans' => $perusahaan
         ]);
     }
-    public function struktur()
+    public function struktur($nama_perusahaan)
     {
-        return view('company-profile.struktur');
+        if (!$nama_perusahaan) {
+            abort(404, 'Perusahaan belum dipilih.');
+        }
+
+        $perusahaan = Perusahaan::with('portofolio')
+            ->where('nama_perusahaan', $nama_perusahaan)
+            ->first();
+
+        if (!$perusahaan) {
+            abort(404, 'Perusahaan tidak ditemukan.');
+        }
+        return view('company-profile.struktur', [
+            'perusahaans' => $perusahaan,
+            'portofolios' => $perusahaan->portofolio
+        ]);
     }
 }

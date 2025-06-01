@@ -9,8 +9,8 @@ use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PortofolioController;
+use App\Http\Controllers\StrukturController;
 use App\Http\Controllers\companyProfile;
-use App\Models\admin;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\LoginController;
@@ -24,6 +24,32 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
+
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth:admin');
+Route::resource('/dashboard/perusahaan', PerusahaanController::class)->middleware('auth:admin');
+Route::resource('/dashboard/akunAdmin', AdminController::class)->middleware('auth:admin');
+Route::resource('/dashboard/partner', PartnerController::class)->middleware('auth:admin');
+Route::resource('/dashboard/berita', BeritaController::class)->middleware('auth:admin');
+Route::resource('/dashboard/layanan', LayananController::class)->middleware('auth:admin');
+Route::resource('/dashboard/portofolio', PortofolioController::class)->middleware('auth:admin');
+Route::resource('/dashboard/banner', BannerController::class)->middleware('auth:admin');
+Route::resource('/dashboard/faq', FaqController::class)->middleware('auth:admin');
+Route::resource('/dashboard/email', EmailController::class)->middleware('auth:admin');
+Route::resource('/dashboard/struktur', StrukturController::class)->middleware('auth:admin');
+// admin
+// Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth:admin');
+// Route::resource('/dashboard/perusahaan', PerusahaanController::class);
+// Route::resource('/dashboard/akunAdmin', AdminController::class);
+// Route::resource('/dashboard/partner', PartnerController::class);
+// Route::resource('/dashboard/berita', BeritaController::class);
+// Route::resource('/dashboard/layanan', LayananController::class);
+// Route::resource('/dashboard/portofolio', PortofolioController::class);
+// Route::resource('/dashboard/banner', BannerController::class);
+// Route::resource('/dashboard/faq', FaqController::class);
+// Route::resource('/dashboard/email', EmailController::class);
+
 
 Route::get('/set-perusahaan/{id}', [CompanyProfile::class, 'setPerusahaan']);
 Route::get('/', [companyProfile::class, 'index']);
@@ -83,30 +109,3 @@ Route::get('/dashboard/profile', [profileController::class, 'index']);
 // Route::put('/dashboard/email/{email}', [EmailController::class, 'update'])->name('email.update');
 
 //admin
-// Khusus perusahaan
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest:admin')->name('login');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:admin');
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth:admin');
-Route::resource('/dashboard/perusahaan', PerusahaanController::class)->middleware('auth:admin');
-Route::resource('/dashboard/akunAdmin', AdminController::class)->middleware('auth:admin');
-Route::resource('/dashboard/partner', PartnerController::class)->middleware('auth:admin');
-Route::resource('/dashboard/berita', BeritaController::class)->middleware('auth:admin');
-Route::resource('/dashboard/layanan', LayananController::class)->middleware('auth:admin');
-Route::resource('/dashboard/portofolio', PortofolioController::class)->middleware('auth:admin');
-Route::resource('/dashboard/banner', BannerController::class)->middleware('auth:admin');
-Route::resource('/dashboard/faq', FaqController::class)->middleware('auth:admin');
-Route::resource('/dashboard/email', EmailController::class)->middleware('auth:admin');
-
-// admin
-// Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth:admin');
-// Route::resource('/dashboard/perusahaan', PerusahaanController::class);
-// Route::resource('/dashboard/akunAdmin', AdminController::class);
-// Route::resource('/dashboard/partner', PartnerController::class);
-// Route::resource('/dashboard/berita', BeritaController::class);
-// Route::resource('/dashboard/layanan', LayananController::class);
-// Route::resource('/dashboard/portofolio', PortofolioController::class);
-// Route::resource('/dashboard/banner', BannerController::class);
-// Route::resource('/dashboard/faq', FaqController::class);
-// Route::resource('/dashboard/email', EmailController::class);

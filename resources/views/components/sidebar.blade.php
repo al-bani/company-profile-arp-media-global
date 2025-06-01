@@ -51,6 +51,13 @@
         </a>
     </li>
 
+    <li class="nav-item {{ Request::is('dashboard/struktur*') ? 'active' : '' }}">
+        <a class="nav-link py-3 fs-4" href="/dashboard/struktur" data-bs-toggle="tooltip" data-bs-placement="right" title="Struktur Organisasi">
+            <i class="fas fa-sitemap fs-3"></i>
+            <span class="ms-2">Struktur Organisasi</span>
+        </a>
+    </li>
+
     <li class="nav-item {{ Request::is('dashboard/partner*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/dashboard/partner" data-bs-toggle="tooltip" data-bs-placement="right" title="Partner">
             <i class="fas fa-handshake fs-3"></i>

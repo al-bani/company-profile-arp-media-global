@@ -38,6 +38,7 @@ Route::resource('/dashboard/banner', BannerController::class)->middleware('auth:
 Route::resource('/dashboard/faq', FaqController::class)->middleware('auth:admin');
 Route::resource('/dashboard/email', EmailController::class)->middleware('auth:admin');
 Route::resource('/dashboard/struktur', StrukturController::class)->middleware('auth:admin');
+Route::get('/dashboard/profile', [profileController::class, 'index']);
 // admin
 // Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth:admin');
 // Route::resource('/dashboard/perusahaan', PerusahaanController::class);
@@ -53,7 +54,8 @@ Route::resource('/dashboard/struktur', StrukturController::class)->middleware('a
 
 Route::get('/set-perusahaan/{id}', [CompanyProfile::class, 'setPerusahaan']);
 Route::get('/', [companyProfile::class, 'index']);
-Route::get('/ujiCoba', [companyProfile::class, 'ujiCoba']);
+// Route::get('/ujiCoba', [companyProfile::class, 'ujiCoba']);
+Route::get('/portofolio-detail', [companyProfile::class, 'portolioDetail']);
 Route::get('/berita/{nama_perusahaan}', [companyProfile::class, 'berita']);
 Route::get('/detail/{nama_perusahaan}', [companyProfile::class, 'detail']);
 Route::get('/kontak/{nama_perusahaan}', [companyProfile::class, 'kontak']);
@@ -66,7 +68,7 @@ Route::get('/{nama_perusahaan}', [companyProfile::class, 'show'])->name('perusah
 // Route::get('/login', [DashboardController::class, 'login']);
 
 // Route::get('/dashboard/homePerusahaan', [PerusahaanController::class, 'index']);
-Route::get('/dashboard/profile', [profileController::class, 'index']);
+
 // Khusus Admin
 // Route::get('/dashboard/admin', [AdminController::class, 'index']);
 // Route::get('/dashboard/createAkun', [AdminController::class, 'create']);

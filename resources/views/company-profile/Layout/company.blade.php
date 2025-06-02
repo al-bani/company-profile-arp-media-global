@@ -70,13 +70,13 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/berita">Berita</a>
+                        <a class="nav-link" href="/berita/{{$perusahaans->nama_perusahaan}}">Berita</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/layanan">Layanan</a>
+                        <a class="nav-link" href="/layanan/{{$perusahaans->nama_perusahaan}}">Layanan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/kontak">Kontak</a>
+                        <a class="nav-link" href="/kontak/{{$perusahaans->nama_perusahaan}}">Kontak</a>
                     </li>
                 </ul>
             </div>

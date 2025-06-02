@@ -21,7 +21,7 @@
                     </div>
                     {{-- penulis  --}}
                     <div class="mb-3">
-                        <label for="judul" class="form-label">Judul Berita</label>
+                        <label for="judul" class="form-label">Penulis</label>
                         <input type="text" name="penulis" id="penulis" class="form-control"
                             placeholder="" value="{{Auth::user()->nama_admin}}">
                     </div>

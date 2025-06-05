@@ -27,7 +27,7 @@ class companyProfile extends Controller
             'layanan',
             'partner',
             'berita',
-            'portofolio.portofolioFoto'
+            'portofolio'
         ])->where('id_perusahaan', $id_perusahaan)->first();
 
         $banners = $perusahaan->banner;
@@ -114,7 +114,7 @@ class companyProfile extends Controller
 
         return view('company-profile.berita', [
             'perusahaans' => $perusahaan,
-            'beriritas' => $perusahaan->berita()
+            'beritas' => $perusahaan->berita
         ]);
     }
 
@@ -142,7 +142,7 @@ class companyProfile extends Controller
     public function kontak($nama_perusahaan)
     {
         // return view('company-profile.kontak');
-          if (!$nama_perusahaan) {
+        if (!$nama_perusahaan) {
             abort(404, 'Perusahaan belum dipilih.');
         }
 
@@ -162,7 +162,7 @@ class companyProfile extends Controller
 
     public function layanan($nama_perusahaan)
     {
-          if (!$nama_perusahaan) {
+        if (!$nama_perusahaan) {
             abort(404, 'Perusahaan belum dipilih.');
         }
 
@@ -182,14 +182,11 @@ class companyProfile extends Controller
     }
     public function portofolio($nama_perusahaan)
     {
-        // return view('company-profile.portofolio');
-
-
         if (!$nama_perusahaan) {
             abort(404, 'Perusahaan belum dipilih.');
         }
 
-        $perusahaan = Perusahaan::with('portofolio')
+        $perusahaan = Perusahaan::with('portofolio.portofolio_Foto') // relasi eager loading
             ->where('nama_perusahaan', $nama_perusahaan)
             ->first();
 
@@ -197,11 +194,17 @@ class companyProfile extends Controller
             abort(404, 'Perusahaan tidak ditemukan.');
         }
 
+
         return view('company-profile.portofolio', [
             'perusahaans' => $perusahaan,
-            'portofolios' => $perusahaan->portofolio
+            'portofolios' => $perusahaan->portofolio,
+            // Tidak perlu portofolioFotos terpisah, bisa diakses langsung di view:
+            // $portofolio->portofolioFoto
+           
+
         ]);
     }
+
     public function portofolioDetail($nama_perusahaan)
     {
         // return view('company-profile.portofolio');

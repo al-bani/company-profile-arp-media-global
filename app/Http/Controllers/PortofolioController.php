@@ -64,6 +64,17 @@ class PortofolioController extends Controller
                 }
             }
         }
+        if ($request->has('team')) {
+            foreach ($request->timeline as $item) {
+                if (!empty($item['team']) || !empty($item['team'])) {
+                    timelinePortofolio::create([
+                        'team_id' => 'tm-' . $request->nama_project . $item['tanggal'], // Pastikan ada relasi
+                        'id_portofolio' => $request->id_portofolio,
+                        'team' => $item['tanggal']
+                    ]);
+                }
+            }
+        }
 
         if ($request->has('foto')) {
             foreach ($request->foto as $index => $item) {

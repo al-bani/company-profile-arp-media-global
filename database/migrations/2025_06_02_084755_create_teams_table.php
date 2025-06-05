@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('portofolios', function (Blueprint $table) {
+        Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->string('id_portofolio')->unique();
-            $table->string('id_perusahaan');
-            $table->string('nama_project');
-            $table->string('tempat');
-            $table->date('tanggal');
-            $table->string('waktu');
-            $table->text('deskripsi');
+            $table->string('team_id')->unique();
+            $table->string('id_portofolio');
+            $table->string('team');
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('portfolios');
+        Schema::dropIfExists('teams');
     }
 };

@@ -43,10 +43,10 @@
                                 <td>
                                     @if ($item->status == 'aktif')
                                         <span
-                                            class="badge bg-success text-white px-4 py-2 fs-6 rounded-pill">{{ $item->status }}</span>
+                                            class="badge bg-success text-white px-4 py-2 fs-6 rounded-pill">Aktif</span>
                                     @else
                                         <span
-                                            class="badge bg-danger text-white px-4 py-2 fs-6 rounded-pill">{{ $item->status }}</span>
+                                            class="badge bg-danger text-white px-4 py-2 fs-6 rounded-pill">Tidak Aktif</span>
                                     @endif
                                 </td>
                                 <td>

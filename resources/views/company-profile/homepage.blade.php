@@ -55,7 +55,7 @@
                     <div class="custom-content">
                         <h2>{{ $layanan->nama_layanan }}</h2>
                         <p>{!! $layanan->deskripsi !!}</p>
-                        <a href="">Read More</a>
+                        <!-- <a href="">Read More</a> -->
                     </div>
                 </div>
             @endforeach
@@ -72,18 +72,20 @@
                 <div class="col-lg-7">
                     <h3 class="fw-bold mb-3">PROFILE PERUSAHAAN</h3>
                     <p class="mb-4">{!! $perusahaans->deskripsi !!}</p>
-                    <a href="/detail/{{$perusahaans->nama_perusahaan}}" class="btn btn-primary">Baca Selengkapnya</a>
+                    <a href="/detail/{{ $perusahaans->nama_perusahaan }}" class="btn btn-primary">Baca Selengkapnya</a>
                 </div>
             </div>
         </div>
     </div>
 
     {{-- Berita --}}
+    
     <div class="container berita pt-5">
         <h1 class="text-center h1 mb-5">Berita Terbaru</h1>
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
             @foreach ($beritas as $berita)
-                <div class="col-12 col-md-6 col-lg-3">
+                <!-- Untuk dekstop -->
+                <div class="col-12 col-md-6 d-none d-md-block col-lg-3">
                     <div class="card h-100 shadow-sm">
                         <img src="{{ asset($berita->foto) }}" class="card-img-top" alt="Berita">
                         <div class="card-body">
@@ -94,15 +96,26 @@
                         </div>
                     </div>
                 </div>
+                <!-- untuk mobile -->
+                <div class="berita-mobile col-12 d-lg-none" style="width: 280px">
+                    <div class="card h-100 shadow-sm" >
+                        <img src="{{ asset($berita->foto) }}" class="card-img-top" alt="Berita">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $berita->judul }}</h5>
+                            <p class="card-text"><small class="text-muted">{!! $berita->tanggal !!}</small></p>
+                            <p class="card-text">{!! $berita->konten !!}</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Read Full Blog</a>
+                        </div>
+                    </div>
+                </div>
             @endforeach
-
         </div>
     </div>
 
     <!-- Anak Perusahaan -->
     <div class="container pt-5">
         <h1 class="text-center h1">Anak Perusahaan</h1>
-        <div class="subsidiary-container">
+        <div class="subsidiary-container  justify-content-center">
             @if ($perusahaans->status === 'induk')
                 @foreach ($anaks as $perusahaan)
                     @if ($perusahaan->status === 'anak')
@@ -125,16 +138,22 @@
 
 
     {{-- Klien --}}
-    <div class="client-section  bg-white ">
+    @php
+        $totalPartners = count($partners);
+        $isMarquee = $totalPartners >= 8; // Ubah kondisi menjadi >= 5
+    @endphp
+
+    <div class="client-section bg-white">
         <div class="container text-center">
-            <h2 class="text-center mb-4">Klien Kami</h2>
+            <h1 class="text-center mb-4">Klien Kami</h1>
             <div class="marquee-container overflow-hidden">
-                <div class="marquee-track d-flex">
+                <div class="marquee-track d-flex {{ $isMarquee ? 'animate-marquee' : 'justify-content-center w-100' }}"
+                    style="flex-wrap: nowrap;">
 
                     @foreach ($partners as $partner)
-                        <div class="px-3">
+                        <div class="px-3" style="flex: 0 0 auto;">
                             <img src="{{ asset($partner->foto) }}" alt="Logo Klien" class="img-fluid"
-                                style="height: 70px;">
+                                style="height: 120px;">
                         </div>
                     @endforeach
 
@@ -142,6 +161,12 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
 @endsection
 <style>
 

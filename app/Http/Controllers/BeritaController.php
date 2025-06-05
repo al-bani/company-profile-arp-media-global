@@ -64,7 +64,7 @@ class BeritaController extends Controller
             $admin = Auth::user();
             $request->merge(['id_perusahaan' => $admin->id_perusahaan]);
         }
-        $id_berita = 'berita' . '_' . $request->id_perusahaan . '_' . $request->id;
+        $id_berita = 'berita' . '_' . $request->id_perusahaan . '_' . $request->judul;
         $request->merge([
             'id_berita' => $id_berita,
             // 'password' => bcrypt($request->password) // hash password juga di sini

@@ -1,3 +1,19 @@
+/* Berita */
+.card-img-top {
+    height: 200px; /* Atur tinggi yang diinginkan */
+    object-fit: cover; /* Gambar akan menutupi seluruh area, mungkin terpotong */
+    /* object-fit: contain; /* Gambar akan diskalakan agar muat, mungkin ada ruang kosong */
+    /* object-fit: scale-down; /* Seperti contain, tapi tidak memperbesar jika lebih kecil */
+}
+
+/* Portofolio */
+.text-outlined {
+    color: white; /* Warna teks utama */
+    text-shadow: -1px -1px 0 grey, /* Bayangan kiri atas */ 1px -1px 0 grey,
+        /* Bayangan kanan atas */ -1px 1px 0 grey,
+        /* Bayangan kiri bawah */ 1px 1px 0 grey; /* Bayangan kanan bawah */
+}
+
 /* Untuk Layanan pada card  */
 .layanan-container {
     position: relative;
@@ -25,7 +41,7 @@
 }
 
 .layanan-container .custom-card:hover {
-    height: 400px;
+    height: 320px;
 }
 
 .layanan-container .custom-card .img-box {
@@ -125,20 +141,20 @@
 
 /* Garis bawah animasi saat hover */
 .nav-link::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     bottom: -4px; /* beri jarak agar tidak menabrak teks */
     width: 100%;
     height: 2px;
-    background-color: #007BFF;
+    background-color: #007bff;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #007BFF;
+    color: #007bff;
 }
 
 .nav-link:hover::after {
@@ -189,8 +205,6 @@
     font-size: 1rem;
     color: inherit;
 }
-
-
 
 /* Anak Perusahaan */
 .subsidiary-container {
@@ -295,7 +309,6 @@
         gap: 20px;
         padding: 20px;
         scroll-snap-type: x mandatory;
-
     }
 
     .subsidiary-card {
@@ -317,11 +330,9 @@
         top: 130px;
         height: 250px;
     }
-
 }
 
 /* Akhir Anak Perusahaan */
-
 
 /* Carousel */
 .carousel-item {

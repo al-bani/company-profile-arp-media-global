@@ -15,11 +15,9 @@
 
                 <div class="mb-3">
                     <label for="nama_project">Nama Project</label>
-                    <input class="form-control @error('nama_project') is-invalid @enderror"
-                           id="nama_project"
-                           name="nama_project"
-                           value="{{ old('nama_project', $portofolio->nama_project) }}"
-                           placeholder="Nama Project" required>
+                    <input class="form-control @error('nama_project') is-invalid @enderror" id="nama_project"
+                        name="nama_project" value="{{ old('nama_project', $portofolio->nama_project) }}"
+                        placeholder="Nama Project" required>
                     @error('nama_project')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -27,23 +25,31 @@
 
                 <div class="mb-3">
                     <label for="deskripsi">Deskripsi Project</label>
-                    <textarea class="form-control @error('deskripsi') is-invalid @enderror"
-                              id="deskripsi"
-                              name="deskripsi"
-                              rows="3"
-                              required>{{ old('deskripsi', $portofolio->deskripsi) }}</textarea>
+                    <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="3"
+                        required>{{ old('deskripsi', $portofolio->deskripsi) }}</textarea>
                     @error('deskripsi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="mb-3">
+                    <label for="status_project">Status Project</label>
+                    <select class="ms-1 form-select btn btn-primary" id="status_project" name="status_project" required>
+                        <option value="ongoing"
+                            {{ old('status_project', $portofolio->status_project ?? '') == 'ongoing' ? 'selected' : '' }}>
+                            Sedang Berjalan
+                        </option>
+                        <option value="done"
+                            {{ old('status_project', $portofolio->status_project ?? '') == 'done' ? 'selected' : '' }}>
+                            Selesai
+                        </option>
+                    </select>
+                </div>
+
 
                 <div class="mb-2">
                     <label for="team">Team</label>
-                    <input class="form-control @error('team') is-invalid @enderror"
-                           id="team"
-                           name="team"
-                           value="{{ old('team', $portofolio->team) }}"
-                           required>
+                    <input class="form-control @error('team') is-invalid @enderror" id="team" name="team"
+                        value="{{ old('team', $portofolio->team) }}" required>
                     @error('team')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -51,12 +57,9 @@
 
                 <div class="mb-3">
                     <label for="tempat">Tempat</label>
-                    <input type="text"
-                           id="tempat"
-                           name="tempat"
-                           class="form-control @error('tempat') is-invalid @enderror"
-                           value="{{ old('tempat', $portofolio->tempat) }}"
-                           required>
+                    <input type="text" id="tempat" name="tempat"
+                        class="form-control @error('tempat') is-invalid @enderror"
+                        value="{{ old('tempat', $portofolio->tempat) }}" required>
                     @error('tempat')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -64,11 +67,9 @@
 
                 <div class="mb-4">
                     <label for="tanggal" class="form-label">Tanggal Publikasi</label>
-                    <input type="date"
-                           name="tanggal"
-                           id="tanggal"
-                           class="form-control @error('tanggal') is-invalid @enderror"
-                           value="{{ old('tanggal', $portofolio->tanggal) }}" required>
+                    <input type="date" name="tanggal" id="tanggal"
+                        class="form-control @error('tanggal') is-invalid @enderror"
+                        value="{{ old('tanggal', $portofolio->tanggal) }}" required>
                     @error('tanggal')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -77,22 +78,18 @@
                 <div class="mb-3 d-flex justify-content-between">
                     <div class="me-2 w-100">
                         <label for="jam_mulai" class="form-label">Jam Mulai</label>
-                        <input type="time"
-                               class="form-control @error('jam_mulai') is-invalid @enderror"
-                               name="jam_mulai"
-                               id="jam_mulai"
-                               value="{{ old('jam_mulai', explode('-', $portofolio->waktu)[0] ?? '') }}" required>
+                        <input type="time" class="form-control @error('jam_mulai') is-invalid @enderror"
+                            name="jam_mulai" id="jam_mulai"
+                            value="{{ old('jam_mulai', explode('-', $portofolio->waktu)[0] ?? '') }}" required>
                         @error('jam_mulai')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="ms-2 w-100">
                         <label for="jam_selesai" class="form-label">Jam Selesai</label>
-                        <input type="time"
-                               class="form-control @error('jam_selesai') is-invalid @enderror"
-                               name="jam_selesai"
-                               id="jam_selesai"
-                               value="{{ old('jam_selesai', explode('-', $portofolio->waktu)[1] ?? '') }}" required>
+                        <input type="time" class="form-control @error('jam_selesai') is-invalid @enderror"
+                            name="jam_selesai" id="jam_selesai"
+                            value="{{ old('jam_selesai', explode('-', $portofolio->waktu)[1] ?? '') }}" required>
                         @error('jam_selesai')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -101,9 +98,8 @@
 
                 <div class="mb-3">
                     <label for="id_perusahaan">Perusahaan</label>
-                    <select class="form-select @error('id_perusahaan') is-invalid @enderror"
-                            name="id_perusahaan"
-                            id="id_perusahaan" required>
+                    <select class="form-select @error('id_perusahaan') is-invalid @enderror" name="id_perusahaan"
+                        id="id_perusahaan" required>
                         @foreach ($perusahaans as $perusahaan)
                             <option value="{{ $perusahaan->id_perusahaan }}"
                                 {{ old('id_perusahaan', $portofolio->id_perusahaan) == $perusahaan->id_perusahaan ? 'selected' : '' }}>
@@ -122,33 +118,28 @@
                     </div>
                     <div class="card-body">
                         <div id="input-container-image" class="image-group mb-3">
-                            @foreach($portofolio->portofolio_foto as $index => $foto)
-                            <div class="mb-3">
-                                <div class="mb-2">
-                                    <label>Judul Foto</label>
-                                    <input class="form-control"
-                                           type="text"
-                                           name="foto[{{ $index }}][judul_foto]"
-                                           value="{{ $foto->judul_foto }}"
-                                           placeholder="Masukkan Judul Foto" required>
+                            @foreach ($portofolio->portofolio_foto as $index => $foto)
+                                <div class="mb-3">
+                                    <div class="mb-2">
+                                        <label>Judul Foto</label>
+                                        <input class="form-control" type="text"
+                                            name="foto[{{ $index }}][judul_foto]"
+                                            value="{{ $foto->judul_foto }}" placeholder="Masukkan Judul Foto" required>
+                                    </div>
+                                    <div>
+                                        <label>Foto</label>
+                                        <input type="file" name="foto[{{ $index }}][foto]"
+                                            class="form-control" accept="image/*" required>
+                                        @if ($foto->foto)
+                                            <img src="{{ asset($foto->foto) }}" alt="Current Photo"
+                                                class="img-fluid mt-2" style="max-height: 100px;">
+                                        @endif
+                                    </div>
                                 </div>
-                                <div>
-                                    <label>Foto</label>
-                                    <input type="file"
-                                           name="foto[{{ $index }}][foto]"
-                                           class="form-control"
-                                           accept="image/*" required>
-                                    @if($foto->foto)
-                                        <img src="{{ asset($foto->foto) }}"
-                                             alt="Current Photo"
-                                             class="img-fluid mt-2"
-                                             style="max-height: 100px;">
-                                    @endif
-                                </div>
-                            </div>
                             @endforeach
                         </div>
-                        <button type="button" class="btn btn-secondary mt-2" id="add-field-image">+ Tambah Field</button>
+                        <button type="button" class="btn btn-secondary mt-2" id="add-field-image">+ Tambah
+                            Field</button>
                     </div>
                 </div>
 
@@ -158,21 +149,19 @@
                     </div>
                     <div class="card-body">
                         <div id="input-container" class="timeline-group mb-3">
-                            @foreach($portofolio->portofolio_timeline as $index => $timeline)
-                            <div class="mb-3">
-                                <div class="mb-2">
-                                    <label>Tanggal/Tahun</label>
-                                    <input class="form-control"
-                                           type="date"
-                                           name="timeline[{{ $index }}][tanggal]"
-                                           value="{{ $timeline->tanggal }}" required>
+                            @foreach ($portofolio->portofolio_timeline as $index => $timeline)
+                                <div class="mb-3">
+                                    <div class="mb-2">
+                                        <label>Tanggal/Tahun</label>
+                                        <input class="form-control" type="date"
+                                            name="timeline[{{ $index }}][tanggal]"
+                                            value="{{ $timeline->tanggal }}" required>
+                                    </div>
+                                    <div>
+                                        <label>Deskripsi</label>
+                                        <textarea class="form-control" name="timeline[{{ $index }}][deskripsi]" required>{{ $timeline->deskripsi }}</textarea>
+                                    </div>
                                 </div>
-                                <div>
-                                    <label>Deskripsi</label>
-                                    <textarea class="form-control"
-                                              name="timeline[{{ $index }}][deskripsi]" required>{{ $timeline->deskripsi }}</textarea>
-                                </div>
-                            </div>
                             @endforeach
                         </div>
                         <button type="button" class="btn btn-secondary mt-2" id="add-field">+ Tambah Field</button>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\BeritaFotoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PerusahaanController;
@@ -38,7 +39,9 @@ Route::resource('/dashboard/banner', BannerController::class)->middleware('auth:
 Route::resource('/dashboard/faq', FaqController::class)->middleware('auth:admin');
 Route::resource('/dashboard/email', EmailController::class)->middleware('auth:admin');
 Route::resource('/dashboard/struktur', StrukturController::class)->middleware('auth:admin');
+Route::resource('dashboard/uploader', BeritaFotoController::class)->middleware('auth:admin');
 Route::get('/dashboard/profile', [profileController::class, 'index']);
+
 // admin
 // Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth:admin');
 // Route::resource('/dashboard/perusahaan', PerusahaanController::class);
@@ -57,12 +60,14 @@ Route::get('/', [companyProfile::class, 'index']);
 // Route::get('/ujiCoba', [companyProfile::class, 'ujiCoba']);
 Route::get('/portofolio-detail', [companyProfile::class, 'portolioDetail']);
 Route::get('/berita/{nama_perusahaan}', [companyProfile::class, 'berita']);
+Route::get('/berita/{nama_perusahaan}/detail/{id}', [companyProfile::class, 'beritaDetail']);
 Route::get('/detail/{nama_perusahaan}', [companyProfile::class, 'detail']);
 Route::get('/kontak/{nama_perusahaan}', [companyProfile::class, 'kontak']);
 Route::post('/kontak/{nama_perusahaan}', [companyProfile::class, 'kontakPost']);
 Route::get('/layanan/{nama_perusahaan}', [companyProfile::class, 'layanan']);
 Route::get('/struktur/{nama_perusahaan}', [companyProfile::class, 'struktur']);
 Route::get('/portofolio/{nama_perusahaan}', [companyProfile::class, 'portofolio']);
+Route::get('/faq/{nama_perusahaan}', [companyProfile::class, 'faq']);
 Route::get('/{nama_perusahaan}', [companyProfile::class, 'show'])->name('perusahaan.show');
 
 // khusus admin
@@ -112,3 +117,5 @@ Route::get('/{nama_perusahaan}', [companyProfile::class, 'show'])->name('perusah
 // Route::put('/dashboard/email/{email}', [EmailController::class, 'update'])->name('email.update');
 
 //admin
+
+

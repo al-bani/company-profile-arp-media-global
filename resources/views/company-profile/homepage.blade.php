@@ -67,7 +67,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 text-center mb-4 mb-lg-0">
-                    <img src="{{ asset($perusahaans->logo) }}" class="img-fluid w-50" alt="Logo Perusahaan">
+                    <img src="{{ asset($perusahaans->logo_utama) }}" class="img-fluid w-50" alt="Logo Perusahaan">
                 </div>
                 <div class="col-lg-7">
                     <h3 class="fw-bold mb-3">PROFILE PERUSAHAAN</h3>
@@ -81,36 +81,46 @@
     {{-- Berita --}}
 
     <div class="container berita pt-5">
-        <h1 class="text-center h1 mb-5">Berita Terbaru</h1>
-        <div class="row g-4 justify-content-center">
-            @foreach ($beritas as $berita)
-                <!-- Untuk dekstop -->
-                <div class="col-12 col-md-6 d-none d-md-block col-lg-3">
-                    <div class="card h-100 shadow-sm">
-                        <img src="{{ asset($berita->foto) }}" class="card-img-top" alt="Berita">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $berita->judul }}</h5>
-                            <p class="card-text"><small class="text-muted">{!! $berita->tanggal !!}</small></p>
-                            <p class="card-text">{!! $berita->konten !!}</p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Read Full Blog</a>
-                        </div>
+    <h1 class="text-center h1 mb-5">Berita Terbaru</h1>
+    <div class="row g-4 justify-content-center">
+        @foreach ($beritas as $berita)
+            <!-- Tampilan untuk desktop -->
+            <div class="col-12 col-md-6 d-none d-md-block col-lg-3 mb-3">
+                <div class="card h-100 shadow rounded-4 border border-light-subtle">
+                    <div class="ratio ratio-16x9 mb-3">
+                        <img src="{{ asset($berita->foto) }}" class="object-fit-cover rounded-top-4" alt="{{ $berita->judul }}">
+                    </div>
+                    <div class="card-body d-flex flex-column pt-0">
+                        <h5 class="card-title fw-semibold mb-2">{{ $berita->judul }}</h5>
+                        <small class="text-muted mb-3 d-block">{!! $berita->tanggal !!}</small>
+                        <p class="card-text flex-grow-1" style="font-size: 0.95rem;">
+                            {!! \Illuminate\Support\Str::limit(strip_tags($berita->konten), 100, '...') !!}
+                        </p>
+                        <a href="#" class="btn btn-primary btn-sm w-100 mt-3">Baca Selengkapnya</a>
                     </div>
                 </div>
-                <!-- untuk mobile -->
-                <div class="berita-mobile col-12 d-lg-none" style="width: 280px">
-                    <div class="card h-100 shadow-sm" >
-                        <img src="{{ asset($berita->foto) }}" class="card-img-top" alt="Berita">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $berita->judul }}</h5>
-                            <p class="card-text"><small class="text-muted">{!! $berita->tanggal !!}</small></p>
-                            <p class="card-text">{!! $berita->konten !!}</p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Read Full Blog</a>
-                        </div>
+            </div>
+
+            <!-- Tampilan untuk mobile -->
+            <div class="berita-mobile col-12 d-lg-none mb-3" style="max-width: 280px;">
+                <div class="card h-100 shadow rounded-4 border border-light-subtle">
+                    <div class="ratio ratio-16x9 mb-3">
+                        <img src="{{ asset($berita->foto) }}" class="object-fit-cover rounded-top-4" alt="{{ $berita->judul }}">
+                    </div>
+                    <div class="card-body d-flex flex-column pt-0">
+                        <h5 class="card-title fw-semibold mb-2">{{ $berita->judul }}</h5>
+                        <small class="text-muted mb-3 d-block">{!! $berita->tanggal !!}</small>
+                        <p class="card-text flex-grow-1" style="font-size: 0.95rem;">
+                            {!! \Illuminate\Support\Str::limit(strip_tags($berita->konten), 100, '...') !!}
+                        </p>
+                        <a href="#" class="btn btn-primary btn-sm w-100 mt-3">Baca Selengkapnya</a>
                     </div>
                 </div>
-            @endforeach
-        </div>
+            </div>
+        @endforeach
     </div>
+</div>
+
 
     <!-- Anak Perusahaan -->
     <div class="container pt-5">
@@ -162,12 +172,39 @@
         </div>
     </div>
 
+<!-- FAQ -->
+<div class="container py-5">
+        <h1 class="fw-bold mb-1 text-center">Pertanyaan Yang Sering Ditanyakan</h1>
+        <p class="text-muted mb-4 text-center">Jawaban atas pertanyaan yang sering ditanyakan</p>
 
+        <h4 class="fw-bold mb-3">Daftar Pertanyaan</h4>
 
+        <div class="accordion faq-accordion" id="faqAccordion">
 
+            @php
+                $faqs
+            @endphp
 
+            @foreach ($faqs as $index => $faq)
+                <div class="accordion-item border-0 border-bottom">
+                    <h2 class="accordion-header" id="heading{{ $index }}">
+                        <button class="accordion-button collapsed shadow-none px-0 py-3 bg-transparent" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}" aria-expanded="false"
+                            aria-controls="collapse{{ $index }}">
+                            <span class="me-auto">{{ $faq['q'] }}</span>
+                            <span class="icon">+</span>
+                        </button>
+                    </h2>
+                    <div id="collapse{{ $index }}" class="accordion-collapse collapse"
+                        aria-labelledby="heading{{ $index }}" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body ps-0 pt-0 pb-3 text-muted">
+                            {{ $faq['a'] }}
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+        </div>
+    </div>
 
 @endsection
-<style>
-
-</style>

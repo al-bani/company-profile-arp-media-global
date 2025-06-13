@@ -1,17 +1,25 @@
 /* Berita */
 .card-img-top {
-    height: 200px; /* Atur tinggi yang diinginkan */
-    object-fit: cover; /* Gambar akan menutupi seluruh area, mungkin terpotong */
+    height: 200px;
+    /* Atur tinggi yang diinginkan */
+    object-fit: cover;
+    /* Gambar akan menutupi seluruh area, mungkin terpotong */
     /* object-fit: contain; /* Gambar akan diskalakan agar muat, mungkin ada ruang kosong */
     /* object-fit: scale-down; /* Seperti contain, tapi tidak memperbesar jika lebih kecil */
 }
 
 /* Portofolio */
 .text-outlined {
-    color: white; /* Warna teks utama */
-    text-shadow: -1px -1px 0 grey, /* Bayangan kiri atas */ 1px -1px 0 grey,
-        /* Bayangan kanan atas */ -1px 1px 0 grey,
-        /* Bayangan kiri bawah */ 1px 1px 0 grey; /* Bayangan kanan bawah */
+    color: white;
+    /* Warna teks utama */
+    text-shadow: -1px -1px 0 grey,
+        /* Bayangan kiri atas */
+        1px -1px 0 grey,
+        /* Bayangan kanan atas */
+        -1px 1px 0 grey,
+        /* Bayangan kiri bawah */
+        1px 1px 0 grey;
+    /* Bayangan kanan bawah */
 }
 
 /* Untuk Layanan pada card  */
@@ -144,7 +152,8 @@
     content: "";
     position: absolute;
     left: 0;
-    bottom: -4px; /* beri jarak agar tidak menabrak teks */
+    bottom: -4px;
+    /* beri jarak agar tidak menabrak teks */
     width: 100%;
     height: 2px;
     background-color: #007bff;
@@ -395,3 +404,34 @@
 }
 
 /* Akhir Carousel */
+
+
+/* FAQ */
+.faq-accordion .accordion-button {
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 0;
+    background-color: transparent;
+    transition: background-color 0.2s;
+}
+
+.faq-accordion .accordion-button::after {
+    display: none;
+}
+
+.faq-accordion .accordion-button .icon {
+    font-weight: bold;
+    font-size: 1.25rem;
+    transition: transform 0.2s;
+}
+
+.faq-accordion .accordion-button:not(.collapsed) .icon {
+    transform: rotate(45deg);
+    /* dari "+" menjadi "x" */
+}
+
+.faq-accordion .accordion-item {
+    background-color: transparent;
+}
+
+/* Akhir FAQ */

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('id_perusahaan');
             $table->string('nama_project');
             $table->string('tempat');
+            $table->string('status_project');
             $table->date('tanggal');
             $table->string('waktu');
             $table->text('deskripsi');

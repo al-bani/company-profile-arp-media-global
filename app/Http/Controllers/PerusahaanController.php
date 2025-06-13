@@ -57,17 +57,23 @@ class PerusahaanController extends Controller
      */
     public function store(Request $request)
     {
-        $id_perusahaan =  $request->status. '_' . str_replace(' ', '_',$request->nama_perusahaan).'_'. $request->nib;
+        $id_perusahaan =  $request->status . '_' . str_replace(' ', '_', $request->nama_perusahaan) . '_' . $request->nib;
         $request->merge([
             'id_perusahaan' => $id_perusahaan,
         ]);
         $data = $request->all();
 
-        if ($request->hasFile('logo')) {
-            $filename = time() . '_' . $request->file('logo')->getClientOriginalName();
-            $destination = 'image/upload/logo';
-            $request->file('logo')->move(public_path($destination), $filename);
-            $data['logo'] = $destination . '/' . $filename;
+        if ($request->hasFile('logo_website')) {
+            $filename = time() . '_' . $request->file('logo_website')->getClientOriginalName();
+            $destination = 'image/upload/logo_website';
+            $request->file('logo_website')->move(public_path($destination), $filename);
+            $data['logo_website'] = $destination . '/' . $filename;
+        }
+        if ($request->hasFile('logo_utama')) {
+            $filename = time() . '_' . $request->file('logo_utama')->getClientOriginalName();
+            $destination = 'image/upload/logo_utama';
+            $request->file('logo_utama')->move(public_path($destination), $filename);
+            $data['logo_utama'] = $destination . '/' . $filename;
         }
 
         perusahaan::create($data);
@@ -95,11 +101,48 @@ class PerusahaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-        perusahaan::where('id', $id)
-            ->update($request->except('_token', '_method'));
-        return redirect('/dashboard/perusahaan')->with('success', 'Data Berhasil Diubah');
+        $perusahaan = Perusahaan::findOrFail($id);
+        $role = Auth::user()->role;
+
+        // Hanya izinkan admin dari perusahaan yang sesuai, kecuali superAdmin
+        if ($role !== 'superAdmin') {
+            $admin = Auth::user();
+            if ($perusahaan->id_perusahaan !== $admin->id_perusahaan) {
+                abort(403, 'Unauthorized');
+            }
+        }
+
+        $data = $request->except('_token', '_method');
+
+        // Handle upload logo baru jika ada
+        if ($request->hasFile('logo_website')) {
+            if ($perusahaan->logo_website && file_exists(public_path($perusahaan->logo_website))) {
+                unlink(public_path($perusahaan->logo_website));
+            }
+
+            $filename = time() . '_' . $request->file('logo_website')->getClientOriginalName();
+            $destination = 'image/upload/logo_website';
+            $request->file('logo_website')->move(public_path($destination), $filename);
+            $data['logo_website'] = $destination . '/' . $filename;
+        }
+        if ($request->hasFile('logo_utama')) {
+            if ($perusahaan->logo_utama && file_exists(public_path($perusahaan->logo_utama))) {
+                unlink(public_path($perusahaan->logo_utama));
+            }
+
+            $filename = time() . '_' . $request->file('logo_utama')->getClientOriginalName();
+            $destination = 'image/upload/logo_utama';
+            $request->file('logo_utama')->move(public_path($destination), $filename);
+            $data['logo_utama'] = $destination . '/' . $filename;
+        }
+
+        // Update data perusahaan
+        $perusahaan->update($data);
+
+        return redirect()->route('perusahaan.index')
+            ->with('success', 'Data Perusahaan berhasil diperbarui');
     }
+
 
     /**
      * Remove the specified resource from storage.

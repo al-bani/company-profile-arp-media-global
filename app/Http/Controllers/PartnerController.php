@@ -113,6 +113,7 @@ class PartnerController extends Controller
                 abort(403, 'Unauthorized');
             }
         }
+        
         $data = $request->except('_token', '_method');
         if ($request->hasFile('foto')) {
             if ($partner->foto && file_exists(public_path($partner->foto))) {

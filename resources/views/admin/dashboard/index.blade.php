@@ -36,7 +36,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Total Projects Selesai</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">40.450</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$portfolio['project_selesai']}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-check-circle fa-2x text-gray-300"></i> <!-- Ikon sudah diganti -->
@@ -55,7 +55,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Total Visitor</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$dashboard_information['total_visit']}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$visitor['total_visitor']}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-eye fa-2x text-gray-300"></i>
@@ -74,7 +74,7 @@
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         Jumlah Client
                     </div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">25</div> {{-- Ganti angka sesuai data --}}
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{$partner}}</div> {{-- Ganti angka sesuai data --}}
                 </div>
                 <div class="col-auto">
                     <i class="fas fa-handshake fa-2x text-gray-300"></i>
@@ -92,7 +92,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Jumlah Perusahaan</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$perusahaan}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-home fa-2x text-gray-300"></i>
@@ -131,9 +131,15 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area">
-                        <div class="d-flex justify-content-center">
-                            <h5 class="font-weight-bold mb-0" style="color: #969696;">Data akan ditampilkan minimal 7 hari</h5>{{-- <canvas id="grafik_visitor"></canvas> --}}
-                        </div>
+
+                            @if ($visitor['total_data'] < 7)
+                            <div class="d-flex justify-content-center">
+                                <h5 class="font-weight-bold mb-0" style="color: #969696;">Data akan ditampilkan minimal 7 hari</h5>
+                            </div>
+                            @else
+                                <canvas id="grafik_visitor"></canvas>
+                            @endif
+
                     </div>
                 </div>
             </div>
@@ -163,20 +169,15 @@
 
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2">
-                        <canvas id="jumlah_project_chart"></canvas>
+                    <div class="chart-area pt-4 pb-2">
+                        @if ($portfolio['jumlah'] > 0)
+                            <canvas id="portofolio_chart"></canvas>
+                        @else
+                            <h5 class="font-weight-bold mb-0" style="color: #969696;">Data akan ditampilkan minimal 7 hari</h5>
+                        @endif
+
                     </div>
-                    <div class="mt-4 text-center small">
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-primary"></i> PT. ARP
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> PT. RED
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-info"></i> PT. SATYA
-                        </span>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -285,20 +286,17 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     return s.join(dec);
 }
 
+const visitors = @json($visitor['data']);
+
+const labels_date = visitors.map(v => v.tanggal);
+const data_visitor = visitors.map(v => v.jumlah_visit);
+
 // Area Chart Example
 var ctx = document.getElementById("grafik_visitor");
 var myLineChart = new Chart(ctx, {
     type: "line",
     data: {
-        labels: [
-            "Senin",
-            "Selasa",
-            "Rabu",
-            "Kamis",
-            "Jumat",
-            "Sabtu",
-            "Minggu",
-        ],
+        labels: labels_date,
         datasets: [
             {
                 label: "Visitor",
@@ -313,7 +311,7 @@ var myLineChart = new Chart(ctx, {
                 pointHoverBorderColor: "rgba(78, 115, 223, 1)",
                 pointHitRadius: 10,
                 pointBorderWidth: 2,
-                data: [12423, 34212, 12342, 78765, 34521, 32454, 33441],
+                data: data_visitor,
             },
         ],
     },
@@ -399,42 +397,119 @@ var myLineChart = new Chart(ctx, {
 
 <script>
     // Set new default font family and font color to mimic Bootstrap's default styling
-(Chart.defaults.global.defaultFontFamily = "Nunito"),
-    '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = "#858796";
+Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+Chart.defaults.global.defaultFontColor = '#858796';
 
-// Pie Chart Example
-var ctx = document.getElementById("jumlah_project_chart");
-var myPieChart = new Chart(ctx, {
-    type: "doughnut",
-    data: {
-        labels: ["PT. ARP", "PT. RED", "PT. SATYA"],
-        datasets: [
-            {
-                data: [21, 11, 50],
-                backgroundColor: ["#4e73df", "#1cc88a", "#36b9cc"],
-                hoverBackgroundColor: ["#2e59d9", "#17a673", "#2c9faf"],
-                hoverBorderColor: "rgba(234, 236, 244, 1)",
-            },
-        ],
+function number_format(number, decimals, dec_point, thousands_sep) {
+  // *     example: number_format(1234.56, 2, ',', ' ');
+  // *     return: '1 234,56'
+  number = (number + '').replace(',', '').replace(' ', '');
+  var n = !isFinite(+number) ? 0 : +number,
+    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+    s = '',
+    toFixedFix = function(n, prec) {
+      var k = Math.pow(10, prec);
+      return '' + Math.round(n * k) / k;
+    };
+  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+  if (s[0].length > 3) {
+    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+  }
+  if ((s[1] || '').length < prec) {
+    s[1] = s[1] || '';
+    s[1] += new Array(prec - s[1].length + 1).join('0');
+  }
+  return s.join(dec);
+}
+
+// Bar Chart Example
+
+const nama_perusahaan = @json($portfolio['nama']);
+const jumlah_portofolio = @json($portfolio['jumlah']);
+
+var ctx = document.getElementById("portofolio_chart");
+var myBarChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: nama_perusahaan,
+    datasets: [{
+      label: "Jumlah",
+      backgroundColor: "#4e73df",
+      hoverBackgroundColor: "#2e59d9",
+      borderColor: "#4e73df",
+      data: jumlah_portofolio,
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 10,
+        right: 25,
+        top: 25,
+        bottom: 0
+      }
     },
-    options: {
-        maintainAspectRatio: false,
-        tooltips: {
-            backgroundColor: "rgb(255,255,255)",
-            bodyFontColor: "#858796",
-            borderColor: "#dddfeb",
-            borderWidth: 1,
-            xPadding: 15,
-            yPadding: 15,
-            displayColors: false,
-            caretPadding: 10,
+    scales: {
+      xAxes: [{
+        time: {
+          unit: 'month'
         },
-        legend: {
-            display: false,
+        gridLines: {
+          display: false,
+          drawBorder: false
         },
-        cutoutPercentage: 80,
+        ticks: {
+          maxTicksLimit: 6
+        },
+        maxBarThickness: 25,
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: 50,
+          maxTicksLimit: 5,
+          padding: 10,
+          // Include a dollar sign in the ticks
+          callback: function(value, index, values) {
+            return number_format(value);
+          }
+        },
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [2]
+        }
+      }],
     },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      titleMarginBottom: 10,
+      titleFontColor: '#6e707e',
+      titleFontSize: 14,
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+      callbacks: {
+        label: function(tooltipItem, chart) {
+          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+          return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+        }
+      }
+    },
+  }
 });
 
 </script>

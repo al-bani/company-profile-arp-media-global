@@ -18,6 +18,14 @@
                     <label for="deskripsi">Deskripsi Project</label>
                     <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
                 </div>
+                <div class="mb-3">
+                    <label for="status_project">Status Project</label>
+                    <select class="ms-1 form-select btn btn-primary" id="status_project" name="status_project">
+                        <option selected>Choose</option>
+                        <option value="ongoing">Sedang Berjalan</option>
+                        <option value="done">Selesai</option>
+                    </select>
+                </div>
 
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-header">

@@ -99,6 +99,12 @@
             <span class="ms-2">Email</span>
         </a>
     </li>
+    <li class="nav-item {{ Request::is('dashboard/uploader*') ? 'active' : '' }}">
+        <a class="nav-link py-3 fs-4" href="/dashboard/uploader" data-bs-toggle="tooltip" data-bs-placement="right" title="uploader">
+            <i class="fas fa-upload fs-3"></i>
+            <span class="ms-2">uploader</span>
+        </a>
+    </li>
 
     <hr class="sidebar-divider">
 

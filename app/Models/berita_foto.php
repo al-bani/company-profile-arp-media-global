@@ -10,6 +10,7 @@ class berita_foto extends Model
     /** @use HasFactory<\Database\Factories\BeritaFotoFactory> */
     use HasFactory;
     protected $guarded = ['id'];
+    protected $fillable = ['foto'];
     public function berita_foto(){
         return $this->belongsTo(berita::class, 'id_berita', 'id_berita');
     }

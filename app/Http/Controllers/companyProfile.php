@@ -9,10 +9,12 @@ use App\Models\email;
 use App\Models\layanan;
 use App\Models\partner;
 use App\Models\perusahaan;
+use App\Models\Faq;
 use App\Models\portofolio;
 use App\Models\portofolio_foto;
 use App\Models\visitor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class companyProfile extends Controller
 {
@@ -58,9 +60,18 @@ class companyProfile extends Controller
         // dd($anak);
         // dd($perusahaan->banner);
 
+        $data_faqs = Faq::all()->map(function ($item) {
+            return [
+                'q' => $item->pertanyaan,
+                'a' => $item->jawaban,
+            ];
+        })->toArray();
+
         if (!$perusahaan) {
             abort(404, 'Perusahaan tidak ditemukan.');
         }
+
+
         return view('company-profile.homePage', [
             'perusahaans' => $perusahaan,
             'banners' => $banners,
@@ -68,7 +79,8 @@ class companyProfile extends Controller
             'partners' => $partners,
             'beritas' => $beritas,
             'portofolios' => $portofolios,
-            'anaks' => $anak
+            'anaks' => $anak,
+            'faqs' => $data_faqs
         ]);
     }
 
@@ -136,6 +148,30 @@ class companyProfile extends Controller
             'beritas' => $perusahaan->berita
         ]);
     }
+    public function beritaDetail($nama_perusahaan,$id)
+    {
+        // return view('company-profile.berita');
+        if (!$nama_perusahaan) {
+            abort(404, 'Perusahaan belum dipilih.');
+        }
+
+        $perusahaan = Perusahaan::with('berita')
+            ->where('nama_perusahaan', $nama_perusahaan)
+            ->first();
+
+        if (!$perusahaan) {
+            abort(404, 'Perusahaan tidak ditemukan.');
+        }
+        $berita = berita::where('id', $id)
+            ->first();
+
+        $beritaAll = berita::all();
+        return view('company-profile.detailBerita', [
+            'perusahaans' => $perusahaan,
+            'beritas' => $berita,
+            'beritaAlls'=> $beritaAll
+        ]);
+    }
 
     public function detail($nama_perusahaan)
     {
@@ -190,13 +226,17 @@ class companyProfile extends Controller
 
         $request->merge(['id_perusahaan' => $perusahaan->id_perusahaan]);
 
+        // Tambahkan validasi untuk CAPTCHAs
         $validateData = $request->validate([
             'id_perusahaan' => 'required',
-            'nama' => 'required',
+            'nama' => 'required|string',
             'email' => 'required|email',
-            'pesan' => 'required',
+            'pesan' => 'required|string',
         ]);
 
+        // Verifikasi ke Google
+
+        // Simpan data
         Email::create($validateData);
 
         return redirect()->back()->with('success', 'Pesan berhasil dikirim.');
@@ -319,6 +359,26 @@ class companyProfile extends Controller
         return view('company-profile.struktur', [
             'perusahaans' => $perusahaan,
             'strukturs' => $perusahaan->struktur
+        ]);
+    }
+
+    public function faq($nama_perusahaan)
+
+    {
+        if (!$nama_perusahaan) {
+            abort(404, 'Perusahaan belum dipilih.');
+        }
+
+        $perusahaan = Perusahaan::with('faq')
+            ->where('nama_perusahaan', $nama_perusahaan)
+            ->first();
+
+        if (!$perusahaan) {
+            abort(404, 'Perusahaan tidak ditemukan.');
+        }
+        return view('company-profile.faq', [
+            'perusahaans' => $perusahaan,
+            'faqs' => $perusahaan->faq
         ]);
     }
 }

@@ -29,5 +29,11 @@ class perusahaan extends Model
     public function admin(){
         return $this->belongsTo(admin::class, 'id_perusahaan', 'id_perusahaan');
     }
+    public function struktur(){
+        return $this->hasMany(struktur::class, 'id_perusahaan', 'id_perusahaan');
+    }
+    public function faq(){
+        return $this->hasMany(Faq::class, 'id_perusahaan', 'id_perusahaan');
+    }
 
 }

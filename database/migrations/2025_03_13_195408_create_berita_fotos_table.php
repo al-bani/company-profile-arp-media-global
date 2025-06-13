@@ -14,10 +14,7 @@ return new class extends Migration
         Schema::create('berita_fotos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('id_berita_foto')->unique();
-            $table->string('id_berita');
-            $table->string('judul_foto', 255);
-            $table->string('foto', 100);
+            $table->string('foto', 255);
         });
     }
 

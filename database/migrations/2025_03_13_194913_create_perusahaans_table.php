@@ -15,13 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('id_perusahaan')->unique();
             $table->string('nama_perusahaan')->nullable();
-            $table->string('logo')->nullable();
+            $table->string('logo_utama')->nullable();
+            $table->string('logo_website')->nullable();
             $table->string('nib')->unique();
             $table->text('notaris');
             $table->string('npwp')->unique();
             $table->text('deskripsi');
             $table->text('alamat_perusahaan');
             $table->text('alamat_kantor');
+            $table->text('maps');
             $table->string('email')->unique();
             $table->string('no_telpon');
             $table->string('instagram')->nullable();

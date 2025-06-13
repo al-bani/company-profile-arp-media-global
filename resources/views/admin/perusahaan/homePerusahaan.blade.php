@@ -25,7 +25,8 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Logo</th>
+                            <th>Logo Website</th>
+                            <th>Logo Utama</th>
                             <th>Nama Perusahaan</th>
                             <th>NIB</th>
                             <th>Notaris</th>
@@ -37,8 +38,15 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>
-                                    @if ($perusahaan->logo)
-                                        <img src="{{ asset($perusahaan->logo) }}" alt="Logo" width="60">
+                                    @if ($perusahaan->logo_website)
+                                        <img src="{{ asset($perusahaan->logo_website) }}" alt="Logo" width="60">
+                                    @else
+                                        <span style="color: red;">Logo Kosong</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($perusahaan->logo_utama)
+                                        <img src="{{ asset($perusahaan->logo_utama) }}" alt="Logo" width="60">
                                     @else
                                         <span style="color: red;">Logo Kosong</span>
                                     @endif
@@ -125,9 +133,15 @@
                             </div>
                             <div class="modal-body">
                                 <!-- Gambar -->
-                                @if ($perusahaan->logo)
+                                @if ($perusahaan->logo_website)
                                     <div class="mb-3 text-center">
-                                        <img src="{{ asset($perusahaan->logo) }}" class="img-fluid rounded shadow-sm"
+                                        <img src="{{ asset($perusahaan->logo_website) }}" class="img-fluid rounded shadow-sm"
+                                            style="max-height: 120px;">
+                                    </div>
+                                @endif
+                                @if ($perusahaan->logo_utama)
+                                    <div class="mb-3 text-center">
+                                        <img src="{{ asset($perusahaan->logo_utama) }}" class="img-fluid rounded shadow-sm"
                                             style="max-height: 120px;">
                                     </div>
                                 @endif

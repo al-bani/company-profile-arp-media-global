@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\berita_foto;
 use App\Http\Requests\Storeberita_fotoRequest;
 use App\Http\Requests\Updateberita_fotoRequest;
+use Illuminate\Support\Str;
 
 class BeritaFotoController extends Controller
 {
@@ -13,7 +14,8 @@ class BeritaFotoController extends Controller
      */
     public function index()
     {
-        //
+        $images = berita_foto::latest()->get();
+        return view("admin.uploader.uploader", compact('images'));
     }
 
     /**
@@ -29,7 +31,22 @@ class BeritaFotoController extends Controller
      */
     public function store(Storeberita_fotoRequest $request)
     {
-        //
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048'
+        ]);
+
+        $file = $request->file('image');
+        $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
+
+        // Simpan di public/images
+        $file->move(public_path('images'), $filename);
+
+        // Simpan ke DB
+        berita_foto::create([
+            'foto' => $filename
+        ]);
+
+        return redirect()->route('uploader.index')->with('success', 'Gambar berhasil diupload.');
     }
 
     /**

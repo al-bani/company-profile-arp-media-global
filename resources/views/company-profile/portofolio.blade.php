@@ -15,7 +15,6 @@
                             @if ($portofolio->portofolio_foto->isNotEmpty())
                                 @php $firstFoto = $portofolio->portofolio_foto->first(); @endphp
                                 <div class="card-front" style="background-image: url('{{ asset($firstFoto->foto) }}');">
-
                                     <div class="overlay p-4">
                                         <h1 class="fst-italic fw-bold h3 text-outlined">{{ $portofolio->nama_project }}</h1>
                                     </div>
@@ -140,4 +139,5 @@
             </div>
         </div>
     </div>
+
 @endsection

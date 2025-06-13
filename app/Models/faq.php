@@ -10,14 +10,7 @@ class Faq extends Model
     /** @use HasFactory<\Database\Factories\FaqFactory> */
     use HasFactory;
 
-    protected $table = 'faqs';
-
-    protected $fillable = [
-        'pertanyaan',
-        'jawaban',
-        'id_perusahaan'
-    ];
-
+   protected $guarded = ['id'];
     public function perusahaan()
     {
         return $this->belongsTo(perusahaan::class, 'id_perusahaan', 'id_perusahaan');

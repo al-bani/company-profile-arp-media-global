@@ -1,53 +1,31 @@
 @extends('company-profile.Layout.company')
 
 @section('content')
-    <img src="{{ asset('images/banner.png') }}" class="berita-web-banner w-100">
+    <img src="{{ asset('images/banner.png') }}" class="berita-web-banner w-100" alt="Banner">
 
-    <div class="container berita-web ">
+    <div class="container berita-web my-5">
+        <h4 class="mb-4 fw-bold text-center">Berita Terbaru</h4>
 
-
-        <h4 class="">Berita</h4>
-
-        <div class="container ">
-            <div class="rowberita row g- mb-5">
-                <div class=" col-lg-3 ">
-                    @foreach ($beritas as $berita)
-                        <div class="card-template">
-                            <div class="card-template-img-holder">
-                                <img src="{{ asset($berita->foto) }}" alt="Blog image">
-                            </div>
-                            <h3 class="blog-title">{{ $berita->judul }}</h3>
-                            <span class="blog-time">{{$berita->tanggal}}</span>
-                            <p class="description">
-                              {!!$berita->konte!!}
-
-                            </p>
-                            <div class="options">
-                                <span></span>
-                                <span>
-                                    Read More
-                                </span>
-                            </div>
-
+        <div class="row g-4">
+            @foreach ($beritas as $berita)
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card h-100 shadow rounded-4 border-0">
+                        <!-- Gambar dengan rasio dan jarak bawah -->
+                        <div class="ratio ratio-16x9 mb-3">
+                            <img src="{{ asset($berita->foto) }}" class="object-fit-cover rounded-top-4" alt="{{ $berita->judul }}">
                         </div>
-                    @endforeach
-                </div>
-            </div>
 
-        </div>
-    </div>
-
-    <!-- @foreach ($beritas as $berita)
-    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="card h-100 shadow-sm">
-                            <img src="{{ asset($berita->foto) }}" class="card-img-top" alt="Berita">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $berita->judul }}</h5>
-                                <p class="card-text"><small class="text-muted">{!! $berita->tanggal !!}</small></p>
-                                <p class="card-text">{!! $berita->konten !!}</p>
-                                <a href="#" class="btn btn-outline-primary btn-sm">Read Full Blog</a>
-                            </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-semibold mb-2">{{ $berita->judul }}</h5>
+                            <small class="text-muted mb-3">{{ $berita->tanggal }}</small>
+                            <p class="card-text flex-grow-1" style="font-size: 0.95rem;">
+                                {!! \Illuminate\Support\Str::limit(strip_tags($berita->konte), 100, '...') !!}
+                            </p>
+                            <a href="/berita/{{$perusahaans->nama_perusahaan}}/detail/{{$berita->id}}" class="btn btn-primary btn-sm w-100 mt-3">Baca Selengkapnya</a>
                         </div>
                     </div>
-    @endforeach -->
+                </div>
+            @endforeach
+        </div>
+    </div>
 @endsection

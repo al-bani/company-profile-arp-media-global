@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('banners', function (Blueprint $table) {
+        Schema::create('visitors', function (Blueprint $table) {
             $table->id();
-            $table->string('id_banner')->unique();
-            $table->string('id_perusahaan');
-            $table->string('judul')->nullable();
-            $table->text('deskripsi')->nullable();
-            $table->string('foto')->nullable();
+            $table->date('tanggal');
+            $table->integer('jumlah_visit');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('banners');
+        Schema::dropIfExists('visitors');
     }
 };

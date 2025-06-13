@@ -59,6 +59,7 @@ Route::get('/portofolio-detail', [companyProfile::class, 'portolioDetail']);
 Route::get('/berita/{nama_perusahaan}', [companyProfile::class, 'berita']);
 Route::get('/detail/{nama_perusahaan}', [companyProfile::class, 'detail']);
 Route::get('/kontak/{nama_perusahaan}', [companyProfile::class, 'kontak']);
+Route::post('/kontak/{nama_perusahaan}', [companyProfile::class, 'kontakPost']);
 Route::get('/layanan/{nama_perusahaan}', [companyProfile::class, 'layanan']);
 Route::get('/struktur/{nama_perusahaan}', [companyProfile::class, 'struktur']);
 Route::get('/portofolio/{nama_perusahaan}', [companyProfile::class, 'portofolio']);

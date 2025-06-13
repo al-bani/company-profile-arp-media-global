@@ -57,7 +57,7 @@ class PerusahaanController extends Controller
      */
     public function store(Request $request)
     {
-        $id_perusahaan =  $request->status. '_' . $request->nama_perusahaan.'_'. $request->nib;
+        $id_perusahaan =  $request->status. '_' . str_replace(' ', '_',$request->nama_perusahaan).'_'. $request->nib;
         $request->merge([
             'id_perusahaan' => $id_perusahaan,
         ]);

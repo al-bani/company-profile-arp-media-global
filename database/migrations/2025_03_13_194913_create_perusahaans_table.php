@@ -20,7 +20,8 @@ return new class extends Migration
             $table->text('notaris');
             $table->string('npwp')->unique();
             $table->text('deskripsi');
-            $table->text('alamat');
+            $table->text('alamat_perusahaan');
+            $table->text('alamat_kantor');
             $table->string('email')->unique();
             $table->string('no_telpon');
             $table->string('instagram')->nullable();

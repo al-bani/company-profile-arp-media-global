@@ -12,11 +12,13 @@
     </div>
 
     <div class="container-fluid">
-        @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="cursor: pointer; text-decoration: none;"></button>
-        </div>
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center"
+                role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                    style="cursor: pointer; text-decoration: none;"></button>
+            </div>
         @endif
     </div>
 
@@ -40,30 +42,32 @@
                         {{-- Contoh Data --}}
                         @php $role = $role ?? 'admin'; @endphp
                         @foreach ($partners as $partner)
-                            @if ($role === 'superAdmin' || (isset($partner->id_perusahaan) && $partner->id_perusahaan == Auth::user()->id_perusahaan))
-                            <tr>
-                                <td>{{ $partner->nama_partner }}</td>
-                                <td>{{ $partner->email }}</td>
-                                <td>
-                                    @if ($partner->foto)
-                                        <img src="{{ asset($partner->foto) }}" alt="Logo" width="100">
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="/dashboard/partner/{{ $partner->id }}/edit"
-                                        class="btn btn-warning btn-sm">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
-                                        data-bs-target="#detailPartner{{ $loop->iteration }}">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    {{-- <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                            @if (
+                                $role === 'superAdmin' ||
+                                    (isset($partner->id_perusahaan) && $partner->id_perusahaan == Auth::user()->id_perusahaan))
+                                <tr>
+                                    <td>{{ $partner->nama_partner }}</td>
+                                    <td>{{ $partner->email }}</td>
+                                    <td>
+                                        @if ($partner->foto)
+                                            <img src="{{ asset($partner->foto) }}" alt="Logo" width="100">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="/dashboard/partner/{{ $partner->id }}/edit"
+                                            class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
+                                            data-bs-target="#detailPartner{{ $loop->iteration }}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        {{-- <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#deletePartner{{ $loop->iteration }}">
                                         <i class="fas fa-trash-alt"></i>
                                     </a> --}}
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             @endif
                         @endforeach
                     </tbody>
@@ -88,20 +92,28 @@
                                         <img src="{{ asset($partner->foto) }}" class="img-fluid rounded shadow-sm"
                                             style="max-height: 150px;" alt="Logo Partner">
                                     </div>
+                                @else
+                                    <div class="mb-3 text-center">
+                                        <span style="color: red;">Logo Partner belum tersedia</span>
+                                    </div>
                                 @endif
 
                                 <div class="mb-3">
                                     <label class="form-label">Nama Partner</label>
-                                    <input type="text" class="form-control" value="{{ $partner->nama_partner }}"
-                                        readonly>
+                                    <div class="form-control" readonly>
+                                        {!! $partner->nama_partner ?? '<span style="color: red;">Nama Partner Kosong</span>' !!}
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Email</label>
-                                    <input type="text" class="form-control" value="{{ $partner->email }}" readonly>
+                                    <div class="form-control" readonly>
+                                        {!! $partner->email ?? '<span style="color: red;">Email Partner Kosong</span>' !!}
+                                    </div>
                                 </div>
 
                             </div>
+
                             <div class="modal-footer border-0">
                                 <button type="button" class="btn btn-secondary rounded-pill px-4"
                                     data-bs-dismiss="modal">Tutup</button>

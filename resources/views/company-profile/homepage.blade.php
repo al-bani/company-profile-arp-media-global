@@ -1,7 +1,7 @@
 @extends('company-profile.Layout.company')
 
 @section('content')
-    @php
+    {{-- @php
         $logos = ['bi.png', 'bjb.png', 'disdik.png', 'diskominfo.png', 'ojk.png', 'unpad.png'];
     @endphp
 
@@ -13,7 +13,7 @@
             ['name' => 'Perusahaan D', 'image' => 'unpad.png'],
             ['name' => 'Perusahaan E', 'image' => 'unpad.png'],
         ];
-    @endphp
+    @endphp --}}
 
     <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
@@ -79,7 +79,7 @@
     </div>
 
     {{-- Berita --}}
-    
+
     <div class="container berita pt-5">
         <h1 class="text-center h1 mb-5">Berita Terbaru</h1>
         <div class="row g-4 justify-content-center">

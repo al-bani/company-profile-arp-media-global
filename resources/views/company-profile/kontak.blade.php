@@ -16,31 +16,34 @@
             <div class="row">
                 <div class="col-sm-12 col-md-5 col-lg-4">
                     <h4 class="mt-3"><b>Alamat Perusahaan</b></h4>
-                    <p>Jl. Zamrud No.19, Cijagra, Kec. Lengkong, Kota Bandung, Jawa Barat 40265</p>
-                    <p style="margin-top: -14px">Telp: +62-11-034-094354542</p>
-                    <p style="margin-top: -14px">Fax: +62-55-435-453423432</p>
+                    <p>{!!$perusahaans->alamat_perusahaan!!}</p>
+                    <p style="margin-top: -14px">Telp:{!!$perusahaans->no_telpon!!}</p>
+                    <p style="margin-top: -14px">Fax: {!!$perusahaans->no_telpon!!}</p>
                     <h4 class="mt-3"><b>Alamat Kantor</b></h4>
-                    <p>Jl. Zamrud No.19, Cijagra, Kec. Lengkong, Kota Bandung, Jawa Barat 40265</p>
-                    <p style="margin-top: -14px">Telp: +62-11-034-094354542</p>
-                    <p style="margin-top: -14px">Fax: +62-55-435-453423432</p>
+                    <p>{!!$perusahaans->alamat_kantor!!}</p>
+                    <p style="margin-top: -14px">Telp: {!!$perusahaans->no_telpon!!}</p>
+                    <p style="margin-top: -14px">Fax: {!!$perusahaans->no_telpon!!}</p>
                 </div>
                 <div class="col-sm-12 col-md-7 col-lg-8 shadow">
-                    <div class="mb-3 mt-3">
-                        <label for="exampleFormControlInput1" class="form-label">Nama</label>
-                        <input class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput2" class="form-label">Email</label>
-                        <input class="form-control" type="email" id="exampleFormControlInput2" rows="3"></input>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Pesan</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                    <div class="mb-4 ">
-                        <input class="btn btn-primary w-100 text-white bg-black border-0" type="submit" value="Submit">
-                    </div>
+                    <form action="/kontak/{{ $perusahaans->nama_perusahaan }}" method="post">
+                        @csrf
+                        <div class="mb-3 mt-3">
+                            <label for="nama" class="form-label">Nama</label>
+                            <input class="form-control" id="nama" name="nama" placeholder="name@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Email</label>
+                            <input class="form-control" type="email" id="email" name="email" rows="3"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pesan" class="form-label">Pesan</label>
+                            <textarea class="form-control" id="pesan" name="pesan" rows="3"></textarea>
+                        </div>
+                        <div class="mb-4 ">
+                            <input class="btn btn-primary w-100 text-white bg-black border-0" type="submit" value="Submit">
+                        </div>
 
+                    </form>
                 </div>
             </div>
         </div>

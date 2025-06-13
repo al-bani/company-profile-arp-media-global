@@ -42,7 +42,7 @@ class PortofolioController extends Controller
     public function store(Request $request)
     {
         // dd($request->foto);
-        $id_portofolio =  $request->id_perusahaan . '_' . $request->nama_project;
+        $id_portofolio =  $request->id_perusahaan . '_' . str_replace(' ', '_',$request->nama_project);
         $waktu = $request->jam_mulai . '-' . $request->jam_selesai;
         $request->merge([
             'id_portofolio' => $id_portofolio,

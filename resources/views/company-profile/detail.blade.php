@@ -8,11 +8,11 @@
             {{-- bagian header --}}
             <div class="row detail-header">
                 <div class="col-lg-4 mt-5 mb-4">
-                    <img src="{{ asset('images/logo copy.png') }}" alt="" class="logo-detail mb-5">
+                    <img src="{{ asset('images/logo copy.png') }}" alt="" class="logo-detail mb-5 w-50">
                 </div>
                 <div class="col-lg-8 mt-4 text-start pe-5 mb-4">
-                    <h2>Media Perusahaan Yang Mengedapankan Kualitas</h2>
-                    <p>Kami hadir sebagai penggerak untuk membuka dunia penuh peluang serta kemungkinan tanpa batas melalui
+                    <h3  class="h1 bold"> Media Perusahaan Yang Mengedapankan Kualitas </h3>
+                    <p class="fs-4">Kami hadir sebagai penggerak untuk membuka dunia penuh peluang serta kemungkinan tanpa batas melalui
                         serta kemungkinan tanpa batas melalui pemanfaatan laanan dan solusi digital integrasi</p>
                 </div>
             </div>

@@ -12,11 +12,13 @@
     </div>
 
     <div class="container-fluid">
-        @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="cursor: pointer; text-decoration: none;"></button>
-        </div>
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center"
+                role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                    style="cursor: pointer; text-decoration: none;"></button>
+            </div>
         @endif
     </div>
 
@@ -43,11 +45,15 @@
                             @if ($role === 'superAdmin' || (isset($banner->id_perusahaan) && $banner->id_perusahaan == Auth::user()->id_perusahaan))
                                 <tr>
                                     <td>{{ $banner->judul }}</td>
-                                    <td>{{ $banner->perusahaan->nama_perusahaan }}</td>
+                                    <td>
+                                        {!! $banner->perusahaan->nama_perusahaan ?? '<span style="color: red;">Nama Perusahaan Kosong</span>' !!}
+                                    </td>
                                     <td>{{ $banner->deskripsi }}</td>
                                     <td>
                                         @if ($banner->foto)
                                             <img src="{{ asset($banner->foto) }}" alt="Logo" width="100">
+                                        @else
+                                            <span style="color: red;">Foto belum tersedia</span>
                                         @endif
                                     </td>
 

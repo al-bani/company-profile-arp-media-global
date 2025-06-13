@@ -8,11 +8,13 @@
                 {{ session('success') }}
             </div>
         @endif
-        @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="cursor: pointer; text-decoration: none;"></button>
-        </div>
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center"
+                role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                    style="cursor: pointer; text-decoration: none;"></button>
+            </div>
         @endif
     </div>
 
@@ -38,26 +40,42 @@
                         @php $role = $role ?? 'admin'; @endphp
                         @foreach ($beritas as $berita)
                             @if ($role === 'superAdmin' || (isset($berita->id_perusahaan) && $berita->id_perusahaan == Auth::user()->id_perusahaan))
-                            <tr>
-                                <td>{{ $berita->id_berita }}</td>
-                                <td>{{ $berita->judul }}</td>
-                                <td>{{ $berita->penulis }}</td>
-                                <td>{{ $berita->id_perusahaan }}</td>
-                                <td>{{ $berita->tanggal }}</td>
-                                <td>
-                                    <a href="{{ route('berita.edit', $berita->id) }}" class="btn btn-warning btn-sm">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#detailBerita{{ $loop->iteration }}">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#deleteBerita{{ $loop->iteration }}">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        {!! $berita->id_berita ?? '<span style="color: red;">ID Berita Kosong</span>' !!}
+                                    </td>
+
+                                    <td>
+                                        {!! $berita->judul ?? '<span style="color: red;">Judul Kosong</span>' !!}
+                                    </td>
+
+                                    <td>
+                                        {!! $berita->penulis ?? '<span style="color: red;">Penulis Kosong</span>' !!}
+                                    </td>
+
+                                    <td>
+                                        {!! $berita->id_perusahaan ?? '<span style="color: red;">ID Perusahaan Kosong</span>' !!}
+                                    </td>
+
+                                    <td>
+                                        {!! $berita->tanggal ?? '<span style="color: red;">Tanggal Kosong</span>' !!}
+                                    </td>
+
+                                    <td>
+                                        <a href="{{ route('berita.edit', $berita->id) }}"
+                                            class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#detailBerita{{ $loop->iteration }}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#deleteBerita{{ $loop->iteration }}">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
                             @endif
                         @endforeach
                     </tbody>
@@ -151,7 +169,8 @@
                                 </div>
                                 @foreach ($beritaFotos as $foto)
                                     @if ($foto->id_berita === $berita->id_berita)
-                                        <label for="foto" class="form-label">Judul Foto: {{ $foto->judul_foto }}</label>
+                                        <label for="foto" class="form-label">Judul Foto:
+                                            {{ $foto->judul_foto }}</label>
                                         <div class="mb-3 ">
                                             <img src="{{ asset($foto->foto) }}" class="img-fluid rounded shadow-sm"
                                                 style="max-height: 120px;">

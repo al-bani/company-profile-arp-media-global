@@ -57,7 +57,19 @@ class BannerController extends Controller
             $admin = Auth::user();
             $request->merge(['id_perusahaan' => $admin->id_perusahaan]);
         }
-        $id_banner = $request->id_perusahaan . '_' . $request->judul;
+        $baseId = $request->id_perusahaan . '_' . str_replace(' ', '_', $request->judul);
+
+        if (Banner::where('id_banner', $baseId)->exists()) {
+            $counter = 1;
+            $id_banner = $baseId . '_' . $counter;
+
+            while (Banner::where('id_banner', $id_banner)->exists()) {
+                $counter++;
+                $id_banner = $baseId . '_' . $counter;
+            }
+        } else {
+            $id_banner = $baseId;
+        }
         $request->merge([
             'id_banner' => $id_banner,
             // 'password' => bcrypt($request->password) // hash password juga di sini
@@ -88,7 +100,7 @@ class BannerController extends Controller
      */
     public function edit(banner $banner)
     {
-         $role = Auth::user()->role;
+        $role = Auth::user()->role;
         return view('admin.banner.banner-edit', [
             'banner' => $banner,
             'perusahaans' => perusahaan::all(),

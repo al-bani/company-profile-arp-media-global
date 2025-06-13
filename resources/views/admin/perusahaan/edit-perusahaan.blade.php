@@ -52,8 +52,12 @@
                     <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required>{{ old('deskripsi', $perusahaan->deskripsi) }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="alamat">Alamat</label>
-                    <textarea class="form-control" id="alamat" name="alamat" rows="3" required>{{ old('alamat', $perusahaan->alamat) }}</textarea>
+                    <label for="alamat_perusahaan">Alamat Perusahaan</label>
+                    <textarea class="form-control" id="alamat_perusahaan" name="alamat_perusahaan" rows="3" required>{{ old('alamat_perusahaan', $perusahaan->alamat_perusahaan) }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="alamat_kantor">Alamat Perusahaan</label>
+                    <textarea class="form-control" id="alamat_kantor" name="alamat_kantor" rows="3" required>{{ old('alamat_kantor', $perusahaan->alamat_kantor) }}</textarea>
                 </div>
 
                 <div class="mb-3 row">

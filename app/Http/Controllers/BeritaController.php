@@ -64,7 +64,23 @@ class BeritaController extends Controller
             $admin = Auth::user();
             $request->merge(['id_perusahaan' => $admin->id_perusahaan]);
         }
-        $id_berita = 'berita' . '_' . $request->id_perusahaan . '_' . $request->judul;
+
+
+        $baseId = 'berita' . '_' . $request->id_perusahaan . '_' . str_replace(' ', '_', $request->judul);
+
+        if (Berita::where('id_berita', $baseId)->exists()) {
+            $counter = 1;
+            $id_berita = $baseId . '_' . $counter;
+
+            // Cek sampai dapat ID unik
+            while (Berita::where('id_berita', $id_berita)->exists()) {
+                $counter++;
+                $id_berita = $baseId . '_' . $counter;
+            }
+        } else {
+            $id_berita = $baseId;
+        }
+
         $request->merge([
             'id_berita' => $id_berita,
             // 'password' => bcrypt($request->password) // hash password juga di sini

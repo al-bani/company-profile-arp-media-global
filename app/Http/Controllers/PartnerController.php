@@ -57,7 +57,19 @@ class PartnerController extends Controller
             $admin = Auth::user();
             $request->merge(['id_perusahaan' => $admin->id_perusahaan]);
         }
-        $id_partner =  $request->id_perusahaan . '_' . $request->nama_partner;
+        $baseId = $request->id_perusahaan . '_' . str_replace(' ', '_', $request->nama_partner);
+
+        if (Partner::where('id_partner', $baseId)->exists()) {
+            $counter = 1;
+            $id_partner = $baseId . '_' . $counter;
+
+            while (Partner::where('id_partner', $id_partner)->exists()) {
+                $counter++;
+                $id_partner = $baseId . '_' . $counter;
+            }
+        } else {
+            $id_partner = $baseId;
+        }
         $request->merge([
             'id_partner' => $id_partner,
         ]);

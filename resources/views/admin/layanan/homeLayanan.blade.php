@@ -12,11 +12,13 @@
             </div>
 
             <div class="container-fluid">
-                @if(session('error'))
-                <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
-                    {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="cursor: pointer; text-decoration: none;"></button>
-                </div>
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center"
+                        role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                            style="cursor: pointer; text-decoration: none;"></button>
+                    </div>
                 @endif
             </div>
 
@@ -34,27 +36,42 @@
                         {{-- Contoh Data --}}
                         @php $role = $role ?? 'admin'; @endphp
                         @foreach ($layanans as $layanan)
-                            @if ($role === 'superAdmin' || (isset($layanan->id_perusahaan) && $layanan->id_perusahaan == Auth::user()->id_perusahaan))
-                            <tr>
-                                <td>{{ $layanan->perusahaan->nama_perusahaan }}</td>
-                                <td>{{ $layanan->nama_layanan }}</td>
-                                <td>{{ $layanan->deskripsi }}</td>
-                                <td>
-                                    <a href="/dashboard/layanan/{{ $layanan->id }}/edit"
-                                        class="btn btn-warning btn-sm">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
-                                        data-bs-target="#detailLayanan{{ $loop->iteration }}">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
+                            @if (
+                                $role === 'superAdmin' ||
+                                    (isset($layanan->id_perusahaan) && $layanan->id_perusahaan == Auth::user()->id_perusahaan))
+                                <tr>
+                                    <td>
+                                        {!! $layanan->perusahaan->nama_perusahaan ?? '<span style="color: red;">Nama Perusahaan Kosong</span>' !!}
+                                    </td>
 
-                                    {{-- <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#deleteLayanan{{ $loop->iteration }}">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a> --}}
-                                </td>
-                            </tr>
+                                    <td>
+                                        {!! $layanan->nama_layanan ?? '<span style="color: red;">Nama Layanan Kosong</span>' !!}
+                                    </td>
+
+                                    <td>
+                                        {!! $layanan->deskripsi ?? '<span style="color: red;">Deskripsi Kosong</span>' !!}
+                                    </td>
+
+                                    <td>
+                                        <a href="/dashboard/layanan/{{ $layanan->id }}/edit"
+                                            class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-info btn-sm me-1" data-bs-toggle="modal"
+                                            data-bs-target="#detailLayanan{{ $loop->iteration }}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+
+                                        {{-- Tombol hapus nonaktif
+
+                                        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#deleteLayanan{{ $loop->iteration }}">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a> --}}
+
+                                    </td>
+
+                                </tr>
                             @endif
                         @endforeach
 
@@ -116,30 +133,35 @@
                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
+
                             <div class="modal-body">
 
                                 <div class="mb-3">
                                     <label class="form-label">Nama Perusahaan</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ $layanan->perusahaan->nama_perusahaan }}" readonly>
+                                    <input type="text" class="form-control" value="{!! $layanan->perusahaan->nama_perusahaan ?? '<span style=\'color: red;\'>Nama Perusahaan Kosong</span>' !!}" readonly>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Nama Layanan</label>
-                                    <input type="text" class="form-control" value="{{ $layanan->nama_layanan }}"
-                                        readonly>
+                                    <input type="text" class="form-control" value="{!! $layanan->nama_layanan ?? '<span style=\'color: red;\'>Nama Layanan Kosong</span>' !!}" readonly>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Deskripsi</label>
-                                    <textarea class="form-control" rows="3" readonly>{{ $layanan->deskripsi }}</textarea>
+                                    @if ($layanan->deskripsi)
+                                        <textarea class="form-control" rows="3" readonly>{{ $layanan->deskripsi }}</textarea>
+                                    @else
+                                        <span style="color: red;">Deskripsi Kosong</span>
+                                    @endif
                                 </div>
 
                             </div>
+
                             <div class="modal-footer border-0">
                                 <button type="button" class="btn btn-secondary rounded-pill px-4"
                                     data-bs-dismiss="modal">Tutup</button>
                             </div>
+
                         </div>
                     </div>
                 </div>

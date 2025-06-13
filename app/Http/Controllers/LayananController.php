@@ -57,7 +57,19 @@ class LayananController extends Controller
             $admin = Auth::user();
             $request->merge(['id_perusahaan' => $admin->id_perusahaan]);
         }
-        $id_layanan = $request->id_perusahaan . '_' . $request->nama_layanan ;
+        $baseId = $request->id_perusahaan . '_' . str_replace(' ', '_', $request->nama_layanan);
+
+        if (Layanan::where('id_layanan', $baseId)->exists()) {
+            $counter = 1;
+            $id_layanan = $baseId . '_' . $counter;
+
+            while (Layanan::where('id_layanan', $id_layanan)->exists()) {
+                $counter++;
+                $id_layanan = $baseId . '_' . $counter;
+            }
+        } else {
+            $id_layanan = $baseId;
+        }
         $request->merge([
             'id_layanan' => $id_layanan,
         ]);
@@ -144,7 +156,7 @@ class LayananController extends Controller
                 abort(403, 'Unauthorized');
             }
         }
-        return view('admin.layanan.layanan-edit',[
+        return view('admin.layanan.layanan-edit', [
             'layanan' => $layanan,
             'role' => $role
         ]);

@@ -160,8 +160,12 @@
 
                                 <!-- Alamat -->
                                 <div class="mb-3">
-                                    <label class="form-label">Alamat</label>
-                                    <textarea class="form-control" rows="3" readonly>{{ $perusahaan->alamat }}</textarea>
+                                    <label class="form-label">Alamat Perusahaan</label>
+                                    <textarea class="form-control" rows="3" readonly>{{ $perusahaan->alamat_perusahaan }}</textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Alamat Perusahaan</label>
+                                    <textarea class="form-control" rows="3" readonly>{{ $perusahaan->alamat_kantor }}</textarea>
                                 </div>
 
                                 <!-- Email & Telp -->

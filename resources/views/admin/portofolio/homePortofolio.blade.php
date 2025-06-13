@@ -12,11 +12,13 @@
             </div>
 
             <div class="container-fluid">
-                @if(session('error'))
-                <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center" role="alert">
-                    {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="cursor: pointer; text-decoration: none;"></button>
-                </div>
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between align-items-center"
+                        role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                            style="cursor: pointer; text-decoration: none;"></button>
+                    </div>
                 @endif
             </div>
 
@@ -38,14 +40,38 @@
                     <tbody>
                         @foreach ($portofolios as $portofolio)
                             <tr>
-                                <td>{{ $portofolio->id_portofolio }}</td>
-                                <td>{{ $portofolio->perusahaan->nama_perusahaan }}</td>
-                                <td>{{ $portofolio->nama_project }}</td>
-                                <td>{{ $portofolio->team }}</td>
-                                <td>{{ $portofolio->tempat }}</td>
-                                <td>{{ $portofolio->tanggal }}</td>
-                                <td>{{ $portofolio->waktu }}</td>
-                                <td>{{ $portofolio->deskripsi }}</td>
+                                <td>
+                                    {!! $portofolio->id_portofolio ?? '<span style="color: red;">ID Portofolio Kosong</span>' !!}
+                                </td>
+
+                                <td>
+                                    {!! $portofolio->perusahaan->nama_perusahaan ?? '<span style="color: red;">Nama Perusahaan Kosong</span>' !!}
+                                </td>
+
+                                <td>
+                                    {!! $portofolio->nama_project ?? '<span style="color: red;">Nama Project Kosong</span>' !!}
+                                </td>
+
+                                <td>
+                                    {!! $portofolio->team ?? '<span style="color: red;">Team Kosong</span>' !!}
+                                </td>
+
+                                <td>
+                                    {!! $portofolio->tempat ?? '<span style="color: red;">Tempat Kosong</span>' !!}
+                                </td>
+
+                                <td>
+                                    {!! $portofolio->tanggal ?? '<span style="color: red;">Tanggal Kosong</span>' !!}
+                                </td>
+
+                                <td>
+                                    {!! $portofolio->waktu ?? '<span style="color: red;">Waktu Kosong</span>' !!}
+                                </td>
+
+                                <td>
+                                    {!! $portofolio->deskripsi ?? '<span style="color: red;">Deskripsi Kosong</span>' !!}
+                                </td>
+
                                 <td>
                                     <a href="/dashboard/portofolio/{{ $portofolio->id }}/edit"
                                         class="btn btn-warning btn-sm">
@@ -121,62 +147,79 @@
                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
+
                             <div class="modal-body">
 
                                 {{-- Gambar (jika ada) --}}
-                                @if ($portofolio->foto)
+                                @if (!empty($portofolio->foto))
                                     <div class="mb-3 text-center">
                                         <img src="{{ asset('storage/' . $portofolio->foto) }}"
                                             class="img-fluid rounded shadow-sm" style="max-height: 150px;">
+                                    </div>
+                                @else
+                                    <div class="mb-3 text-center">
+                                        <span style="color: red;">Foto dokumentasi belum tersedia</span>
                                     </div>
                                 @endif
 
                                 <div class="mb-3">
                                     <label class="form-label">ID Portofolio</label>
-                                    <input type="text" class="form-control" value="{{ $portofolio->id_portofolio }}"
-                                        readonly>
+                                    <div class="form-control" readonly>
+                                        {!! $portofolio->id_portofolio ?? '<span style="color: red;">ID Portofolio Kosong</span>' !!}
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Perusahaan</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ $portofolio->perusahaan->nama_perusahaan }}" readonly>
+                                    <div class="form-control" readonly>
+                                        {!! $portofolio->perusahaan->nama_perusahaan ?? '<span style="color: red;">Nama Perusahaan Kosong</span>' !!}
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Nama Project</label>
-                                    <input type="text" class="form-control" value="{{ $portofolio->nama_project }}"
-                                        readonly>
+                                    <div class="form-control" readonly>
+                                        {!! $portofolio->nama_project ?? '<span style="color: red;">Nama Project Kosong</span>' !!}
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Team</label>
-                                    <input type="text" class="form-control" value="{{ $portofolio->team }}"
-                                        readonly>
+                                    <div class="form-control" readonly>
+                                        {!! $portofolio->team ?? '<span style="color: red;">Team Kosong</span>' !!}
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Tempat</label>
-                                    <input type="text" class="form-control" value="{{ $portofolio->tempat }}"
-                                        readonly>
+                                    <div class="form-control" readonly>
+                                        {!! $portofolio->tempat ?? '<span style="color: red;">Tempat Kosong</span>' !!}
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Tanggal</label>
-                                    <input type="date" class="form-control" value="{{ $portofolio->tanggal }}"
-                                        readonly>
+                                    <div class="form-control" readonly>
+                                        {!! $portofolio->tanggal ?? '<span style="color: red;">Tanggal Kosong</span>' !!}
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Waktu</label>
-                                    <input type="text" class="form-control" value="{{ $portofolio->waktu }}"
-                                        readonly>
+                                    <div class="form-control" readonly>
+                                        {!! $portofolio->waktu ?? '<span style="color: red;">Waktu Kosong</span>' !!}
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Deskripsi</label>
-                                    <textarea class="form-control" rows="3" readonly>{{ $portofolio->deskripsi }}</textarea>
+                                    @if (!empty($portofolio->deskripsi))
+                                        <textarea class="form-control" rows="3" readonly>{{ $portofolio->deskripsi }}</textarea>
+                                    @else
+                                        <span style="color: red;">Deskripsi Kosong</span>
+                                    @endif
                                 </div>
+
                             </div>
 
                             <div class="modal-footer border-0">
@@ -184,6 +227,7 @@
                                     data-bs-dismiss="modal">Tutup</button>
                             </div>
                         </div>
+
                     </div>
                 </div>
             @endforeach

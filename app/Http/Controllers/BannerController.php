@@ -77,10 +77,12 @@ class BannerController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('foto')) {
-            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $destination = 'image/upload/foto';
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $randomString = md5(uniqid(rand(), true));
+            $filename = time() . '_' . $randomString . '.' . $extension;
+            $destination = 'images/upload/banner';
             $request->file('foto')->move(public_path($destination), $filename);
-            $data['foto'] = $destination . '/' . $filename;
+            $data['foto'] = $filename;
         }
         // dd($data);
         banner::create($data);
@@ -129,10 +131,12 @@ class BannerController extends Controller
                 unlink(public_path($banner->foto));
             }
 
-            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $destination = 'image/upload/foto';
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $randomString = md5(uniqid(rand(), true));
+            $filename = time() . '_' . $randomString . '.' . $extension;
+            $destination = 'images/upload/banner';
             $request->file('foto')->move(public_path($destination), $filename);
-            $data['foto'] = $destination . '/' . $filename;
+            $data['foto'] = $filename;
         }
 
         $banner->update($data);

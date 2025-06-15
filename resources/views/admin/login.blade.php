@@ -28,7 +28,7 @@
         <div class="login-box">
             <!-- Logo Kanan / Atas Saat Mobile -->
             <div class="login-right">
-                <img src="/images/logo.png" alt="ARP Logo" class="login-logo" />
+                <img src="/images/arp_itenas.png" alt="ARP Logo" class="login-logo" />
             </div>
 
             <!-- Form Kiri / Bawah Saat Mobile -->
@@ -64,14 +64,13 @@
                     <button type="submit" class="login-button">Sign In</button>
 
                     <div class="links">
-                        <a href="#" class="forgot">Forgot password?</a>
+                        <a href="#" class="forgot" data-bs-toggle="modal" data-bs-target="#itenasModal">Powered by
+                            itenas</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 
 </html>

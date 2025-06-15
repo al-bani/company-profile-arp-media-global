@@ -75,10 +75,12 @@ class LayananController extends Controller
         ]);
         $data = $request->all();
         if ($request->hasFile('foto')) {
-            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $destination = 'image/upload/foto';
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $randomString = md5(uniqid(rand(), true));
+            $filename = time() . '_' . $randomString . '.' . $extension;
+            $destination = 'images/upload/layanan';
             $request->file('foto')->move(public_path($destination), $filename);
-            $data['foto'] = $destination . '/' . $filename;
+            $data['foto'] = $filename;
         }
         layanan::create($data);
         return redirect('/dashboard/layanan')->with('success', 'Data Berhasil Ditambahkan');
@@ -119,9 +121,9 @@ class LayananController extends Controller
                 unlink(public_path($layanan->foto));
             }
             $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $destination = 'image/upload/foto';
+            $destination = 'images/upload/layanan';
             $request->file('foto')->move(public_path($destination), $filename);
-            $data['foto'] = $destination . '/' . $filename;
+            $data['foto'] = $filename;
         }
         if ($request->nama_layanan !== $layanan->nama_layanan) {
             $data['id_layanan'] = $layanan->id_perusahaan . '_' . $request->nama_layanan;

@@ -88,9 +88,9 @@ class BeritaController extends Controller
         $data = $request->all();
         if ($request->hasFile('foto')) {
             $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $destination = 'image/upload/foto';
+            $destination = 'images/upload/thumbnail';
             $request->file('foto')->move(public_path($destination), $filename);
-            $data['foto'] = $destination . '/' . $filename;
+            $data['foto'] = $filename;
         }
 
         berita::create($data);
@@ -175,14 +175,14 @@ class BeritaController extends Controller
                     }
                     $extension = $item['foto']->getClientOriginalExtension();
                     $filename = Str::random(16) . '.' . $extension;
-                    $destination = 'image/upload/foto';
+                    $destination = 'images/upload/thumbnail';
                     $item['foto']->move(public_path($destination), $filename);
                     berita_foto::updateOrCreate(
                         ['id_berita' => $berita->id_berita],
                         [
                             'id_berita_foto' => 'img' . $berita->id_berita . ($item['judul_foto'] ?? ''),
                             'judul_foto' => $item['judul_foto'] ?? '',
-                            'foto' => $destination . '/' . $filename,
+                            'foto' => $filename,
                         ]
                     );
                 }

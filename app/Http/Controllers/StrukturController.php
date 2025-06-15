@@ -76,10 +76,12 @@ class StrukturController extends Controller
         }
 
         if ($request->hasFile('foto')) {
-            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $destination = 'image/upload/foto';
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $randomString = md5(uniqid(rand(), true));
+            $filename = time() . '_' . $randomString . '.' . $extension;
+            $destination = 'images/upload/struktur';
             $request->file('foto')->move(public_path($destination), $filename);
-            $data['foto'] = $destination . '/' . $filename;
+            $data['foto'] =  $filename;
         }
 
         struktur::create($data);
@@ -147,10 +149,12 @@ class StrukturController extends Controller
                 unlink(public_path($struktur->foto));
             }
 
-            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $destination = 'image/upload/foto';
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $randomString = md5(uniqid(rand(), true));
+            $filename = time() . '_' . $randomString . '.' . $extension;
+            $destination ='images/upload/struktur';
             $request->file('foto')->move(public_path($destination), $filename);
-            $data['foto'] = $destination . '/' . $filename;
+            $data['foto'] = $filename;
         }
 
         $struktur->update($data);

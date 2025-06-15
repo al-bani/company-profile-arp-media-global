@@ -18,7 +18,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="image" class="form-label">Pilih Gambar</label>
-                        <input class="form-control" type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)">
+                        <input class="form-control" type="file" id="image" name="foto" accept="image/*" onchange="previewImage(event)">
                     </div>
                     <div class="mb-3">
                         <img id="preview" src="#" alt="Preview Gambar" class="img-thumbnail d-none" style="max-height: 200px;">
@@ -39,8 +39,9 @@
                         <tr>
                             <th>#</th>
                             <th>Preview</th>
-                            <th>Nama File</th>
+                            <th>Url File</th>
                             <th>Uploaded At</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,10 +49,19 @@
                             <tr>
                                 <td>{{ $index + 1 }}</td>
                                 <td>
-                                    <img src="{{ asset('images/' . $img->foto) }}" width="100" class="img-thumbnail">
+                                    <img src="{{ asset('images/upload/' . $img->foto) }}" width="100" class="img-thumbnail">
                                 </td>
                                 <td>{{ $img->foto }}</td>
                                 <td>{{ $img->created_at->format('d-m-Y H:i') }}</td>
+                                <td>
+                                    <form action="/dashboard/uploader/{{ $img->id }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus gambar ini?')">
+                                            <i class="fas fa-trash"></i> Hapus
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                         @empty
                             <tr>

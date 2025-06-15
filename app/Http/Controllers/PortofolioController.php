@@ -79,15 +79,17 @@ class PortofolioController extends Controller
         if ($request->has('foto')) {
             foreach ($request->foto as $index => $item) {
                 if (isset($item['foto']) && $item['foto'] instanceof \Illuminate\Http\UploadedFile) {
-                    $filename = time() . '_' . $item['foto']->getClientOriginalName();
-                    $destination = 'image/upload/foto';
+                    $extension = $request->file('foto')->getClientOriginalExtension();
+                    $randomString = md5(uniqid(rand(), true));
+                    $filename = time() . '_' . $randomString . '.' . $extension;
+                    $destination = 'images/upload/portofolio';
                     $item['foto']->move(public_path($destination), $filename);
 
                     portofolio_foto::create([
                         'id_portofolio' => $request->id_portofolio,
                         'id_portofolio_foto' => 'img'.$request->id_portofolio.$item['judul_foto'],
                         'judul_foto' => $item['judul_foto'] ?? '',
-                        'foto' => $destination . '/' . $filename,
+                        'foto' => $filename,
                     ]);
                 }
             }
@@ -175,8 +177,10 @@ class PortofolioController extends Controller
                     }
 
                     // Upload new file
-                    $filename = time() . '_' . $item['foto']->getClientOriginalName();
-                    $destination = 'image/upload/foto';
+                    $extension = $request->file('foto')->getClientOriginalExtension();
+                    $randomString = md5(uniqid(rand(), true));
+                    $filename = time() . '_' . $randomString . '.' . $extension;
+                    $destination = 'images/upload/portofolio';
                     $item['foto']->move(public_path($destination), $filename);
 
                     // Update or create foto record
@@ -187,7 +191,7 @@ class PortofolioController extends Controller
                         ],
                         [
                             'id_portofolio_foto' => 'img' . $portofolio->id_portofolio . $item['judul_foto'],
-                            'foto' => $destination . '/' . $filename
+                            'foto' => $filename
                         ]
                     );
                 }

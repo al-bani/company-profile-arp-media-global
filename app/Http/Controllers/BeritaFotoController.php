@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\berita_foto;
 use App\Http\Requests\Storeberita_fotoRequest;
 use App\Http\Requests\Updateberita_fotoRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class BeritaFotoController extends Controller
 {
@@ -29,24 +31,21 @@ class BeritaFotoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Storeberita_fotoRequest $request)
+    public function store(Request $request)
     {
-        $request->validate([
-            'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048'
-        ]);
+        $data = $request->all();
+        if ($request->hasFile('foto')) {
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $randomString = md5(uniqid(rand(), true));
+            $filename = time() . '_' . $randomString . '.' . $extension;
+            $destination = 'images/upload';
+            $request->file('foto')->move(public_path($destination), $filename);
+            $data['foto'] = $filename;
+        }
 
-        $file = $request->file('image');
-        $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
+        berita_foto::create($data);
 
-        // Simpan di public/images
-        $file->move(public_path('images'), $filename);
-
-        // Simpan ke DB
-        berita_foto::create([
-            'foto' => $filename
-        ]);
-
-        return redirect()->route('uploader.index')->with('success', 'Gambar berhasil diupload.');
+        return redirect('/dashboard/uploader')->with('success', 'Gambar berhasil diupload.');
     }
 
     /**
@@ -76,8 +75,16 @@ class BeritaFotoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(berita_foto $berita_foto)
+    public function destroy($id)
     {
-        //
+        $berita_foto = berita_foto::findOrFail($id);
+
+        // Hapus file fisik jika ada
+        if ($berita_foto->foto && file_exists(public_path('images/upload/' . $berita_foto->foto))) {
+            unlink(public_path('images/upload/' . $berita_foto->foto));
+        }
+
+        $berita_foto->delete();
+        return redirect('/dashboard/uploader')->with('success', 'Gambar berhasil dihapus');
     }
 }

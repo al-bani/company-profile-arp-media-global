@@ -25,28 +25,31 @@
                         </div>
                     </div>
                 </div> -->
-                <div class="mb-4 text-center">
-                    <div class="card" style="max-width: 18rem; margin: auto;">
-                        <img id="preview" src="/images/default.jpg" class="card-img-top" alt="Logo Perusahaan"
-                            style="height: 13.5rem; object-fit: cover;">
-                        <div class="card-body">
-                            <p class="card-text">Upload Logo Utama(MAX 5MB)</p>
-                            <input type="file" id="logo_utama" name="logo_utama" class="form-control" accept="image/*"
-                                onchange="validateFileSize(this)" required>
+                <div class="row">
+                    <div class="mb-4 text-center col-md-6">
+                        <div class="card" style="max-width: 18rem; margin: auto;">
+                            <img id="preview" src="/images/default.jpg" class="card-img-top" alt="Logo Perusahaan"
+                                style="height: 13.5rem; object-fit: cover;">
+                            <div class="card-body">
+                                <p class="card-text">Upload Logo Utama(MAX 5MB)</p>
+                                <input type="file" id="logo_utama" name="logo_utama" class="form-control" accept="image/*"
+                                    onchange="validateFileSize(this)" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4 text-center col-md-6">
+                        <div class="card" style="max-width: 18rem; margin: auto;">
+                            <img id="preview" src="/images/default.jpg" class="card-img-top" alt="Logo Website"
+                                style="height: 13.5rem; object-fit: cover;">
+                            <div class="card-body">
+                                <p class="card-text">Upload Logo Website(MAX 5MB)</p>
+                                <input type="file" id="logo_website" name="logo_website" class="form-control" accept="image/*"
+                                    onchange="validateFileSize(this)" required>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="mb-4 text-center">
-                    <div class="card" style="max-width: 18rem; margin: auto;">
-                        <img id="preview" src="/images/default.jpg" class="card-img-top" alt="Logo Website"
-                            style="height: 13.5rem; object-fit: cover;">
-                        <div class="card-body">
-                            <p class="card-text">Upload Logo Website(MAX 5MB)</p>
-                            <input type="file" id="logo_website" name="logo_website" class="form-control" accept="image/*"
-                                onchange="validateFileSize(this)" required>
-                        </div>
-                    </div>
-                </div>
+
 
 
                 <!-- NIB, Notaris, and NPWP -->

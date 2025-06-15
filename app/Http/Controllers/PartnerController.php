@@ -75,10 +75,12 @@ class PartnerController extends Controller
         ]);
         $data = $request->all();
         if ($request->hasFile('foto')) {
-            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $destination = 'image/upload/foto';
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $randomString = md5(uniqid(rand(), true));
+            $filename = time() . '_' . $randomString . '.' . $extension;
+            $destination = 'images/upload/partner';
             $request->file('foto')->move(public_path($destination), $filename);
-            $data['foto'] = $destination . '/' . $filename;
+            $data['foto'] = $filename;
         }
         partner::create($data);
         return redirect('/dashboard/partner')->with('success', 'Data Berhasil Ditambahkan');
@@ -113,16 +115,18 @@ class PartnerController extends Controller
                 abort(403, 'Unauthorized');
             }
         }
-        
+
         $data = $request->except('_token', '_method');
         if ($request->hasFile('foto')) {
             if ($partner->foto && file_exists(public_path($partner->foto))) {
                 unlink(public_path($partner->foto));
             }
-            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $destination = 'image/upload/foto';
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $randomString = md5(uniqid(rand(), true));
+            $filename = time() . '_' . $randomString . '.' . $extension;
+            $destination = 'images/upload/partner';
             $request->file('foto')->move(public_path($destination), $filename);
-            $data['foto'] = $destination . '/' . $filename;
+            $data['foto'] = $filename;
         }
         if ($request->nama_partner !== $partner->nama_partner) {
             $data['id_partner'] = $partner->id_perusahaan . '_' . $request->nama_partner;

@@ -51,7 +51,7 @@
                                 <td>
                                     <img src="{{ asset('images/upload/' . $img->foto) }}" width="100" class="img-thumbnail">
                                 </td>
-                                <td>{{ $img->foto }}</td>
+                                <td><a href="{{ url('/') . '/images/upload/'.$img->foto }}" target="_blank">{{ url('/') . '/images/upload/'.$img->foto }}</a></td>
                                 <td>{{ $img->created_at->format('d-m-Y H:i') }}</td>
                                 <td>
                                     <form action="/dashboard/uploader/{{ $img->id }}" method="POST" class="d-inline">

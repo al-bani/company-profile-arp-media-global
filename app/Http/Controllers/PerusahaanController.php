@@ -64,20 +64,20 @@ class PerusahaanController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('logo_website')) {
-            $extension = $request->file('foto')->getClientOriginalExtension();
+            $extension = $request->file('logo_website')->getClientOriginalExtension();
             $randomString = md5(uniqid(rand(), true));
             $filename = time() . '_' . $randomString . '.' . $extension;
             $destination = 'images/upload/logo/website';
             $request->file('logo_website')->move(public_path($destination), $filename);
-            $data['logo_website'] = $filename;
+            $data['logo_website'] = $destination . '/'. $filename;
         }
         if ($request->hasFile('logo_utama')) {
-            $extension = $request->file('foto')->getClientOriginalExtension();
+            $extension = $request->file('logo_utama')->getClientOriginalExtension();
             $randomString = md5(uniqid(rand(), true));
             $filename = time() . '_' . $randomString . '.' . $extension;
             $destination = 'images/upload/logo/primary';
             $request->file('logo_utama')->move(public_path($destination), $filename);
-            $data['logo_utama'] = $filename;
+            $data['logo_utama'] = $destination . '/'.$filename;
         }
 
         perusahaan::create($data);
@@ -124,24 +124,24 @@ class PerusahaanController extends Controller
                 unlink(public_path($perusahaan->logo_website));
             }
 
-            $extension = $request->file('foto')->getClientOriginalExtension();
+            $extension = $request->file('logo_website')->getClientOriginalExtension();
             $randomString = md5(uniqid(rand(), true));
             $filename = time() . '_' . $randomString . '.' . $extension;
             $destination = 'images/upload/logo/website';
             $request->file('logo_website')->move(public_path($destination), $filename);
-            $data['logo_website'] = $filename;
+            $data['logo_website'] = $destination . '/'. $filename;
         }
         if ($request->hasFile('logo_utama')) {
             if ($perusahaan->logo_utama && file_exists(public_path($perusahaan->logo_utama))) {
                 unlink(public_path($perusahaan->logo_utama));
             }
 
-            $extension = $request->file('foto')->getClientOriginalExtension();
+            $extension = $request->file('logo_utama')->getClientOriginalExtension();
             $randomString = md5(uniqid(rand(), true));
             $filename = time() . '_' . $randomString . '.' . $extension;
             $destination = 'images/upload/logo/primary';
             $request->file('logo_utama')->move(public_path($destination), $filename);
-            $data['logo_utama'] = $filename;
+            $data['logo_utama'] = $destination . '/'. $filename;
         }
 
         // Update data perusahaan

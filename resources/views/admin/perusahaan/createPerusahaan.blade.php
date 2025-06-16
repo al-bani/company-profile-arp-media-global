@@ -84,6 +84,10 @@
                     <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
                 </div>
                 <div class="mb-3">
+                    <label for="maps">Maps</label>
+                    <textarea class="form-control" id="maps" name="maps" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
                     <label for="alamat">Alamat Perusahaan</label>
                     <textarea class="form-control" id="alamat_perusahaan" name="alamat_perusahaan" rows="3" required></textarea>
                 </div>

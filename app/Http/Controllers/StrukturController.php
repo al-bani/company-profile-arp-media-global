@@ -82,6 +82,9 @@ class StrukturController extends Controller
             $destination = 'images/upload/struktur';
             $request->file('foto')->move(public_path($destination), $filename);
             $data['foto'] =  $filename;
+        } else {
+            $data['foto'] = '1';
+            $data['atasan'] = '1';
         }
 
         struktur::create($data);

@@ -22,8 +22,7 @@
                 <!-- deskripsi -->
                 <div class="mb-3">
                     <label for="deskripsi">Deskripsi</label>
-                    <input class="form-control" id="deskripsi" name="deskripsi" type="text"
-                        placeholder="admin@example.com">
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" type="text" rows=4></textarea>
                 </div>
 
                 <div class="mb-3">

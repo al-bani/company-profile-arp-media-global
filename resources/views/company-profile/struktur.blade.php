@@ -8,9 +8,9 @@
             <div class="row mb-5 d-flex justify-content-center">
                 <div class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
                     @foreach ($strukturs as $struktur)
-                        @if ($struktur->atasan === '0')
+                        @if ($struktur->atasan === '0' && $struktur->atasan != '1')
                             <div class="card">
-                                <img src="{{ asset($struktur->foto) }}" alt="Avatar" style="width:100%">
+                                <img src="{{ asset('images/upload/struktur/'.$struktur->foto) }}" alt="Avatar" style="width:100%">
                                 <div class="container">
                                     <h4><b>{!! $struktur->nama !!}</b></h4>
                                     <p>{!! $struktur->jabatan !!}</p>
@@ -23,10 +23,10 @@
 
             <div class="row mt-4 mb-5 text-center justify-content-center">
                 @foreach ($strukturs as $struktur)
-                    @if ($struktur->atasan != '0')
+                    @if ($struktur->atasan != '0' && $struktur->atasan != '1')
                         <div class="col-6 col-md-4 col-lg-3 mb-4">
                             <div class="card">
-                                <img src="{{ asset($struktur->foto) }}" alt="Avatar" style="width:100%">
+                                <img src="{{ asset('images/upload/struktur/'.$struktur->foto) }}" alt="Avatar" style="width:100%">
                                 <div class="container">
                                     <h4><b>{!! $struktur->nama !!}</b></h4>
                                     <p>{!! $struktur->jabatan !!}</p>
@@ -46,16 +46,18 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>Status</th>
+                                <th>jabatan</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($strukturs as $struktur)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $struktur->nama }}</td>
-                                    <td>{{ $struktur->atasan == '0' ? 'Pimpinan' : 'Bawahan' }}</td>
-                                </tr>
+                                @if ($struktur->atasan == '1')
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $struktur->nama }}</td>
+                                        <td>{{ $struktur->jabatan}}</td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

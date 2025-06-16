@@ -165,41 +165,20 @@
     </div>
 
     <script>
-        function previewImage(event) {
-            const file = event.target.files[0];
+        function previewSelectedImage(input, previewId) {
+            const file = input.files[0];
             if (file) {
                 const maxSize = 5 * 1024 * 1024; // 5MB dalam bytes
 
                 if (file.size > maxSize) {
                     alert("Ukuran file tidak boleh lebih dari 5MB!");
-                    event.target.value = ''; // Reset input file
+                    input.value = ''; // Reset input file
                     return false;
                 }
 
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const preview = document.getElementById('preview_logo_utama');
-                    preview.src = e.target.result;
-                    preview.classList.remove('d-none');
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function previewImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const maxSize = 5 * 1024 * 1024; // 5MB dalam bytes
-
-                if (file.size > maxSize) {
-                    alert("Ukuran file tidak boleh lebih dari 5MB!");
-                    event.target.value = ''; // Reset input file
-                    return false;
-                }
-
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('preview_logo_website');
+                    const preview = document.getElementById(previewId);
                     preview.src = e.target.result;
                     preview.classList.remove('d-none');
                 }

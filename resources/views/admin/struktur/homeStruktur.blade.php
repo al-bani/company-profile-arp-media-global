@@ -63,6 +63,8 @@
 
                                     @if ($struktur->atasan == '0')
                                         <td>Posisi Tertinggi (tidak ada atasan)</td>
+                                    @elseif ($struktur->atasan == '1')
+                                        <td>Ketua Divisi Masing-masing</td>
                                     @else
                                         <td>
                                             {!! $struktur->atasan ?? '<span style="color: red;">Atasan Kosong</span>' !!}
@@ -162,30 +164,35 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Foto</label><br>
-                                    @if (!empty($struktur->foto))
-                                        <img src="{{ asset($struktur->foto) }}" alt="Foto"
-                                            class="img-fluid rounded">
-                                    @else
-                                        <span style="color: red;">Foto belum tersedia</span>
-                                    @endif
-                                </div>
-
-                                <div class="mb-3">
                                     <label class="form-label">Perusahaan</label>
                                     <div class="form-control" readonly>
                                         {!! $struktur->perusahaan->nama_perusahaan ?? '<span style="color: red;">Nama Perusahaan Kosong</span>' !!}
                                     </div>
                                 </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Atasan</label>
-                                    <div class="form-control" readonly>
-                                        {!! $struktur->atasan == '0'
-                                            ? 'Posisi Tertinggi (tidak ada atasan)'
-                                            : $struktur->atasan ?? '<span style="color: red;">Atasan Kosong</span>' !!}
+                                @if ($struktur->atasan == '1')
+                                    <div class="mb-3">
                                     </div>
-                                </div>
+                                @else
+                                    <div class="mb-3">
+                                        <label class="form-label">Foto</label><br>
+                                        @if (!empty($struktur->foto))
+                                            <img src="{{ asset('images/upload/struktur/'.$struktur->foto) }}" alt="Foto"
+                                                class="img-fluid rounded">
+                                        @else
+                                            <span style="color: red;">Foto belum tersedia</span>
+                                        @endif
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Atasan</label>
+                                        <div class="form-control" readonly>
+                                            {!! $struktur->atasan == '0'
+                                                ? 'Posisi Tertinggi (tidak ada atasan)'
+                                                : $struktur->atasan ?? '<span style="color: red;">Atasan Kosong</span>' !!}
+                                        </div>
+                                    </div>
+                                @endif
+
 
                             </div>
 

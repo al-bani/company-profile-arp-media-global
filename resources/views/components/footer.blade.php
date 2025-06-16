@@ -1,7 +1,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Arp Global Media</span>
+                        <span>Copyright &copy; Itenas</span>
                     </div>
                 </div>
             </footer>

@@ -12,7 +12,7 @@
                     <div class="card h-100 shadow rounded-4 border-0">
                         <!-- Gambar dengan rasio dan jarak bawah -->
                         <div class="ratio ratio-16x9 mb-3">
-                            <img src="{{ asset($berita->foto) }}" class="object-fit-cover rounded-top-4" alt="{{ $berita->judul }}">
+                            <img src="{{ asset('images/upload/thumbnail/'.$berita->foto) }}" class="object-fit-cover rounded-top-4" alt="{{ $berita->judul }}">
                         </div>
 
                         <div class="card-body d-flex flex-column">

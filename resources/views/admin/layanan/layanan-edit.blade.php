@@ -48,7 +48,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <img id="preview" src="{{ asset($layanan->foto ?? '/images/default.jpg') }}"
+                        <img id="preview" src="{{ asset("images/upload/layanan/".$layanan->foto ?? '/images/default.jpg') }}"
                              class="img-fluid rounded mb-3"
                              alt="Foto Layanan"
                              style="max-height: 200px; object-fit: cover;">

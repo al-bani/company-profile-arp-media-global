@@ -11,7 +11,7 @@
 
         {{-- Gambar Utama --}}
         <div class="text-center mb-5">
-            <img src="{{ asset($beritas->foto) }}" alt="{{ $beritas->judul }}" class="img-fluid rounded-4 shadow-sm"
+            <img src="{{ asset(''.$beritas->foto) }}" alt="{{ $beritas->judul }}" class="img-fluid rounded-4 shadow-sm"
                 style="max-height: 480px; object-fit: cover; width: 100%;">
         </div>
 

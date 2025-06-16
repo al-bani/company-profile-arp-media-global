@@ -28,23 +28,23 @@
                 <div class="row">
                     <div class="mb-4 text-center col-md-6">
                         <div class="card" style="max-width: 18rem; margin: auto;">
-                            <img id="preview" src="/images/default.jpg" class="card-img-top" alt="Logo Perusahaan"
+                            <img id="preview_logo_utama" src="/images/default.jpg" class="card-img-top" alt="Logo Perusahaan"
                                 style="height: 13.5rem; object-fit: cover;">
                             <div class="card-body">
                                 <p class="card-text">Upload Logo Utama(MAX 5MB)</p>
                                 <input type="file" id="logo_utama" name="logo_utama" class="form-control" accept="image/*"
-                                    onchange="validateFileSize(this)" required>
+                                    onchange="previewSelectedImage(this, 'preview_logo_utama')" required>
                             </div>
                         </div>
                     </div>
                     <div class="mb-4 text-center col-md-6">
                         <div class="card" style="max-width: 18rem; margin: auto;">
-                            <img id="preview" src="/images/default.jpg" class="card-img-top" alt="Logo Website"
+                            <img id="preview_logo_website" src="/images/default.jpg" class="card-img-top" alt="Logo Website"
                                 style="height: 13.5rem; object-fit: cover;">
                             <div class="card-body">
                                 <p class="card-text">Upload Logo Website(MAX 5MB)</p>
                                 <input type="file" id="logo_website" name="logo_website" class="form-control" accept="image/*"
-                                    onchange="validateFileSize(this)" required>
+                                    onchange="previewSelectedImage(this, 'preview_logo_website')" required>
                             </div>
                         </div>
                     </div>
@@ -180,28 +180,24 @@
     </div>
 
     <script>
-        function previewImage(event) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                const preview = document.getElementById('preview');
-                preview.src = reader.result;
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        }
-
-        function validateFileSize(input) {
-            const maxSize = 5 * 1024 * 1024; // 5MB dalam bytes
+        function previewSelectedImage(input, previewId) {
             const file = input.files[0];
-
-            if (file && file.size > maxSize) {
-                alert("Ukuran file tidak boleh lebih dari 5MB!");
-                input.value = ''; // Reset input file
-                return false;
-            }
-
-            // Jika file valid, preview gambar
             if (file) {
-                previewImage({ target: input });
+                const maxSize = 5 * 1024 * 1024; // 5MB dalam bytes
+
+                if (file.size > maxSize) {
+                    alert("Ukuran file tidak boleh lebih dari 5MB!");
+                    input.value = ''; // Reset input file
+                    return false;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById(previewId);
+                    preview.src = e.target.result;
+                    preview.classList.remove('d-none');
+                }
+                reader.readAsDataURL(file);
             }
         }
     </script>

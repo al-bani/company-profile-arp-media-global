@@ -41,8 +41,26 @@ class PortofolioController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->foto);
-        $id_portofolio =  $request->id_perusahaan . '_' . str_replace(' ', '_',$request->nama_project);
+        // Validasi kolom unique
+        $uniqueFields = [
+            'id_portofolio' => 'ID Portofolio'
+        ];
+
+        foreach ($uniqueFields as $field => $label) {
+            if ($field === 'id_portofolio') {
+                $value = 'PRT_' . str_replace(' ', '_', $request->nama_project) . '_' . time();
+            } else {
+                $value = $request->$field;
+            }
+
+            if (portofolio::where($field, $value)->exists()) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', $label . ' sudah terdaftar dalam sistem!');
+            }
+        }
+
+        $id_portofolio = 'PRT_' . str_replace(' ', '_', $request->nama_project) . '_' . time();
         $waktu = $request->jam_mulai . '-' . $request->jam_selesai;
         $request->merge([
             'id_portofolio' => $id_portofolio,
@@ -79,7 +97,7 @@ class PortofolioController extends Controller
         if ($request->has('foto')) {
             foreach ($request->foto as $index => $item) {
                 if (isset($item['foto']) && $item['foto'] instanceof \Illuminate\Http\UploadedFile) {
-                    $extension = $request->file('foto')->getClientOriginalExtension();
+                    $extension = $item['foto']->getClientOriginalExtension();
                     $randomString = md5(uniqid(rand(), true));
                     $filename = time() . '_' . $randomString . '.' . $extension;
                     $destination = 'images/upload/portofolio';
@@ -122,6 +140,24 @@ class PortofolioController extends Controller
     public function update(Request $request, $id)
     {
         $portofolio = portofolio::findOrFail($id);
+
+        // Validasi kolom unique kecuali untuk data yang sedang diedit
+        $uniqueFields = [
+            'id_portofolio' => 'ID Portofolio'
+        ];
+
+        foreach ($uniqueFields as $field => $label) {
+            $value = $request->$field;
+            $exists = portofolio::where($field, $value)
+                ->where('id', '!=', $id)
+                ->exists();
+
+            if ($exists) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', $label . ' sudah terdaftar dalam sistem!');
+            }
+        }
 
         // Update id_portofolio if needed
         if ($request->nama_project !== $portofolio->nama_project || $request->id_perusahaan !== $portofolio->id_perusahaan) {
@@ -177,7 +213,7 @@ class PortofolioController extends Controller
                     }
 
                     // Upload new file
-                    $extension = $request->file('foto')->getClientOriginalExtension();
+                    $extension = $item['foto']->getClientOriginalExtension();
                     $randomString = md5(uniqid(rand(), true));
                     $filename = time() . '_' . $randomString . '.' . $extension;
                     $destination = 'images/upload/portofolio';

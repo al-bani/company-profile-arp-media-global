@@ -48,8 +48,27 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi kolom unique
+        $uniqueFields = [
+            'id_admin' => 'ID Admin',
+            'email' => 'Email'
+        ];
 
-        $id_admin = $request->status . '_' . $request->id_perusahaan . '_' . str_replace(' ', '_', $request->nama_admin);
+        foreach ($uniqueFields as $field => $label) {
+            if ($field === 'id_admin') {
+                $value = 'ADM_' . str_replace(' ', '_', $request->nama_admin) . '_' . time();
+            } else {
+                $value = $request->$field;
+            }
+
+            if (admin::where($field, $value)->exists()) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', $label . ' sudah terdaftar dalam sistem!');
+            }
+        }
+
+        $id_admin = 'ADM_' . str_replace(' ', '_', $request->nama_admin) . '_' . time();
         $request->merge([
             'id_admin' => $id_admin,
             'password' => Hash::make($request->password),
@@ -104,6 +123,26 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $admin = admin::findOrFail($id);
+
+        // Validasi kolom unique kecuali untuk data yang sedang diedit
+        $uniqueFields = [
+            'email' => 'Email'
+        ];
+
+        foreach ($uniqueFields as $field => $label) {
+            $value = $request->$field;
+            $exists = admin::where($field, $value)
+                ->where('id', '!=', $id)
+                ->exists();
+
+            if ($exists) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', $label . ' sudah terdaftar dalam sistem!');
+            }
+        }
+
         $data = $request->except('_token', '_method');
 
         // Jika kolom password diisi, hash dulu
@@ -114,7 +153,7 @@ class AdminController extends Controller
             unset($data['password']);
         }
 
-        admin::where('id', $id)->update($data);
+        $admin->update($data);
 
         return redirect('/dashboard/akunAdmin')->with('success', 'Data Berhasil Diubah');
     }

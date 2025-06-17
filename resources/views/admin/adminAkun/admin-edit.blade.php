@@ -53,7 +53,7 @@
                 <div class="mb-3">
                     <label for="status">Status</label>
                     <select class="ms-1 form-select btn btn-primary" id="status" name="status" required>
-                        <option disabled>Pilih Status</option>
+                        <option value="">Pilih Status</option>
                         <option value="aktif" {{ $admin->status == 'aktif' ? 'selected' : '' }}>Aktif</option>
                         <option value="tidak aktif" {{ $admin->status == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>
                     </select>
@@ -62,7 +62,7 @@
                 <div class="mb-3">
                     <label for="role">Status</label>
                     <select class="ms-1 form-select btn btn-primary" id="role" name="role" required>
-                        <option disabled>Pilih Status</option>
+                        <option value="">Pilih Status</option>
                         <option value="admin" {{ $admin->role == 'admin' ? 'selected' : '' }}>Admin</option>
                         <option value="superAdmin" {{ $admin->role == 'superAdmin' ? 'selected' : '' }}>Super Admin</option>
                     </select>

@@ -15,7 +15,7 @@
                 <div class="mb-4 text-center">
                     <div class="card" style="max-width: 18rem; margin: auto;">
                         <img id="preview_logo_utama"
-                            src="{{ $perusahaan->logo_utama ? asset($perusahaan->logo_utama) : '/images/default.jpg' }}"
+                            src="{{ $perusahaan->logo_utama ? asset('images/upload/logo/primary/'.$perusahaan->logo_utama) : '/images/default.jpg' }}"
                             class="card-img-top" alt="Logo Perusahaan" style="height: 13.5rem; object-fit: cover;">
                         <div class="card-body">
                             <p class="card-text">Upload Logo Utama (MAX 5MB)</p>
@@ -28,7 +28,7 @@
                 <div class="mb-4 text-center">
                     <div class="card" style="max-width: 18rem; margin: auto;">
                         <img id="preview_logo_website"
-                            src="{{ $perusahaan->logo_website ? asset($perusahaan->logo_website) : '/images/default.jpg' }}"
+                            src="{{ $perusahaan->logo_website ? asset('images/upload/logo/website/'.$perusahaan->logo_website) : '/images/default.jpg' }}"
                             class="card-img-top" alt="Logo Website" style="height: 13.5rem; object-fit: cover;">
                         <div class="card-body">
                             <p class="card-text">Upload Logo Website (MAX 5MB)</p>

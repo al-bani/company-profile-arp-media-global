@@ -6,7 +6,7 @@
     <!-- Card Wrapper -->
     <div class="card shadow-sm mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Formulir Edit Portofolio</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Edit Portofolio</h6>
         </div>
         <div class="card-body">
             <form action="/dashboard/portofolio/{{ $portofolio->id }}" method="POST" enctype="multipart/form-data">
@@ -31,48 +31,78 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div class="mb-3">
                     <label for="status_project">Status Project</label>
-                    <select class="ms-1 form-select btn btn-primary" id="status_project" name="status_project" required>
-                        <option value="ongoing"
-                            {{ old('status_project', $portofolio->status_project ?? '') == 'ongoing' ? 'selected' : '' }}>
-                            Sedang Berjalan
-                        </option>
-                        <option value="done"
-                            {{ old('status_project', $portofolio->status_project ?? '') == 'done' ? 'selected' : '' }}>
-                            Selesai
-                        </option>
+                    <select class="ms-1 form-select btn btn-primary" id="status_project" name="status_project">
+                        <option value="ongoing" {{ old('status_project', $portofolio->status_project) == 'ongoing' ? 'selected' : '' }}>Sedang Berjalan</option>
+                        <option value="done" {{ old('status_project', $portofolio->status_project) == 'done' ? 'selected' : '' }}>Selesai</option>
                     </select>
                 </div>
 
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Team</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="team-container" class="team-group mb-3">
+                            @foreach(explode(',', $portofolio->team) as $index => $anggota)
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-grow-1">
+                                    <label>Anggota</label>
+                                    <input type="text" name="team[{{ $index }}][anggota]" class="form-control"
+                                        value="{{ trim($anggota) }}" placeholder="Masukkan Nama Anggota">
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
 
-                <div class="mb-2">
-                    <label for="team">Team</label>
-                    <input class="form-control @error('team') is-invalid @enderror" id="team" name="team"
-                        value="{{ old('team', $portofolio->team) }}" required>
-                    @error('team')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-secondary" id="add-team-field">Tambah Anggota</button>
+                            <button type="button" class="btn btn-danger ml-2" id="remove-team-field">Hapus Anggota</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="tempat">Tempat</label>
-                    <input type="text" id="tempat" name="tempat"
-                        class="form-control @error('tempat') is-invalid @enderror"
-                        value="{{ old('tempat', $portofolio->tempat) }}" required>
-                    @error('tempat')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <label for="tempat">Lokasi Kegiatan</label>
+                    <div class="d-flex gap-3 mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="jenis_lokasi" id="offline" value="offline"
+                                {{ !in_array($portofolio->tempat, ['website', 'online_meeting', 'desain']) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="offline">
+                                Offline
+                            </label>
+                        </div>
+                        <div class="form-check ml-2">
+                            <input class="form-check-input" type="radio" name="jenis_lokasi" id="online" value="online"
+                                {{ in_array($portofolio->tempat, ['website', 'online_meeting', 'desain']) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="online">
+                                Online
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="offline-field" style="{{ in_array($portofolio->tempat, ['website', 'online_meeting', 'desain']) ? 'display: none;' : '' }}">
+                        <input type="text" id="tempat" name="tempat" class="form-control"
+                            value="{{ !in_array($portofolio->tempat, ['website', 'online_meeting', 'desain']) ? $portofolio->tempat : '' }}"
+                            placeholder="Masukkan lokasi kegiatan" required>
+                    </div>
+
+                    <div id="online-field" style="{{ !in_array($portofolio->tempat, ['website', 'online_meeting', 'desain']) ? 'display: none;' : '' }}">
+                        <select class="form-select" name="tempat" id="jenis_online">
+                            <option value="">Pilih jenis kegiatan online</option>
+                            <option value="website" {{ $portofolio->tempat == 'website' ? 'selected' : '' }}>Website</option>
+                            <option value="online_meeting" {{ $portofolio->tempat == 'online_meeting' ? 'selected' : '' }}>Online Meeting</option>
+                            <option value="desain" {{ $portofolio->tempat == 'desain' ? 'selected' : '' }}>Desain</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="mb-4">
                     <label for="tanggal" class="form-label">Tanggal Publikasi</label>
-                    <input type="date" name="tanggal" id="tanggal"
-                        class="form-control @error('tanggal') is-invalid @enderror"
+                    <input type="date" name="tanggal" id="tanggal" class="form-control"
                         value="{{ old('tanggal', $portofolio->tanggal) }}" required>
-                    @error('tanggal')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
                 </div>
 
                 <div class="mb-3 d-flex justify-content-between">
@@ -98,8 +128,7 @@
 
                 <div class="mb-3">
                     <label for="id_perusahaan">Perusahaan</label>
-                    <select class="form-select @error('id_perusahaan') is-invalid @enderror" name="id_perusahaan"
-                        id="id_perusahaan" required>
+                    <select class="ms-1 form-select btn btn-secondary" name="id_perusahaan" id="id_perusahaan" required>
                         @foreach ($perusahaans as $perusahaan)
                             <option value="{{ $perusahaan->id_perusahaan }}"
                                 {{ old('id_perusahaan', $portofolio->id_perusahaan) == $perusahaan->id_perusahaan ? 'selected' : '' }}>
@@ -107,9 +136,6 @@
                             </option>
                         @endforeach
                     </select>
-                    @error('id_perusahaan')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
                 </div>
 
                 <div class="card border-0 shadow-sm mb-4">
@@ -119,27 +145,34 @@
                     <div class="card-body">
                         <div id="input-container-image" class="image-group mb-3">
                             @foreach ($portofolio->portofolio_foto as $index => $foto)
-                                <div class="mb-3">
-                                    <div class="mb-2">
-                                        <label>Judul Foto</label>
-                                        <input class="form-control" type="text"
-                                            name="foto[{{ $index }}][judul_foto]"
-                                            value="{{ $foto->judul_foto }}" placeholder="Masukkan Judul Foto" required>
-                                    </div>
-                                    <div>
-                                        <label>Foto</label>
-                                        <input type="file" name="foto[{{ $index }}][foto]"
-                                            class="form-control" accept="image/*" required>
-                                        @if ($foto->foto)
-                                            <img src="{{ asset($foto->foto) }}" alt="Current Photo"
-                                                class="img-fluid mt-2" style="max-height: 100px;">
-                                        @endif
+                                <div class="image-item">
+                                    <div class="row align-items-center mb-3">
+                                        <div class="col-auto">
+                                            <img id="preview-{{ $index }}" src="{{ asset('images/upload/portofolio/'.$foto->foto) }}"
+                                                class="card-img-top border" alt="Preview Foto"
+                                                style="height: 10rem; width: 10rem; object-fit: cover;">
+                                        </div>
+                                        <div class="col">
+                                            <div class="mb-2">
+                                                <label>Judul Foto</label>
+                                                <input class="form-control" type="text" name="foto[{{ $index }}][judul_foto]"
+                                                    value="{{ $foto->judul_foto }}" placeholder="Masukkan Judul Foto">
+                                            </div>
+                                            <div>
+                                                <label>Foto</label>
+                                                <input type="file" name="foto[{{ $index }}][foto]" class="form-control"
+                                                    accept="image/*" onchange="previewImage(this, 'preview-{{ $index }}')">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
-                        <button type="button" class="btn btn-secondary mt-2" id="add-field-image">+ Tambah
-                            Field</button>
+
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-secondary" id="add-field-image">Tambah Dokumentasi</button>
+                            <button type="button" class="btn btn-danger ml-2" id="remove-field-image">Hapus Dokumentasi</button>
+                        </div>
                     </div>
                 </div>
 
@@ -148,23 +181,26 @@
                         <h5 class="mb-0">Timeline</h5>
                     </div>
                     <div class="card-body">
-                        <div id="input-container" class="timeline-group mb-3">
+                        <div id="timeline-container" class="timeline-group mb-3">
                             @foreach ($portofolio->portofolio_timeline as $index => $timeline)
-                                <div class="mb-3">
+                                <div class="timeline-item">
                                     <div class="mb-2">
                                         <label>Tanggal/Tahun</label>
-                                        <input class="form-control" type="date"
-                                            name="timeline[{{ $index }}][tanggal]"
+                                        <input class="form-control" type="date" name="timeline[{{ $index }}][tanggal]"
                                             value="{{ $timeline->tanggal }}" required>
                                     </div>
                                     <div>
                                         <label>Deskripsi</label>
-                                        <textarea class="form-control" name="timeline[{{ $index }}][deskripsi]" required>{{ $timeline->deskripsi }}</textarea>
+                                        <textarea name="timeline[{{ $index }}][deskripsi]" class="form-control" required>{{ $timeline->deskripsi }}</textarea>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
-                        <button type="button" class="btn btn-secondary mt-2" id="add-field">+ Tambah Field</button>
+
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-secondary" id="add-timeline-field">Tambah Timeline</button>
+                            <button type="button" class="btn btn-danger ml-2" id="remove-timeline-field">Hapus Timeline</button>
+                        </div>
                     </div>
                 </div>
 
@@ -178,66 +214,148 @@
 
     @push('script')
         <script>
+            function previewImage(input, previewId) {
+                const preview = document.getElementById(previewId);
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                        preview.classList.remove('d-none');
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    preview.src = '#';
+                    preview.classList.add('d-none');
+                }
+            }
+
             document.addEventListener('DOMContentLoaded', function() {
-                const button = document.getElementById('add-field');
-                const container = document.getElementById('input-container');
-                const maxFields = 5;
+                // Fungsi untuk menambah dan menghapus field team
+                const teamButton = document.getElementById('add-team-field');
+                const removeTeamButton = document.getElementById('remove-team-field');
+                const teamContainer = document.getElementById('team-container');
+                let teamIndex = {{ count(explode(',', $portofolio->team)) }};
+
+                teamButton.addEventListener('click', function() {
+                    const newGroup = document.createElement('div');
+                    newGroup.classList.add('d-flex', 'align-items-center', 'mb-3');
+                    newGroup.innerHTML = `
+                        <div class="flex-grow-1">
+                            <label>Anggota</label>
+                            <input type="text" name="team[${teamIndex}][anggota]" class="form-control" placeholder="Masukkan Nama Anggota">
+                        </div>
+                    `;
+                    teamContainer.appendChild(newGroup);
+                    teamIndex++;
+                });
+
+                removeTeamButton.addEventListener('click', function() {
+                    const fields = teamContainer.querySelectorAll('.d-flex');
+                    if (fields.length > 1) {
+                        teamContainer.removeChild(fields[fields.length - 1]);
+                        teamIndex--;
+                    }
+                });
+
+                // Fungsi untuk menambah dan menghapus field timeline
+                const timelineButton = document.getElementById('add-timeline-field');
+                const removeTimelineButton = document.getElementById('remove-timeline-field');
+                const timelineContainer = document.getElementById('timeline-container');
                 let timelineIndex = {{ count($portofolio->portofolio_timeline) }};
 
-                button.addEventListener('click', function() {
-                    const currentFields = container.querySelectorAll('.timeline-group').length;
+                timelineButton.addEventListener('click', function() {
+                    const newGroup = document.createElement('div');
+                    newGroup.classList.add('timeline-item', 'mb-3');
+                    newGroup.innerHTML = `
+                        <hr class="my-4 border-2">
+                        <div class="mb-2">
+                            <label>Tanggal/Tahun</label>
+                            <input class="form-control" type="date" name="timeline[${timelineIndex}][tanggal]" required>
+                        </div>
+                        <div>
+                            <label>Deskripsi</label>
+                            <textarea name="timeline[${timelineIndex}][deskripsi]" class="form-control" required></textarea>
+                        </div>
+                    `;
+                    timelineContainer.appendChild(newGroup);
+                    timelineIndex++;
+                });
 
-                    if (currentFields < maxFields) {
-                        const newGroup = document.createElement('div');
-                        newGroup.classList.add('timeline-group', 'mb-3');
-                        newGroup.innerHTML = `
-                            <hr class="my-4 border-2">
-                            <div class="mb-2">
-                                <label>Tanggal/Tahun</label>
-                                <input class="form-control" type="date" name="timeline[${timelineIndex}][tanggal]">
-                            </div>
-                            <div>
-                                <label>Deskripsi</label>
-                                <textarea class="form-control" name="timeline[${timelineIndex}][deskripsi]"></textarea>
-                            </div>
-                        `;
-                        container.appendChild(newGroup);
-                        timelineIndex++;
-                    } else {
-                        alert("Maksimal hanya 5 field yang boleh ditambahkan.");
+                removeTimelineButton.addEventListener('click', function() {
+                    const fields = timelineContainer.querySelectorAll('.timeline-item');
+                    if (fields.length > 1) {
+                        timelineContainer.removeChild(fields[fields.length - 1]);
+                        timelineIndex--;
                     }
                 });
-            });
 
-            document.addEventListener('DOMContentLoaded', function() {
-                const button = document.getElementById('add-field-image');
-                const container = document.getElementById('input-container-image');
-                const maxFields = 3;
+                // Fungsi untuk menambah dan menghapus field dokumentasi
+                const imageButton = document.getElementById('add-field-image');
+                const removeImageButton = document.getElementById('remove-field-image');
+                const imageContainer = document.getElementById('input-container-image');
                 let imageIndex = {{ count($portofolio->portofolio_foto) }};
 
-                button.addEventListener('click', function() {
-                    const currentFields = container.querySelectorAll('.image-group').length;
+                imageButton.addEventListener('click', function() {
+                    const newGroup = document.createElement('div');
+                    newGroup.classList.add('image-item', 'mb-3');
+                    newGroup.innerHTML = `
+                        <hr class="my-4 border-2">
+                        <div class="row align-items-center mb-3">
+                            <div class="col-auto">
+                                <img id="preview-${imageIndex}" src="/images/default.jpg" class="card-img-top border" alt="Preview Foto"
+                                    style="height: 10rem; width: 10rem; object-fit: cover;">
+                            </div>
+                            <div class="col">
+                                <div class="mb-2">
+                                    <label>Judul Foto</label>
+                                    <input class="form-control" name="foto[${imageIndex}][judul_foto]" placeholder="Masukkan Judul Foto">
+                                </div>
+                                <div>
+                                    <label>Foto</label>
+                                    <input type="file" name="foto[${imageIndex}][foto]" class="form-control" accept="image/*" onchange="previewImage(this, 'preview-${imageIndex}')">
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    imageContainer.appendChild(newGroup);
+                    imageIndex++;
+                });
 
-                    if (currentFields < maxFields) {
-                        const newGroup = document.createElement('div');
-                        newGroup.classList.add('image-group', 'mb-3');
-                        newGroup.innerHTML = `
-                            <hr class="my-4 border-2">
-                            <div class="mb-2">
-                                <label>Judul Foto</label>
-                                <input class="form-control" name="foto[${imageIndex}][judul_foto]" placeholder="Masukkan Judul Foto" required>
-                            </div>
-                            <div>
-                                <label>Foto</label>
-                                <input type="file" name="foto[${imageIndex}][foto]" class="form-control" accept="image/*" required>
-                            </div>
-                        `;
-                        container.appendChild(newGroup);
-                        imageIndex++;
-                    } else {
-                        alert("Maksimal hanya 3 field yang boleh ditambahkan.");
+                removeImageButton.addEventListener('click', function() {
+                    const fields = imageContainer.querySelectorAll('.image-item');
+                    if (fields.length > 1) {
+                        imageContainer.removeChild(fields[fields.length - 1]);
+                        imageIndex--;
                     }
                 });
+
+                // Fungsi untuk menangani perubahan jenis lokasi
+                const offlineRadio = document.getElementById('offline');
+                const onlineRadio = document.getElementById('online');
+                const offlineField = document.getElementById('offline-field');
+                const onlineField = document.getElementById('online-field');
+                const tempatInput = document.getElementById('tempat');
+                const jenisOnlineSelect = document.getElementById('jenis_online');
+
+                function updateFields() {
+                    if (offlineRadio.checked) {
+                        offlineField.style.display = 'block';
+                        onlineField.style.display = 'none';
+                        tempatInput.required = true;
+                        jenisOnlineSelect.required = false;
+                    } else {
+                        offlineField.style.display = 'none';
+                        onlineField.style.display = 'block';
+                        tempatInput.required = false;
+                        jenisOnlineSelect.required = true;
+                    }
+                }
+
+                offlineRadio.addEventListener('change', updateFields);
+                onlineRadio.addEventListener('change', updateFields);
+
+                // Inisialisasi awal
+                updateFields();
             });
         </script>
     @endpush

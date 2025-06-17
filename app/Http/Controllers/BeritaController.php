@@ -59,60 +59,41 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
-        $role = Auth::user()->role;
-        if ($role !== 'superAdmin') {
-            $admin = Auth::user();
-            $request->merge(['id_perusahaan' => $admin->id_perusahaan]);
-        }
+        // Validasi kolom unique
+        $uniqueFields = [
+            'id_berita' => 'ID Berita'
+        ];
 
-
-        $baseId = 'berita' . '_' . $request->id_perusahaan . '_' . str_replace(' ', '_', $request->judul);
-
-        if (Berita::where('id_berita', $baseId)->exists()) {
-            $counter = 1;
-            $id_berita = $baseId . '_' . $counter;
-
-            // Cek sampai dapat ID unik
-            while (Berita::where('id_berita', $id_berita)->exists()) {
-                $counter++;
-                $id_berita = $baseId . '_' . $counter;
+        foreach ($uniqueFields as $field => $label) {
+            if ($field === 'id_berita') {
+                $value = 'BRT_' . str_replace(' ', '_', $request->judul) . '_' . time();
+            } else {
+                $value = $request->$field;
             }
-        } else {
-            $id_berita = $baseId;
+
+            if (Berita::where($field, $value)->exists()) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', $label . ' sudah terdaftar dalam sistem!');
+            }
         }
 
+        $id_berita = 'BRT_' . str_replace(' ', '_', $request->judul) . '_' . time();
         $request->merge([
             'id_berita' => $id_berita,
-            // 'password' => bcrypt($request->password) // hash password juga di sini
         ]);
+
         $data = $request->all();
         if ($request->hasFile('foto')) {
-            $filename = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $destination = 'images/upload/thumbnail';
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $randomString = md5(uniqid(rand(), true));
+            $filename = time() . '_' . $randomString . '.' . $extension;
+            $destination = 'images/upload/berita';
             $request->file('foto')->move(public_path($destination), $filename);
             $data['foto'] = $filename;
         }
 
-        berita::create($data);
-
-        // if ($request->has('foto')) {
-        //     foreach ($request->foto as $item) {
-        //         if (isset($item['foto']) && $item['foto'] instanceof \Illuminate\Http\UploadedFile) {
-        //             $filename = time() . '_' . $item['foto']->getClientOriginalName();
-        //             $destination = 'image/upload/foto';
-        //             $item['foto']->move(public_path($destination), $filename);
-
-        //             berita_foto::create([
-        //                 'id_berita' => $request->id_berita,
-        //                 'id_berita_foto' => 'img'.$request->id_berita.$item['judul_foto'],
-        //                 'judul_foto' => $item['judul_foto'] ?? '',
-        //                 'foto' => $destination . '/' . $filename,
-        //             ]);
-        //         }
-        //     }
-        // }
-
-
+        Berita::create($data);
         return redirect('/dashboard/berita')->with('success', 'Data Berhasil Ditambahkan');
     }
 
@@ -154,42 +135,43 @@ class BeritaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $berita = berita::findOrFail($id);
-        $role = Auth::user()->role;
-        if ($role !== 'superAdmin') {
-            $admin = Auth::user();
-            if ($berita->id_perusahaan !== $admin->id_perusahaan) {
-                abort(403, 'Unauthorized');
+        $berita = Berita::findOrFail($id);
+
+        // Validasi kolom unique kecuali untuk data yang sedang diedit
+        $uniqueFields = [
+            'id_berita' => 'ID Berita'
+        ];
+
+        foreach ($uniqueFields as $field => $label) {
+            $value = $request->$field;
+            $exists = Berita::where($field, $value)
+                ->where('id', '!=', $id)
+                ->exists();
+
+            if ($exists) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', $label . ' sudah terdaftar dalam sistem!');
             }
         }
-        $data = $request->except('_token', '_method', 'foto');
-        if ($request->id_perusahaan !== $berita->id_perusahaan) {
-            $data['id_berita'] = 'berita' . '_' . $request->id_perusahaan . '_' . $id;
-        }
-        if ($request->has('foto')) {
-            foreach ($request->foto as $item) {
-                if (isset($item['foto']) && $item['foto'] instanceof \Illuminate\Http\UploadedFile) {
-                    $oldFoto = berita_foto::where('id_berita', $berita->id_berita)->first();
-                    if ($oldFoto && file_exists(public_path($oldFoto->foto))) {
-                        unlink(public_path($oldFoto->foto));
-                    }
-                    $extension = $item['foto']->getClientOriginalExtension();
-                    $filename = Str::random(16) . '.' . $extension;
-                    $destination = 'images/upload/thumbnail';
-                    $item['foto']->move(public_path($destination), $filename);
-                    berita_foto::updateOrCreate(
-                        ['id_berita' => $berita->id_berita],
-                        [
-                            'id_berita_foto' => 'img' . $berita->id_berita . ($item['judul_foto'] ?? ''),
-                            'judul_foto' => $item['judul_foto'] ?? '',
-                            'foto' => $filename,
-                        ]
-                    );
-                }
+
+        $data = $request->except('_token', '_method');
+        if ($request->hasFile('foto')) {
+            if ($berita->foto && file_exists(public_path($berita->foto))) {
+                unlink(public_path($berita->foto));
             }
+
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $randomString = md5(uniqid(rand(), true));
+            $filename = time() . '_' . $randomString . '.' . $extension;
+            $destination = 'images/upload/berita';
+            $request->file('foto')->move(public_path($destination), $filename);
+            $data['foto'] = $filename;
         }
+
         $berita->update($data);
-        return redirect('/dashboard/berita')->with('success', 'Berita berhasil diperbarui');
+        return redirect()->route('berita.index')
+            ->with('success', 'Data Berita berhasil diperbarui');
     }
 
     /**

@@ -42,8 +42,8 @@
                     <div class="col-md-6">
                         <label for="perusahaan" class="form-label fw-semibold">Perusahaan</label>
                         <select class="ms-1 form-select btn btn-primary" aria-label="Default select example"
-                            name="id_perusahaan" id="id_perusahaan">
-                            <option disabled>Pilih Perusahaan</option>
+                            name="id_perusahaan" id="id_perusahaan" required>
+                            <option value="">Pilih Perusahaan</option>
                             @foreach ($perusahaans as $perusahaan)
                                 @if (old('id_perusahaan') == $perusahaan->id_perusahaan)
                                     <option value="{{ $perusahaan->id_perusahaan }}" selected>

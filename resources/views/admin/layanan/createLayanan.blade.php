@@ -16,19 +16,20 @@
                 <div class="mb-3">
                     <label for="nama_admin">Nama Layanan</label>
                     <input class="form-control" id="nama_layanan" name="nama_layanan" type="text"
-                        placeholder="Nama Layanan">
+                        placeholder="Nama Layanan" required>
                 </div>
 
                 <!-- deskripsi -->
                 <div class="mb-3">
                     <label for="deskripsi">Deskripsi</label>
-                    <textarea class="form-control" id="deskripsi" name="deskripsi" type="text" rows=4></textarea>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" type="text" rows=4 required></textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="id_perusahaan">Perusahaan</label>
                     <select class="ms-1 form-select btn btn-secondary" aria-label="Default select example"
-                        name="id_perusahaan" id="id_perusahaan">
+                        name="id_perusahaan" id="id_perusahaan" required>
+                        <option value="">Pilih Perusahaan</option>
                         @foreach ($perusahaans as $perusahaan)
                             @if ($role === 'superAdmin' || $perusahaan->id_perusahaan == Auth::user()->id_perusahaan)
                                 <option value="{{ $perusahaan->id_perusahaan }}" {{ old('id_perusahaan') == $perusahaan->id_perusahaan ? 'selected' : '' }}>

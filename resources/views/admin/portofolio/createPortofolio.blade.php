@@ -70,7 +70,7 @@
                     </div>
 
                     <div id="online-field" style="display: none;">
-                        <select class="form-select" name="jenis_online" id="jenis_online">
+                        <select class="form-select" name="tempat" id="jenis_online">
                             <option value="">Pilih jenis kegiatan online</option>
                             <option value="website">Website</option>
                             <option value="online_meeting">Online Meeting</option>

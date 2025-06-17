@@ -67,6 +67,7 @@ Route::post('/kontak/{nama_perusahaan}', [companyProfile::class, 'kontakPost']);
 Route::get('/layanan/{nama_perusahaan}', [companyProfile::class, 'layanan']);
 Route::get('/struktur/{nama_perusahaan}', [companyProfile::class, 'struktur']);
 Route::get('/portofolio/{nama_perusahaan}', [companyProfile::class, 'portofolio']);
+Route::get('/portofolio/{nama_perusahaan}/detail/{id}', [companyProfile::class, 'portofolioDetail'])->name('portofolio.detail');
 Route::get('/faq/{nama_perusahaan}', [companyProfile::class, 'faq']);
 Route::get('/{nama_perusahaan}', [companyProfile::class, 'show'])->name('perusahaan.show');
 
@@ -117,5 +118,3 @@ Route::get('/{nama_perusahaan}', [companyProfile::class, 'show'])->name('perusah
 // Route::put('/dashboard/email/{email}', [EmailController::class, 'update'])->name('email.update');
 
 //admin
-
-

@@ -57,6 +57,28 @@ class PerusahaanController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi kolom unique
+        $uniqueFields = [
+            'id_perusahaan' => 'ID Perusahaan',
+            'nib' => 'NIB',
+            'npwp' => 'NPWP',
+            'email' => 'Email'
+        ];
+
+        foreach ($uniqueFields as $field => $label) {
+            if ($field === 'id_perusahaan') {
+                $value = $request->status . '_' . str_replace(' ', '_', $request->nama_perusahaan) . '_' . $request->nib;
+            } else {
+                $value = $request->$field;
+            }
+
+            if (Perusahaan::where($field, $value)->exists()) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', $label . ' sudah terdaftar dalam sistem!');
+            }
+        }
+
         $id_perusahaan =  $request->status . '_' . str_replace(' ', '_', $request->nama_perusahaan) . '_' . $request->nib;
         $request->merge([
             'id_perusahaan' => $id_perusahaan,
@@ -69,7 +91,7 @@ class PerusahaanController extends Controller
             $filename = time() . '_' . $randomString . '.' . $extension;
             $destination = 'images/upload/logo/website';
             $request->file('logo_website')->move(public_path($destination), $filename);
-            $data['logo_website'] = $destination . '/'. $filename;
+            $data['logo_website'] = $filename;
         }
         if ($request->hasFile('logo_utama')) {
             $extension = $request->file('logo_utama')->getClientOriginalExtension();
@@ -77,7 +99,7 @@ class PerusahaanController extends Controller
             $filename = time() . '_' . $randomString . '.' . $extension;
             $destination = 'images/upload/logo/primary';
             $request->file('logo_utama')->move(public_path($destination), $filename);
-            $data['logo_utama'] = $destination . '/'.$filename;
+            $data['logo_utama'] = $filename;
         }
 
         perusahaan::create($data);
@@ -116,6 +138,26 @@ class PerusahaanController extends Controller
             }
         }
 
+        // Validasi kolom unique kecuali untuk data yang sedang diedit
+        $uniqueFields = [
+            'nib' => 'NIB',
+            'npwp' => 'NPWP',
+            'email' => 'Email'
+        ];
+
+        foreach ($uniqueFields as $field => $label) {
+            $value = $request->$field;
+            $exists = Perusahaan::where($field, $value)
+                ->where('id', '!=', $id)
+                ->exists();
+
+            if ($exists) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', $label . ' sudah terdaftar dalam sistem!');
+            }
+        }
+
         $data = $request->except('_token', '_method');
 
         // Handle upload logo baru jika ada
@@ -129,7 +171,7 @@ class PerusahaanController extends Controller
             $filename = time() . '_' . $randomString . '.' . $extension;
             $destination = 'images/upload/logo/website';
             $request->file('logo_website')->move(public_path($destination), $filename);
-            $data['logo_website'] = $destination . '/'. $filename;
+            $data['logo_website'] = $filename;
         }
         if ($request->hasFile('logo_utama')) {
             if ($perusahaan->logo_utama && file_exists(public_path($perusahaan->logo_utama))) {
@@ -141,7 +183,7 @@ class PerusahaanController extends Controller
             $filename = time() . '_' . $randomString . '.' . $extension;
             $destination = 'images/upload/logo/primary';
             $request->file('logo_utama')->move(public_path($destination), $filename);
-            $data['logo_utama'] = $destination . '/'. $filename;
+            $data['logo_utama'] = $filename;
         }
 
         // Update data perusahaan

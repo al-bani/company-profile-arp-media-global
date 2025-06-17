@@ -149,24 +149,24 @@
                 <!-- Moto, Visi, and Misi -->
                 <div class="mb-3">
                     <label for="moto">Moto</label>
-                    <input class="form-control" id="moto" name="moto" type="text">
+                    <input class="form-control" id="moto" name="moto" type="text" required>
                 </div>
                 <div class="mb-3 row">
                     <div class="col">
                         <label for="visi">Visi</label>
-                        <input class="form-control" id="visi" name="visi" type="text">
+                        <input class="form-control" id="visi" name="visi" type="text" required>
                     </div>
                     <div class="col">
                         <label for="misi">Misi</label>
-                        <input class="form-control" id="misi" name="misi" type="text">
+                        <input class="form-control" id="misi" name="misi" type="text" required>
                     </div>
                 </div>
 
                 <!-- Perusahaan Status -->
                 <div class="mb-3">
                     <label for="status">Status</label>
-                    <select class="ms-1 form-select btn btn-primary" id="status" name="status">
-                        <option selected>Choose</option>
+                    <select class="ms-1 form-select btn btn-primary" id="status" name="status" required>
+                        <option value="">Choose</option>
                         <option value="anak">Anak</option>
                         <option value="induk">Induk</option>
                     </select>

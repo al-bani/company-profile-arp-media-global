@@ -30,7 +30,7 @@
                             <th>Perusahaan</th>
                             <th>Nama Project</th>
                             <th>Status Project</th>
-                            <th>Team</th>
+
                             <th>Tempat</th>
                             <th>Tanggal</th>
                             <th>Waktu</th>
@@ -55,10 +55,6 @@
 
                                 <td>
                                     {!! $portofolio->status_project ?? '<span style="color: red;">Nama Project Kosong</span>' !!}
-                                </td>
-
-                                <td>
-                                    {!! $portofolio->team ?? '<span style="color: red;">Team Kosong</span>' !!}
                                 </td>
 
                                 <td>

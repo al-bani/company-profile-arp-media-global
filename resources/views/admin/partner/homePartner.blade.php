@@ -50,7 +50,7 @@
                                     <td>{{ $partner->email }}</td>
                                     <td>
                                         @if ($partner->foto)
-                                            <img src="{{ asset($partner->foto) }}" alt="Logo" width="100">
+                                            <img src="{{ asset('images/upload/partner/'.$partner->foto) }}" alt="Logo" width="100">
                                         @endif
                                     </td>
                                     <td>

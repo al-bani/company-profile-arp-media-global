@@ -39,14 +39,14 @@
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>
                                     @if ($perusahaan->logo_website)
-                                        <img src="{{ asset($perusahaan->logo_website) }}" alt="Logo" width="60">
+                                        <img src="{{ asset('images/upload/logo/website/' . $perusahaan->logo_website) }}" alt="Logo" width="60">
                                     @else
                                         <span style="color: red;">Logo Kosong</span>
                                     @endif
                                 </td>
                                 <td>
                                     @if ($perusahaan->logo_utama)
-                                        <img src="{{ asset($perusahaan->logo_utama) }}" alt="Logo" width="60">
+                                        <img src="{{ asset('images/upload/logo/primary/' . $perusahaan->logo_utama) }}" alt="Logo" width="60">
                                     @else
                                         <span style="color: red;">Logo Kosong</span>
                                     @endif

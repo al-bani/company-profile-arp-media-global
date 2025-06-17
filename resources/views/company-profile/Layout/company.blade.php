@@ -32,7 +32,7 @@
     <nav class="navbar navbar-expand-lg w-100 sticky-top shadow">
         <div class="container-fluid">
             <a href="/" class="navbar-brand ms-3">
-                <img class="nav-logo" src="{{ asset($perusahaans->logo_website) }}" alt="Logo">
+                <img class="nav-logo" src="{{ asset('images/upload/logo/website/' . $perusahaans->logo_website) }}" alt="Logo">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -53,8 +53,6 @@
 
                         <!-- submenu khusus mobile -->
                         <div class="collapse d-lg-none ps-3" id="submenuMobilePerusahaan">
-                            <a class="dropdown-item" href="/detail/{{ $perusahaans->nama_perusahaan }}">Detail
-                                Perusahaan</a>
                             <a class="dropdown-item"
                                 href="/portofolio/{{ $perusahaans->nama_perusahaan }}">Portofolio</a>
                             <a class="dropdown-item" href="/struktur/{{ $perusahaans->nama_perusahaan }}">Struktur

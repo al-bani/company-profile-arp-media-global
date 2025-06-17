@@ -50,7 +50,7 @@
         <div class="layanan-container">
             @foreach ($layanans as $layanan)
                 <div class="custom-card">
-                    <div class="img-box"><img src="{{ asset($layanan->foto) }}">
+                    <div class="img-box"><img src="{{ asset('images/upload/layanan/' . $layanan->foto) }}">
                     </div>
                     <div class="custom-content">
                         <h2>{{ $layanan->nama_layanan }}</h2>
@@ -67,7 +67,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 text-center mb-4 mb-lg-0">
-                    <img src="{{ asset($perusahaans->logo_utama) }}" class="img-fluid w-50" alt="Logo Perusahaan">
+                    <img src="{{ asset('images/upload/logo/primary/' . $perusahaans->logo_utama) }}" class="img-fluid w-50" alt="Logo Perusahaan">
                 </div>
                 <div class="col-lg-7">
                     <h3 class="fw-bold mb-3">PROFILE PERUSAHAAN</h3>
@@ -125,7 +125,6 @@
 
 
     <!-- Anak Perusahaan -->
-    @if ($perusahaans->status === 'induk')
         <div class="container pt-5">
             <h1 class="text-center h1">Anak Perusahaan</h1>
             <div class="subsidiary-container  justify-content-center">
@@ -133,7 +132,7 @@
                     @if ($perusahaan->status === 'anak')
                         <div class="subsidiary-card">
                             <div class="subsidiary-img-box">
-                                <img src="{{ asset($perusahaan->logo) }}" alt="">
+                                <img src="{{ asset('images/upload/logo/primary/' . $perusahaan->logo_utama) }}" alt="">
                             </div>
                             <div class="subsidiary-content">
                                 <h2>{{ $perusahaan->nama_perusahaan }}</h2>
@@ -143,10 +142,8 @@
                         </div>
                     @endif
                 @endforeach
-
             </div>
         </div>
-    @endif
 
 
     {{-- Klien --}}
@@ -164,7 +161,7 @@
 
                     @foreach ($partners as $partner)
                         <div class="px-3" style="flex: 0 0 auto;">
-                            <img src="{{ asset($partner->foto) }}" alt="Logo Klien" class="img-fluid"
+                            <img src="{{ asset('images/upload/partner/'.$partner->foto) }}" alt="Logo Klien" class="img-fluid"
                                 style="height: 120px;">
                         </div>
                     @endforeach

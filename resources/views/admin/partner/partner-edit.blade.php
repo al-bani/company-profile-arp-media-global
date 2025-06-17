@@ -52,7 +52,7 @@
                 <!-- Foto -->
                 <div class="row align-items-center">
                     <div class="col-md-2">
-                        <img id="preview" src="{{ asset($partner->foto ?? '/images/default.jpg') }}"
+                        <img id="preview" src="{{ asset('images/upload/partner/'.$partner->foto ?? '/images/default.jpg') }}"
                              class="img-fluid rounded mb-3"
                              alt="Logo Partner"
                              style="max-height: 200px; object-fit: cover;">

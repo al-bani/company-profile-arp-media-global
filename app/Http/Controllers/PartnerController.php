@@ -52,27 +52,31 @@ class PartnerController extends Controller
      */
     public function store(Request $request)
     {
-        $role = Auth::user()->role;
-        if ($role !== 'superAdmin') {
-            $admin = Auth::user();
-            $request->merge(['id_perusahaan' => $admin->id_perusahaan]);
-        }
-        $baseId = $request->id_perusahaan . '_' . str_replace(' ', '_', $request->nama_partner);
+        // Validasi kolom unique
+        $uniqueFields = [
+            'id_partner' => 'ID Partner',
+            'email' => 'Email'
+        ];
 
-        if (Partner::where('id_partner', $baseId)->exists()) {
-            $counter = 1;
-            $id_partner = $baseId . '_' . $counter;
-
-            while (Partner::where('id_partner', $id_partner)->exists()) {
-                $counter++;
-                $id_partner = $baseId . '_' . $counter;
+        foreach ($uniqueFields as $field => $label) {
+            if ($field === 'id_partner') {
+                $value = 'PRT_' . str_replace(' ', '_', $request->nama_partner) . '_' . time();
+            } else {
+                $value = $request->$field;
             }
-        } else {
-            $id_partner = $baseId;
+
+            if (Partner::where($field, $value)->exists()) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', $label . ' sudah terdaftar dalam sistem!');
+            }
         }
+
+        $id_partner = 'PRT_' . str_replace(' ', '_', $request->nama_partner) . '_' . time();
         $request->merge([
             'id_partner' => $id_partner,
         ]);
+
         $data = $request->all();
         if ($request->hasFile('foto')) {
             $extension = $request->file('foto')->getClientOriginalExtension();
@@ -82,7 +86,8 @@ class PartnerController extends Controller
             $request->file('foto')->move(public_path($destination), $filename);
             $data['foto'] = $filename;
         }
-        partner::create($data);
+
+        Partner::create($data);
         return redirect('/dashboard/partner')->with('success', 'Data Berhasil Ditambahkan');
     }
 
@@ -107,12 +112,24 @@ class PartnerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $partner = partner::findOrFail($id);
-        $role = Auth::user()->role;
-        if ($role !== 'superAdmin') {
-            $admin = Auth::user();
-            if ($partner->id_perusahaan !== $admin->id_perusahaan) {
-                abort(403, 'Unauthorized');
+        $partner = Partner::findOrFail($id);
+
+        // Validasi kolom unique kecuali untuk data yang sedang diedit
+        $uniqueFields = [
+            'id_partner' => 'ID Partner',
+            'email' => 'Email'
+        ];
+
+        foreach ($uniqueFields as $field => $label) {
+            $value = $request->$field;
+            $exists = Partner::where($field, $value)
+                ->where('id', '!=', $id)
+                ->exists();
+
+            if ($exists) {
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', $label . ' sudah terdaftar dalam sistem!');
             }
         }
 
@@ -121,6 +138,7 @@ class PartnerController extends Controller
             if ($partner->foto && file_exists(public_path($partner->foto))) {
                 unlink(public_path($partner->foto));
             }
+
             $extension = $request->file('foto')->getClientOriginalExtension();
             $randomString = md5(uniqid(rand(), true));
             $filename = time() . '_' . $randomString . '.' . $extension;
@@ -128,9 +146,7 @@ class PartnerController extends Controller
             $request->file('foto')->move(public_path($destination), $filename);
             $data['foto'] = $filename;
         }
-        if ($request->nama_partner !== $partner->nama_partner) {
-            $data['id_partner'] = $partner->id_perusahaan . '_' . $request->nama_partner;
-        }
+
         $partner->update($data);
         return redirect()->route('partner.index')
             ->with('success', 'Data Partner berhasil diperbarui');

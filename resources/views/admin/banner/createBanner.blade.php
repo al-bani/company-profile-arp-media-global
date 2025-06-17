@@ -15,18 +15,19 @@
                 <div class="mb-3">
                     <label for="judul" class="form-label">Judul Banner</label>
                     <input class="form-control" id="judul" name="judul" type="text"
-                        placeholder="Masukkan Judul">
+                        placeholder="Masukkan Judul" required>
                 </div>
 
                 <!-- Email -->
                 <div class="mb-3">
                     <label for="deskripsi" class="form-label">Deskripsi Foto</label>
-                    <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Masukan Deskripsi"></textarea>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Masukan Deskripsi" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="id_perusahaan">Perusahaan</label>
                     <select class="ms-1 form-select btn btn-secondary" aria-label="Default select example"
-                        name="id_perusahaan" id="id_perusahaan">
+                        name="id_perusahaan" id="id_perusahaan" required>
+                        <option value="">Pilih Perusahaan</option>
                         @foreach ($perusahaans as $perusahaan)
                             @if ($role === 'superAdmin' || $perusahaan->id_perusahaan == Auth::user()->id_perusahaan)
                                 <option value="{{ $perusahaan->id_perusahaan }}" {{ old('id_perusahaan', $banner->id_perusahaan ?? '') == $perusahaan->id_perusahaan ? 'selected' : '' }}>

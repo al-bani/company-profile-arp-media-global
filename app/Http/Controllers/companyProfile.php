@@ -276,6 +276,8 @@ class companyProfile extends Controller
             abort(404, 'Perusahaan tidak ditemukan.');
         }
 
+        $banners = Banner::where('id_perusahaan', $perusahaan->id_perusahaan)->get();
+
 
         return view('company-profile.portofolio', [
             'perusahaans' => $perusahaan,
@@ -287,27 +289,29 @@ class companyProfile extends Controller
         ]);
     }
 
-    public function portofolioDetail($nama_perusahaan)
+    public function portofolioDetail($nama_perusahaan, $id)
     {
-        // return view('company-profile.portofolio');
-
-
         if (!$nama_perusahaan) {
             abort(404, 'Perusahaan belum dipilih.');
         }
 
-        $perusahaan = Perusahaan::with('portofolio')
-            ->where('nama_perusahaan', $nama_perusahaan)
-            ->first();
+        $perusahaan = Perusahaan::where('nama_perusahaan', $nama_perusahaan)->first();
 
         if (!$perusahaan) {
             abort(404, 'Perusahaan tidak ditemukan.');
         }
 
+        $portofolio = Portofolio::with(['portofolio_foto', 'portofolio_timeline'])
+            ->where('id', $id)
+            ->first();
+
+        if (!$portofolio) {
+            abort(404, 'Portofolio tidak ditemukan.');
+        }
+
         return view('company-profile.portofolio-detail', [
             'perusahaans' => $perusahaan,
-            'portofolios' => $perusahaan->portofolio,
-            'portofolioFotos' => $perusahaan->portofolioFoto->foto
+            'portofolio' => $portofolio
         ]);
     }
 

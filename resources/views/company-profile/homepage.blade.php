@@ -81,52 +81,54 @@
     {{-- Berita --}}
 
     <div class="container berita pt-5">
-    <h1 class="text-center h1 mb-5">Berita Terbaru</h1>
-    <div class="row g-4 justify-content-center">
-        @foreach ($beritas as $berita)
-            <!-- Tampilan untuk desktop -->
-            <div class="col-12 col-md-6 d-none d-md-block col-lg-3 mb-3">
-                <div class="card h-100 shadow rounded-4 border border-light-subtle">
-                    <div class="ratio ratio-16x9 mb-3">
-                        <img src="{{ asset($berita->foto) }}" class="object-fit-cover rounded-top-4" alt="{{ $berita->judul }}">
-                    </div>
-                    <div class="card-body d-flex flex-column pt-0">
-                        <h5 class="card-title fw-semibold mb-2">{{ $berita->judul }}</h5>
-                        <small class="text-muted mb-3 d-block">{!! $berita->tanggal !!}</small>
-                        <p class="card-text flex-grow-1" style="font-size: 0.95rem;">
-                            {!! \Illuminate\Support\Str::limit(strip_tags($berita->konten), 100, '...') !!}
-                        </p>
-                        <a href="#" class="btn btn-primary btn-sm w-100 mt-3">Baca Selengkapnya</a>
+        <h1 class="text-center h1 mb-5">Berita Terbaru</h1>
+        <div class="row g-4 justify-content-center">
+            @foreach ($beritas as $berita)
+                <!-- Tampilan untuk desktop -->
+                <div class="col-12 col-md-6 d-none d-md-block col-lg-3 mb-3">
+                    <div class="card h-100 shadow rounded-4 border border-light-subtle">
+                        <div class="ratio ratio-16x9 mb-3">
+                            <img src="{{ asset($berita->foto) }}" class="object-fit-cover rounded-top-4"
+                                alt="{{ $berita->judul }}">
+                        </div>
+                        <div class="card-body d-flex flex-column pt-0">
+                            <h5 class="card-title fw-semibold mb-2">{{ $berita->judul }}</h5>
+                            <small class="text-muted mb-3 d-block">{!! $berita->tanggal !!}</small>
+                            <p class="card-text flex-grow-1" style="font-size: 0.95rem;">
+                                {!! \Illuminate\Support\Str::limit(strip_tags($berita->konten), 100, '...') !!}
+                            </p>
+                            <a href="#" class="btn btn-primary btn-sm w-100 mt-3">Baca Selengkapnya</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tampilan untuk mobile -->
-            <div class="berita-mobile col-12 d-lg-none mb-3" style="max-width: 280px;">
-                <div class="card h-100 shadow rounded-4 border border-light-subtle">
-                    <div class="ratio ratio-16x9 mb-3">
-                        <img src="{{ asset($berita->foto) }}" class="object-fit-cover rounded-top-4" alt="{{ $berita->judul }}">
-                    </div>
-                    <div class="card-body d-flex flex-column pt-0">
-                        <h5 class="card-title fw-semibold mb-2">{{ $berita->judul }}</h5>
-                        <small class="text-muted mb-3 d-block">{!! $berita->tanggal !!}</small>
-                        <p class="card-text flex-grow-1" style="font-size: 0.95rem;">
-                            {!! \Illuminate\Support\Str::limit(strip_tags($berita->konten), 100, '...') !!}
-                        </p>
-                        <a href="#" class="btn btn-primary btn-sm w-100 mt-3">Baca Selengkapnya</a>
+                <!-- Tampilan untuk mobile -->
+                <div class="berita-mobile col-12 d-lg-none mb-3" style="max-width: 280px;">
+                    <div class="card h-100 shadow rounded-4 border border-light-subtle">
+                        <div class="ratio ratio-16x9 mb-3">
+                            <img src="{{ asset($berita->foto) }}" class="object-fit-cover rounded-top-4"
+                                alt="{{ $berita->judul }}">
+                        </div>
+                        <div class="card-body d-flex flex-column pt-0">
+                            <h5 class="card-title fw-semibold mb-2">{{ $berita->judul }}</h5>
+                            <small class="text-muted mb-3 d-block">{!! $berita->tanggal !!}</small>
+                            <p class="card-text flex-grow-1" style="font-size: 0.95rem;">
+                                {!! \Illuminate\Support\Str::limit(strip_tags($berita->konten), 100, '...') !!}
+                            </p>
+                            <a href="#" class="btn btn-primary btn-sm w-100 mt-3">Baca Selengkapnya</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
-</div>
 
 
     <!-- Anak Perusahaan -->
-    <div class="container pt-5">
-        <h1 class="text-center h1">Anak Perusahaan</h1>
-        <div class="subsidiary-container  justify-content-center">
-            @if ($perusahaans->status === 'induk')
+    @if ($perusahaans->status === 'induk')
+        <div class="container pt-5">
+            <h1 class="text-center h1">Anak Perusahaan</h1>
+            <div class="subsidiary-container  justify-content-center">
                 @foreach ($anaks as $perusahaan)
                     @if ($perusahaan->status === 'anak')
                         <div class="subsidiary-card">
@@ -141,10 +143,10 @@
                         </div>
                     @endif
                 @endforeach
-            @endif
 
+            </div>
         </div>
-    </div>
+    @endif
 
 
     {{-- Klien --}}
@@ -172,8 +174,8 @@
         </div>
     </div>
 
-<!-- FAQ -->
-<div class="container py-5">
+    <!-- FAQ -->
+    <div class="container py-5">
         <h1 class="fw-bold mb-1 text-center">Pertanyaan Yang Sering Ditanyakan</h1>
         <p class="text-muted mb-4 text-center">Jawaban atas pertanyaan yang sering ditanyakan</p>
 
@@ -182,15 +184,15 @@
         <div class="accordion faq-accordion" id="faqAccordion">
 
             @php
-                $faqs
+                $faqs;
             @endphp
 
             @foreach ($faqs as $index => $faq)
                 <div class="accordion-item border-0 border-bottom">
                     <h2 class="accordion-header" id="heading{{ $index }}">
                         <button class="accordion-button collapsed shadow-none px-0 py-3 bg-transparent" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}" aria-expanded="false"
-                            aria-controls="collapse{{ $index }}">
+                            data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}"
+                            aria-expanded="false" aria-controls="collapse{{ $index }}">
                             <span class="me-auto">{{ $faq['q'] }}</span>
                             <span class="icon">+</span>
                         </button>

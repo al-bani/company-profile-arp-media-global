@@ -150,8 +150,8 @@
                         <select class="ms-1 form-select btn btn-primary" id="status" name="status" required>
                             <option value="anak"
                                 {{ old('status', $perusahaan->status) == 'anak' ? 'selected' : '' }}>Anak</option>
-                            <option value="perusahaan"
-                                {{ old('status', $perusahaan->status) == 'perusahaan' ? 'selected' : '' }}>Induk
+                            <option value="induk"
+                                {{ old('status', $perusahaan->status) == 'induk' ? 'selected' : '' }}>Induk
                             </option>
                         </select>
                     </div>

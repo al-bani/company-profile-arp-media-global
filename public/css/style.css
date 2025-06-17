@@ -12,13 +12,9 @@
 .text-outlined {
     color: white;
     /* Warna teks utama */
-    text-shadow: -1px -1px 0 grey,
-        /* Bayangan kiri atas */
-        1px -1px 0 grey,
-        /* Bayangan kanan atas */
-        -1px 1px 0 grey,
-        /* Bayangan kiri bawah */
-        1px 1px 0 grey;
+    text-shadow: -1px -1px 0 grey, /* Bayangan kiri atas */ 1px -1px 0 grey,
+        /* Bayangan kanan atas */ -1px 1px 0 grey,
+        /* Bayangan kiri bawah */ 1px 1px 0 grey;
     /* Bayangan kanan bawah */
 }
 
@@ -45,6 +41,7 @@
     border-radius: 20px;
     transition: 0.5s;
     box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+
     overflow: visible;
 }
 
@@ -101,6 +98,12 @@
 .layanan-container .custom-card .custom-content p {
     color: #333;
     margin-bottom: 15px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* ubah sesuai jumlah baris */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .layanan-container .custom-card .custom-content a {
@@ -404,7 +407,6 @@
 }
 
 /* Akhir Carousel */
-
 
 /* FAQ */
 .faq-accordion .accordion-button {

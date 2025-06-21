@@ -109,7 +109,7 @@
                         </div>
                         <div class="mb-4 mt-4">
                             <div class="card" style="max-width: 18rem; margin: auto;">
-                                <img id="preview" src="{{ asset($berita->foto ?? '/images/default.jpg') }}"
+                                <img id="preview" src="{{ asset(''.$berita->foto ?? '/images/default.jpg') }}"
                                      class="card-img-top"
                                      alt="Logo Perusahaan"
                                      style="height: 12rem; object-fit: cover;">

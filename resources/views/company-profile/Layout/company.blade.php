@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ARP GLOBAL MEDIA</title>
+    <title>{{$perusahaans->nama_perusahaan}}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     {{-- <link href="{{ asset('css/style-compro.css') }}" rel="stylesheet" type="text/css"> --}}
+    <link rel="icon" href="{{ asset('images/upload/logo/primary/'.$perusahaans->logo_utama) }}" type="image/png">
+
     <link href="{{ asset('css/style-desktop.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/style-tablet.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/style-mobile.css') }}" rel="stylesheet" type="text/css">
@@ -32,7 +34,8 @@
     <nav class="navbar navbar-expand-lg w-100 sticky-top shadow">
         <div class="container-fluid">
             <a href="/" class="navbar-brand ms-3">
-                <img class="nav-logo" src="{{ asset('images/upload/logo/website/' . $perusahaans->logo_website) }}" alt="Logo">
+                <img class="nav-logo" src="{{ asset('images/upload/logo/website/' . $perusahaans->logo_website) }}"
+                    alt="Logo">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -67,8 +70,6 @@
 
                         <!-- DESKTOP dropdown menu -->
                         <ul class="dropdown-menu custom-dropdown" aria-labelledby="dropdownPerusahaan">
-                            <li><a class="dropdown-item" href="/detail/{{ $perusahaans->nama_perusahaan }}">Tentang
-                                    Perusahaan</a></li>
                             <li><a class="dropdown-item"
                                     href="/portofolio/{{ $perusahaans->nama_perusahaan }}">Portofolio</a></li>
                             <li><a class="dropdown-item" href="/struktur/{{ $perusahaans->nama_perusahaan }}">Struktur
@@ -114,10 +115,12 @@
 
                 <!-- Sosial Media -->
                 <div class="d-flex justify-content-center gap-4 mb-3">
-                    <a href="{{$perusahaans->instagram}}" class="text-black fs-5"><i class="bi bi-instagram"></i></a>
-                    <a href="{{$perusahaans->facebook}}" class="text-black fs-5"><i class="bi bi-facebook"></i></a>
-                    <a href="{{$perusahaans->tiktok}}" class="text-black fs-5"><i class="bi bi-linkedin"></i></a>
-                    <a href="{{$perusahaans->twitter}}" class="text-black fs-5"><i class="bi bi-youtube"></i></a>
+                    <a href="{{ $perusahaans->instagram }}" class="text-black fs-5"><i
+                            class="bi bi-instagram"></i></a>
+                    <a href="{{ $perusahaans->facebook }}" class="text-black fs-5"><i
+                            class="bi bi-facebook"></i></a>
+                    <a href="{{ $perusahaans->tiktok }}" class="text-black fs-5"><i class="bi bi-linkedin"></i></a>
+                    <a href="{{ $perusahaans->twitter }}" class="text-black fs-5"><i class="bi bi-youtube"></i></a>
                 </div>
 
                 <!-- Alamat -->

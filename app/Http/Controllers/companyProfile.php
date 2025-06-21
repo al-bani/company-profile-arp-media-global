@@ -48,7 +48,8 @@ class companyProfile extends Controller
             'layanan',
             'partner',
             'berita',
-            'portofolio'
+            'portofolio',
+            'faq'
         ])->where('id_perusahaan', $id_perusahaan)->first();
 
         $banners = $perusahaan->banner;
@@ -56,16 +57,17 @@ class companyProfile extends Controller
         $partners = $perusahaan->partner;
         $beritas = $perusahaan->berita;
         $portofolios = $perusahaan->portofolio;
+        $faqs = $perusahaan->faq;
         $anak = perusahaan::all();
         // dd($anak);
         // dd($perusahaan->banner);
 
-        $data_faqs = Faq::all()->map(function ($item) {
-            return [
-                'q' => $item->pertanyaan,
-                'a' => $item->jawaban,
-            ];
-        })->toArray();
+        // $data_faqs = Faq::all()->map(function ($item) {
+        //     return [
+        //         'q' => $item->pertanyaan,
+        //         'a' => $item->jawaban,
+        //     ];
+        // })->toArray();
 
         if (!$perusahaan) {
             abort(404, 'Perusahaan tidak ditemukan.');
@@ -80,7 +82,8 @@ class companyProfile extends Controller
             'beritas' => $beritas,
             'portofolios' => $portofolios,
             'anaks' => $anak,
-            'faqs' => $data_faqs
+            'faqs' => $faqs
+            // 'faqs' => $data_faqs
         ]);
     }
 
@@ -94,7 +97,8 @@ class companyProfile extends Controller
             'layanan',
             'partner',
             'berita',
-            'portofolio.portofolioFoto'
+            'portofolio',
+            'faq'
         ])->where('nama_perusahaan', $nama_perusahaan)->first();
 
 
@@ -110,6 +114,7 @@ class companyProfile extends Controller
         $partners = $perusahaan->partner;
         $beritas = $perusahaan->berita;
         $portofolios = $perusahaan->portofolio;
+        $faqs = $perusahaan->faq;
         $anak = perusahaan::all();
         // dd($anak);
         // dd($perusahaan->banner);
@@ -121,7 +126,9 @@ class companyProfile extends Controller
             'partners' => $partners,
             'beritas' => $beritas,
             'portofolios' => $portofolios,
-            'anaks' => $anak
+            'anaks' => $anak,
+            'faqs' => $faqs
+
         ]);
     }
 
@@ -148,7 +155,7 @@ class companyProfile extends Controller
             'beritas' => $perusahaan->berita
         ]);
     }
-    public function beritaDetail($nama_perusahaan,$id)
+    public function beritaDetail($nama_perusahaan, $id)
     {
         // return view('company-profile.berita');
         if (!$nama_perusahaan) {
@@ -169,7 +176,7 @@ class companyProfile extends Controller
         return view('company-profile.detailBerita', [
             'perusahaans' => $perusahaan,
             'beritas' => $berita,
-            'beritaAlls'=> $beritaAll
+            'beritaAlls' => $beritaAll
         ]);
     }
 

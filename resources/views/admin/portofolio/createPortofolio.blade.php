@@ -12,7 +12,8 @@
 
                 <div class="mb-3">
                     <label for="Nama_Perusahaan">Nama Project</label>
-                    <input class="form-control" id="nama_project" name="nama_project" placeholder="Nama Project" required>
+                    <input class="form-control" id="nama_project" name="nama_project" placeholder="Nama Project"
+                        required>
                 </div>
                 <div class="mb-3">
                     <label for="deskripsi">Deskripsi Project</label>
@@ -36,14 +37,16 @@
                             <div class="d-flex align-items-center mb-3">
                                 <div class="flex-grow-1">
                                     <label>Anggota</label>
-                                    <input type="text" name="team[0][anggota]" class="form-control" placeholder="Masukkan Nama Anggota">
+                                    <input type="text" name="team[0][anggota]" class="form-control"
+                                        placeholder="Masukkan Nama Anggota">
                                 </div>
                             </div>
                         </div>
 
                         <div class="d-flex gap-2">
                             <button type="button" class="btn btn-secondary" id="add-team-field">Tambah Anggota</button>
-                            <button type="button" class="btn btn-danger ml-2" id="remove-team-field">Hapus Anggota</button>
+                            <button type="button" class="btn btn-danger ml-2" id="remove-team-field">Hapus
+                                Anggota</button>
                         </div>
                     </div>
                 </div>
@@ -52,13 +55,15 @@
                     <label for="tempat">Lokasi Kegiatan</label>
                     <div class="d-flex gap-3 mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="jenis_lokasi" id="offline" value="offline" checked>
+                            <input class="form-check-input" type="radio" name="jenis_lokasi" id="offline"
+                                value="offline" checked>
                             <label class="form-check-label" for="offline">
                                 Offline
                             </label>
                         </div>
                         <div class="form-check ml-2">
-                            <input class="form-check-input" type="radio" name="jenis_lokasi" id="online" value="online">
+                            <input class="form-check-input" type="radio" name="jenis_lokasi" id="online"
+                                value="online">
                             <label class="form-check-label" for="online">
                                 Online
                             </label>
@@ -66,7 +71,8 @@
                     </div>
 
                     <div id="offline-field">
-                        <input type="text" id="tempat" name="tempat" class="form-control" placeholder="Masukkan lokasi kegiatan" required>
+                        <input type="text" id="tempat" name="tempat_offline" class="form-control"
+                            placeholder="Masukkan lokasi kegiatan" required>
                     </div>
 
                     <div id="online-field" style="display: none;">
@@ -136,17 +142,21 @@
                             <div class="image-item">
                                 <div class="row align-items-center mb-3">
                                     <div class="col-auto">
-                                        <img id="preview-0" src="/images/default.jpg" class="card-img-top border" alt="Preview Foto"
+                                        <img id="preview-0" src="/images/default.jpg" class="card-img-top border"
+                                            alt="Preview Foto"
                                             style="height: 10rem; width: 10rem; object-fit: cover;">
                                     </div>
                                     <div class="col">
                                         <div class="mb-2">
                                             <label>Judul Foto</label>
-                                            <input class="form-control" type="text" name="foto[0][judul_foto]" placeholder="Masukkan Judul Foto">
+                                            <input class="form-control" type="text" name="foto[0][judul_foto]"
+                                                placeholder="Masukkan Judul Foto">
                                         </div>
                                         <div>
                                             <label>Foto</label>
-                                            <input type="file" name="foto[0][foto]" class="form-control" placeholder="foto" accept="image/*" onchange="previewImage(this, 'preview-0')">
+                                            <input type="file" name="foto[0][foto]" class="form-control"
+                                                placeholder="foto" accept="image/*"
+                                                onchange="previewImage(this, 'preview-0')">
                                         </div>
                                     </div>
                                 </div>
@@ -154,8 +164,10 @@
                         </div>
 
                         <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-secondary" id="add-field-image">Tambah Dokumentasi</button>
-                            <button type="button" class="btn btn-danger ml-2" id="remove-field-image">Hapus Dokumentasi</button>
+                            <button type="button" class="btn btn-secondary" id="add-field-image">Tambah
+                                Dokumentasi</button>
+                            <button type="button" class="btn btn-danger ml-2" id="remove-field-image">Hapus
+                                Dokumentasi</button>
                         </div>
                     </div>
                 </div>
@@ -169,7 +181,8 @@
                             <div class="timeline-item">
                                 <div class="mb-2">
                                     <label>Tanggal/Tahun</label>
-                                    <input class="form-control" type="date" name="timeline[0][tanggal]" placeholder="Masukkan tanggal/tahun">
+                                    <input class="form-control" type="date" name="timeline[0][tanggal]"
+                                        placeholder="Masukkan tanggal/tahun">
                                 </div>
                                 <div>
                                     <label>Deskripsi</label>
@@ -179,8 +192,10 @@
                         </div>
 
                         <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-secondary" id="add-timeline-field">Tambah Timeline</button>
-                            <button type="button" class="btn btn-danger ml-2" id="remove-timeline-field">Hapus Timeline</button>
+                            <button type="button" class="btn btn-secondary" id="add-timeline-field">Tambah
+                                Timeline</button>
+                            <button type="button" class="btn btn-danger ml-2" id="remove-timeline-field">Hapus
+                                Timeline</button>
                         </div>
                     </div>
                 </div>

@@ -35,8 +35,12 @@
                 <div class="mb-3">
                     <label for="status_project">Status Project</label>
                     <select class="ms-1 form-select btn btn-primary" id="status_project" name="status_project">
-                        <option value="ongoing" {{ old('status_project', $portofolio->status_project) == 'ongoing' ? 'selected' : '' }}>Sedang Berjalan</option>
-                        <option value="done" {{ old('status_project', $portofolio->status_project) == 'done' ? 'selected' : '' }}>Selesai</option>
+                        <option value="ongoing"
+                            {{ old('status_project', $portofolio->status_project) == 'ongoing' ? 'selected' : '' }}>
+                            Sedang Berjalan</option>
+                        <option value="done"
+                            {{ old('status_project', $portofolio->status_project) == 'done' ? 'selected' : '' }}>Selesai
+                        </option>
                     </select>
                 </div>
 
@@ -46,20 +50,22 @@
                     </div>
                     <div class="card-body">
                         <div id="team-container" class="team-group mb-3">
-                            @foreach(explode(',', $portofolio->team) as $index => $anggota)
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="flex-grow-1">
-                                    <label>Anggota</label>
-                                    <input type="text" name="team[{{ $index }}][anggota]" class="form-control"
-                                        value="{{ trim($anggota) }}" placeholder="Masukkan Nama Anggota">
+                            @foreach (explode(',', $portofolio->team) as $index => $anggota)
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="flex-grow-1">
+                                        <label>Anggota</label>
+                                        <input type="text" name="team[{{ $index }}][anggota]"
+                                            class="form-control" value="{{ trim($anggota) }}"
+                                            placeholder="Masukkan Nama Anggota">
+                                    </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
 
                         <div class="d-flex gap-2">
                             <button type="button" class="btn btn-secondary" id="add-team-field">Tambah Anggota</button>
-                            <button type="button" class="btn btn-danger ml-2" id="remove-team-field">Hapus Anggota</button>
+                            <button type="button" class="btn btn-danger ml-2" id="remove-team-field">Hapus
+                                Anggota</button>
                         </div>
                     </div>
                 </div>
@@ -68,14 +74,16 @@
                     <label for="tempat">Lokasi Kegiatan</label>
                     <div class="d-flex gap-3 mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="jenis_lokasi" id="offline" value="offline"
+                            <input class="form-check-input" type="radio" name="jenis_lokasi" id="offline"
+                                value="offline"
                                 {{ !in_array($portofolio->tempat, ['website', 'online_meeting', 'desain']) ? 'checked' : '' }}>
                             <label class="form-check-label" for="offline">
                                 Offline
                             </label>
                         </div>
                         <div class="form-check ml-2">
-                            <input class="form-check-input" type="radio" name="jenis_lokasi" id="online" value="online"
+                            <input class="form-check-input" type="radio" name="jenis_lokasi" id="online"
+                                value="online"
                                 {{ in_array($portofolio->tempat, ['website', 'online_meeting', 'desain']) ? 'checked' : '' }}>
                             <label class="form-check-label" for="online">
                                 Online
@@ -83,18 +91,23 @@
                         </div>
                     </div>
 
-                    <div id="offline-field" style="{{ in_array($portofolio->tempat, ['website', 'online_meeting', 'desain']) ? 'display: none;' : '' }}">
-                        <input type="text" id="tempat" name="tempat" class="form-control"
+                    <div id="offline-field"
+                        style="{{ in_array($portofolio->tempat, ['website', 'online_meeting', 'desain']) ? 'display: none;' : '' }}">
+                        <input type="text" id="tempat" name="tempat_offline" class="form-control"
                             value="{{ !in_array($portofolio->tempat, ['website', 'online_meeting', 'desain']) ? $portofolio->tempat : '' }}"
                             placeholder="Masukkan lokasi kegiatan" required>
                     </div>
 
-                    <div id="online-field" style="{{ !in_array($portofolio->tempat, ['website', 'online_meeting', 'desain']) ? 'display: none;' : '' }}">
+                    <div id="online-field"
+                        style="{{ !in_array($portofolio->tempat, ['website', 'online_meeting', 'desain']) ? 'display: none;' : '' }}">
                         <select class="form-select" name="tempat" id="jenis_online">
                             <option value="">Pilih jenis kegiatan online</option>
-                            <option value="website" {{ $portofolio->tempat == 'website' ? 'selected' : '' }}>Website</option>
-                            <option value="online_meeting" {{ $portofolio->tempat == 'online_meeting' ? 'selected' : '' }}>Online Meeting</option>
-                            <option value="desain" {{ $portofolio->tempat == 'desain' ? 'selected' : '' }}>Desain</option>
+                            <option value="website" {{ $portofolio->tempat == 'website' ? 'selected' : '' }}>Website
+                            </option>
+                            <option value="online_meeting"
+                                {{ $portofolio->tempat == 'online_meeting' ? 'selected' : '' }}>Online Meeting</option>
+                            <option value="desain" {{ $portofolio->tempat == 'desain' ? 'selected' : '' }}>Desain
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -128,7 +141,8 @@
 
                 <div class="mb-3">
                     <label for="id_perusahaan">Perusahaan</label>
-                    <select class="ms-1 form-select btn btn-secondary" name="id_perusahaan" id="id_perusahaan" required>
+                    <select class="ms-1 form-select btn btn-secondary" name="id_perusahaan" id="id_perusahaan"
+                        required>
                         @foreach ($perusahaans as $perusahaan)
                             <option value="{{ $perusahaan->id_perusahaan }}"
                                 {{ old('id_perusahaan', $portofolio->id_perusahaan) == $perusahaan->id_perusahaan ? 'selected' : '' }}>
@@ -148,20 +162,24 @@
                                 <div class="image-item">
                                     <div class="row align-items-center mb-3">
                                         <div class="col-auto">
-                                            <img id="preview-{{ $index }}" src="{{ asset('images/upload/portofolio/'.$foto->foto) }}"
+                                            <img id="preview-{{ $index }}"
+                                                src="{{ asset('images/upload/portofolio/' . $foto->foto) }}"
                                                 class="card-img-top border" alt="Preview Foto"
                                                 style="height: 10rem; width: 10rem; object-fit: cover;">
                                         </div>
                                         <div class="col">
                                             <div class="mb-2">
                                                 <label>Judul Foto</label>
-                                                <input class="form-control" type="text" name="foto[{{ $index }}][judul_foto]"
-                                                    value="{{ $foto->judul_foto }}" placeholder="Masukkan Judul Foto">
+                                                <input class="form-control" type="text"
+                                                    name="foto[{{ $index }}][judul_foto]"
+                                                    value="{{ $foto->judul_foto }}"
+                                                    placeholder="Masukkan Judul Foto">
                                             </div>
                                             <div>
                                                 <label>Foto</label>
-                                                <input type="file" name="foto[{{ $index }}][foto]" class="form-control"
-                                                    accept="image/*" onchange="previewImage(this, 'preview-{{ $index }}')">
+                                                <input type="file" name="foto[{{ $index }}][foto]"
+                                                    class="form-control" accept="image/*"
+                                                    onchange="previewImage(this, 'preview-{{ $index }}')">
                                             </div>
                                         </div>
                                     </div>
@@ -170,8 +188,10 @@
                         </div>
 
                         <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-secondary" id="add-field-image">Tambah Dokumentasi</button>
-                            <button type="button" class="btn btn-danger ml-2" id="remove-field-image">Hapus Dokumentasi</button>
+                            <button type="button" class="btn btn-secondary" id="add-field-image">Tambah
+                                Dokumentasi</button>
+                            <button type="button" class="btn btn-danger ml-2" id="remove-field-image">Hapus
+                                Dokumentasi</button>
                         </div>
                     </div>
                 </div>
@@ -186,7 +206,8 @@
                                 <div class="timeline-item">
                                     <div class="mb-2">
                                         <label>Tanggal/Tahun</label>
-                                        <input class="form-control" type="date" name="timeline[{{ $index }}][tanggal]"
+                                        <input class="form-control" type="date"
+                                            name="timeline[{{ $index }}][tanggal]"
                                             value="{{ $timeline->tanggal }}" required>
                                     </div>
                                     <div>
@@ -198,8 +219,10 @@
                         </div>
 
                         <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-secondary" id="add-timeline-field">Tambah Timeline</button>
-                            <button type="button" class="btn btn-danger ml-2" id="remove-timeline-field">Hapus Timeline</button>
+                            <button type="button" class="btn btn-secondary" id="add-timeline-field">Tambah
+                                Timeline</button>
+                            <button type="button" class="btn btn-danger ml-2" id="remove-timeline-field">Hapus
+                                Timeline</button>
                         </div>
                     </div>
                 </div>

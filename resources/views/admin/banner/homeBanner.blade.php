@@ -51,7 +51,7 @@
                                     <td>{{ $banner->deskripsi }}</td>
                                     <td>
                                         @if ($banner->foto)
-                                            <img src="{{ asset($banner->foto) }}" alt="Logo" width="100">
+                                            <img src="{{ asset('images/upload/banner'.$banner->foto) }}" alt="Logo" width="100">
                                         @else
                                             <span style="color: red;">Foto belum tersedia</span>
                                         @endif

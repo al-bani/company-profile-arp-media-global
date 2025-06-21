@@ -42,6 +42,7 @@ class PortofolioController extends Controller
     public function store(Request $request)
     {
         // Validasi kolom unique
+
         $uniqueFields = [
             'id_portofolio' => 'ID Portofolio'
         ];
@@ -66,7 +67,14 @@ class PortofolioController extends Controller
             'id_portofolio' => $id_portofolio,
             'waktu' => $waktu
         ]);
-        portofolio::create($request->all());
+
+        $data = $request->all();
+
+        if (!$data['tempat']) {
+            $data['tempat'] = $data['tempat_offline'];
+        }
+
+        portofolio::create($data);
 
         // dd($request->timeline);
         // Simpan timeline jika ada
@@ -105,7 +113,7 @@ class PortofolioController extends Controller
 
                     portofolio_foto::create([
                         'id_portofolio' => $request->id_portofolio,
-                        'id_portofolio_foto' => 'img'.$request->id_portofolio.$item['judul_foto'],
+                        'id_portofolio_foto' => 'img' . $request->id_portofolio . $item['judul_foto'],
                         'judul_foto' => $item['judul_foto'] ?? '',
                         'foto' => $filename,
                     ]);
@@ -166,6 +174,12 @@ class PortofolioController extends Controller
             $id_portofolio = $portofolio->id_portofolio;
         }
 
+        $data = $request->all();
+
+        if (!$data['tempat']) {
+            $data['tempat'] = $data['tempat_offline'];
+        }
+
         // Combine jam_mulai and jam_selesai
         $waktu = $request->jam_mulai . '-' . $request->jam_selesai;
 
@@ -175,7 +189,7 @@ class PortofolioController extends Controller
             'nama_project' => $request->nama_project,
             'deskripsi' => $request->deskripsi,
             'team' => $request->team,
-            'tempat' => $request->tempat,
+            'tempat' => $data['tempat'],
             'tanggal' => $request->tanggal,
             'waktu' => $waktu,
             'id_perusahaan' => $request->id_perusahaan

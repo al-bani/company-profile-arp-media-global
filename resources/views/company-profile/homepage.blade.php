@@ -1,26 +1,15 @@
 @extends('company-profile.Layout.company')
 
 @section('content')
-    {{-- @php
-        $logos = ['bi.png', 'bjb.png', 'disdik.png', 'diskominfo.png', 'ojk.png', 'unpad.png'];
-    @endphp
 
-    @php
-        $subsidiaries = [
-            ['name' => 'Perusahaan A', 'image' => 'unpad.png'],
-            ['name' => 'Perusahaan B', 'image' => 'unpad.png'],
-            ['name' => 'Perusahaan C', 'image' => 'unpad.png'],
-            ['name' => 'Perusahaan D', 'image' => 'unpad.png'],
-            ['name' => 'Perusahaan E', 'image' => 'unpad.png'],
-        ];
-    @endphp --}}
 
     <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
             @foreach ($banners as $index => $foto)
                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                     <!-- Gambar -->
-                    <img src="{{ asset($foto->foto) }}" class="carousel-img d-block w-100" alt="Slide {{ $index + 1 }}">
+                    <img src="{{ asset('images/upload/banner/' . $foto->foto) }}" class="carousel-img d-block w-100"
+                        alt="Slide {{ $index + 1 }}">
 
                     <!-- Overlay Teks -->
                     <div class="carousel-text-overlay">
@@ -42,24 +31,22 @@
     </div>
 
 
-
-
     {{-- Layanan --}}
     <div class="container pt-5 ">
-        <h1 class="text-center h1">Layanan Kami</h1>
-        <div class="layanan-container">
-            @foreach ($layanans as $layanan)
-                <div class="custom-card">
-                    <div class="img-box"><img src="{{ asset('images/upload/layanan/' . $layanan->foto) }}">
+        <h1 class="text-center fw-bold">Layanan Kami</h3>
+            <div class="layanan-container">
+                @foreach ($layanans as $layanan)
+                    <div class="custom-card">
+                        <div class="img-box"><img src="{{ asset('images/upload/layanan/' . $layanan->foto) }}">
+                        </div>
+                        <div class="custom-content">
+                            <h2>{{ $layanan->nama_layanan }}</h2>
+                            <p>{!! $layanan->deskripsi !!}</p>
+                            <!-- <a href="">Read More</a> -->
+                        </div>
                     </div>
-                    <div class="custom-content">
-                        <h2>{{ $layanan->nama_layanan }}</h2>
-                        <p>{!! $layanan->deskripsi !!}</p>
-                        <!-- <a href="">Read More</a> -->
-                    </div>
-                </div>
-            @endforeach
-        </div>
+                @endforeach
+            </div>
     </div>
 
     {{-- Profil Perusahaan --}}
@@ -67,7 +54,8 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 text-center mb-4 mb-lg-0">
-                    <img src="{{ asset('images/upload/logo/primary/' . $perusahaans->logo_utama) }}" class="img-fluid w-50" alt="Logo Perusahaan">
+                    <img src="{{ asset('images/upload/logo/primary/' . $perusahaans->logo_utama) }}" class="img-fluid w-50"
+                        alt="Logo Perusahaan">
                 </div>
                 <div class="col-lg-7">
                     <h3 class="fw-bold mb-3">PROFILE PERUSAHAAN</h3>
@@ -78,18 +66,55 @@
         </div>
     </div>
 
+    {{-- Visi dan Misi --}}
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h1 class="fw-bold">Visi dan Misi</h1>
+                <p class="text-muted">Tujuan dan arah strategis perusahaan kami</p>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card shadow border-0 h-100">
+                    <div class="card-body">
+                        <h4 class="card-title fw-semibold mb-3">Visi</h4>
+                        <p class="card-text">
+                            Menjadi perusahaan terdepan dalam inovasi dan pelayanan berkualitas untuk menciptakan dampak
+                            positif bagi masyarakat dan lingkungan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card shadow border-0 h-100">
+                    <div class="card-body">
+                        <h4 class="card-title fw-semibold mb-3">Misi</h4>
+                        <ul class="card-text ps-3 fs6">
+                            <li>Menyediakan produk dan layanan terbaik berbasis teknologi terkini.</li>
+                            <li>Mendorong pengembangan sumber daya manusia yang unggul dan profesional.</li>
+                            <li>Membangun kemitraan yang saling menguntungkan dengan seluruh stakeholder.</li>
+                            <li>Menerapkan prinsip keberlanjutan dan tanggung jawab sosial dalam setiap aktivitas bisnis.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- Berita --}}
 
     <div class="container berita pt-5">
-        <h1 class="text-center h1 mb-5">Berita Terbaru</h1>
+        <h1 class="text-center fw-bold h1 mb-5">Berita Terbaru</h1>
         <div class="row g-4 justify-content-center">
             @foreach ($beritas as $berita)
                 <!-- Tampilan untuk desktop -->
                 <div class="col-12 col-md-6 d-none d-md-block col-lg-3 mb-3">
                     <div class="card h-100 shadow rounded-4 border border-light-subtle">
                         <div class="ratio ratio-16x9 mb-3">
-                            <img src="{{ asset($berita->foto) }}" class="object-fit-cover rounded-top-4"
-                                alt="{{ $berita->judul }}">
+                            <img src="{{ asset('images/upload/berita/' . $berita->foto) }}"
+                                class="object-fit-cover rounded-top-4" alt="{{ $berita->judul }}">
                         </div>
                         <div class="card-body d-flex flex-column pt-0">
                             <h5 class="card-title fw-semibold mb-2">{{ $berita->judul }}</h5>
@@ -97,7 +122,7 @@
                             <p class="card-text flex-grow-1" style="font-size: 0.95rem;">
                                 {!! \Illuminate\Support\Str::limit(strip_tags($berita->konten), 100, '...') !!}
                             </p>
-                            <a href="#" class="btn btn-primary btn-sm w-100 mt-3">Baca Selengkapnya</a>
+
                         </div>
                     </div>
                 </div>
@@ -125,14 +150,16 @@
 
 
     <!-- Anak Perusahaan -->
+    @if ($perusahaans->status === 'induk')
         <div class="container pt-5">
-            <h1 class="text-center h1">Anak Perusahaan</h1>
+            <h1 class="text-center h1 fw-bold">Anak Perusahaan</h1>
             <div class="subsidiary-container  justify-content-center">
                 @foreach ($anaks as $perusahaan)
                     @if ($perusahaan->status === 'anak')
                         <div class="subsidiary-card">
                             <div class="subsidiary-img-box">
-                                <img src="{{ asset('images/upload/logo/primary/' . $perusahaan->logo_utama) }}" alt="">
+                                <img src="{{ asset('images/upload/logo/primary/' . $perusahaan->logo_utama) }}"
+                                    alt="">
                             </div>
                             <div class="subsidiary-content">
                                 <h2>{{ $perusahaan->nama_perusahaan }}</h2>
@@ -144,6 +171,7 @@
                 @endforeach
             </div>
         </div>
+    @endif
 
 
     {{-- Klien --}}
@@ -154,15 +182,15 @@
 
     <div class="client-section bg-white">
         <div class="container text-center">
-            <h1 class="text-center mb-4">Klien Kami</h1>
+            <h1 class="text-center fw-bold mb-4">Klien Kami</h1>
             <div class="marquee-container overflow-hidden">
                 <div class="marquee-track d-flex {{ $isMarquee ? 'animate-marquee' : 'justify-content-center w-100' }}"
                     style="flex-wrap: nowrap;">
 
                     @foreach ($partners as $partner)
                         <div class="px-3" style="flex: 0 0 auto;">
-                            <img src="{{ asset('images/upload/partner/'.$partner->foto) }}" alt="Logo Klien" class="img-fluid"
-                                style="height: 120px;">
+                            <img src="{{ asset('images/upload/partner/' . $partner->foto) }}" alt="Logo Klien"
+                                class="img-fluid" style="height: 120px;">
                         </div>
                     @endforeach
 
@@ -180,9 +208,6 @@
 
         <div class="accordion faq-accordion" id="faqAccordion">
 
-            @php
-                $faqs;
-            @endphp
 
             @foreach ($faqs as $index => $faq)
                 <div class="accordion-item border-0 border-bottom">
@@ -190,18 +215,19 @@
                         <button class="accordion-button collapsed shadow-none px-0 py-3 bg-transparent" type="button"
                             data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}"
                             aria-expanded="false" aria-controls="collapse{{ $index }}">
-                            <span class="me-auto">{{ $faq['q'] }}</span>
+                            <span class="me-auto">{{ $faq->pertanyaan }}</span>
                             <span class="icon">+</span>
                         </button>
                     </h2>
                     <div id="collapse{{ $index }}" class="accordion-collapse collapse"
                         aria-labelledby="heading{{ $index }}" data-bs-parent="#faqAccordion">
                         <div class="accordion-body ps-0 pt-0 pb-3 text-muted">
-                            {{ $faq['a'] }}
+                            {{ $faq->jawaban }}
                         </div>
                     </div>
                 </div>
             @endforeach
+
 
         </div>
     </div>

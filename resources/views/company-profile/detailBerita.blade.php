@@ -11,8 +11,8 @@
 
         {{-- Gambar Utama --}}
         <div class="text-center mb-5">
-            <img src="{{ asset(''.$beritas->foto) }}" alt="{{ $beritas->judul }}" class="img-fluid rounded-4 shadow-sm"
-                style="max-height: 480px; object-fit: cover; width: 100%;">
+            <img src="{{ asset('images/upload/berita/' . $beritas->foto) }}" alt="{{ $beritas->judul }}"
+                class="img-fluid rounded-4 shadow-sm" style="max-height: 480px; object-fit: cover; width: 100%;">
         </div>
 
         {{-- Isi Berita --}}
@@ -25,11 +25,11 @@
         </div>
 
         {{-- Tombol Kembali --}}
-        <div class="text-center mb-5">
-            <a href="{{ route('berita.index') }}" class="btn btn-outline-primary px-4 py-2 rounded-pill">
+        <!-- <div class="text-center mb-5">
+            <a href="{{ redirect()->back() }}" class="btn btn-outline-primary px-4 py-2 rounded-pill">
                 ← Kembali ke Daftar Berita
             </a>
-        </div>
+        </div> -->
 
         {{-- Berita Terkait --}}
         @if ($beritaAlls->count() > 1)
@@ -50,7 +50,7 @@
                                         {{ \Illuminate\Support\Str::limit(strip_tags($berita->konten), 90, '...') }}
                                     </p>
                                     <a href="{{ route('berita.show', $berita->id) }}"
-                                       class="btn btn-primary btn-sm w-100 mt-2 ">Baca Selengkapnya</a>
+                                        class="btn btn-primary btn-sm w-100 mt-2 ">Baca Selengkapnya</a>
                                 </div>
                             </div>
                         </div>

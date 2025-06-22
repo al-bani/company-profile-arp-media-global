@@ -15,13 +15,13 @@
                 <!-- Nama Partner -->
                 <div class="mb-3">
                     <label for="nama_partner" class="form-label">Nama Partner</label>
-                    <input class="form-control" id="nama_partner" name="nama_partner" type="text" placeholder="Masukkan nama Partner">
+                    <input class="form-control" id="nama_partner" name="nama_partner" type="text" placeholder="Masukkan nama Partner" required>
                 </div>
 
                 <!-- Email -->
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input class="form-control" id="email" name="email" type="email" placeholder="partner@example.com">
+                    <input class="form-control" id="email" name="email" type="email" placeholder="partner@example.com" required>
                 </div>
 
                 <div class="row align-items-center mb-3">
@@ -32,14 +32,15 @@
                     <div class="col">
                         <label for="foto" class="form-label">Logo</label>
                         <input class="form-control" id="foto" name="foto" type="file" accept="image/*"
-                            onchange="validateFileSize(this)">
+                            onchange="validateFileSize(this)" required>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="id_perusahaan">Perusahaan</label>
                     <select class="ms-1 form-select btn btn-secondary" aria-label="Default select example"
-                        name="id_perusahaan" id="id_perusahaan">
+                        name="id_perusahaan" id="id_perusahaan" required>
+                        <option value="">Pilih Perusahaan</option>
                         @foreach ($perusahaans as $perusahaan)
                             @if ($role === 'superAdmin' || $perusahaan->id_perusahaan == Auth::user()->id_perusahaan)
                                 <option value="{{ $perusahaan->id_perusahaan }}" {{ old('id_perusahaan') == $perusahaan->id_perusahaan ? 'selected' : '' }}>

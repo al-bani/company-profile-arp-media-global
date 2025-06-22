@@ -34,7 +34,8 @@
 
                 <div class="mb-3">
                     <label for="status_project">Status Project</label>
-                    <select class="ms-1 form-select btn btn-primary" id="status_project" name="status_project">
+                    <select class="ms-1 form-select btn btn-primary" id="status_project" name="status_project" required>
+                        <option value="">Pilih Status</option>
                         <option value="ongoing"
                             {{ old('status_project', $portofolio->status_project) == 'ongoing' ? 'selected' : '' }}>
                             Sedang Berjalan</option>
@@ -49,17 +50,40 @@
                         <h5 class="mb-0">Team</h5>
                     </div>
                     <div class="card-body">
+                        <div class="mb-3">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-grow-1">
+                                    <label>Nama Team</label>
+                                    <input type="text" name="nama_team" class="form-control"
+                                        placeholder="Masukkan Nama Team"
+                                        value="{{ $portofolio->teams->first() ? $portofolio->teams->first()->team : '' }}"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+
                         <div id="team-container" class="team-group mb-3">
-                            @foreach (explode(',', $portofolio->team) as $index => $anggota)
+                            @if($portofolio->teams->count() > 0)
+                                @foreach ($portofolio->teams as $index => $teamMember)
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="flex-grow-1">
+                                            <label>Anggota</label>
+                                            <input type="text" name="team[{{ $index }}][anggota]"
+                                                class="form-control" value="{{ $teamMember->anggota }}"
+                                                placeholder="Masukkan Nama Anggota" required>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
                                 <div class="d-flex align-items-center mb-3">
                                     <div class="flex-grow-1">
                                         <label>Anggota</label>
-                                        <input type="text" name="team[{{ $index }}][anggota]"
-                                            class="form-control" value="{{ trim($anggota) }}"
-                                            placeholder="Masukkan Nama Anggota">
+                                        <input type="text" name="team[0][anggota]"
+                                            class="form-control" value=""
+                                            placeholder="Masukkan Nama Anggota" required>
                                     </div>
                                 </div>
-                            @endforeach
+                            @endif
                         </div>
 
                         <div class="d-flex gap-2">
@@ -100,7 +124,7 @@
 
                     <div id="online-field"
                         style="{{ !in_array($portofolio->tempat, ['website', 'online_meeting', 'desain']) ? 'display: none;' : '' }}">
-                        <select class="form-select" name="tempat" id="jenis_online">
+                        <select class="form-select" name="tempat" id="jenis_online" required>
                             <option value="">Pilih jenis kegiatan online</option>
                             <option value="website" {{ $portofolio->tempat == 'website' ? 'selected' : '' }}>Website
                             </option>
@@ -173,13 +197,13 @@
                                                 <input class="form-control" type="text"
                                                     name="foto[{{ $index }}][judul_foto]"
                                                     value="{{ $foto->judul_foto }}"
-                                                    placeholder="Masukkan Judul Foto">
+                                                    placeholder="Masukkan Judul Foto" required>
                                             </div>
                                             <div>
                                                 <label>Foto</label>
                                                 <input type="file" name="foto[{{ $index }}][foto]"
                                                     class="form-control" accept="image/*"
-                                                    onchange="previewImage(this, 'preview-{{ $index }}')">
+                                                    onchange="previewImage(this, 'preview-{{ $index }}')" required>
                                             </div>
                                         </div>
                                     </div>
@@ -257,7 +281,7 @@
                 const teamButton = document.getElementById('add-team-field');
                 const removeTeamButton = document.getElementById('remove-team-field');
                 const teamContainer = document.getElementById('team-container');
-                let teamIndex = {{ count(explode(',', $portofolio->team)) }};
+                let teamIndex = {{ $portofolio->teams->count() > 0 ? $portofolio->teams->count() : 0 }};
 
                 teamButton.addEventListener('click', function() {
                     const newGroup = document.createElement('div');
@@ -265,7 +289,7 @@
                     newGroup.innerHTML = `
                         <div class="flex-grow-1">
                             <label>Anggota</label>
-                            <input type="text" name="team[${teamIndex}][anggota]" class="form-control" placeholder="Masukkan Nama Anggota">
+                            <input type="text" name="team[${teamIndex}][anggota]" class="form-control" placeholder="Masukkan Nama Anggota" required>
                         </div>
                     `;
                     teamContainer.appendChild(newGroup);
@@ -277,6 +301,13 @@
                     if (fields.length > 1) {
                         teamContainer.removeChild(fields[fields.length - 1]);
                         teamIndex--;
+                    } else {
+                        // Jika hanya tersisa 1 field, kosongkan isinya
+                        const lastField = fields[0];
+                        const input = lastField.querySelector('input');
+                        if (input) {
+                            input.value = '';
+                        }
                     }
                 });
 
@@ -331,11 +362,11 @@
                             <div class="col">
                                 <div class="mb-2">
                                     <label>Judul Foto</label>
-                                    <input class="form-control" name="foto[${imageIndex}][judul_foto]" placeholder="Masukkan Judul Foto">
+                                    <input class="form-control" name="foto[${imageIndex}][judul_foto]" placeholder="Masukkan Judul Foto" required>
                                 </div>
                                 <div>
                                     <label>Foto</label>
-                                    <input type="file" name="foto[${imageIndex}][foto]" class="form-control" accept="image/*" onchange="previewImage(this, 'preview-${imageIndex}')">
+                                    <input type="file" name="foto[${imageIndex}][foto]" class="form-control" accept="image/*" onchange="previewImage(this, 'preview-${imageIndex}')" required>
                                 </div>
                             </div>
                         </div>

@@ -32,17 +32,17 @@
 
                         <div class="mb-3 mt-3">
                             <label for="nama" class="form-label">Nama</label>
-                            <input class="form-control" id="nama" name="nama" placeholder="Nama Anda" value="{{ old('nama') }}">
+                            <input class="form-control" id="nama" name="nama" placeholder="Nama Anda" value="{{ old('nama') }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input class="form-control" type="email" id="email" name="email" value="{{ old('email') }}">
+                            <input class="form-control" type="email" id="email" name="email" value="{{ old('email') }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="pesan" class="form-label">Pesan</label>
-                            <textarea class="form-control" id="pesan" name="pesan" rows="3">{{ old('pesan') }}</textarea>
+                            <textarea class="form-control" id="pesan" name="pesan" rows="3" required>{{ old('pesan') }}</textarea>
                         </div>
                         <div class="mb-4">
                             <input class="btn btn-primary w-100 text-white bg-black border-0" type="submit" value="Submit">

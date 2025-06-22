@@ -21,8 +21,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="status_project">Status Project</label>
-                    <select class="ms-1 form-select btn btn-primary" id="status_project" name="status_project">
-                        <option selected>Choose</option>
+                    <select class="ms-1 form-select btn btn-primary" id="status_project" name="status_project" required>
+                        <option value="">Choose</option>
                         <option value="ongoing">Sedang Berjalan</option>
                         <option value="done">Selesai</option>
                     </select>
@@ -33,12 +33,22 @@
                         <h5 class="mb-0">Team</h5>
                     </div>
                     <div class="card-body">
+                        <div class="mb-3">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-grow-1">
+                                    <label>Nama Team</label>
+                                    <input type="text" name="nama_team" class="form-control"
+                                        placeholder="Masukkan Nama Anggota" required>
+                                </div>
+                            </div>
+                        </div>
+
                         <div id="team-container" class="team-group mb-3">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="flex-grow-1">
                                     <label>Anggota</label>
                                     <input type="text" name="team[0][anggota]" class="form-control"
-                                        placeholder="Masukkan Nama Anggota">
+                                        placeholder="Masukkan Nama Anggota" required>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +86,7 @@
                     </div>
 
                     <div id="online-field" style="display: none;">
-                        <select class="form-select" name="tempat" id="jenis_online">
+                        <select class="form-select" name="tempat" id="jenis_online" required>
                             <option value="">Pilih jenis kegiatan online</option>
                             <option value="website">Website</option>
                             <option value="online_meeting">Online Meeting</option>
@@ -87,7 +97,7 @@
 
                 <div class="mb-4">
                     <label for="tanggal" class="form-label">Tanggal Publikasi</label>
-                    <input type="date" name="tanggal" id="tanggal" class="form-control">
+                    <input type="date" name="tanggal" id="tanggal" class="form-control" required>
                 </div>
 
                 <div class="mb-3 d-flex justify-content-between">
@@ -95,7 +105,7 @@
                         <label for="exampleFormControlInput1" class="form-label">Jam Mulai</label>
                         <input type="time" class="form-control @error('jam_mulai') is-invalid @enderror"
                             placeholder="Masukan Jam Mulai" name="jam_mulai" id="jam_mulai"
-                            value="{{ old('jam_mulai') }}">
+                            value="{{ old('jam_mulai') }}" required>
                         @error('jam_mulai')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -106,7 +116,7 @@
                         <label for="exampleFormControlInput1" class="form-label">Jam Selesai</label>
                         <input type="time" class="form-control @error('jam_selesai') is-invalid @enderror"
                             placeholder="Masukan Jam Selesai" name="jam_selesai" id="jam_selesai"
-                            value="{{ old('jam_selesai') }}">
+                            value="{{ old('jam_selesai') }}" required>
                         @error('jam_selesai')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -117,14 +127,15 @@
                 <div class="mb-3">
                     <label for="id_perusahaan">Perusahaan</label>
                     <select class="ms-1 form-select btn btn-secondary" aria-label="Default select example"
-                        name="id_perusahaan" id="id_perusahaan">
+                        name="id_perusahaan" id="id_perusahaan" required>
+                        <option value="">Pilih Perusahaan</option>
                         @foreach ($perusahaans as $perusahaan)
                             @if (old('id_perusahaan') == $perusahaan->id_perusahaan)
                                 <option value="{{ $perusahaan->id_perusahaan }}" selected>
                                     {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
                                 </option>
                             @else
-                                <option value="{{ $perusahaan->id_perusahaan }}" selected>
+                                <option value="{{ $perusahaan->id_perusahaan }}">
                                     {{ $perusahaan->id_perusahaan . ' - ' . $perusahaan->nama_perusahaan }}
                                 </option>
                             @endif
@@ -150,13 +161,13 @@
                                         <div class="mb-2">
                                             <label>Judul Foto</label>
                                             <input class="form-control" type="text" name="foto[0][judul_foto]"
-                                                placeholder="Masukkan Judul Foto">
+                                                placeholder="Masukkan Judul Foto" required>
                                         </div>
                                         <div>
                                             <label>Foto</label>
                                             <input type="file" name="foto[0][foto]" class="form-control"
                                                 placeholder="foto" accept="image/*"
-                                                onchange="previewImage(this, 'preview-0')">
+                                                onchange="previewImage(this, 'preview-0')" required>
                                         </div>
                                     </div>
                                 </div>
@@ -182,11 +193,11 @@
                                 <div class="mb-2">
                                     <label>Tanggal/Tahun</label>
                                     <input class="form-control" type="date" name="timeline[0][tanggal]"
-                                        placeholder="Masukkan tanggal/tahun">
+                                        placeholder="Masukkan tanggal/tahun" required>
                                 </div>
                                 <div>
                                     <label>Deskripsi</label>
-                                    <textarea name="timeline[0][deskripsi]" class="form-control" placeholder="Masukkan deskripsi"></textarea>
+                                    <textarea name="timeline[0][deskripsi]" class="form-control" placeholder="Masukkan deskripsi" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -238,7 +249,7 @@
                     newGroup.innerHTML = `
                         <div class="flex-grow-1">
                             <label>Anggota</label>
-                            <input type="text" name="team[${teamIndex}][anggota]" class="form-control" placeholder="Masukkan Nama Anggota">
+                            <input type="text" name="team[${teamIndex}][anggota]" class="form-control" placeholder="Masukkan Nama Anggota" required>
                         </div>
                     `;
                     teamContainer.appendChild(newGroup);
@@ -266,11 +277,11 @@
                         <hr class="my-4 border-2">
                         <div class="mb-2">
                             <label>Tanggal/Tahun</label>
-                            <input class="form-control" type="date" name="timeline[${timelineIndex}][tanggal]" placeholder="Masukkan tanggal/tahun">
+                            <input class="form-control" type="date" name="timeline[${timelineIndex}][tanggal]" placeholder="Masukkan tanggal/tahun" required>
                         </div>
                         <div>
                             <label>Deskripsi</label>
-                            <textarea name="timeline[${timelineIndex}][deskripsi]" class="form-control" placeholder="Masukkan deskripsi"></textarea>
+                            <textarea name="timeline[${timelineIndex}][deskripsi]" class="form-control" placeholder="Masukkan deskripsi" required></textarea>
                         </div>
                     `;
                     timelineContainer.appendChild(newGroup);
@@ -304,11 +315,11 @@
                             <div class="col">
                                 <div class="mb-2">
                                     <label>Judul Foto</label>
-                                    <input class="form-control" name="foto[${imageIndex}][judul_foto]" placeholder="Masukkan Judul Foto">
+                                    <input class="form-control" name="foto[${imageIndex}][judul_foto]" placeholder="Masukkan Judul Foto" required>
                                 </div>
                                 <div>
                                     <label>Foto</label>
-                                    <input type="file" name="foto[${imageIndex}][foto]" class="form-control" placeholder="Masukkan Foto" accept="image/*" onchange="previewImage(this, 'preview-${imageIndex}')">
+                                    <input type="file" name="foto[${imageIndex}][foto]" class="form-control" placeholder="Masukkan Foto" accept="image/*" onchange="previewImage(this, 'preview-${imageIndex}')" required>
                                 </div>
                             </div>
                         </div>

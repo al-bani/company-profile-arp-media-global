@@ -18,7 +18,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="image" class="form-label">Pilih Gambar</label>
-                        <input class="form-control" type="file" id="image" name="foto" accept="image/*" onchange="previewImage(event)">
+                        <input class="form-control" type="file" id="image" name="foto" accept="image/*" onchange="previewImage(event)" required>
                     </div>
                     <div class="mb-3">
                         <img id="preview" src="#" alt="Preview Gambar" class="img-thumbnail d-none" style="max-height: 200px;">

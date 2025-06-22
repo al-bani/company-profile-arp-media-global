@@ -12,7 +12,7 @@
             <form action="/dashboard/banner/{{$banner->id}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-              
+
 
                 <!-- Judul Banner -->
                 <div class="mb-3">

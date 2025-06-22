@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('team_id')->unique();
             $table->string('id_portofolio');
             $table->string('team');
+            $table->string('anggota');
             $table->timestamps();
         });
     }

@@ -20,4 +20,7 @@ class portofolio extends Model
     public function portofolio_timeline(){
         return $this->hasMany(timelinePortofolio::class, 'id_portofolio', 'id_portofolio');
     }
+    public function teams(){
+        return $this->hasMany(team::class, 'id_portofolio', 'id_portofolio');
+    }
 }

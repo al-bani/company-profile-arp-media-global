@@ -7,6 +7,7 @@ use App\Http\Requests\StoreportfolioRequest;
 use App\Http\Requests\UpdateportfolioRequest;
 use App\Models\perusahaan;
 use App\Models\portofolio_foto;
+use App\Models\team;
 use App\Models\timelinePortofolio;
 use Illuminate\Http\Request;
 
@@ -90,13 +91,16 @@ class PortofolioController extends Controller
                 }
             }
         }
-        if ($request->has('team')) {
-            foreach ($request->timeline as $item) {
-                if (!empty($item['team']) || !empty($item['team'])) {
-                    timelinePortofolio::create([
-                        'team_id' => 'tm-' . $request->nama_project . $item['tanggal'], // Pastikan ada relasi
+
+        // Simpan team jika ada
+        if ($request->has('team') && $request->nama_team) {
+            foreach ($request->team as $index => $item) {
+                if (!empty($item['anggota'])) {
+                    team::create([
+                        'team_id' => 'tm-' . $request->nama_team . '-' . $index . '-' . time(),
                         'id_portofolio' => $request->id_portofolio,
-                        'team' => $item['tanggal']
+                        'team' => $request->nama_team,
+                        'anggota' => $item['anggota']
                     ]);
                 }
             }
@@ -136,6 +140,9 @@ class PortofolioController extends Controller
      */
     public function edit(portofolio $portofolio)
     {
+        // Load teams relationship
+        $portofolio->load('teams');
+
         return view('admin.portofolio.portofolio-edit', [
             'portofolio' => $portofolio,
             'perusahaans' => perusahaan::all()
@@ -188,7 +195,6 @@ class PortofolioController extends Controller
             'id_portofolio' => $id_portofolio,
             'nama_project' => $request->nama_project,
             'deskripsi' => $request->deskripsi,
-            'team' => $request->team,
             'tempat' => $data['tempat'],
             'tanggal' => $request->tanggal,
             'waktu' => $waktu,
@@ -208,6 +214,24 @@ class PortofolioController extends Controller
                         'id_portofolio' => $portofolio->id_portofolio,
                         'tanggal' => $item['tanggal'],
                         'deskripsi' => $item['deskripsi'],
+                    ]);
+                }
+            }
+        }
+
+        // Update team
+        if ($request->has('team') && $request->nama_team) {
+            // Delete existing teams
+            team::where('id_portofolio', $portofolio->id_portofolio)->delete();
+
+            // Create new teams
+            foreach ($request->team as $index => $item) {
+                if (!empty($item['anggota'])) {
+                    team::create([
+                        'team_id' => 'tm-' . $request->nama_team . '-' . $index . '-' . time(),
+                        'id_portofolio' => $portofolio->id_portofolio,
+                        'team' => $request->nama_team,
+                        'anggota' => $item['anggota']
                     ]);
                 }
             }

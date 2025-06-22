@@ -60,7 +60,7 @@
                     <div class="col-md-6">
                         <label for="role" ass="form-label fw-semibold">Status</label>
                         <select class="ms-1 form-select btn btn-primary" id="role" name="role" required>
-                            <option disabled>Pilih Status</option>
+                            <option value="">Pilih Status</option>
                             <option value="admin">Admin</option>
                             <option value="superAdmin">Super Admin</option>
                         </select>

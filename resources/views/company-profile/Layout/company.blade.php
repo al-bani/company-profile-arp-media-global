@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{$perusahaans->nama_perusahaan}}</title>
+    <title>{{ $perusahaans->nama_perusahaan }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     {{-- <link href="{{ asset('css/style-compro.css') }}" rel="stylesheet" type="text/css"> --}}
-    <link rel="icon" href="{{ asset('images/upload/logo/primary/'.$perusahaans->logo_utama) }}" type="image/png">
+    <link rel="icon" href="{{ asset('images/upload/logo/primary/' . $perusahaans->logo_utama) }}" type="image/png">
 
     <link href="{{ asset('css/style-desktop.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/style-tablet.css') }}" rel="stylesheet" type="text/css">
@@ -33,10 +33,18 @@
     {{-- Header --}}
     <nav class="navbar navbar-expand-lg w-100 sticky-top shadow">
         <div class="container-fluid">
-            <a href="/" class="navbar-brand ms-3">
-                <img class="nav-logo" src="{{ asset('images/upload/logo/website/' . $perusahaans->logo_website) }}"
-                    alt="Logo">
-            </a>
+            @if ($perusahaans->status === 'induk')
+             <a href="/" class="navbar-brand ms-3">
+                    <img class="nav-logo" src="{{ asset('images/upload/logo/website/' . $perusahaans->logo_website) }}"
+                        alt="Logo">
+                </a>
+            @else
+                <a href="/{{ $perusahaans->nama_perusahaan }}" class="navbar-brand ms-3">
+                    <img class="nav-logo" src="{{ asset('images/upload/logo/website/' . $perusahaans->logo_website) }}"
+                        alt="Logo">
+                </a>
+            @endif
+
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

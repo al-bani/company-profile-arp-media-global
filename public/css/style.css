@@ -12,101 +12,112 @@
 .text-outlined {
     color: white;
     /* Warna teks utama */
-    text-shadow: -1px -1px 0 grey, /* Bayangan kiri atas */ 1px -1px 0 grey,
-        /* Bayangan kanan atas */ -1px 1px 0 grey,
-        /* Bayangan kiri bawah */ 1px 1px 0 grey;
+    text-shadow: -1px -1px 0 grey,
+        /* Bayangan kiri atas */
+        1px -1px 0 grey,
+        /* Bayangan kanan atas */
+        -1px 1px 0 grey,
+        /* Bayangan kiri bawah */
+        1px 1px 0 grey;
     /* Bayangan kanan bawah */
 }
 
+
+
+
 /* Untuk Layanan pada card  */
 .layanan-container {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 100px 50px;
     padding: 50px;
-}
-
-.layanan-container .custom-card {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 350px;
-    max-width: 100%;
-    height: 300px;
-    background: #fff;
-    border-radius: 20px;
-    transition: 0.5s;
-    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
-
     overflow: visible;
 }
 
-.layanan-container .custom-card:hover {
-    height: 320px;
-}
-
-.layanan-container .custom-card .img-box {
-    position: absolute;
-    top: 20px;
-    width: 300px;
-    height: 220px;
-    background: #333;
-    border-radius: 12px;
-    overflow: hidden;
+.custom-card {
+    position: relative;
+    width: 350px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+    overflow: visible;
+    height: 350px;
     transition: 0.5s;
 }
 
-.layanan-container .custom-card:hover .img-box {
+.custom-card:hover {
+    height: 380px;
+}
+
+.img-box {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.5s;
+    z-index: 2;
+    background: #333;
+}
+
+.custom-card:hover .img-box {
     top: -100px;
-    transform: scale(0.75);
+    transform: translateX(-50%) scale(0.75);
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
 }
 
-.layanan-container .custom-card .img-box img {
+.img-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.layanan-container .custom-card .custom-content {
+.custom-content {
     position: absolute;
-    top: 252px;
+    top: 260px;
     width: 100%;
-    height: 35px;
     padding: 0 30px;
     text-align: center;
+    height: 60px;
+    /* penting: batasi tinggi awal */
     overflow: hidden;
     transition: 0.5s;
+    z-index: 1;
 }
 
-.layanan-container .custom-card:hover .custom-content {
+.custom-card:hover .custom-content {
     top: 130px;
     height: 250px;
+    /* cukup menampung seluruh teks */
 }
 
-.layanan-container .custom-card .custom-content h2 {
+.custom-content h2 {
     font-size: 1.5rem;
     font-weight: 700;
     color: #333;
     margin-bottom: 10px;
 }
 
-.layanan-container .custom-card .custom-content p {
+.custom-content p {
     color: #333;
     margin-bottom: 15px;
+    font-size: 0.95rem;
+    line-height: 1.4;
 
     display: -webkit-box;
-    -webkit-line-clamp: 5; /* ubah sesuai jumlah baris */
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.layanan-container .custom-card .custom-content a {
+/* Tombol (jika ingin diaktifkan) */
+.custom-content a {
     display: inline-block;
     padding: 12px 25px;
     text-decoration: none;
@@ -116,27 +127,44 @@
     transition: opacity 0.3s ease;
 }
 
-.layanan-container .custom-card .custom-content a:hover {
+.custom-content a:hover {
     opacity: 0.8;
 }
 
+/* Responsive */
 @media (max-width: 480px) {
-    .layanan-container .custom-card {
+    .custom-card {
         width: 230px;
-        border-radius: 15px;
+        height: 360px;
     }
 
-    .layanan-container .custom-card .img-box {
+    .custom-card:hover {
+        height: 390px;
+    }
+
+    .img-box {
         width: 185px;
-        border-radius: 10px;
+        height: 160px;
     }
 
-    .layanan-container .custom-card .custom-content p {
+    .custom-content {
+        top: 230px;
+        padding: 0 15px;
+        height: 50px;
+    }
+
+    .custom-card:hover .custom-content {
+        top: 120px;
+        height: 250px;
+    }
+
+    .custom-content p {
         font-size: 0.8rem;
+        -webkit-line-clamp: 4;
     }
 
-    .layanan-container .custom-card .custom-content a {
-        font-size: 0.9rem;
+    .custom-content a {
+        font-size: 0.85rem;
     }
 }
 
@@ -220,129 +248,136 @@
 
 /* Anak Perusahaan */
 .subsidiary-container {
-    position: relative;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 100px 50px;
-    padding: 50px;
-}
-
-.subsidiary-card {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    width: 350px;
-    max-width: 100%;
-    height: 300px;
+    flex-wrap: wrap;
+    gap: 60px 40px;
+    padding: 50px 20px;
+}
+
+/* Card base */
+.subsidiary-card {
+    position: relative;
+    width: 320px;
+    height: 320px;
     background: #fff;
     border-radius: 20px;
-    transition: 0.5s;
-    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
     overflow: visible;
+    transition: 0.5s;
 }
 
+/* Hover effect to expand height */
 .subsidiary-card:hover {
-    height: 260px;
-}
-
-.subsidiary-img-box {
-    position: absolute;
-    top: 20px;
-    width: 300px;
-    height: 220px;
-    background: #333;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: 0.5s;
-}
-
-.subsidiary-card:hover .subsidiary-img-box {
-    top: -100px;
-    transform: scale(0.75);
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
-}
-
-.subsidiary-img-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.subsidiary-content {
-    position: absolute;
-    top: 252px;
-    width: 100%;
-    height: 35px;
-    padding: 0 30px;
-    text-align: center;
-    overflow: hidden;
-    transition: 0.5s;
-}
-
-.subsidiary-card:hover .subsidiary-content {
-    top: 130px;
     height: 250px;
 }
 
+/* Image wrapper */
+.subsidiary-img-box {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 260px;
+    height: 180px;
+    background: transparent;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.5s;
+    z-index: 2;
+}
+
+/* Animate image upward on hover */
+.subsidiary-card:hover .subsidiary-img-box {
+    top: -80px;
+    transform: translateX(-50%) scale(0.75);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+}
+
+/* Actual image */
+.subsidiary-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: transparent;
+}
+
+/* Content wrapper */
+.subsidiary-content {
+    position: absolute;
+    top: 230px;
+    width: 100%;
+    padding: 0 25px;
+    text-align: center;
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+/* Move content up when hover */
+.subsidiary-card:hover .subsidiary-content {
+    top: 130px;
+}
+
+/* Title */
 .subsidiary-content h2 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: #333;
     margin-bottom: 10px;
 }
 
-.subsidiary-content p {
-    color: #333;
-    margin-bottom: 15px;
-}
-
+/* Button */
 .subsidiary-content a {
     display: inline-block;
-    padding: 12px 25px;
-    text-decoration: none;
+    padding: 10px 20px;
     background: #181818;
     color: #fff;
-    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    text-decoration: none;
     transition: opacity 0.3s ease;
 }
 
 .subsidiary-content a:hover {
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
-/* === Responsive: Horizontal Scroll on Mobile === */
-@media screen and (max-width: 768px) {
+/* Responsive */
+@media (max-width: 768px) {
     .subsidiary-container {
         flex-wrap: nowrap;
         overflow-x: auto;
-        gap: 20px;
         padding: 20px;
+        gap: 20px;
         scroll-snap-type: x mandatory;
     }
 
     .subsidiary-card {
         flex: 0 0 auto;
+        width: 250px;
+        height: 300px;
         scroll-snap-align: start;
     }
 
-    .subsidiary-card.active {
-        height: 250px;
+    .subsidiary-card:hover {
+        height: 360px;
     }
 
-    .subsidiary-card.active .subsidiary-img-box {
-        top: -100px;
-        transform: scale(0.75);
-        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+    .subsidiary-img-box {
+        width: 200px;
+        height: 140px;
     }
 
-    .subsidiary-card.active .subsidiary-content {
-        top: 130px;
-        height: 250px;
+    .subsidiary-content h2 {
+        font-size: 1.1rem;
+    }
+
+    .subsidiary-content a {
+        font-size: 0.85rem;
     }
 }
+
 
 /* Akhir Anak Perusahaan */
 
@@ -437,3 +472,21 @@
 }
 
 /* Akhir FAQ */
+.icon-box {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    height: 100%;
+    text-align: center;
+}
+
+.icon-box:hover {
+    background: #eaeaea;
+}
+
+.icon-box i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #000000;
+}

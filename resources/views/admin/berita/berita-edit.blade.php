@@ -11,10 +11,15 @@
             </div>
 
             <div class="card-body">
-                <form action="{{ route('berita.update', $berita->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="/dashboard/berita/{{ $berita->id }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
+                    <pre>{{ dd($berita) }}</pre>
 
+                    {{-- @php
+
+                        dd($berita);
+                    @endphp --}}
                     {{-- Judul --}}
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul Berita</label>

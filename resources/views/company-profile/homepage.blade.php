@@ -32,81 +32,78 @@
 
 
     {{-- Layanan --}}
-    <div class="container pt-5 ">
-        <h1 class="text-center fw-bold">Layanan Kami</h3>
-            <div class="layanan-container">
-                @foreach ($layanans as $layanan)
-                    <div class="custom-card">
-                        <div class="img-box"><img src="{{ asset('images/upload/layanan/' . $layanan->foto) }}">
-                        </div>
-                        <div class="custom-content">
-                            <h2>{{ $layanan->nama_layanan }}</h2>
-                            <p>{!! $layanan->deskripsi !!}</p>
-                            <!-- <a href="">Read More</a> -->
-                        </div>
+    <div class="container pt-5">
+        <h2 class="text-center fw-bold">Layanan Kami</h2>
+        <div class="layanan-container">
+            @foreach ($layanans as $layanan)
+                <div class="custom-card">
+                    <div class="img-box">
+                        <img src="{{ asset('images/upload/layanan/' . $layanan->foto) }}"
+                            alt="{{ $layanan->nama_layanan }}">
                     </div>
-                @endforeach
-            </div>
+                    <div class="custom-content">
+                        <h2>{{ $layanan->nama_layanan }}</h2>
+                        <p>{!! $layanan->deskripsi !!}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
+
 
     {{-- Profil Perusahaan --}}
+    @php
+        use Illuminate\Support\Str;
+    @endphp
+
     <div class="container-fluid bg-white py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5 text-center mb-4 mb-lg-0">
-                    <img src="{{ asset('images/upload/logo/primary/' . $perusahaans->logo_utama) }}" class="img-fluid w-50"
-                        alt="Logo Perusahaan">
-                </div>
-                <div class="col-lg-7">
-                    <h3 class="fw-bold mb-3">PROFILE PERUSAHAAN</h3>
-                    <p class="mb-4">{!! $perusahaans->deskripsi !!}</p>
-                    <a href="/detail/{{ $perusahaans->nama_perusahaan }}" class="btn btn-primary">Baca Selengkapnya</a>
-                </div>
+        <div class="row align-items-center">
+            <div class="col-lg-5 text-center mb-4 mb-lg-0">
+                <img src="{{ asset('images/upload/logo/primary/' . $perusahaans->logo_utama) }}" class="img-fluid w-50"
+                    alt="Logo Perusahaan">
+            </div>
+            <div class="col-lg-7">
+                <h3 class="fw-bold mb-3">PROFILE PERUSAHAAN</h3>
+                <p class="mb-4">
+                    {!! Str::limit(strip_tags($perusahaans->deskripsi), 250, '...') !!}
+                </p>
+                <a href="/detail/{{ $perusahaans->nama_perusahaan }}" class="btn btn-primary">Baca Selengkapnya</a>
             </div>
         </div>
     </div>
 
+
     {{-- Visi dan Misi --}}
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-12 text-center mb-4">
-                <h1 class="fw-bold">Visi dan Misi</h1>
-                <p class="text-muted">Tujuan dan arah strategis perusahaan kami</p>
-            </div>
-
-            <div class="col-md-6 mb-4">
-                <div class="card shadow border-0 h-100">
-                    <div class="card-body">
-                        <h4 class="card-title fw-semibold mb-3">Visi</h4>
-                        <p class="card-text">
-                            Menjadi perusahaan terdepan dalam inovasi dan pelayanan berkualitas untuk menciptakan dampak
-                            positif bagi masyarakat dan lingkungan.
-                        </p>
-                    </div>
+    <div class="container pt-5">
+        @if ($perusahaans->visi != null || $perusahaans->misi != null)
+            <div class="row mb-5">
+                <div class="col-12 text-center mb-4">
+                    <h2 class="fw-bold">Visi & Misi</h2>
                 </div>
-            </div>
-
-            <div class="col-md-6 mb-4">
-                <div class="card shadow border-0 h-100">
-                    <div class="card-body">
-                        <h4 class="card-title fw-semibold mb-3">Misi</h4>
-                        <ul class="card-text ps-3 fs6">
-                            <li>Menyediakan produk dan layanan terbaik berbasis teknologi terkini.</li>
-                            <li>Mendorong pengembangan sumber daya manusia yang unggul dan profesional.</li>
-                            <li>Membangun kemitraan yang saling menguntungkan dengan seluruh stakeholder.</li>
-                            <li>Menerapkan prinsip keberlanjutan dan tanggung jawab sosial dalam setiap aktivitas bisnis.
-                            </li>
-                        </ul>
+                @if ($perusahaans->visi != '-')
+                    <div class="col-md-6 mb-4">
+                        <div class="p-4 shadow-sm bg-white rounded h-100">
+                            <h5 class="fw-bold text mb-3">Visi</h5>
+                            <p class="mb-0">{{ $perusahaans->visi }}</p>
+                        </div>
                     </div>
-                </div>
+                @endif
+                @if ($perusahaans->misi != '-')
+                    <div class="col-md-6 mb-4">
+                        <div class="p-4 shadow-sm bg-white rounded h-100">
+                            <h5 class="fw-bold text mb-3">Misi</h5>
+                            <p class="mb-0">{{ $perusahaans->misi }}</p>
+                        </div>
+                    </div>
+                @endif
             </div>
-        </div>
+        @endif
     </div>
 
     {{-- Berita --}}
 
     <div class="container berita pt-5">
-        <h1 class="text-center fw-bold h1 mb-5">Berita Terbaru</h1>
+        <h2 class="text-center fw-bold h2 mb-5">Berita Terbaru</h2>
         <div class="row g-4 justify-content-center">
             @foreach ($beritas as $berita)
                 <!-- Tampilan untuk desktop -->
@@ -152,7 +149,7 @@
     <!-- Anak Perusahaan -->
     @if ($perusahaans->status === 'induk')
         <div class="container pt-5">
-            <h1 class="text-center h1 fw-bold">Anak Perusahaan</h1>
+            <h2 class="text-center h2 fw-bold">Anak Perusahaan</h2>
             <div class="subsidiary-container  justify-content-center">
                 @foreach ($anaks as $perusahaan)
                     @if ($perusahaan->status === 'anak')
@@ -177,12 +174,12 @@
     {{-- Klien --}}
     @php
         $totalPartners = count($partners);
-        $isMarquee = $totalPartners >= 8; // Ubah kondisi menjadi >= 5
+        $isMarquee = $totalPartners >= 5; // Ubah kondisi menjadi >= 5
     @endphp
 
     <div class="client-section bg-white">
         <div class="container text-center">
-            <h1 class="text-center fw-bold mb-4">Klien Kami</h1>
+            <h2 class="text-center fw-bold mb-4">Klien Kami</h2>
             <div class="marquee-container overflow-hidden">
                 <div class="marquee-track d-flex {{ $isMarquee ? 'animate-marquee' : 'justify-content-center w-100' }}"
                     style="flex-wrap: nowrap;">
@@ -201,7 +198,7 @@
 
     <!-- FAQ -->
     <div class="container py-5">
-        <h1 class="fw-bold mb-1 text-center">Pertanyaan Yang Sering Ditanyakan</h1>
+        <h2 class="fw-bold mb-1 text-center">Pertanyaan Yang Sering Ditanyakan</h2>
         <p class="text-muted mb-4 text-center">Jawaban atas pertanyaan yang sering ditanyakan</p>
 
         <h4 class="fw-bold mb-3">Daftar Pertanyaan</h4>

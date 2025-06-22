@@ -188,7 +188,7 @@ class companyProfile extends Controller
             abort(404, 'Perusahaan belum dipilih.');
         }
 
-        $perusahaan = Perusahaan::all()
+        $perusahaan = Perusahaan::with('struktur')
             ->where('nama_perusahaan', $nama_perusahaan)
             ->first();
 
@@ -198,6 +198,7 @@ class companyProfile extends Controller
 
         return view('company-profile.detail', [
             'perusahaans' => $perusahaan,
+            'strukturs' => $perusahaan->struktur,
         ]);
     }
 

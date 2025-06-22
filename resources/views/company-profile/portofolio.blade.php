@@ -6,7 +6,7 @@
         <h1 class="mb-4">Ongoing</h1>
 
         <!-- TAMPILAN DESKTOP: Grid -->
-        
+
         <div class="row d-none d-md-flex">
             @foreach ($portofolios as $portofolio)
                 @if ($portofolio->status_project == 'ongoing')

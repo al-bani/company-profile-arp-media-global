@@ -1,16 +1,19 @@
 @extends('company-profile.Layout.company')
 
+
 <link href="{{ asset('css/portofolio.css') }}" rel="stylesheet" type="text/css">
 @section('content')
 
     <div id="carouselExample" class="carousel slide d-block d-md-none" data-bs-ride="carousel" data-bs-interval="4000">
         <div class="carousel-inner">
-            @foreach($portofolio->portofolio_foto as $index => $foto)
+            @foreach ($portofolio->portofolio_foto as $index => $foto)
                 <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                    @if(str_ends_with(strtolower($foto->foto), '.mp4'))
-                        <video src="{{ asset('images/upload/portofolio/' . $foto->foto) }}" class="corousel-img d-block w-100" autoplay controls loop type="video/mp4"></video>
+                    @if (str_ends_with(strtolower($foto->foto), '.mp4'))
+                        <video src="{{ asset('images/upload/portofolio/' . $foto->foto) }}"
+                            class="corousel-img d-block w-100" autoplay controls loop type="video/mp4"></video>
                     @else
-                        <img src="{{ asset('images/upload/portofolio/' . $foto->foto) }}" class="corousel-img d-block w-75" alt="{{ $foto->judul_foto }}">
+                        <img src="{{ asset('images/upload/portofolio/' . $foto->foto) }}" class="corousel-img d-block w-75"
+                            alt="{{ $foto->judul_foto }}">
                     @endif
                 </div>
             @endforeach
@@ -26,23 +29,27 @@
     </div>
 
     <div class="gambar-banner-desktop d-none d-md-block">
-        @foreach($portofolio->portofolio_foto->take(3) as $index => $foto)
-            @if($index === 0)
-                <img src="{{ asset('images/upload/portofolio/' . $foto->foto) }}" class="corousel-img w-100" style="height: 400px" alt="{{ $foto->judul_foto }}">
+        @foreach ($portofolio->portofolio_foto->take(3) as $index => $foto)
+            @if ($index === 0)
+                <img src="{{ asset('images/upload/portofolio/' . $foto->foto) }}" class="corousel-img w-100"
+                    style="height: 400px" alt="{{ $foto->judul_foto }}">
             @else
                 <div class="row g-0">
                     <div class="col-lg-6 col-md-6">
-                        <img src="{{ asset('images/upload/portofolio/' . $foto->foto) }}" class="w-100" style="height: 400px" alt="{{ $foto->judul_foto }}">
+                        <img src="{{ asset('images/upload/portofolio/' . $foto->foto) }}"
+                            class="corousel-img w-100 fixed-img-height" alt="{{ $foto->judul_foto }}">
+
                     </div>
                 </div>
             @endif
         @endforeach
     </div>
 
-    <div class="container pt-4" style="font-family: 'Roboto';">
+    <div class="container isi-porto pt-4" style="font-family: 'Roboto';">
         <div class="container">
             <h1 class="fst-italic fw-bold">{{ $portofolio->nama_project }}</h1>
-            <p class="fs-5">{{ $portofolio->deskripsi }}</p>
+            <p class="fs-5 deskripsi-text">{{ $portofolio->deskripsi }}</p>
+
         </div>
 
         <div class="container mb-3">
@@ -61,8 +68,8 @@
         <div class="container p-3" style="font-family: 'Roboto';">
             <h2 class="fst-italic fw-bold mb-5">Timeline</h2>
             <div class="timeline p-4">
-                @if($portofolio->portofolio_timeline && count($portofolio->portofolio_timeline) > 0)
-                    @foreach($portofolio->portofolio_timeline as $index => $item)
+                @if ($portofolio->portofolio_timeline && count($portofolio->portofolio_timeline) > 0)
+                    @foreach ($portofolio->portofolio_timeline as $index => $item)
                         <div class="timeline-container {{ $index % 2 == 0 ? 'left' : 'right' }}">
                             <div class="content">
                                 <h2 class="fw-bold">{{ $item->tanggal }}</h2>

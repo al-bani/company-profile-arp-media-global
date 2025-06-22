@@ -173,11 +173,11 @@
         }
 
         function validateFileSize(input) {
-            const maxSize = 5 * 1024 * 1024; // 5MB dalam bytes
+            const maxSize = 10 * 1024 * 1024; // 10MB dalam bytes
             const file = input.files[0];
 
             if (file && file.size > maxSize) {
-                alert("Ukuran file tidak boleh lebih dari 5MB!");
+                alert("Ukuran file tidak boleh lebih dari 10MB!");
                 input.value = ''; // Reset input file
                 return false;
             }

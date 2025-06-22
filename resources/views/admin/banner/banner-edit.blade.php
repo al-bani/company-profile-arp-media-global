@@ -12,6 +12,7 @@
             <form action="/dashboard/banner/{{$banner->id}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+              
 
                 <!-- Judul Banner -->
                 <div class="mb-3">
@@ -26,7 +27,6 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
                 <!-- Deskripsi -->
                 <div class="mb-3">
                     <label for="deskripsi" class="form-label">Deskripsi Banner</label>

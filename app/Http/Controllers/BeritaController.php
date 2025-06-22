@@ -107,13 +107,17 @@ class BeritaController extends Controller
 
     public function edit(berita $berita)
     {
-        $role = Auth::user()->role;
-        if ($role !== 'superAdmin') {
-            $admin = Auth::user();
-            if ($berita->id_perusahaan !== $admin->id_perusahaan) {
-                abort(403, 'Unauthorized');
-            }
+        dd($berita);
+        if (!$berita->exists) {
+            abort(404, 'Data berita tidak ditemukan');
         }
+
+        $role = Auth::user()->role;
+
+        if ($role !== 'superAdmin' && $berita->id_perusahaan !== Auth::user()->id_perusahaan) {
+            abort(403, 'Unauthorized');
+        }
+
         return view('admin.berita.berita-edit', [
             'berita' => $berita,
             'perusahaans' => perusahaan::all(),

@@ -28,7 +28,7 @@
                 <table id="example" class="table table-bordered table-striped" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>ID Berita</th>
+
                             <th>Judul</th>
                             <th>Penulis</th>
                             <th>Perusahaan</th>
@@ -41,9 +41,6 @@
                         @foreach ($beritas as $berita)
                             @if ($role === 'superAdmin' || (isset($berita->id_perusahaan) && $berita->id_perusahaan == Auth::user()->id_perusahaan))
                                 <tr>
-                                    <td>
-                                        {!! $berita->id_berita ?? '<span style="color: red;">ID Berita Kosong</span>' !!}
-                                    </td>
 
                                     <td>
                                         {!! $berita->judul ?? '<span style="color: red;">Judul Kosong</span>' !!}
@@ -62,7 +59,7 @@
                                     </td>
 
                                     <td>
-                                        <a href="{{ route('berita.edit', $berita->id) }}"
+                                        <a href="/dashboard/berita/{{ $berita->id }}/edit"
                                             class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>

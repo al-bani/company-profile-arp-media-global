@@ -1,14 +1,14 @@
+/* Card Flip Section */
 .card {
     width: 300px;
     height: 450px;
-    /* margin: 1rem auto; */
     perspective: 1000px;
     cursor: pointer;
     font-family: 'Roboto';
     color: white;
-
+    overflow: hidden;
+    border-radius: 0.5rem;
 }
-
 
 .card-inner {
     position: relative;
@@ -28,20 +28,21 @@
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    /* display: flex; */
-    align-items: center;
-    justify-content: center;
     border-radius: 0.5rem;
+    background-size: cover;
+    background-position: center;
+    /* Hapus display:flex agar font kembali ke posisi semula */
 }
 
+
 .card-front {
-    background: white;
+    background-color: white;
     border: 1px solid #e5e7eb;
-    /* background-image: url('images/banner.png'); */
+    z-index: 2;
 }
 
 .card-back {
-    background: grey;
+    background-color: grey;
     color: white;
     transform: rotateY(180deg);
 }
@@ -50,6 +51,7 @@
     font-size: 0.9rem;
 }
 
+/* Scrollable Container */
 .scroll-container {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -59,15 +61,12 @@
     display: flex;
     flex-wrap: nowrap;
     gap: 1rem;
-    /* jarak antar card */
     padding-bottom: 1rem;
-
 }
 
 .scroll-wrapper .card {
     flex: 0 0 auto;
     width: 300px;
-    /* ukuran tetap */
 }
 
 @media (max-width: 768px) {
@@ -81,22 +80,43 @@
     .scrollable-row .col {
         display: inline-block;
         width: 80%;
-        /* Atur sesuai ukuran yang diinginkan */
         margin-right: 1rem;
         vertical-align: top;
     }
 
     .scrollable-row .card {
-        height: 100%;
+        height: auto;
     }
 }
 
-
-/* Buat Portofoilio Detail */
-
+/* Portfolio Detail Section */
 p {
     text-align: justify;
 }
+
+.deskripsi-text {
+    text-align: justify;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Gambar  */
+.fixed-img-height {
+    height: 400px;
+    object-fit: cover;
+}
+
+
+
+.corousel-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    display: block;
+}
+
 
 .timeline {
     position: relative;
@@ -178,14 +198,13 @@ p {
     background-color: rgba(65, 105, 255, 0.5);
     position: relative;
     border-radius: 6px;
-    color: white
+    color: white;
 }
 
 /* Responsive */
 @media screen and (max-width: 600px) {
     .timeline::after {
         left: 26px;
-        /* Garis tengah timeline */
     }
 
     .timeline-container {
@@ -196,7 +215,6 @@ p {
 
     .timeline-container::after {
         left: 18px;
-        /* sejajarkan dengan garis tengah */
     }
 
     .timeline-container::before {

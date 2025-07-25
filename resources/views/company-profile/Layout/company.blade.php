@@ -66,6 +66,8 @@
                         <div class="collapse d-lg-none ps-3" id="submenuMobilePerusahaan">
                             <a class="dropdown-item"
                                 href="/portofolio/{{ $perusahaans->nama_perusahaan }}">Portofolio</a>
+                            <a class="dropdown-item"
+                                href="/Detail/{{ $perusahaans->nama_perusahaan }}">Portofolio</a>
                             <a class="dropdown-item" href="/struktur/{{ $perusahaans->nama_perusahaan }}">Struktur
                                 Organisasi</a>
                         </div>
@@ -78,6 +80,8 @@
 
                         <!-- DESKTOP dropdown menu -->
                         <ul class="dropdown-menu custom-dropdown" aria-labelledby="dropdownPerusahaan">
+                            <li><a class="dropdown-item"
+                                    href="/detail/{{ $perusahaans->nama_perusahaan }}">Detail Perusahaan</a></li>
                             <li><a class="dropdown-item"
                                     href="/portofolio/{{ $perusahaans->nama_perusahaan }}">Portofolio</a></li>
                             <li><a class="dropdown-item" href="/struktur/{{ $perusahaans->nama_perusahaan }}">Struktur

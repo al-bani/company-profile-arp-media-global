@@ -26,10 +26,10 @@
 
         {{-- Tombol Kembali --}}
         <!-- <div class="text-center mb-5">
-            <a href="{{ redirect()->back() }}" class="btn btn-outline-primary px-4 py-2 rounded-pill">
-                ← Kembali ke Daftar Berita
-            </a>
-        </div> -->
+                <a href="{{ redirect()->back() }}" class="btn btn-outline-primary px-4 py-2 rounded-pill">
+                    ← Kembali ke Daftar Berita
+                </a>
+            </div> -->
 
         {{-- Berita Terkait --}}
         @if ($beritaAlls->count() > 1)
@@ -40,7 +40,7 @@
                         <div class="col-12 col-sm-6 col-lg-4">
                             <div class="card h-100 shadow-sm border-0 rounded-4">
                                 <div class="ratio ratio-16x9">
-                                    <img src="{{ asset($berita->foto) }}" alt="{{ $berita->judul }}"
+                                    <img src="{{ asset('images/upload/berita/' . $berita->foto) }}" alt="{{ $berita->judul }}"
                                         class="object-fit-cover rounded-top-4">
                                 </div>
                                 <div class="card-body">
@@ -49,8 +49,8 @@
                                     <p class="card-text mt-2" style="font-size: 0.95rem;">
                                         {{ \Illuminate\Support\Str::limit(strip_tags($berita->konten), 90, '...') }}
                                     </p>
-                                    <a href="{{ route('berita.show', $berita->id) }}"
-                                        class="btn btn-primary btn-sm w-100 mt-2 ">Baca Selengkapnya</a>
+                                    <a href="/berita/{{ $perusahaans->nama_perusahaan }}/detail/{{ $berita->id }}"
+                                        class="btn btn-primary btn-sm w-100 mt-3">Baca Selengkapnya</a>
                                 </div>
                             </div>
                         </div>

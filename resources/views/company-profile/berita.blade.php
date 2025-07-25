@@ -1,7 +1,7 @@
 @extends('company-profile.Layout.company')
 
 @section('content')
-    <img src="{{ asset('images/banner.png') }}" class="berita-web-banner w-100" alt="Banner">
+
     <div class="container berita-web my-5">
         <h4 class="mb-4 fw-bold text-center">Berita Terbaru</h4>
         <div class="row g-4">

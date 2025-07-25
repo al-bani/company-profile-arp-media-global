@@ -42,8 +42,7 @@ class PortofolioController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi kolom unique
-
+        // Validasi kolom unik
         $uniqueFields = [
             'id_portofolio' => 'ID Portofolio'
         ];
@@ -62,6 +61,7 @@ class PortofolioController extends Controller
             }
         }
 
+        // Generate ID dan waktu
         $id_portofolio = 'PRT_' . str_replace(' ', '_', $request->nama_project) . '_' . time();
         $waktu = $request->jam_mulai . '-' . $request->jam_selesai;
         $request->merge([
@@ -70,62 +70,71 @@ class PortofolioController extends Controller
         ]);
 
         $data = $request->all();
-
-        if (!$data['tempat']) {
+        if (empty($data['tempat'])) {
             $data['tempat'] = $data['tempat_offline'];
         }
 
-        portofolio::create($data);
+        // Simpan portofolio
+        $portofolio = portofolio::create($data);
 
-        // dd($request->timeline);
-        // Simpan timeline jika ada
-        if ($request->has('timeline')) {
-            foreach ($request->timeline as $item) {
-                if (!empty($item['tanggal']) || !empty($item['deskripsi'])) {
-                    timelinePortofolio::create([
-                        'timeline_id' => 'tl-' . $request->nama_project . $item['tanggal'], // Pastikan ada relasi
-                        'id_portofolio' => $request->id_portofolio,
-                        'tanggal' => $item['tanggal'],
-                        'deskripsi' => $item['deskripsi'],
-                    ]);
+        // Hanya lanjutkan jika portofolio berhasil disimpan
+        if ($portofolio) {
+
+            // Simpan timeline jika ada
+            if ($request->has('timeline')) {
+                foreach ($request->timeline as $item) {
+                    if (!empty($item['tanggal']) || !empty($item['deskripsi'])) {
+                        timelinePortofolio::create([
+                            'timeline_id' => 'tl-' . $request->nama_project . $item['tanggal'],
+                            'id_portofolio' => $request->id_portofolio,
+                            'tanggal' => $item['tanggal'],
+                            'deskripsi' => $item['deskripsi'],
+                        ]);
+                    }
                 }
             }
-        }
 
-        // Simpan team jika ada
-        if ($request->has('team') && $request->nama_team) {
-            foreach ($request->team as $index => $item) {
-                if (!empty($item['anggota'])) {
-                    team::create([
-                        'team_id' => 'tm-' . $request->nama_team . '-' . $index . '-' . time(),
-                        'id_portofolio' => $request->id_portofolio,
-                        'team' => $request->nama_team,
-                        'anggota' => $item['anggota']
-                    ]);
+            // Simpan team jika ada
+            if ($request->has('team') && $request->nama_team) {
+                foreach ($request->team as $index => $item) {
+                    if (!empty($item['anggota'])) {
+                        team::create([
+                            'team_id' => 'tm-' . str_replace(' ', '_', $request->nama_project) . '-' . $index . '-' . time(),
+                            'id_portofolio' => $request->id_portofolio,
+                            'team' => $request->nama_team,
+                            'anggota' => $item['anggota']
+                        ]);
+                    }
                 }
             }
-        }
 
-        if ($request->has('foto')) {
-            foreach ($request->foto as $index => $item) {
-                if (isset($item['foto']) && $item['foto'] instanceof \Illuminate\Http\UploadedFile) {
-                    $extension = $item['foto']->getClientOriginalExtension();
-                    $randomString = md5(uniqid(rand(), true));
-                    $filename = time() . '_' . $randomString . '.' . $extension;
-                    $destination = 'images/upload/portofolio';
-                    $item['foto']->move(public_path($destination), $filename);
+            // Simpan foto jika ada
+            if ($request->has('foto')) {
+                foreach ($request->foto as $index => $item) {
+                    if (isset($item['foto']) && $item['foto'] instanceof \Illuminate\Http\UploadedFile) {
+                        $extension = $item['foto']->getClientOriginalExtension(); // diperbaiki
+                        $randomString = md5(uniqid(rand(), true));
+                        $filename = time() . '_' . $randomString . '.' . $extension;
+                        $destination = 'images/upload/portofolio';
+                        $item['foto']->move(public_path($destination), $filename);
 
-                    portofolio_foto::create([
-                        'id_portofolio' => $request->id_portofolio,
-                        'id_portofolio_foto' => 'img' . $request->id_portofolio . $item['judul_foto'],
-                        'judul_foto' => $item['judul_foto'] ?? '',
-                        'foto' => $filename,
-                    ]);
+                        portofolio_foto::create([
+                            'id_portofolio' => $request->id_portofolio,
+                            'id_portofolio_foto' => 'img' . $request->id_portofolio . ($item['judul_foto'] ?? 'no_title'),
+                            'judul_foto' => $item['judul_foto'] ?? '',
+                            'foto' => $filename,
+                        ]);
+                    }
                 }
             }
+
+            return redirect('/dashboard/portofolio')->with('success', 'Data Berhasil Ditambahkan');
         }
-        return redirect('/dashboard/portofolio')->with('success', 'Data Berhasil Ditambahkan');
+
+        return redirect()->back()->withInput()->with('error', 'Gagal menyimpan data portofolio.');
     }
+
+
 
     /**
      * Display the specified resource.

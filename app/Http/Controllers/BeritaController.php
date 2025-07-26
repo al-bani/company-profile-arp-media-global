@@ -9,6 +9,7 @@ use App\Models\berita_foto;
 use App\Models\perusahaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class BeritaController extends Controller
@@ -71,7 +72,7 @@ class BeritaController extends Controller
                 $value = $request->$field;
             }
 
-            if (Berita::where($field, $value)->exists()) {
+            if (berita::where($field, $value)->exists()) {
                 return redirect()->back()
                     ->withInput()
                     ->with('error', $label . ' sudah terdaftar dalam sistem!');
@@ -83,17 +84,28 @@ class BeritaController extends Controller
             'id_berita' => $id_berita,
         ]);
 
-        $data = $request->all();
+        $data = $request->except('foto');
+
+        // Proses file foto
         if ($request->hasFile('foto')) {
-            $extension = $request->file('foto')->getClientOriginalExtension();
+            $foto = $request->file('foto');
+            $extension = $foto->getClientOriginalExtension();
             $randomString = md5(uniqid(rand(), true));
             $filename = time() . '_' . $randomString . '.' . $extension;
             $destination = 'images/upload/berita';
-            $request->file('foto')->move(public_path($destination), $filename);
+            $foto->move(public_path($destination), $filename);
             $data['foto'] = $filename;
+        } else {
+            // Set default foto jika tidak ada file yang diupload
+            $data['foto'] = 'default.jpg';
         }
 
-        Berita::create($data);
+        // Pastikan judul_foto ada dalam data
+        if (!isset($data['judul_foto']) || empty($data['judul_foto'])) {
+            $data['judul_foto'] = 'Thumbnail Berita';
+        }
+
+        berita::create($data);
         return redirect('/dashboard/berita')->with('success', 'Data Berhasil Ditambahkan');
     }
 
@@ -107,10 +119,8 @@ class BeritaController extends Controller
 
     public function edit(berita $berita)
     {
-        dd($berita);
-        if (!$berita->exists) {
-            abort(404, 'Data berita tidak ditemukan');
-        }
+        // Debug untuk melihat parameter yang diterima
+        // Log::info('Edit method called with ID: ' . $berita->id);
 
         $role = Auth::user()->role;
 
@@ -137,9 +147,10 @@ class BeritaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, berita $berita)
     {
-        $berita = Berita::findOrFail($id);
+        // Debug untuk melihat apakah method dipanggil
+        // Log::info('Update method called for berita ID: ' . $berita->id);
 
         // Validasi kolom unique kecuali untuk data yang sedang diedit
         $uniqueFields = [
@@ -148,8 +159,8 @@ class BeritaController extends Controller
 
         foreach ($uniqueFields as $field => $label) {
             $value = $request->$field;
-            $exists = Berita::where($field, $value)
-                ->where('id', '!=', $id)
+            $exists = berita::where($field, $value)
+                ->where('id', '!=', $berita->id)
                 ->exists();
 
             if ($exists) {
@@ -159,31 +170,42 @@ class BeritaController extends Controller
             }
         }
 
-        $data = $request->except('_token', '_method');
+        $data = $request->except('_token', '_method', 'foto');
+
+        // Proses file foto
         if ($request->hasFile('foto')) {
-            if ($berita->foto && file_exists(public_path($berita->foto))) {
-                unlink(public_path($berita->foto));
+            // Hapus foto lama jika ada
+            if ($berita->foto && file_exists(public_path('images/upload/berita/' . $berita->foto))) {
+                unlink(public_path('images/upload/berita/' . $berita->foto));
             }
 
-            $extension = $request->file('foto')->getClientOriginalExtension();
+            $foto = $request->file('foto');
+            $extension = $foto->getClientOriginalExtension();
             $randomString = md5(uniqid(rand(), true));
             $filename = time() . '_' . $randomString . '.' . $extension;
             $destination = 'images/upload/berita';
-            $request->file('foto')->move(public_path($destination), $filename);
+            $foto->move(public_path($destination), $filename);
             $data['foto'] = $filename;
+
+            // Pastikan judul_foto ada dalam data hanya jika ada foto yang diupload
+            if (!isset($data['judul_foto']) || empty($data['judul_foto'])) {
+                $data['judul_foto'] = 'Thumbnail Berita';
+            }
         }
 
         $berita->update($data);
-        return redirect()->route('berita.index')
+        return redirect('/dashboard/berita')
             ->with('success', 'Data Berita berhasil diperbarui');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(berita $berita)
     {
-        $berita = berita::findOrFail($id);
+        // Debug untuk melihat parameter yang diterima
+        Log::info('Destroy method called with ID: ' . $berita->id);
+
         $role = Auth::user()->role;
         if ($role !== 'superAdmin') {
             $admin = Auth::user();

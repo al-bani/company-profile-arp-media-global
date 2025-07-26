@@ -125,7 +125,7 @@
                         <div class="col">
                             <label for="foto" class="form-label">Foto</label>
                             <input class="form-control" id="foto" name="foto" type="file" accept="image/*"
-                                onchange="validateFileSize(this)" required>
+                                onchange="validateFileSize(this)" >
                         </div>
                     </div>
 

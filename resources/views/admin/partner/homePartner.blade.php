@@ -62,10 +62,10 @@
                                             data-bs-target="#detailPartner{{ $loop->iteration }}">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        {{-- <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#deletePartner{{ $loop->iteration }}">
                                         <i class="fas fa-trash-alt"></i>
-                                    </a> --}}
+                                    </a>
                                     </td>
                                 </tr>
                             @endif

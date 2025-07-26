@@ -62,12 +62,12 @@
                 <!-- Foto Banner -->
                 <div class="mb-4 text-center">
                     <div class="card" style="max-width: 25rem; margin: auto;">
-                        <img id="preview" src="{{ asset($banner->foto) }}" class="card-img-top" alt="Logo Perusahaan"
+                        <img id="preview" src="{{ asset('images/upload/banner/'.$banner->foto) }}" class="card-img-top" alt="Logo Perusahaan"
                             style="height: 13.5rem; object-fit: cover;">
                         <div class="card-body">
                             <p class="card-text">Upload Banner</p>
                             <input type="file" id="foto" name="foto" class="form-control" accept="image/*"
-                                onchange="previewImage(event)" required>
+                                onchange="previewImage(event)">
                         </div>
                     </div>
                 </div>

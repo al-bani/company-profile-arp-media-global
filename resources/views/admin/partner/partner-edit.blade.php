@@ -66,7 +66,7 @@
                                        id="foto"
                                        name="foto"
                                        accept="image/*"
-                                       onchange="previewImage(event)" required>
+                                       onchange="previewImage(event)">
                                 @error('foto')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

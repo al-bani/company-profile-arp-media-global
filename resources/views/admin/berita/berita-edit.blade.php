@@ -11,15 +11,15 @@
             </div>
 
             <div class="card-body">
-                <form action="/dashboard/berita/{{ $berita->id }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('berita.update', $berita->id) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
-                    <pre>{{ dd($berita) }}</pre>
 
-                    {{-- @php
-
-                        dd($berita);
-                    @endphp --}}
+                    {{-- Debug foto --}}
+                    @php
+                        // dd($berita);
+                        // echo "Foto: " . $berita->foto;
+                    @endphp
                     {{-- Judul --}}
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul Berita</label>
@@ -84,23 +84,23 @@
                             <div id="input-container-image" class="image-group mb-3">
                                 <div class="mb-2">
                                     <label>Judul Foto</label>
-                                    <input class="form-control @error('foto.0.judul_foto') is-invalid @enderror"
+                                    <input class="form-control @error('judul_foto') is-invalid @enderror"
                                            type="text"
-                                           name="foto[0][judul_foto]"
-                                           value="{{ old('foto.0.judul_foto') }}"
+                                           name="judul_foto"
+                                           value="{{ old('judul_foto', $berita->judul_foto) }}"
                                            placeholder="Masukkan Judul Foto" required>
-                                    @error('foto.0.judul_foto')
+                                    @error('judul_foto')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div>
                                     <label>Foto</label>
                                     <input type="file"
-                                           name="foto[0][foto]"
-                                           class="form-control @error('foto.0.foto') is-invalid @enderror"
+                                           name="foto"
+                                           class="form-control @error('foto') is-invalid @enderror"
                                            accept="image/*"
-                                           onchange="validateFileSize(this)" required>
-                                    @error('foto.0.foto')
+                                           onchange="validateFileSize(this)">
+                                    @error('foto')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -114,10 +114,11 @@
                         </div>
                         <div class="mb-4 mt-4">
                             <div class="card" style="max-width: 18rem; margin: auto;">
-                                <img id="preview" src="{{ asset(''.$berita->foto ?? '/images/default.jpg') }}"
+                                <img id="preview" src="{{ asset($berita->foto ? 'images/upload/berita/' . $berita->foto : 'images/default.jpg') }}"
                                      class="card-img-top"
                                      alt="Logo Perusahaan"
-                                     style="height: 12rem; object-fit: cover;">
+                                     style="height: 12rem; object-fit: cover;"
+                                     onerror="this.src='{{ asset('images/default.jpg') }}'">
                                 <div class="card-body">
                                     <h5 class="card-title" id="cardTitle"><b>{{ $berita->judul ?? 'Judul Berita' }}</b></h5>
                                     <p class="card-text"><i class="fas fa-user fs-3"></i> {{ $berita->penulis ?? 'Nama Penulis' }}</p>

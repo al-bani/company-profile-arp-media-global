@@ -59,7 +59,7 @@
                                     </td>
 
                                     <td>
-                                        <a href="/dashboard/berita/{{ $berita->id }}/edit"
+                                        <a href="{{ route('berita.edit', $berita->id) }}"
                                             class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
@@ -96,8 +96,8 @@
                             <!-- Modal Body -->
                             <div class="modal-body text-center">
                                 <p class="fs-6 mb-1">Apakah Anda yakin ingin menghapus data berikut?</p>
-                                <p class="fw-semibold text-danger ">Nama berita: {{ $berita->nama_berita }}</p>
-                                <p class="fw-semibold text-danger ">Nama berita: {{ $berita->email }}</p>
+                                <p class="fw-semibold text-danger ">Judul berita: {{ $berita->judul }}</p>
+                                <p class="fw-semibold text-danger ">ID berita: {{ $berita->id_berita }}</p>
                             </div>
 
                             <!-- Modal Footer -->

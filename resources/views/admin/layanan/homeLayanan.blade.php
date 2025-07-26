@@ -62,12 +62,12 @@
                                             <i class="fas fa-eye"></i>
                                         </a>
 
-                                        {{-- Tombol hapus nonaktif
+
 
                                         <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                             data-bs-target="#deleteLayanan{{ $loop->iteration }}">
                                             <i class="fas fa-trash-alt"></i>
-                                        </a> --}}
+                                        </a>
 
                                     </td>
 
@@ -98,7 +98,6 @@
                             <div class="modal-body text-center">
                                 <p class="fs-6 mb-1">Apakah Anda yakin ingin menghapus data berikut?</p>
                                 <p class="fw-semibold text-danger ">Nama layanan: {{ $layanan->nama_layanan }}</p>
-                                <p class="fw-semibold text-danger ">Nama layanan: {{ $layanan->email }}</p>
                             </div>
 
                             <!-- Modal Footer -->

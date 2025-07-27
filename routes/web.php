@@ -15,6 +15,7 @@ use App\Http\Controllers\companyProfile;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\KbliController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -39,6 +40,7 @@ Route::resource('/dashboard/banner', BannerController::class)->middleware('auth:
 Route::resource('/dashboard/faq', FaqController::class)->middleware('auth:admin');
 Route::resource('/dashboard/email', EmailController::class)->middleware('auth:admin');
 Route::resource('/dashboard/struktur', StrukturController::class)->middleware('auth:admin');
+Route::resource('/dashboard/kbli', KbliController::class)->middleware('auth:admin');
 Route::resource('dashboard/uploader', BeritaFotoController::class)->middleware('auth:admin');
 Route::get('/dashboard/profile', [profileController::class, 'index']);
 

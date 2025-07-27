@@ -67,8 +67,16 @@ class PortfolioFotoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy($id)
     {
-        //
+        $portofolioFoto = portofolio_foto::findOrFail($id);
+
+        // Hapus file foto jika ada
+        if ($portofolioFoto->foto && file_exists(public_path('images/upload/portofolio/' . $portofolioFoto->foto))) {
+            unlink(public_path('images/upload/portofolio/' . $portofolioFoto->foto));
+        }
+
+        $portofolioFoto->delete();
+        return redirect('/dashboard/portofolio_foto')->with('success', 'Data Berhasil dihapus');
     }
 }

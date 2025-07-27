@@ -113,7 +113,7 @@
                             <div class="modal-body text-center">
                                 <p class="fs-6 mb-1">Apakah Anda yakin ingin menghapus data berikut?</p>
                                 <p class="fw-semibold text-danger small">Nama portofolio:
-                                    {{ $portofolio->nama_portofolio }}</p>
+                                    {{ $portofolio->nama_project }}</p>
                             </div>
 
                             <!-- Modal Footer -->
@@ -135,7 +135,6 @@
                     </div>
                 </div>
             @endforeach
-
 
             @foreach ($portofolios as $portofolio)
                 <!-- Modal Detail -->
@@ -242,4 +241,5 @@
             });
         </script>
     @endpush
+
 </x-layout>

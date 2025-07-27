@@ -165,6 +165,12 @@ class PartnerController extends Controller
                 abort(403, 'Unauthorized');
             }
         }
+
+        // Hapus file foto jika ada
+        if ($partner->foto && file_exists(public_path('images/upload/partner/' . $partner->foto))) {
+            unlink(public_path('images/upload/partner/' . $partner->foto));
+        }
+
         $partner->delete();
         return redirect('/dashboard/partner')->with('success', 'Data Berhasil dihapus');
     }

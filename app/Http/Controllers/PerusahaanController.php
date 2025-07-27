@@ -199,6 +199,18 @@ class PerusahaanController extends Controller
      */
     public function destroy($id)
     {
+        $perusahaan = perusahaan::findOrFail($id);
+
+        // Hapus file logo_website jika ada
+        if ($perusahaan->logo_website && file_exists(public_path('images/upload/logo/website/' . $perusahaan->logo_website))) {
+            unlink(public_path('images/upload/logo/website/' . $perusahaan->logo_website));
+        }
+
+        // Hapus file logo_utama jika ada
+        if ($perusahaan->logo_utama && file_exists(public_path('images/upload/logo/primary/' . $perusahaan->logo_utama))) {
+            unlink(public_path('images/upload/logo/primary/' . $perusahaan->logo_utama));
+        }
+
         perusahaan::destroy($id);
         return redirect('/dashboard/perusahaan')->with('success', 'Data Berhasil dihapus');
     }

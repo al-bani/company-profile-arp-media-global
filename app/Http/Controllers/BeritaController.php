@@ -213,6 +213,12 @@ class BeritaController extends Controller
                 abort(403, 'Unauthorized');
             }
         }
+
+        // Hapus file foto jika ada
+        if ($berita->foto && file_exists(public_path('images/upload/berita/' . $berita->foto))) {
+            unlink(public_path('images/upload/berita/' . $berita->foto));
+        }
+
         $berita->delete();
         return redirect('/dashboard/berita')->with('success', 'Data Berhasil dihapus');
     }

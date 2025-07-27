@@ -102,7 +102,7 @@ class BannerController extends Controller
      */
     public function edit(banner $banner)
     {
- 
+
         $role = Auth::user()->role;
         return view('admin.banner.banner-edit', [
             'banner' => $banner,
@@ -150,6 +150,13 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
+        $banner = banner::findOrFail($id);
+
+        // Hapus file foto jika ada
+        if ($banner->foto && file_exists(public_path('images/upload/banner/' . $banner->foto))) {
+            unlink(public_path('images/upload/banner/' . $banner->foto));
+        }
+
         banner::destroy($id);
         return redirect('/dashboard/banner')->with('success', 'Data Berhasil dihapus');
     }

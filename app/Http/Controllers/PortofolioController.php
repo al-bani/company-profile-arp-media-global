@@ -289,6 +289,25 @@ class PortofolioController extends Controller
      */
     public function destroy($id)
     {
+        $portofolio = portofolio::findOrFail($id);
+
+        // Hapus semua foto portofolio yang terkait
+        $portofolioFotos = portofolio_foto::where('id_portofolio', $portofolio->id_portofolio)->get();
+        foreach ($portofolioFotos as $foto) {
+            if ($foto->foto && file_exists(public_path('images/upload/portofolio/' . $foto->foto))) {
+                unlink(public_path('images/upload/portofolio/' . $foto->foto));
+            }
+        }
+
+        // Hapus data foto portofolio dari database
+        portofolio_foto::where('id_portofolio', $portofolio->id_portofolio)->delete();
+
+        // Hapus timeline portofolio
+        timelinePortofolio::where('id_portofolio', $portofolio->id_portofolio)->delete();
+
+        // Hapus team portofolio
+        team::where('id_portofolio', $portofolio->id_portofolio)->delete();
+
         portofolio::destroy($id);
         return redirect('/dashboard/portofolio')->with('success', 'Data Berhasil dihapus');
     }

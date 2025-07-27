@@ -65,6 +65,13 @@
         </a>
     </li>
 
+    <li class="nav-item {{ Request::is('dashboard/kbli*') ? 'active' : '' }}">
+        <a class="nav-link py-3 fs-4" href="/dashboard/kbli" data-bs-toggle="tooltip" data-bs-placement="right" title="Kbli">
+            <i class="fas fa-book fs-3"></i>
+            <span class="ms-2">Kbli</span>
+        </a>
+    </li>
+
     <li class="nav-item {{ Request::is('dashboard/berita*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/dashboard/berita" data-bs-toggle="tooltip" data-bs-placement="right" title="Berita">
             <i class="fas fa-newspaper fs-3"></i>
@@ -102,7 +109,7 @@
     <li class="nav-item {{ Request::is('dashboard/uploader*') ? 'active' : '' }}">
         <a class="nav-link py-3 fs-4" href="/dashboard/uploader" data-bs-toggle="tooltip" data-bs-placement="right" title="uploader">
             <i class="fas fa-upload fs-3"></i>
-            <span class="ms-2">uploader</span>
+            <span class="ms-2">uploader (untuk berita gambar)</span>
         </a>
     </li>
 

@@ -146,6 +146,12 @@ class LayananController extends Controller
                 abort(403, 'Unauthorized');
             }
         }
+
+        // Hapus file foto jika ada
+        if ($layanan->foto && file_exists(public_path('images/upload/layanan/' . $layanan->foto))) {
+            unlink(public_path('images/upload/layanan/' . $layanan->foto));
+        }
+
         $layanan->delete();
         return redirect('/dashboard/layanan')->with('success', 'Data Berhasil dihapus');
     }

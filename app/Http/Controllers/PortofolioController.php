@@ -149,8 +149,11 @@ class PortofolioController extends Controller
      */
     public function edit(portofolio $portofolio)
     {
-        // Load teams relationship
-        $portofolio->load('teams');
+        $portofolio = portofolio::with([
+            'portofolio_timeline',
+            'teams',
+            'portofolio_foto'
+        ])->findOrFail($portofolio->id);
 
         return view('admin.portofolio.portofolio-edit', [
             'portofolio' => $portofolio,

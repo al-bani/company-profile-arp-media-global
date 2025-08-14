@@ -35,5 +35,8 @@ class perusahaan extends Model
     public function faq(){
         return $this->hasMany(Faq::class, 'id_perusahaan', 'id_perusahaan');
     }
+    public function kbli(){
+        return $this->hasMany(kbli::class, 'id_perusahaan', 'id');
+    }
 
 }

@@ -132,19 +132,6 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <!-- Gambar -->
-                                @if ($perusahaan->logo_website)
-                                    <div class="mb-3 text-center">
-                                        <img src="{{ asset($perusahaan->logo_website) }}" class="img-fluid rounded shadow-sm"
-                                            style="max-height: 120px;">
-                                    </div>
-                                @endif
-                                @if ($perusahaan->logo_utama)
-                                    <div class="mb-3 text-center">
-                                        <img src="{{ asset($perusahaan->logo_utama) }}" class="img-fluid rounded shadow-sm"
-                                            style="max-height: 120px;">
-                                    </div>
-                                @endif
 
                                 <!-- NIB -->
                                 <div class="mb-3">

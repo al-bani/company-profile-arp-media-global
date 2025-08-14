@@ -49,7 +49,8 @@ class companyProfile extends Controller
             'partner',
             'berita',
             'portofolio',
-            'faq'
+            'faq',
+            'kbli'
         ])->where('id_perusahaan', $id_perusahaan)->first();
 
         $banners = $perusahaan->banner;
@@ -58,6 +59,7 @@ class companyProfile extends Controller
         $beritas = $perusahaan->berita;
         $portofolios = $perusahaan->portofolio;
         $faqs = $perusahaan->faq;
+        $kblis = $perusahaan->kbli;
         $anak = perusahaan::all();
         // dd($anak);
         // dd($perusahaan->banner);
@@ -82,7 +84,8 @@ class companyProfile extends Controller
             'beritas' => $beritas,
             'portofolios' => $portofolios,
             'anaks' => $anak,
-            'faqs' => $faqs
+            'faqs' => $faqs,
+            'kblis' => $kblis
             // 'faqs' => $data_faqs
         ]);
     }
@@ -98,7 +101,8 @@ class companyProfile extends Controller
             'partner',
             'berita',
             'portofolio',
-            'faq'
+            'faq',
+            'kbli'
         ])->where('nama_perusahaan', $nama_perusahaan)->first();
 
 
@@ -115,6 +119,7 @@ class companyProfile extends Controller
         $beritas = $perusahaan->berita;
         $portofolios = $perusahaan->portofolio;
         $faqs = $perusahaan->faq;
+        $kblis = $perusahaan->kbli;
         $anak = perusahaan::all();
         // dd($anak);
         // dd($perusahaan->banner);
@@ -127,13 +132,35 @@ class companyProfile extends Controller
             'beritas' => $beritas,
             'portofolios' => $portofolios,
             'anaks' => $anak,
-            'faqs' => $faqs
+            'faqs' => $faqs,
+            'kblis' => $kblis
 
         ]);
     }
 
 
 
+
+    public function kbli($nama_perusahaan)
+    {
+        // return view('company-profile.berita');
+        if (!$nama_perusahaan) {
+            abort(404, 'Perusahaan belum dipilih.');
+        }
+
+        $perusahaan = Perusahaan::with('kbli')
+            ->where('nama_perusahaan', $nama_perusahaan)
+            ->first();
+
+        if (!$perusahaan) {
+            abort(404, 'Perusahaan tidak ditemukan.');
+        }
+
+        return view('company-profile.detailKbli', [
+            'perusahaans' => $perusahaan,
+            'kblis' => $perusahaan->kbli
+        ]);
+    }
 
     public function berita($nama_perusahaan)
     {
@@ -145,6 +172,7 @@ class companyProfile extends Controller
         $perusahaan = Perusahaan::with('berita')
             ->where('nama_perusahaan', $nama_perusahaan)
             ->first();
+
 
         if (!$perusahaan) {
             abort(404, 'Perusahaan tidak ditemukan.');

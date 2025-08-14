@@ -86,6 +86,7 @@
                                     href="/portofolio/{{ $perusahaans->nama_perusahaan }}">Portofolio</a></li>
                             <li><a class="dropdown-item" href="/struktur/{{ $perusahaans->nama_perusahaan }}">Struktur
                                     Organisasi</a></li>
+                            <li><a class="dropdown-item" href="/kbli/{{ $perusahaans->nama_perusahaan }}">KBLI</a></li>
 
                         </ul>
                     </li>
@@ -127,12 +128,12 @@
 
                 <!-- Sosial Media -->
                 <div class="d-flex justify-content-center gap-4 mb-3">
-                    <a href="{{ $perusahaans->instagram }}" class="text-black fs-5"><i
+                    <a href="https://instagram.com/{{ $perusahaans->instagram }}" class="text-black fs-5"><i
                             class="bi bi-instagram"></i></a>
-                    <a href="{{ $perusahaans->facebook }}" class="text-black fs-5"><i
+                    <a href="https://facebook.com/{{ $perusahaans->facebook }}" class="text-black fs-5"><i
                             class="bi bi-facebook"></i></a>
-                    <a href="{{ $perusahaans->tiktok }}" class="text-black fs-5"><i class="bi bi-linkedin"></i></a>
-                    <a href="{{ $perusahaans->twitter }}" class="text-black fs-5"><i class="bi bi-youtube"></i></a>
+                    <a href="https://tiktok.com/{{ $perusahaans->tiktok }}" class="text-black fs-5"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://x.com/{{ $perusahaans->twitter }}" class="text-black fs-5"><i class="bi bi-twitter"></i></a>
                 </div>
 
                 <!-- Alamat -->
@@ -165,81 +166,49 @@
 
                     <!-- Logo Itenas -->
                     <div class="d-flex justify-content-center mb-3">
-                        <img src="{{ asset('images/images/logo-itenas.jpg') }}" alt="Logo Itenas" class="img-fluid"
+                        <img src="{{ asset('images/itenas.jpg') }}" alt="Logo Itenas" class="img-fluid"
                             style="max-width: 300px;">
                     </div>
 
                     <!-- Alamat -->
                     <p class="text-muted small fs-6">Alamat Kampus: Jl. PHH Mustofa No.23, Bandung 40124</p>
-
-                    <!-- Dosen Pembimbing -->
-                    <h5 class="fw-semibold  mt-4">Dosen Pembimbing</h6>
-                        <div class="row justify-content-center mb-5">
-                            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                <div class="card h-100">
-                                    <img src="{{ asset('images/images/3.jpg') }}" alt="Dosen"
-                                        class="card-img-top" style="height: 200px; object-fit: cover;">
-                                    <div class="container py-3">
-                                        <h6 class="mb-1"><b>Sofia Umaroh</b></h6>
-                                        <p class="mb-0 text-muted">Dosen Pembimbing</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tim Pengembang -->
-                        <h5 class="fw-semibold mb-3">Tim Pengembang</h5>
-                        <div class="row justify-content-center">
-
-                            <!-- Card: Ramzi -->
-                            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                <div class="card h-100">
-                                    <img src="{{ asset('images/images/3.jpg') }}" alt="Ramzi"
-                                        class="card-img-top" style="height: 200px; object-fit: cover;">
-                                    <div class="container py-3">
-                                        <h6 class="mb-1"><b>Ramzi Mubarak</b></h6>
-                                        <p class="mb-0 text-muted">(162021004)</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card: Zildan -->
-                            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                <div class="card h-100">
-                                    <img src="{{ asset('images/images/1.jpg') }}" alt="Zildan"
-                                        class="card-img-top" style="height: 200px; object-fit: cover;">
-                                    <div class="container py-3">
-                                        <h6 class="mb-1"><b>Al Zildan</b></h6>
-                                        <p class="mb-0 text-muted">(162021016)</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card: Bagas -->
-                            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                <div class="card h-100">
-                                    <img src="{{ asset('images/images/Group 1.png') }}" alt="Bagas"
-                                        class="card-img-top" style="height: 200px; object-fit: cover;">
-                                    <div class="container py-3">
-                                        <h6 class="mb-1"><b>Bagas Praditya</b></h6>
-                                        <p class="mb-0 text-muted">(162021028)</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card: Darari -->
-                            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                <div class="card h-100">
-                                    <img src="{{ asset('images/images/2.jpg') }}" alt="Darari"
-                                        class="card-img-top" style="height: 200px; object-fit: cover;">
-                                    <div class="container py-3">
-                                        <h6 class="mb-1"><b>Darari Yafi Fuadi</b></h6>
-                                        <p class="mb-0 text-muted">(162021046)</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                    <!-- Tabel Informasi -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Nama</td>
+                                    <td>Role</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Sofia Umaroh</td>
+                                    <td>Project Manager</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Bagas Praditya</td>
+                                    <td>System Analyst</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Al Zildan Abrar</td>
+                                    <td>Backend Developer</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Ramzi Mubarak</td>
+                                    <td>Frontend Developer</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Darari Yafi</td>
+                                    <td>UI/UX Designer</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             </div>

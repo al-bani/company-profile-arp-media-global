@@ -26,7 +26,7 @@
 
 
         {{-- INFO PERUSAHAAN --}}
-        <div class="row g-4 mb-5">
+        {{-- <div class="row g-4 mb-5">
             <div class="col-md-4">
                 <div class="icon-box shadow-sm p-4 text-center bg-white rounded">
                     <i class="bi bi-file-earmark-text fs-2 text mb-2"></i>
@@ -48,7 +48,7 @@
                     <p class="mb-0">{{ $perusahaans->notaris }}</p>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         {{-- VISI & MISI --}}
         @if ($perusahaans->visi != '-' || $perusahaans->misi != '-')

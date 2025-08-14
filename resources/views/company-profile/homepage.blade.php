@@ -149,10 +149,10 @@
     <!-- Anak Perusahaan -->
     @if ($perusahaans->status === 'induk')
         <div class="container pt-5">
-            <h2 class="text-center h2 fw-bold">Anak Perusahaan</h2>
-            <div class="subsidiary-container  justify-content-center">
                 @foreach ($anaks as $perusahaan)
                     @if ($perusahaan->status === 'anak')
+                            <h2 class="text-center h2 fw-bold">Anak Perusahaan</h2>
+                    <div class="subsidiary-container  justify-content-center">
                         <div class="subsidiary-card">
                             <div class="subsidiary-img-box">
                                 <img src="{{ asset('images/upload/logo/primary/' . $perusahaan->logo_utama) }}"
@@ -164,9 +164,10 @@
                                 <a href="/{{ $perusahaan->nama_perusahaan }}">Read More</a>
                             </div>
                         </div>
+                    </div>
                     @endif
                 @endforeach
-            </div>
+
         </div>
     @endif
 

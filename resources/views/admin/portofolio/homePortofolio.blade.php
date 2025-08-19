@@ -186,7 +186,11 @@
                                 <div class="mb-3">
                                     <label class="form-label">Team</label>
                                     <div class="form-control" readonly>
-                                        {!! $portofolio->team ?? '<span style="color: red;">Team Kosong</span>' !!}
+                                        @if ($portofolio->teams && $portofolio->teams->count())
+                                            {{ $portofolio->teams->pluck('team')->filter()->unique()->implode(', ') }}
+                                        @else
+                                            <span style="color: red;">Team Kosong</span>
+                                        @endif
                                     </div>
                                 </div>
 

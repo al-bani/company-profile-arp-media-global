@@ -60,6 +60,11 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi minimal agar konten wajib diisi
+        $request->validate([
+            'konten' => 'required',
+        ]);
+
         // Validasi kolom unique
         $uniqueFields = [
             'id_berita' => 'ID Berita'
@@ -149,6 +154,11 @@ class BeritaController extends Controller
      */
     public function update(Request $request, berita $berita)
     {
+        // Validasi minimal agar konten wajib diisi
+        $request->validate([
+            'konten' => 'required',
+        ]);
+
         // Debug untuk melihat apakah method dipanggil
         // Log::info('Update method called for berita ID: ' . $berita->id);
 

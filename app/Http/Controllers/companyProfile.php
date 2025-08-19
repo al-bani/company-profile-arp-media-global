@@ -337,7 +337,7 @@ class companyProfile extends Controller
             abort(404, 'Perusahaan tidak ditemukan.');
         }
 
-        $portofolio = Portofolio::with(['portofolio_foto', 'portofolio_timeline'])
+        $portofolio = Portofolio::with(['portofolio_foto', 'portofolio_timeline','teams'])
             ->where('id', $id)
             ->first();
 
@@ -347,7 +347,8 @@ class companyProfile extends Controller
 
         return view('company-profile.portofolio-detail', [
             'perusahaans' => $perusahaan,
-            'portofolio' => $portofolio
+            'portofolio' => $portofolio,
+
         ]);
     }
 

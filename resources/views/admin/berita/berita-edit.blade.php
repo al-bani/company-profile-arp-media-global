@@ -141,7 +141,7 @@
     {{-- CKEditor Init + Preview --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            CKEDITOR.replace('konten', {
+            const editor = CKEDITOR.replace('konten', {
                 contentsCss: '/ckeditor/contents.css',
                 removePlugins: 'elementspath,resize,about,flash,iframe,forms,smiley,specialchar,tabletools,find,pagebreak,preview,print,save,showblocks,stylescombo,templates,newpage,language,scayt,div,justify,font,colorbutton,background,image2,uploadimage,uploadfile,filebrowser,link,anchor,horizontalrule,indent,outdent,blockquote,removeformat,format,sourcearea',
                 allowedContent: true,
@@ -158,6 +158,40 @@
                 format_tags: 'p;h1;h2;h3;pre',
                 removeDialogTabs: 'image:advanced;link:advanced'
             });
+
+            function htmlToPlain(html) {
+                const div = document.createElement('div');
+                div.innerHTML = html || '';
+                return (div.textContent || div.innerText || '')
+                    .replace(/\u00A0/g, ' ')
+                    .trim();
+            }
+
+            // Sinkronkan ke textarea saat ada perubahan
+            editor.on('change', function() {
+                editor.updateElement();
+                const textarea = document.getElementById('konten');
+                const text = htmlToPlain(editor.getData());
+                if (textarea) {
+                    textarea.setCustomValidity(text ? '' : 'Isi Berita wajib diisi.');
+                }
+            });
+
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(event) {
+                    editor.updateElement();
+                    const text = htmlToPlain(editor.getData());
+                    if (!text) {
+                        event.preventDefault();
+                        const textarea = document.getElementById('konten');
+                        if (textarea) {
+                            textarea.setCustomValidity('Isi Berita wajib diisi.');
+                            textarea.reportValidity();
+                        }
+                    }
+                });
+            }
         });
 
         function previewJudul() {
